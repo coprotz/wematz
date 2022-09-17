@@ -1,0 +1,37 @@
+.home_menu{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5vh;
+    width: 100%;
+    padding: 0 10px;
+}
+
+.home_menu a{
+    text-decoration: none;
+}
+
+.home_no{
+    display: none;
+}
+
+.menu_item{
+    display: flex;
+    /* width: 100%; */
+    justify-content: flex-start;
+    gap: 15px;
+    padding: 1vh;
+    border-radius: 0 25px 25px 0;
+    align-items: center;
+    font-size: 1rem;
+    color: #aaa;
+}
+
+.active{
+    background-color: white;
+    color: black;
+    font-weight: 700;
+    padding-left: 20px;
+    border-left: 4px solid var(--primary);
+    box-shadow: var(--shadow);
+    
+}

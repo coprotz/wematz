@@ -1,0 +1,7 @@
+.mada_remarks{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    color: #aaa;
+    margin-top: 2px;
+}

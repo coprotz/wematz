@@ -1,0 +1,68 @@
+.prayer_container{
+    background-color: white;
+    height: fit-content;
+    border-radius: 5px;
+    padding: 5px;
+    box-shadow: var(--shadow);
+}
+.prayer{
+    display: flex;
+    flex-direction: column;
+}
+
+.prayer_top{
+    display: flex;
+    justify-content: space-between;
+    padding: 3px;
+    align-items: center;
+    width: 100%;
+    /* border: 1px solid red; */
+}
+
+.btn{
+    color: black;
+}
+
+/* .prayer_top h5{
+    padding: 2px 7px;
+    background-color: white;
+    border-radius: 3px;
+} */
+
+.prayer_details{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 5px;
+}
+
+.prayer_grids{
+    display: flex;
+    justify-items: center;
+    justify-content: center;
+    gap: 2px;
+    margin-top: 7px;
+}
+
+.prayer_time{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 0.9rem;
+    padding: 7px;
+    color: #888;
+}
+
+.current_time{
+    background-color: var(--primary);
+    color: white;
+    box-shadow: var(--shadow);
+    border-radius: 3px;
+}
+
+.time_remaining{
+    /* font-weight: 300; */
+    font-size: 1.2rem;
+    margin: 5px;
+    color: black;
+}

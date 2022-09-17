@@ -1,0 +1,165 @@
+
+.mada_details{
+    display: flex;
+    flex-direction: column;
+}
+.author_wrapper{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+
+
+.author_info{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.author_photo{
+    width: 30px;height: 30px;
+}
+
+.author_photo img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.mada_title{
+    display: block;
+    text-align: left;
+    margin: 7px 0;
+    font-size: 1.3rem !important;
+}
+.mada_card{
+    display: flex;
+    flex-direction: column;
+    padding: 1.2vh;
+   
+}
+
+
+
+.mada_time{
+    font-size: 1rem;
+    color: #aaa;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.madas{
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.mada_top{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.mada_top_left{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+}
+
+.mada_auth_photo{
+    display: flex;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+
+}
+
+.mada_auth_photo img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.madas_body{
+    display: flex;
+}
+
+.mada_left{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    
+}
+
+.madas_photo{
+    width: 170px;
+    height: 170px;    
+}
+
+.madas_photo img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.mada_right{
+    width: 20vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    height: 50vh;
+    position: sticky;
+    top: 100px;
+}
+
+
+
+.mada_left_card{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    background-color: white;
+    padding: 25px;
+    border-radius: 5px;
+}
+
+.mada_left_card h2{
+    display: block;
+    text-align: left;
+    /* font-weight: 00; */
+}
+
+.mada_action{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+
+@media screen and (max-width: 440px){
+    .madas_body{
+        display: flex;
+        flex-direction: column-reverse;
+    }
+
+    .mada_right{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        padding: 15px 0;
+        height: fit-content;
+        position:static;
+        /* top: 100px; */
+    }
+}
