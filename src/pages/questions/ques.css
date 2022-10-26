@@ -1,0 +1,297 @@
+
+.main_ques{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.main_ques_inner{
+    background-color: white;
+    
+}
+.que_card{
+    display: flex;
+    gap: 15px;
+    padding: 40px;
+    border-bottom: 3px solid var(--bg);
+}
+
+.main_ques_inner{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.que_author{
+    width: 45px;
+    height: 45px;
+    aspect-ratio: 1;
+}
+
+.que_author img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    padding: 2px;
+    border: 3px solid var(--primary);
+}
+
+.que_cations{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background: var(--bg);
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+.ques_act_left{
+    display: flex;
+    gap: 10px;
+}
+
+.que_answers{
+    padding: 5px 10px;
+    background-color: white;
+    border: 1px solid var(--sec);
+    border-radius: 3px;
+}
+
+.main_ques_top{
+    height: 60px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    /* padding-left: 20px; */
+    background-color: white;
+}
+
+.main_ques_top span{
+    margin: 0 20px;
+}
+
+.btn_que{
+    background-color: var(--primary);
+    padding: 10px 20px;
+    width: 90%;
+    text-align: center;
+    border: none;
+    color: white;
+    font: 1.2rem;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    
+}
+
+.recent_activies_wrapper{
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    /* align-items: center; */
+    padding: 20px;
+}
+
+.recent_activities{
+    background-color: white;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    /* padding: 20px; */
+}
+
+.que_title{
+    margin: 10px 0;
+}
+
+
+.activity_photo{
+    width: 25px;
+    height: 25px;
+    aspect-ratio: 1;
+}
+
+.activity_photo img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.activies_body{
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.activity_card{
+    display: flex;
+    gap: 10px;
+    
+}
+
+.activies_inner_body{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.view_que_author{
+    display: flex;
+    align-items: center;
+    gap: 7px;
+
+}
+
+.view_que_photo{
+    width: 25px;
+    height: 25px;
+    aspect-ratio: 1;
+}
+
+.view_que_photo img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+
+}
+
+.view_que_top{
+    margin: 20px 0;
+    font-size: 2rem;
+    line-height: 1;
+    display: block;
+}
+
+.view_que_answers{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid white;
+}
+.view_answers_grid{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+
+.que_grid_anwers{
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+    background-color: white;
+    padding: 25px;
+    border-radius: 5px;
+  
+}
+
+
+
+.answerd_photo{
+    width: 35px;
+    height: 35px;
+    aspect-ratio: 1;
+}
+
+.answerd_photo img{
+    width: 100%;height: 100%;
+    border-radius: 3px;
+    object-fit: cover;
+}
+
+.answered_small{
+    color: #aaa;
+    margin-top: 10px;
+    display: block;
+}
+
+.view_que_create{
+    margin: 25px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    
+}
+
+.btn_back{
+    display: flex;
+    align-items: center;
+    grid-template-columns: 15px;
+    background-color: transparent;
+    border: none;
+    gap: 15px;
+    font-size: 1rem;
+}
+
+
+.create_que{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+
+@media screen and (max-width: 440px){
+    .que_card{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 20px;
+        border-bottom: 3px solid var(--bg);
+    }
+
+    .view_que_top{
+        margin: 10px auto;
+        font-size: 1.5rem;
+        line-height: 1;
+        display: block;
+        width: 95%;
+    }
+
+    .view_que_author{
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        width: 95%;
+        margin: 0 auto;
+    
+    }
+
+    .view_que_answers{
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        /* margin-top: 20px; */
+        padding-top: 20px;
+        border-top: 1px solid white;
+        width: 95%;
+        margin: 0 auto;
+    }
+
+    .view_answers_grid{
+       
+        gap: 1px;
+    }
+
+    .view_que_create{
+        margin: 15px auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 95%;
+        gap: 20px;
+        
+    }
+    
+}
+
+/* .que_cat{
+    width: 100%;
+} */

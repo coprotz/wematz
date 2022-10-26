@@ -1,0 +1,20 @@
+import React from 'react'
+import { useNavigate } from 'react-router-dom'
+import { doctors } from '../../data'
+
+const ClinicCard = ({c}) => {
+    const navigate = useNavigate()
+    const docs = doctors?.filter(d =>d.specializes.find(s =>s.includes(`${c.name}`)))
+
+    console.log('docs', docs)
+  return (
+    <div className="clinic_card" key={c.id} onClick={() =>navigate(`/health/clinics/${c.swahir}`)}>
+        <img src={process.env.PUBLIC_URL+`/${c.url}`} />
+        <h3>{c?.swahir}</h3>
+        <span>{c?.name}</span>
+        <h4>{docs?.length} Madaktari</h4>
+    </div>
+  )
+}
+
+export default ClinicCard

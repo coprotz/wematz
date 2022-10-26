@@ -13,8 +13,8 @@ const Navbar = ({active, setActive}) => {
   return (
     <div className="home_top">
         <div className="home_logo">
-            <h1 onClick={() =>navigate('/')}>Forum</h1>
-            <Button active={active} setActive={setActive} onClick={() =>setActive(true)}/>
+            <h1 onClick={() =>navigate('/main')}>Wema</h1>
+            <Button active={active} setActive={setActive} onClick={() =>setActive(false)}/>
         </div>
         <div className="home_profile">
             {/* <div className="search">

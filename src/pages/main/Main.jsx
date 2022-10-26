@@ -26,22 +26,22 @@ const Main = () => {
                 </div>
                 <div className="main_b_card">
                     <FaHeartbeat className='m_card_svg'/>
-                    <h4>Health & Fitness</h4>
+                    <h4>Afya</h4>
                     <p>Pata Ushauri wa Afya yako</p>
                 </div>
                 <div className="main_b_card">
                     <RiTeamLine className='m_card_svg'/>
-                    <h4>Conference</h4>
+                    <h4>Mikutano</h4>
                     <p>Anzisha Mikutano ya kimtamdao</p>
                 </div>
                 <div className="main_b_card">
                     <IoIosChatbubbles className='m_card_svg'/>
-                    <h4>Live chats</h4>
+                    <h4>Mazungumzo</h4>
                     <p>Wasiliana na unayemtaka</p>
                 </div>
                 <div className="main_b_card">
                     <GoLaw className='m_card_svg'/>
-                    <h4>Legal</h4>
+                    <h4>Sheria</h4>
                     <p>Pata ushauri wa kisheria</p>
                 </div>
                 <div className="main_b_card">
@@ -58,9 +58,9 @@ const Main = () => {
                 className="main_b_right">
                     <div className="login">
                         <span>Tayari ni mwanachama?</span>
-                        <button className='btn_sign' onClick={() => navigate('/home/posts')}>Ingia</button>
+                        <button className='btn_sign' onClick={() => navigate('/')}>Ingia</button>
                     </div>
-                <h1 className='ma_b_title'>Forum</h1>
+                <h1 className='ma_b_title'>Wema</h1>
                 <h3>Ukumbi wa kuwakutanisha waislamu na wale wanaotarajia kuwa waislamu wa kitanzania wanaoishi 
                     sehemeu mbalimbali duniani na kuwapa fursa ya kupeana mustkbari wa maisha ya kIIslamu duniani.
                 </h3>
@@ -73,12 +73,12 @@ const Main = () => {
             </motion.div>
         </div> 
         <div className="main_footer">
-            <div className="m_f_logo">Forum</div>
+            <div className="m_f_logo">Wema</div>
             <div className="m_f_items">
-                <span>About</span>
-                <span>Pricing</span>
-                <span>Terms</span>
-                <span>Privacy</span>
+                <span>Kuhusu Sisi</span>
+                <span>Sadaka</span>
+                <span>Vigezo</span>
+                <span>Faragha</span>
                 <span>Contact</span>
             </div>
         </div>    

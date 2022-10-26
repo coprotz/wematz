@@ -1,13 +1,15 @@
 import React from 'react'
 import { useState } from 'react'
+import {useNavigate } from 'react-router-dom'
 import './donate.css'
 
 const Donate = ({setDonate}) => {
     const [cont, setCont] = useState('')
+    const navigate = useNavigate()
   return (
     <div className="nikah_donate">
-    <h2>Please support us to view this page</h2>
-    <h3>Select  your donation</h3>
+    <h2>Tunaomba utuunge mkono ili kuangalia ukurasa huu</h2>
+    {/* <h3>Select  your donation</h3>
     <div className="support">
         <label htmlFor="2">
             <input 
@@ -64,12 +66,12 @@ const Donate = ({setDonate}) => {
                 />$100
         </label> 
                 
-    </div>
+    </div> */}
     <button 
         className='btn_cont' 
-        onClick={() => setDonate(false)}
-        disabled={cont === ''}
-        >Continue</button>
+        onClick={() => navigate('/subscriptions')}
+        
+        >Endelea</button>
     
 </div>
   )

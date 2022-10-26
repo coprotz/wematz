@@ -7,23 +7,33 @@ import Remarks from '../../components/remarks/Remarks';
 import Search from '../../components/search/Search'
 import { motion } from 'framer-motion';
 import { BsChatLeftDotsFill,BsFillPersonFill } from "react-icons/bs";
+import CreateMada from './CreateMada';
 
 const Madas = () => {
     const navigate = useNavigate();
   return (
-    <div className='madas'>  
-            
-        <div className="top_meeting_wrapper">
-            <div className="meeting_top">            
+    <div className='madas'>            
+        <div className="top_madas_wrapper">
+            {/* <div className="meeting_top">            
                 <button onClick={() => navigate(-1)} className='btn'><BsArrowLeft/></button>            
                 <div className="mada_auth_photo">
                     <img src={img1} alt="" />
                 </div>
-                <h4>By Shukuru Comrade</h4>
+                <h4>Na: Shukuru Comrade</h4>
+            </div> */}
+            <div className='author_div'>
+                <button className="create_new btn_mada">
+                    Anzisha Mada
+                </button> 
+                <div className="mada_author">
+                    <div className="mada_auth_photo">
+                        <img src={img1} alt="" />
+                    </div>
+                    <h4>Na: Shukuru Comrade</h4>
+                    <button className='btn_btn'><BsChatLeftDotsFill/></button>
+                </div>
             </div>
-            <div className="create_new">
-                Create a Mada
-            </div>       
+            <CreateMada/>    
         </div>
         <motion.div 
              initial={{ y:'100vw'}}
@@ -31,7 +41,7 @@ const Madas = () => {
              transition={{ ease: "easeOut", duration: 0.5 }}  
             className="madas_body">
             <div className="mada_left"> 
-                <Search/>            
+                <Search title='Tafuta Mada'/>            
                 <div className="mada_left_card">
                     <h2>Mapinduzi ya Viwanga na Uislam nchini na nini tinajifunza</h2>
                     <div className="mada_action">
@@ -96,13 +106,13 @@ const Madas = () => {
                     </div>
                 </div>
             </div>
-            <div className="mada_right">
+            {/* <div className="mada_right">
                 <div className="madas_photo">
                     <img src={img1} alt="" />
                 </div>
-                <h3>Shukuru Comrade</h3>
+                <h3>Na: Shukuru Comrade</h3>
                 <button className='btn_btn'><BsChatLeftDotsFill/></button>
-            </div>
+            </div> */}
         </motion.div>
        
     </div>

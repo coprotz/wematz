@@ -4,10 +4,15 @@
     border-radius: 5px;
     padding: 5px;
     box-shadow: var(--shadow);
+   
 }
 .prayer{
     display: flex;
     flex-direction: column;
+    margin-top: 5px;
+    border: 7px solid var(--primary);
+    background-color: var(--sec);
+    padding: 7px;
 }
 
 .prayer_top{
@@ -41,16 +46,19 @@
     justify-items: center;
     justify-content: center;
     gap: 2px;
-    margin-top: 7px;
+    margin-top: 1px;
 }
 
 .prayer_time{
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
+    /* flex-direction: column; */
     align-items: center;
     font-size: 0.9rem;
+    gap: 15px;
     padding: 7px;
     color: #888;
+   
 }
 
 .current_time{
@@ -65,4 +73,27 @@
     font-size: 1.2rem;
     margin: 5px;
     color: black;
+}
+
+.current{
+    display: flex;
+    align-items: center;
+    background-color: white;
+    padding: 5px;
+    color: black;
+    flex-direction: column;
+}
+
+.next{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+
+@media screen and (max-width: 740px){
+    .prayer{
+        display: none;
+    }
 }

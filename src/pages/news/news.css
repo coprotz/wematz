@@ -1,0 +1,255 @@
+
+.main_news{
+    /* border: 1px solid red; */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 3;
+}
+.news_wrapper{
+    display: flex;
+    gap: 20px;
+    /* border: 1px solid red; */
+}
+
+.news_body{
+    flex: 4;
+}
+
+.news_latest{
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    position: sticky;
+    top: 60px;
+    height: 700px;
+}
+
+.top_news{
+    width: 100%;
+    height: fit-content;
+    position: relative;
+    /* border: 1px solid red; */
+}
+
+.top_news_head{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+    /* padding: 20px; */
+    /* background: rgb(255,255,255); */
+    background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,  rgba(0,0,0,0.7) 65%);
+
+}
+
+.top_news_timer{
+    display: flex;
+    color: white;
+    align-items: center;
+    gap: 10px;
+    /* padding-left: 30px; */
+    /* font-size: 2rem;
+    border: 1px solid red; */
+    width: 96%;
+}
+
+.top_news_timer span{
+    width: 7px;
+    height: 7px;
+    background-color: white;
+    border-radius: 50%;
+}
+
+.top_title{
+    padding: 0 30px;
+    font-size: 2rem;
+    color: white;
+    display: block;
+    height: fit-content;
+    /* text-align: right; */
+}
+
+.top_news img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.main_news_outlines{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    justify-content: center;
+    gap: 25px;
+    margin-top: 15px;
+}
+
+.news_card{
+    background-color: white;
+}
+
+.news_card img{
+    width: 100%;
+    height: 10vw;
+    object-fit: cover;
+    
+}
+
+.news_actions{
+    display: flex;
+    width: 96%;
+    padding-bottom: 30px;
+}
+.top_news_head:hover{
+    background:  rgba(0,0,0,0.7);
+    cursor: pointer;
+}
+
+ .top_title:hover{
+    text-decoration: underline;
+}
+
+.news_details{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid red;
+    /* height: 100%; */
+}
+
+/* .new_actions{
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+} */
+
+.news_name{
+    width: 90%;
+    display: block;
+    margin: 0 auto;
+    padding-bottom: 10px;
+}
+
+.reaction_news{
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-top: 10px;
+}
+
+.news_name:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.news_headlines{
+    display: inline-block;
+    gap:10px ;
+}
+
+.news_headlines span{
+    padding: 5px;
+    margin: 3px;
+}
+
+.view_main{
+   flex: 4;
+   display: flex;
+   flex-direction: column;
+   gap: 7px;
+}
+
+.view_main img{
+    width: 100%;
+}
+
+.date_color{
+    color: black ;
+    
+}
+
+ .date_color span{
+    background-color:var(--primary) ;
+    
+}
+
+.date_color small{
+    font-size: 1rem;
+}
+
+.view_main_span{
+    color: black;
+}
+
+.view_main_body{
+    padding: 0 15px;
+    font-size: 1.3rem;
+    line-height: 1.4;
+    text-align: justify;
+}
+.latest_news img{
+    width: 150px;
+}
+
+
+@media screen and (max-width: 440px){
+    .news_latest{
+        
+        display: none;
+     
+    }
+
+    .top_news{
+     
+        height: 100%;
+      
+        /* border: 1px solid red; */
+    }
+
+    .news_card img{
+       
+        height: 250px;
+       
+        
+    }
+
+    .main_news_outlines{
+       width: 95%;
+        margin: 0 auto;
+    }
+
+    .news_body{
+        width: 95%;
+        margin: 0 auto;
+    }
+
+    .view_main{
+        width: 95%;
+        margin: 0 auto
+     }
+
+     .top_news_head{
+        position: static;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: flex-end;
+        /* padding: 20px; */
+        /* background: rgb(255,255,255); */
+        background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,  rgba(0,0,0,0.7) 65%);
+    
+    }
+    
+}
+
+

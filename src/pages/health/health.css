@@ -1,0 +1,460 @@
+.health_wrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.clinics_rap{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 15px;
+    width: 100%;
+    justify-content: center;
+    /* margin-top: 15px; */
+    /* border: 1px solid red; */
+}
+
+.clinic_card{
+    background-color: white;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    border-radius: 7px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+}
+
+.health_top{
+    display: flex;
+    align-items: center;
+    
+    justify-content: space-between;
+    /* border: 1px solid red; */
+    padding: 30px 50px;
+    background-color: var(--sec);
+    border-radius: 10px;
+}
+
+.health_p{
+    font-size: 1.3rem;
+    margin: 10px 0!important;
+    color: #444;
+    font-weight: 400;
+    /* border: 1px solid red; */
+    display: block;
+}
+
+.clinic_card img{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.health_logo{
+    width: 200px;
+    height: 200px;
+    background-color: var(--primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 8rem;
+    color: white;
+    border-radius: 10px;
+}
+
+.main_health{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.health_t_1{
+    width: 60%;
+}
+
+.health_inner{
+    display: flex;
+    width: 100%;
+}
+
+.health_body{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+}
+
+.clinic_card h4{
+    color: #aaa;
+    font-weight: 400;
+}
+
+.page_side{
+    width: 300px;
+    /* background-color: var(--primary); */
+    height: 400px;
+    padding: 15px;    
+    position: sticky;
+    top: 80px;
+}
+
+
+
+.doctors_grid{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 15px;
+    overflow-y: scroll;
+    height: 400px;
+    /* padding: 15px; */
+}
+
+.more_doctors{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.doctor_card{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 10px;
+    background-color: white;
+    border-radius: 7px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+}
+
+.doctor_card:hover{
+    background-color: var(--sec);
+    cursor: pointer;
+}
+
+.doctor_card img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+
+.doctors_inner{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 20px;
+}
+
+.doc_card{
+    background-color: white;
+    height: 100%;
+}
+
+.doc_card img{
+    width: 100%;
+    height: 380px;
+    object-fit: cover;
+}
+
+.doctors_top{
+    background-color: var(--sec);
+    padding: 30px 50px;
+   
+    border-radius: 10px;
+
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.doc_card_details{
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* width: 100%; */
+}
+
+.doctors_top h1{
+    padding-bottom: 15px;
+}
+
+.view_doc_top{
+    width: 100%;
+    height: 200px;
+    position: relative;
+    margin-bottom: 10px;
+    
+}
+
+.view_doc_top img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.view_doc_photo{
+    position: absolute;
+    height: 120px;
+    width: 120px;
+    left: 90px;
+    bottom: -60px;
+    z-index: 10;
+}
+
+.view_doc_photo img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 5px solid var(--bg);
+}
+
+.view_doc_left{
+    width: 280px;
+    display: flex;
+    flex-direction: column;
+    /* padding-top: 80px; */
+    /* border: 1px solid red; */
+    padding: 80px 25px 25px 25px;
+    /* background-color: white; */
+    
+}
+
+.doc_specializes{
+    display: inline-block;   
+    margin: 20px 0;
+    
+}
+
+.doc_spec{
+    padding: 4px 8px;
+    background-color: var(--sec);
+    border-radius: 25px;
+    margin: 2px;
+    font-size: 0.8rem;
+   
+    /* color: #aaa; */
+}
+
+.doc_profile_desc{
+    line-height: 1.5;
+    display: block;
+    font-size: 1rem;
+    /* color: #aaa; */
+}
+
+.view_doc_inner{
+    display: flex;
+    gap: 15px;
+    justify-content: space-between;
+}
+
+.doc_body{
+    width: 100%;
+}
+
+.doc_right{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+
+.view_doc_top::after{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(60, 64, 67, 0.3);
+    left: 0;
+    top: 0;
+}
+
+.doc_right h4{
+    margin: 10px 0;
+}
+
+.btn_close2{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    z-index: 10;
+    color: var(--primary) !important;
+    background-color: white;
+}
+
+.view_clinic{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.view_clinic_top{
+    display: flex;
+    gap: 50px;
+    background-color: var(--sec);
+    padding: 50px;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.view_clinic_right img{
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.view_clini_left{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.view_clini_left h1{
+    font-size: 5rem;
+    font-weight: 800;
+    line-height: 1;
+
+}
+
+.view_clinic_body{
+    padding: 50px;
+    border: 7px solid var(--sec);
+    /* background-color: white; */
+}
+
+.doc_rating{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+    border: 10px solid var(--sec);
+    background-color: white;
+    text-align: center;
+    font-size: 1rem;
+}
+
+.review_rate{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.reviews_top h3{
+    display: block;
+    text-align: center;
+    /* border: 1px solid red; */
+    width: 100%;
+}
+
+
+
+
+@media screen and (max-width: 440px){
+    .health_logo{
+        display: none;
+    }
+
+    .health_t_1{
+        width: 100%;
+    }
+
+    .health_top{
+        
+        /* border: 1px solid red; */
+        padding: 20px;
+     
+        border-radius: 5px;
+    }
+
+    
+    .page_side{
+    display: none;
+    }
+    .health_body{
+       
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    .view_clinic_top{
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 10px;
+       
+        padding: 15px;
+     
+    }
+
+    .view_clini_left h1{
+        font-size: 3rem;
+        font-weight: 700;
+        line-height: 1;
+    
+    }
+
+    .view_clinic_body{
+        padding: 15px;
+        border: 7px solid var(--sec);
+        width: 85%;
+        margin: 0 auto;
+        /* background-color: white; */
+    }
+
+    .view_ingredients{
+        width: 95%;
+        margin: 0 auto;
+    }
+
+    .view_doc_photo{
+        position: absolute;
+        height: 120px;
+        width: 120px;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: -60px;
+        z-index: 10;
+    }
+
+    .view_doc_inner{
+        
+        flex-direction: column;
+        
+    }
+
+    .view_doc_left{
+        width: 83%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        /* padding-top: 80px; */
+        border: 1px solid #aaa;
+        padding-top: 55px;
+        margin: 0 auto;
+        background-color: white;
+        /* background-color: white; */
+        
+    }
+
+    .doc_right{
+        width: 90%;
+        
+        margin: 0 auto;
+    }
+    
+    
+    
+    
+}
+

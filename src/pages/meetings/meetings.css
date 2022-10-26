@@ -25,7 +25,7 @@
 }
 
 .meeting_top{
-    display: flex;
+    display: none;
     align-items: center;
     gap: 15px;
     margin-bottom: 10px;
@@ -468,6 +468,14 @@
         gap: 10px;
         
     }
+
+    .meeting_top{
+            display: flex;}
+        /* align-items: center;
+        gap: 15px;
+        margin-bottom: 10px;
+        font-size: 1.1rem;
+    } */
     
 
     /* .meetings_actions{

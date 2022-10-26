@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion';
 import { ages, heights, tribes, weight } from '../../data';
 import { useState } from 'react';
+import Nav from '../../components/nav/Nav';
 
 
 
@@ -19,21 +20,7 @@ const Register = () => {
     console.log('revert', revert)
   return (
     <div className='register'>
-        <div className="register_nav">
-            <div className="logo" onClick={() => navigate('/')}>
-                Forum
-            </div>
-            <div className="mneu_items">
-                <span>Nyumbani</span>
-                <span>Kuhusu sisi</span>
-                <span>Bei</span>
-                <span>Mawasiliano</span>
-            </div>
-            <div className="sign_in">
-                <span>Tayari ni mwanachama?</span>
-                <button className='btn_sign' onClick={() =>navigate('/home/posts')}>Ingia</button>
-            </div>
-        </div>
+        <Nav/>
         <motion.div 
              initial={{ y:'100vw'}}
              animate={{y:0}} 
@@ -551,7 +538,8 @@ const Register = () => {
                         <textarea  name='desc' placeholder='Sifa za ziada' className='sel_textarea'/> 
                     </div>                 
                                      
-                </div></>}
+                </div>
+                </>}
                 
                
                 <div className="items_group">

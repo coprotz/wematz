@@ -1,0 +1,20 @@
+.likes{
+    /* display: flex; */
+    /* align-items: center; */
+    /* gap: 10px; */
+    /* font-size: 1rem; */
+    /* color: white; */
+    /* align-items: center; */
+    /* margin-top: 20px; */
+    /* background-color: var(--primary); */
+    width: fit-content;
+    cursor: pointer;
+    /* padding: px 7px; */
+    /* border-radius: 25px; */
+}
+
+.likes_action{
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+}

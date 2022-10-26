@@ -1,0 +1,123 @@
+
+.subscript{
+    background-color: var(--bg);
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.subscript_wrapper{
+    width: 80%;
+    margin: 0 auto;
+}
+
+.subscript_body{
+    max-width: 500px;
+    background-color: white;
+    margin: 15px auto;  
+    display: flex;
+    flex-direction: column;
+    /* gap: 15px; */
+    border-radius: 10px ;
+    box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+}
+
+.subcript_top h3{
+    margin-bottom: 50px;
+    line-height: 1.3;
+    font-weight: 400;
+    font-size: 1.7rem;
+    color: var(--primary);
+}
+
+.sub_body_top{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* width: 100%; */
+    /* margin-bottom: 20px; */
+    border-bottom: 7px solid var(--bg);
+    padding: 25px;
+}
+
+.amount_fig{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 87%;
+    /* border: 1px solid red; */
+    
+}
+
+.sub_body_selection{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 25px;
+}
+
+.selection_group input[type='radio']:checked + label{
+    background-color: var(--primary);
+    color: white;
+    border: 1px solid white;
+}
+
+.figure_details{
+    display: flex;
+    align-items: center;
+    /* border: 1px solid red; */
+    /* width: 100%; */
+}
+
+.fig_input{
+    border: none;
+    outline: none;
+}
+
+.pay_status_1{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+
+
+.pay_options{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.pay_options span{
+    width: 30px;
+    height: 20px;
+    border: 1px solid #c1c2c3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.donate_opt{
+    color: #aaa;
+    /* border: 1px solid red; */
+}
+
+.pay_options img{
+    width: 100%;
+    /* height: 100%; */
+    object-fit: cover;
+}
+
+.pay_secure{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.pay_secure svg{
+    color:  green;
+    font-size: 1.5rem;
+}

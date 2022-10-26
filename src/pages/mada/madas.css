@@ -144,6 +144,47 @@
     gap: 15px;
 }
 
+.top_madas_wrapper{
+    display: flex;
+    flex-direction: column;
+}
+
+.btn_mada{
+    margin-bottom: 10px;
+    border: none;
+}
+
+.create_mada{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+}
+
+.btn_create{
+    border: none;
+    background-color: var(--primary);
+    font-size: 1rem;
+    padding: 15px;
+    width: 100%;
+    color: white;
+    border-radius: 15px;
+}
+
+.author_div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.mada_author{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
 
 @media screen and (max-width: 440px){
     .madas_body{

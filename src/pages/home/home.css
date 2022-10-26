@@ -19,9 +19,10 @@
 }
 
 .home_sidebar{
-    width: 18vw;
+    flex: 1;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     /* gap: 2vh; */
     height: calc(100vh - 80px);
     position: sticky;
@@ -32,7 +33,7 @@
 
 .home_body{
     display: flex;
-    width: 100%;
+    flex: 4;
     gap: 15px;
     /* border: 1px solid rgb(133, 96, 96); */
 }
@@ -46,17 +47,11 @@
     flex-direction: column;
     gap: 10px;
     /* border: 1px solid black; */
-    width: 70%;
+    width: 100%;
     transition: width all 0.5s ease;
 }
 
 
-
-.post_grids{
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
 
 
 
@@ -170,7 +165,7 @@
         /* flex-direction: column; */
         /* border: 1px solid red; */
         margin: 0 auto;
-        /* gap: 50px; */
+        gap: 0px;
         /* margin: 10px; */
     }
 
@@ -183,11 +178,15 @@
     }
 
     .home_sidebar{
-        position: absolute;
+        position:fixed;
+        top: 70px;
+        height: 70vh;
         background-color: var(--bg);
-        width: 320px;
+        width: 80%;
         z-index: 10;
-        font-size: 2.5rem !important;
+        padding: 15px;
+       /* display: none; */
+   
     }
 
     .main_left{

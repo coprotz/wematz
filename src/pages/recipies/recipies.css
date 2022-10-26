@@ -1,0 +1,237 @@
+.recipies_wrapper{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    justify-content: center;
+    gap: 25px;
+    margin-top: 15px;
+}
+
+.recipies_card{
+    height: 480px;
+    background-color: white;
+    border: 1px solid #e1e1e1;
+}
+
+
+
+.recipies_card:hover ~ .card_name{
+    text-decoration: underline;
+}
+
+.recipies_card img{
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+}
+
+.rec_details{
+    padding: 15px;
+    width: 290px;
+    /* border: 1px solid red; */
+}
+
+.recipies_actions{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.cat_recipies{
+    margin: 5px;
+    padding: 5px 10px;
+    background-color: white;
+    /* line-height: 2.4; */
+    border-radius: 5px;
+    display: inline-block;
+}
+
+.view_reci_top{
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 1rem;
+    margin-bottom: 15px;
+}
+
+/* .view_reci_top svg{
+    border: 1px solid red;
+} */
+
+.view_reci_top span{
+    /* border: 1px solid red; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: -1px;
+    font-size: 1rem;
+}
+
+.reviews{
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    width: 100%;
+}
+
+.ratings_stairs{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.view_rec_body{
+    background-color: white;
+    width: 100%;
+    padding: 40px;
+    border-radius: 15px;
+}
+
+.view_rec_body h1{
+    font-size: 4rem;
+    font-weight: 800;
+    color: var(--primary);
+    line-height: 1;
+    margin: 30px 0;
+
+}
+
+.ratings_span{
+    border-right: 1px solid #999;
+    height: 18px;
+
+}
+
+.review_body{
+    display: block;
+    width: 100%;
+    font-size: 1.1rem;
+    font-weight: 400;
+    margin-top: 15px;
+}
+
+.rev_photo{
+    width: 100%;
+    height: 500px;
+}
+
+.rev_body_inner{
+    display: flex;
+    gap: 35px;
+
+}
+
+.review_time{
+    margin: 15px 0;
+    display: flex;
+    align-items: center;
+}
+
+.rev_photo img{
+    width: 100%;
+    height: 100%;
+    object-fit:cover;
+}
+
+
+.rev_right{
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: sticky;
+    top: 80px;
+    height: 600px;
+}
+
+.latest_card{
+    display: flex;
+    gap: 15px;
+}
+
+.latest_card img{
+    width: 70px;
+    height: 100%;
+    object-fit:contain;
+}
+
+.rev_latest{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.latest_card:hover{
+    background-color: white;
+}
+
+.view_title{
+    margin: 20px 0;
+}
+
+
+.ingredient_grids{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    
+}
+
+.ingredi_card{
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding-left: 15px;
+}
+
+.step_card{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-left: 15px;
+}
+
+.card_text{
+    font-size: 1.2rem;
+    font-weight: 400;
+    text-align: justify;
+}
+
+.ingredi_card span{
+    width: 7px;
+    height: 7px;
+    background-color: var(--primary);
+    border-radius: 50%;
+}
+
+
+
+@media screen and (max-width: 740px){
+  
+
+    .recipies_cat{
+        width: 95%;
+        margin: 0 auto;
+    }
+
+    .recipies_wrapper{
+        width: 95%;
+        margin: 0 auto;
+    }
+
+    .view_rec_body{
+      
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    .rev_right{
+       
+        display: none;
+       
+    }
+
+    .rev_photo{
+      
+        height: 200px;
+    }
+}

@@ -45,10 +45,13 @@ label{
     justify-content: center;
     align-items: center;
     gap: 5;
-    border: 1px solid var(--sec);
+    
+    border: 1px solid black;
     border-radius: 3px;
     margin: 5px;
     cursor: pointer;
+    font-size: 1.2rem;
+    padding: 8px 13px;
 }
 
 label:hover{
@@ -78,7 +81,8 @@ label:hover{
 
 .nikah_search{
     width: 80%;
-    margin: 0 auto 10px;
+    margin: 10px auto;
+
 }
 
 .nikah_donated{
@@ -183,6 +187,7 @@ label:hover{
     flex-direction: column;
     font-size: 0.9rem;
     align-items: flex-start;
+    height: 100%;
 }
 
 .nikah_info span{
@@ -239,13 +244,15 @@ label:hover{
 }
 
 .nikah_view_bottom{
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20vw, 1fr));
     margin-top: 5px;
     box-shadow: var(--shadow);
+    gap: 15px;
 }
 
 .nikah_view_left{
-    width: 500px;
+    /* width: 30vw; */
     height: 100%;
     position: relative;
 }
@@ -253,8 +260,8 @@ label:hover{
 .nikah_view_action{
     position: absolute;
     bottom: 20px;
-    left: 40%;
-    transform: translateY(-50%);
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
     align-items: center;
     gap: 15px;
@@ -300,7 +307,7 @@ label:hover{
     flex-direction: column;
     gap: 3px;
     color: white;
-    width: 50%;
+    /* width: 50%; */
 }
 
 .nikah_right_item{
@@ -348,6 +355,34 @@ label:hover{
         font-size: 1.5rem;
         align-items: flex-start;
     }
+    .nikah_search{
+        width: 95%;
+        margin: 10px auto;
+    }
+
+    .nikah_view_bottom{
+        display: flex;
+        flex-direction: column;
+       
+    }
+
+    .nikah_view_right{
+        /* background-color: var(--primary);
+        padding: 15px;
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        color: white; */
+        width: 95%;
+        margin: 0 auto;
+    }
+
+    .nikah_view_left{
+        width: 100%;
+        height: 100%;
+        position: relative;
+    }
+    
     
 }
 

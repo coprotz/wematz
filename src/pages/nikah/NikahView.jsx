@@ -29,79 +29,158 @@ const NikahView = () => {
             <div className="nikah_view_right">
                 <h1>{nikah && nikah.name}</h1>
                 <div className="nikah_right_item">
-                    <span>Age</span>
+                    <span>Umri</span>
                     <h4>{nikah && nikah.age}</h4>
                 </div>
                 <div className="nikah_right_item">
-                    <span>Tribe</span>
+                    <span>Kabila</span>
                     <h4>{nikah && nikah.tribe}</h4>
                 </div>
                 <div className="nikah_right_item">
-                    <span>Living</span>
+                    <span>Anaishi na</span>
                     <h4>{nikah && nikah.live}</h4>
                 </div>
                 <div className="nikah_right_item">
-                    <span>Education</span>
+                    <span>Elimu ya Juu</span>
                     <h4>{nikah && nikah.education}</h4>
                 </div>
                 <div className="nikah_right_item">
-                    <span>Quran</span>
+                    <span>Elimu ya Quran</span>
                     <h4>{nikah && nikah.quran}</h4>
                 </div>
                 <div className="nikah_right_item">
-                    <span>Prayer</span>
+                    <span>Kuswali</span>
                     <h4>{nikah && nikah.prayer}</h4>
                 </div>
                 <div className="nikah_right_item">
-                    <span>Weight</span>
+                    <span>Uzito</span>
                     <h4>{nikah && nikah.weight}</h4>
                 </div>
                 <div className="nikah_right_item">
-                    <span>Height</span>
+                    <span>Urefu</span>
                     <h4>{nikah && nikah.height}</h4>
                 </div>
                 <div className="nikah_right_item">
-                    <span>Body Status</span>
+                    <span>Umbile</span>
                     <h4>{nikah && nikah.body}</h4>
                 </div>
                 <div className="nikah_right_item">
-                    <span>Blood Group</span>
+                    <span>Kundi la Damu</span>
                     <h4>{nikah && nikah.blood}</h4>
                 </div>
                 <div className="nikah_right_item">
-                    <span>Marrital Status</span>
+                    <span>Hali ya Ndoa</span>
                     <h4>{nikah && nikah.status}</h4>
                 </div>
                 <div className="nikah_right_item">
-                    <span>Children</span>
+                    <span>Watoto</span>
                     <h4>{nikah && nikah.child}</h4>
                 </div>
                 <div className="nikah_right_item">
-                    <span>Employment Status</span>
+                    <span>Hali ya Ajira</span>
                     <h4>{nikah && nikah.emmployement}</h4>
                 </div>
                 <div className="nikah_right_item">
-                    <span>Stays</span>
+                    <span>Anapokaa</span>
                     <h4>{nikah && nikah.live}</h4>
                 </div>
                 <div className="nikah_right_item">
-                    <span>Occupation</span>
+                    <span>Ujuzi</span>
                     <h4>{nikah && nikah.occupation}</h4>
                 </div>
                 <div className="nikah_right_item">
-                    <span>Ethnicity</span>
+                    <span>Asili</span>
                     <h4>{nikah && nikah.Ethnicity}</h4>
                 </div>
                 <div className="nikah_right_item">
-                    <span>Religious Set</span>
+                    <span>Dhehebu</span>
                     <h4>{nikah && nikah.religion_set}</h4>
                 </div>
                 <div className="nikah_right_item">
-                    <span>Muslem by</span>
+                    <span>Muislamu kwa</span>
                     <h4>{nikah && nikah.islam_by}</h4>
                 </div>
                 <div className="nikah_right_item">
-                    <span>Gender</span>
+                    <span>Ukewenza</span>
+                    <h4>{nikah && nikah.gender}</h4>
+                </div>
+            </div>
+            <div className="nikah_view_right">
+                <h1>Sifa za Mwenza</h1>
+                <div className="nikah_right_item">
+                    <span>Umri</span>
+                    <h4>{nikah && nikah.age}</h4>
+                </div>
+                <div className="nikah_right_item">
+                    <span>Kabila</span>
+                    <h4>{nikah && nikah.tribe}</h4>
+                </div>
+                <div className="nikah_right_item">
+                    <span>Anaishi na</span>
+                    <h4>{nikah && nikah.live}</h4>
+                </div>
+                <div className="nikah_right_item">
+                    <span>Elimu ya Juu</span>
+                    <h4>{nikah && nikah.education}</h4>
+                </div>
+                <div className="nikah_right_item">
+                    <span>Elimu ya Quran</span>
+                    <h4>{nikah && nikah.quran}</h4>
+                </div>
+                <div className="nikah_right_item">
+                    <span>Kuswali</span>
+                    <h4>{nikah && nikah.prayer}</h4>
+                </div>
+                <div className="nikah_right_item">
+                    <span>Uzito</span>
+                    <h4>{nikah && nikah.weight}</h4>
+                </div>
+                <div className="nikah_right_item">
+                    <span>Urefu</span>
+                    <h4>{nikah && nikah.height}</h4>
+                </div>
+                <div className="nikah_right_item">
+                    <span>Umbile</span>
+                    <h4>{nikah && nikah.body}</h4>
+                </div>
+                <div className="nikah_right_item">
+                    <span>Kundi la Damu</span>
+                    <h4>{nikah && nikah.blood}</h4>
+                </div>
+                <div className="nikah_right_item">
+                    <span>Hali ya Ndoa</span>
+                    <h4>{nikah && nikah.status}</h4>
+                </div>
+                <div className="nikah_right_item">
+                    <span>Watoto</span>
+                    <h4>{nikah && nikah.child}</h4>
+                </div>
+                <div className="nikah_right_item">
+                    <span>Hali ya Ajira</span>
+                    <h4>{nikah && nikah.emmployement}</h4>
+                </div>
+                <div className="nikah_right_item">
+                    <span>Anapokaa</span>
+                    <h4>{nikah && nikah.live}</h4>
+                </div>
+                <div className="nikah_right_item">
+                    <span>Ujuzi</span>
+                    <h4>{nikah && nikah.occupation}</h4>
+                </div>
+                <div className="nikah_right_item">
+                    <span>Asili</span>
+                    <h4>{nikah && nikah.Ethnicity}</h4>
+                </div>
+                <div className="nikah_right_item">
+                    <span>Dhehebu</span>
+                    <h4>{nikah && nikah.religion_set}</h4>
+                </div>
+                <div className="nikah_right_item">
+                    <span>Muislamu kwa</span>
+                    <h4>{nikah && nikah.islam_by}</h4>
+                </div>
+                <div className="nikah_right_item">
+                    <span>Ukewenza</span>
                     <h4>{nikah && nikah.gender}</h4>
                 </div>
             </div>
