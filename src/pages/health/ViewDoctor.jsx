@@ -1,15 +1,17 @@
 import React from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { doctors, reviews } from '../../data'
+import { reviews } from '../../data'
 import { BsChatLeftDotsFill,BsFillPersonFill, BsCalendarDay } from "react-icons/bs";
 import {GrClose, GrLike } from "react-icons/gr";
 import Reviews from '../../components/reviews/Reviews';
 import { BsStar,BsStarFill } from "react-icons/bs";
+import useData from '../../hooks/useData';
 // import {  HiOutlineArrowLeft } from "react-icons/hi";
 
 const ViewDoctor = () => {
 
     const { id } = useParams()
+    const { doctors } = useData()
     const doctor = doctors?.find(d => d.id === id)
     const navigate = useNavigate()
     // const revs = reviews.filter(r =>r.docId === doc.id)
@@ -36,9 +38,9 @@ const ViewDoctor = () => {
             <button onClick={() =>navigate(-1)} className='btn_back'><HiOutlineArrowLeft/>Rudi Nyuma</button>
         </div> */}
       <div className="view_doc_top">
-        <img src={process.env.PUBLIC_URL+`/${doctor?.photo}`} />
+        <img src={doctor?.photo} />
         <div className="view_doc_photo">
-            <img src={process.env.PUBLIC_URL+`/${doctor?.photo}`} />
+            <img src={doctor?.photo} />
            
         </div>
         <button className='btn btn_close2' onClick={() => navigate(-1)}><GrClose/></button>
@@ -46,15 +48,13 @@ const ViewDoctor = () => {
       <div className="view_doc_inner">
         <div className="view_doc_left">
             <h2>{doctor?.name}</h2>
-            <span>{doctor?.specializes[0]}</span>
-            <div className="doc_specializes">
+            <span>{doctor?.specialize}</span>
+            {/* <div className="doc_specializes">
                 {doctor?.specializes.map(s => (
                    <small className='doc_spec'>{s}</small> 
                 ))}
-            </div>
-            <p className='doc_profile_desc'>{doctor?.name} is Specialized doctor in all areas related to
-            heart. He has more that 25 years experience in his professional. He has been working as 
-            professional Doctor at Muhimibli Hospital for so many years</p>
+            </div> */}
+            <p className='doc_profile_desc'>{doctor?.desc}</p>
             
         </div>
         <div className="doc_body">
@@ -85,35 +85,18 @@ const ViewDoctor = () => {
                   </div>            
               </div> 
             </div>
-            {/* <h2 className='patient_reviews'>Maoni({revs?.length})</h2>
-            <CreateReview title='Toa Maoni yako'/>
-            <div className="reviews_patients">
-                {revs?.map(r => (
-
-                
-                <div className="review_card">
-                    <div className="review_photo">
-                        <img src={process.env.PUBLIC_URL+`/${r.photo}`} />
-                        <div className="review_body_name">
-                            <h3>{r.name}</h3>                        
-                        </div>                    
-                    </div>
-                    <div className="reviews_body">                    
-                        <span>{r.date}</span>                  
-                        <p className="review_status">{r.message}</p>
-                    </div>
-                </div>
-              ))}
-            
-            
-            </div>           */}
+          
             <Reviews doc={doctor}/>
         </div>
         <div className="doc_right">
             <button className='btn_sign'>Weka Miadi</button>
             <div className="hosp_name">
-              <h4>Clinic/Hospital</h4>
+              <h4>Hospital</h4>
               <h2>{doctor?.hospital}</h2>
+            </div>
+            <div className="hosp_name">
+              <h4>Clinic</h4>
+              <h2>{doctor?.clinic}</h2>
             </div>
             <div className="doc_rating">
               <span>Unaweza kumpa kiwango kipi mawasiliano na ushauri wa Daktari huyu?. Ushiriki wako ni muhimu ili kuwasaidia wengine</span>

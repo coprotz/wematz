@@ -1,7 +1,41 @@
 .mada_remarks{
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 20px;
-    color: #aaa;
+    /* color: #aaa; */
     margin-top: 2px;
+}
+
+.likes{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn_likes{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: rgb(235, 235, 235);
+    border: none;
+    padding: 5px;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn_likes:hover{
+    background-color: var(--sec);
+    cursor: pointer;
+}
+
+.likes svg{
+    font-size: 1rem;
+}
+
+.timeago{
+    font-size: 0.9rem;
+    font-weight: 200;
 }

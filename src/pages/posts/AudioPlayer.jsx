@@ -2,23 +2,28 @@ import React from 'react'
 import img8 from '../../assets/images/img8.jpg'
 import fatha from '../../assets/audio/fatha.mp3'
 import Remarks from '../../components/remarks/Remarks'
+import moment from 'moment'
+import useData from '../../hooks/useData'
 // import {  BsCaretRightFill } from "react-icons/bs";
 
 
-const AudioPlayer = () => {
+const AudioPlayer = ({p}) => {
     // const [perc, setPerc] = useState(0)
     // console.log('perc', perc)
+
+    const { users } = useData()
+    const user = users?.find(u => u.id === p?.userId)
    
   return (
     <div className='post_card'>
     <div className="post_top">
         <div className="post_card_user">
             <div className="card_user_photo">
-                <img src={img8} alt="" />
+                <img src={user?.photo} alt="" />
             </div>
             <div className="card_username">
-                 <h5>Juma Mbaga</h5>
-                 <small>12 March 2022</small>
+                 <h5>{user?.fname+" "+user?.lname}</h5>
+                 <small className='timeago'>{moment(p?.createdAt?.toDate()).fromNow(true)}</small>
             </div>
            
         </div>
@@ -28,11 +33,11 @@ const AudioPlayer = () => {
     </div>
     <div className="card_player">
         <div className="audio_player">           
-            <audio src={fatha} controls></audio>
+            <audio src={p?.clip} controls></audio>
         </div>   
 
     </div>
-    <Remarks/>
+    <Remarks p={p}/>
 </div>
   )
 }

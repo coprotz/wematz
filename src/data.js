@@ -388,10 +388,11 @@ export const ages = ['18','19','20','21', '22', '23','24','25','26','27','28','2
 
 export const heights = ['110','111','112','113','114','115','116','117','118','119','120','121','122','123','124','125','126','127','128','129','130','131','132','133','134','135','136','137','138','139','140','141','142','143','144','145','146','147','148','149','150','151','152','153','154','155','156','157','158','159','160','161','162','163','164','165','166','167','168','169','170','171','172','173','174','175','176','177','178','179','180','181','182','183','184','185','186','187','188','189','190','191','192','193','194','195','196','197','198','199','200']
 
-export const weight = ['40','41','42','43','44','45','46','47','48','49','50','51','52','53','54','55','56','57','58','59','60','61','62','63','64','65','66','67','68','69','70','71','72','73','74','75','76','77','78','79','80','81','82','83','84','85','86','87','88','89','90','91','92','93','94','95','96','97','98','90','91','92','93','94','95','96','97','98','99','100','101','102','103','104','105','106','107','108','109','110','111','112','113','114','115','116','117','118','119','120','121','122','123','124','125','126','127','128','129','130']
+export const weights = ['40','41','42','43','44','45','46','47','48','49','50','51','52','53','54','55','56','57','58','59','60','61','62','63','64','65','66','67','68','69','70','71','72','73','74','75','76','77','78','79','80','81','82','83','84','85','86','87','88','89','90','91','92','93','94','95','96','97','98','90','91','92','93','94','95','96','97','98','99','100','101','102','103','104','105','106','107','108','109','110','111','112','113','114','115','116','117','118','119','120','121','122','123','124','125','126','127','128','129','130']
 
 export const tribes = ['Alagwa','Akiek','Akie ','Arusha','Assa','Barabaig','Balouch','Bembe','Bena','Bende','Bondei','Bungu','Burunge','Chaga','Datooga','Dhaiso','Digo','Doe','Fipa','Gogo','Goa','Goma','Gorowa','Gujarati','Gweno','Ha','Hutu','Hadza','Hangaza','Haya','Hehe','Holoholo','Hutu','Ikizu','Ikoma','Iraqw','Isanzu','Jiji','Jita','Kabwa','Kagura','Kaguru','Kahe','Kami','Kamba','Kara','Kerewe','Kikuyu','Kimbu','Kinga','Kisankasa','Kisi','Konongo','Kuria','Kutu','Kwadza','Kwavi','Kwaya','Kwere','Kwifa','Lambya','Luguru','Lungu','Luo','Maasai','Machinga','Magoma','Mahanji','Mbulu','Makonde','Makua','Makwe','Mambwe','Manyema','Manda','Mahara','Mediak','Meru','Matengo','Matumbi','Maviha','Mbugwe','Mbunga','Mbugu','Mosiro','Mpoto','Msur','Mwanga','Mwera','Natta','Ndali','Ndamba','Ndendeule','Ndengereko','Ndonde','Nyanja','Ngas','Ngasa','Ngindo','Ngoni','Ngulu','Ngazija','Ngurimi','Ngwele','Nilamba','Nindi','Nyakyusa','Nyasa','Nyambo','Nyamwanga','Nyamwezi','Nyanyembe','Nyaturu','Nyiha','Nyiramba','Omotik','Okiek','Pangwa','Pare','Pimbwe','Pogolo','Rangi','Rufiji','Rungi','Rungwa','Rwa','Safwa','Sagara','Sandawe','Sangu','Segeju','Swengwear','Shambaa','Shirazi','Shubi','Sizaki','Suba','Sukuma','Sumbwa','Sungu','Swahili','Temi','Tongwe','Twa','Tutsi','Tumbuka','Vidunda','Vinza','Wanda','Washihiri','Wamanga','Wanji','Ware','Yaaku','Yao','Zanaki','Zaramo','Zigua','Zinza','Zyoba','Zulu']
 
+export const bloods = ['A+', 'B+', 'AB+', 'O+', 'O-', 'AB-', 'A-', 'B-']
 
 export const clinics = [
     // {
@@ -1638,6 +1639,41 @@ export const categories = [
     'MAPISHI YENYE AFYA',
     'VYAKULA VYA WATOTO',
     'VYAKULA VYA SIKUKUU'
+]
+
+
+export const regions = [
+    {id: '1241', name: 'Arusha', districts: ["Arusha","Karatu","Longido","Meru","Monduli","Ngorongoro"]},
+    {id: '124d1', name: 'Dar es Salaam', districts: ["Ilala","Kinondoni","Temeke","Kigamboni","Ubungo"]},
+    {id: '12444d1', name: 'Dodoma', districts: ["Dodoma","Bahi","Chamwino","Chemba","Kondoa","Kongwa","Mpwapwa"]},
+    {id: '44d1', name: 'Geita', districts: ["Geita Urban","Bukombe","Chato","Geita","Mbogwe","Nyang'hwale"]},
+    {id: '44dff1', name: 'Iringa', districts: ["Iringa Rural","Iringa Urban","Kilolo","Mafinga","Mufindi"]},
+    {id: '44dfsf1', name: 'Kagera', districts: ["Biharamulo","Bukoba Rural","Bukoba Urban","Karagwe","Kyerwa","Missenyi","Muleba","Ngara"]},
+    {id: 'fsf1', name: 'Katavi', districts: ["Mlele","Mpanda"]},
+    {id: 'fsddf1', name: 'Kigoma', districts: ["Buhigwe","Kakonko","Kasulu Rural","Kasulu Urban","Kibondo","Kigoma","Kigoma-Ujiji","Uvinza"]},
+    {id: 'fsdfdf1', name: 'Kilimanjaro', districts: ["Hai","Moshi","Moshi Rural","Mwanga","Rombo","Same","Siha"]},
+    {id: 'fsdufdf1', name: 'Lindi', districts: ["Kilwa","Lindi","Lindi Municipal","Liwale","Nachingwea","Ruangwa"]},
+    {id: 'f78dufdf1', name: 'Manyara', districts: ["Babati","Hanang",,"Kiteto","Mbulu","Simanjiro"]},
+    {id: 'f7fdf1', name: 'Mara', districts: ["Bunda","Butiama","Musoma Rural","Musoma Urban","Rorya","Serengeti","Tarime"]},
+    {id: 'f7fdddf1', name: 'Mbeya', districts: ["Busokelo","Chunya","Kyela","Mbarali","Mbeya","Mbeya Rural","Rungwe"]},
+    {id: 'f7fddyydf1', name: 'Morogoro', districts: ["Gairo","Kilombero","Kilosa","Malinyi","Morogoro Rural","Morogoro Urban","Mvomero","Ulanga"]},
+    {id: 'f7f7ydf1', name: 'Mtwara', districts: ["Masasi","Masasi","Mtwara","Mikindani","Mtwara Rural","Mtwara-Mikindani","Nanyamba","Nanyumbu","Newala","Tandahimba"]},   
+    {id: 'f7df89ydf1', name: 'Mwanza', districts: ["Ilemela","Kwimba","Magu","Misungwi","Nyamagana","Sengerema","Ukerewe"]},
+    {id: 'f7889ydf1', name: 'Njombe', districts: ["Njombe","Ludewa","Makambako Urban","Makete","Njombe Rural","Njombe Urban","Wanging'ombe"]},
+    {id: 'f7889ydf145', name: 'Pemba North', districts: ["Micheweni","Wete"]},
+    {id: 'f7889yurr145', name: 'Pemba South', districts: ["Chake Chake","Mkoani"]},
+    {id: 'f7889yu145', name: 'Pwani', districts: ["Bagamoyo"," Chalinze","Kibaha","Kibaha Urban","Kibiti","Kisarawe","Mafia","Mkuranga","Rufiji"]},
+    {id: 'f788dd9yu145', name: 'Rukwa', districts: ["Kalambo","Lyamba lya Mfipa","Nkasi","Sumbawanga"]},
+    {id: 'f89yu145', name: 'Ruvuma', districts: ["Mbinga","Namtumbo","Songea (rural)","Songea (urban)","Tunduru","Nyasa"]},
+    {id: 'f89yffu145', name: 'Shinyanga', districts: ["Bariadi","Bukombe","Kahama","Maswa","Meatu","Shinyanga","Kishapu"]},
+    {id: 'f89yffu1g45', name: 'Simiyu', districts: ["Bariadi","Busega","Itilima","Maswa","Meatu"]},
+    {id: 'f89yffffu1g45', name: 'Singida', districts: ["Singida Rural","Singida Urban","Manyoni","Ikungi","Iramba","Mkalama"]},
+    {id: '8yffffu1g45', name: 'Tabora', districts: ["Igunga","Kaliua","Nzega","Sikonge","Tabora Urban","Urambo","Uyui"]},
+    {id: '8yfffggfu1g45', name: 'Tanga', districts: ["Tanga","Muheza","Korogwe","Lushoto","Handeni","Pangani","kilindi","Mkinga"]},
+    {id: '8yu1g45', name: 'Zanzibar North', districts: ["Kaskazini A","Kaskazini B"]},
+    {id: '8yu1ggqg45', name: 'Zanzibar South and central', districts: ["Kati","Kusini"]},
+    {id: '8yu1gwwgqg45', name: 'Zanzibar West', districts: ["Magharibi","Mjini"]},
+
 ]
 
 

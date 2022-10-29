@@ -6,11 +6,11 @@ const DoctorCard = ({d}) => {
     const navigate = useNavigate()
   return (
     <div className="doc_card" key={d.id}>
-        <img src={process.env.PUBLIC_URL+`/${d.photo}`} />
+        <img src={d.photo} />
         <div className="doc_card_details">
             <div className="doc_info">
                 <h4>{d.name}</h4>
-                {d.specializes[0]}  
+                {d.specialize}  
             </div>
             <div className="meetings_actions">                    
                 <button className='btn'><BsCalendarDay/></button>

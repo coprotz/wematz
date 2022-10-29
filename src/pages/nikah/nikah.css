@@ -39,7 +39,7 @@
     font-size: 1rem;
 }
 
-label{
+.label{
     padding: 5px;
     display: flex;
     justify-content: center;
@@ -54,7 +54,7 @@ label{
     padding: 8px 13px;
 }
 
-label:hover{
+.label:hover{
     background-color: var(--bg);
 }
 
@@ -72,11 +72,13 @@ label:hover{
 
 .nikah_grid{
     display: grid;
-    grid-template-columns: repeat(auto-fit, 220px);
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 15px;
     justify-content: center;
     filter: blur(8px);
     -webkit-filter: blur(8px);
+    width: 90%;
+    margin: 0 auto;
 }
 
 .nikah_search{
@@ -87,7 +89,7 @@ label:hover{
 
 .nikah_donated{
     display: grid;
-    grid-template-columns: repeat(auto-fit, 220px);
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 15px;
     justify-content: center;
     
@@ -205,8 +207,12 @@ label:hover{
 .nikahview{
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     margin-top: 5px;
+    /* border: 1px solid red; */
 }
+
+
 
 .nikah_View_top{
     display: flex;

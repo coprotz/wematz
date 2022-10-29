@@ -3,9 +3,47 @@ import './posts.css'
 import me from '../../assets/images/img8.jpg'
 import {  BsCardImage, BsPaperclip, BsCaretRightSquareFill, BsSoundwave, BsFillShareFill } from "react-icons/bs";
 import { useState } from 'react';
+import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
+import { db, useAuth } from '../../hooks/useAuth';
+import useData from '../../hooks/useData';
 
-const SharePost = () => {
+
+const SharePost = ({setVideo,setAudio, setImage}) => {
     const [message, setMessage] = useState('')
+    const [loading, setLoading] = useState(false)
+    const { user } = useAuth()
+    const { users } = useData()
+
+    const cuUser = users?.find(u => u.id === user?.uid)
+
+    const postRef = collection(db, 'posts')
+
+
+    const handlePost = async(e) => {
+        e.preventDefault()
+
+        setLoading(true)
+
+        const data = {
+            userId: user.uid,
+            name: cuUser?.fname+" "+cuUser?.lname,
+            createdAt: serverTimestamp(),
+            tex: message,
+            type: 'text',
+            photo: cuUser?.photo
+        }
+
+        try {
+            await addDoc(postRef, data)
+            setLoading(null)
+            setMessage('')
+        } catch (error) {
+            console.log(error.message)
+        }
+
+
+
+    }
   return (
     <div className="share_post">
         <div className="share_info">
@@ -19,21 +57,22 @@ const SharePost = () => {
                         placeholder='Unataka kuwaambia nini WanaWema?' 
                         className='sel_input'
                         name='message'
+                        value={message} 
                         style={{width:'100%'}}
                         onChange={(e) =>setMessage(e.target.value)}
                     /> 
                     {!message &&                  
                      <div className="share_others">
-                        <button className='btn_btn'>
+                        <button className='btn_btn' onClick={() =>setImage(true)}>
                             <BsCardImage/>
                         </button>               
-                        <buttton className='btn_btn'>
-                            <BsCaretRightSquareFill/>
+                        <buttton className='btn_btn' onClick={() =>setVideo(true)}>
+                            <BsCaretRightSquareFill />
                         </buttton>
                         <buttton className='btn_btn'>
                             <BsPaperclip/>
                         </buttton>
-                        <buttton className='btn_btn'>
+                        <buttton className='btn_btn' onClick={() =>setAudio(true)}>
                             <BsSoundwave/>
                         </buttton>
                     </div>}
@@ -42,7 +81,8 @@ const SharePost = () => {
                     className='btn_sign'
                     style={{minWidth: '70px', height: '50px'}}
                     disabled={!message}
-                    ><BsFillShareFill/></button>
+                    onClick={handlePost}
+                    >{loading? 'Sending' : <BsFillShareFill/>}</button>
                 </div>
                
             </div>

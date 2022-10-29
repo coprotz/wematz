@@ -1,50 +1,55 @@
 import React from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import CreateReview from '../../components/reviews/CreateReview'
-import { questions, answers } from '../../data'
+import {  answers } from '../../data'
 import {  HiOutlineArrowLeft } from "react-icons/hi";
+import useData from '../../hooks/useData';
+import moment from 'moment'
 
 const ViewQue = () => {
     const { id } = useParams()
+    const { questions, comments } = useData()
     const que = questions?.find(q => q.id === id)
     const navigate = useNavigate()
-    const ans = answers?.filter(a => a.queId === que?.id)
+    const ans = comments?.filter(a => a.docId === que?.id)
+
+    console.log('que', que)
   return (
     <div className='view_que'>
         <div className="view_que_back">
             <button onClick={() =>navigate(-1)} className='btn_back'><HiOutlineArrowLeft/>Rudi Nyuma</button>
         </div>
         <div className="view_que_top">
-            <h1>{que.que}</h1>
+            <h1>{que?.que}</h1>
         </div>
         <div className="view_que_author">
-            <span>Limeulizwa na</span>
+            {/* <span>Limeulizwa na</span> */}
             <div className='view_que_photo'>
-                <img src={process.env.PUBLIC_URL+`/${que.photo}`} />
+                <img src={que?.photo} />
             </div>           
-            <h4>{que.name}</h4>          
-            <span>{que.createdAt}</span>
+            <h4>{que?.name}</h4>          
+            <span>{moment(que?.createdAt?.toDate()).fromNow(true)}</span>
         </div>
         <div className="view_que_answers">
-            <h3>Majibu</h3>
+            <h3 className='sub_title'>Majibu</h3>
             <div className="view_answers_grid">
                 {ans?.map(a => (
                     <div className="que_grid_anwers" key={a.id}>
                         <div className="answerd_photo">
-                            <img src={process.env.PUBLIC_URL+`/${a.photo}`} />
+                            <img src={a.photo} />
                         </div>
                         <div className="answered_body">
                             <p>{a.text}</p>
                             <small className='answered_small'>
-                                {a.answeredAt}
+                                <span>{moment(a?.createdAt?.toDate()).fromNow(true)}</span>
                             </small>
                         </div>
                     </div>
                 ))}
             </div>
             <div className="view_que_create">
-                <h3>Toa Jibu lako</h3>
-              <CreateReview title='Andika jibu lako'/>  
+                {/* <h3 className='sub_title'>Toa Jibu lako</h3> */}
+              <CreateReview title='Andika jibu lako' doc={que}/>  
             </div>
             
         </div>

@@ -8,30 +8,35 @@ import Donate from '../../components/donate/Donate'
 import { BsChatLeftDotsFill,BsFillPersonFill } from "react-icons/bs";
 import { FcLike } from "react-icons/fc";
 import { GiLovers } from "react-icons/gi";
+import { useAuth } from '../../hooks/useAuth';
+import useData from '../../hooks/useData';
 
 
 const Nikah = () => {
     const navigate = useNavigate();
     const [donate, setDonate] = useState(false)
+    const { user } = useAuth()
+    const { marriages, users } = useData() 
+
+    const cuUser = users?.find(u => u.id === user.uid)
+    const marry = marriages?.find(m => m.userId === user.uid)
+    const isMarry = user.uid === marry?.userId
+
+    console.log('cuUser', cuUser)
+
   return (
 
-    <div className='nikah'>
-        <div className="top_meeting_wrapper">
-            {/* <div className="meeting_top">            
-                <button onClick={() => navigate(-1)} className='btn'><BsArrowLeft/></button>            
-                <h4>Ukumbi wa Nikah</h4>
-            </div> */}
-            {/* <div className="create_new">
-                Changia
-            </div>        */}
-        </div>
+    <div className='nikah'>       
         <div className="health_top">
             <div className="health_t_1">
                 <h1>Ukumbi wa Nikah</h1>
                 <span className='health_p'>Unatafuta mke au mume au mchumba, kuna wanaWema humu wanatafuta wenza wao, kwa uwezo wa Allah ukumbi utakupatia unayemtafuta.
                 </span>
-                <span className='health_p'>Kwa ajili ya kutunza stara za wanaWema, ukumbi huu umefanywa mahususi kwa ajili ya wanaotafuta Nikah, ili uwe miongoni mwao tafadhari bonyeza link hii</span>
-                {/* <button className='btn_sign' >Omba Maelezo ya Mapishi</button> */}
+                {!isMarry && <>
+                    <span className='health_p'>Kwa ajili ya kutunza stara za wanaWema, ukumbi huu umefanywa mahususi kwa 
+                    ajili ya wanaotafuta Nikah, ili uwe miongoni bonyeza endelea</span>
+                    <button className='btn_sign' onClick={() =>navigate('/nikahreg')}>ENDELEA</button>  
+                 </>} 
             </div>
             <div className="health_logo">
                 <GiLovers/>
@@ -39,24 +44,19 @@ const Nikah = () => {
         </div>
         <div className="nikah_search">
            <Search title='Andika kutafuta Mwenza'/> 
-        </div>
-        
-        {/* <div className="nikah_search">
-            <Search/>
-        </div> */}
-        <div className={donate? "nikah_grid" : 'nikah_donated'}>
-            
-            {nikahs && nikahs.map((item, index) => (
+        </div>     
+        <div className={isMarry? 'nikah_donated' : "nikah_grid"}>            
+            {marriages && marriages.filter(m =>m.gender !== cuUser?.gender).map((item, index) => (
                 <div className="nikah_card" key={index}>
                     <div className="nikah_img">
-                        <img src={item.url} alt="" />
+                        <img src={item?.photo} alt="" />
                     </div>
                     <div className="nikah_main_info">
                         <div className="nikah_info">
-                            <h4>{item.name}, {item.age}</h4>
+                            <h4>{item?.username}, {item?.age}</h4>
                             <div className="nikah_loc">
-                                <span>{item.tribe} -</span>
-                                <span> {item.live}</span>
+                                <span>{item?.tribe} -</span>
+                                <span> {item?.location}</span>
                             </div>
                         </div>                       
                         <div className="meetings_actions">                    
@@ -68,8 +68,8 @@ const Nikah = () => {
                 </div>
             ))}
         </div>
-        {donate &&
-        <Donate setDonate={setDonate}/>}
+        {/* {donate &&
+        <Donate setDonate={setDonate}/>} */}
         
     </div>
   

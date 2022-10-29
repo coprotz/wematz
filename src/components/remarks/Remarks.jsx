@@ -1,12 +1,22 @@
 import React from 'react'
+import { GrLike } from 'react-icons/gr'
+import useData from '../../hooks/useData'
 import './remarks.css'
 
-const Remarks = () => {
+
+const Remarks = ({p}) => {
+  const { comments } = useData()
+
+  const coms = comments?.filter(c => c.docId === p?.id)
+  console.log('coms', coms)
   return (
     <div className="mada_remarks">
-        <small>12 Likes</small>
-        <small>12 Views</small>
-        <small>12 Comments</small>
+        <div className="likes">
+          <button className='btn_likes'><GrLike/></button>
+          <span>12 Penda</span> 
+        </div>
+              
+        <span>{coms?.length} Maoni</span>
     </div>
   )
 }

@@ -31,8 +31,9 @@
 
 .reviews_patients{
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     gap: 10px;
+    margin: 15px 0;
 }
 
 .review_body_name{

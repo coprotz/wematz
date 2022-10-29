@@ -8,6 +8,7 @@ import { GoLaw } from "react-icons/go";
 // import { FcGoogle } from "react-icons/fc";
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion';
+import Nav from '../../components/nav/Nav';
 
 const Main = () => {
     const navigate = useNavigate();
@@ -56,10 +57,11 @@ const Main = () => {
              animate={{x:0}} 
              transition={{ ease: "easeOut", duration: 0.5 }} 
                 className="main_b_right">
-                    <div className="login">
+                    <Nav/>
+                    {/* <div className="login">
                         <span>Tayari ni mwanachama?</span>
                         <button className='btn_sign' onClick={() => navigate('/')}>Ingia</button>
-                    </div>
+                    </div> */}
                 <h1 className='ma_b_title'>Wema</h1>
                 <h3>Ukumbi wa kuwakutanisha waislamu na wale wanaotarajia kuwa waislamu wa kitanzania wanaoishi 
                     sehemeu mbalimbali duniani na kuwapa fursa ya kupeana mustkbari wa maisha ya kIIslamu duniani.
@@ -75,7 +77,7 @@ const Main = () => {
         <div className="main_footer">
             <div className="m_f_logo">Wema</div>
             <div className="m_f_items">
-                <span>Kuhusu Sisi</span>
+                <span>Kuhusu</span>
                 <span>Sadaka</span>
                 <span>Vigezo</span>
                 <span>Faragha</span>

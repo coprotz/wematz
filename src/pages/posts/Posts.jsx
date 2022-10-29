@@ -20,6 +20,13 @@ import img5 from '../../assets/images/img5.jpg'
 import img6 from '../../assets/images/img6.jpg'
 import img7 from '../../assets/images/img7.jpg'
 import img9 from '../../assets/images/img9.jpg'
+import useData from '../../hooks/useData';
+import ShareVideo from './ShareVideo';
+import { useState } from 'react';
+import ShareAudio from './ShareAudio';
+import ImageCard from './ImageCard';
+import ShareImage from './ShareImage';
+import moment from 'moment'
 
 
 const nikahs = [
@@ -39,6 +46,35 @@ const nikahs = [
 const Posts = () => {
   const navigate = useNavigate();
     const scrollRef = React.useRef(null);
+    const [video, setVideo] = useState(false)
+    const [audio, setAudio] = useState(false)
+    const [image, setImage] = useState(false)
+    const { posts, users, questions } = useData();
+
+    const RenderPost = (p) => {
+        if(p.type === 'text'){
+            return (
+                <PostCard key={p.id} p={p}/> 
+            )
+        }else if(p.type === 'video'){
+            return (
+                <VideoCard key={p.id} p={p}/>                
+            )
+        }else if(p.type === 'doc'){
+            return (
+                <VideoCard key={p.id} p={p}/>                
+            )
+        }else if(p.type === 'audio'){
+            return (
+                <AudioPlayer key={p.id} p={p}/>                
+            )
+        }else if(p.type === 'image'){
+            return (
+                <ImageCard key={p.id} p={p}/>                
+            )
+        }
+    }
+
     React.useLayoutEffect(() => {
         if(scrollRef.current) {
           scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
@@ -46,88 +82,84 @@ const Posts = () => {
       })
 
   return (
-    <div className="posts" ref={scrollRef}>
-        <div className="top_meeting_wrapper">
-            {/* <div className="meeting_top">            
-                <button onClick={() => navigate(-1)} className='btn'><BsArrowLeft/></button>            
-                <h4>Machapisho</h4>
-            </div> */}
-            {/* <div className="create_new">
-                Changia
-            </div>        */}
-        </div>
+    <div className="posts" ref={scrollRef}> 
+        {video && <ShareVideo setVideo={setVideo}/> }   
+        {audio && <ShareAudio setAudio={setAudio}/> }   
+        {image && <ShareImage setImage={setImage}/> }          
         <div className="posts_wrapper">
           <div className="posts_inner">
-              <SharePost/>        
+              <SharePost setVideo={setVideo} setAudio={setAudio} setImage={setImage}/>        
               <motion.div 
                   initial={{ y:'100vw'}}
                   animate={{y:0}} 
                   transition={{ ease: "easeOut", duration: 0.5 }} 
                   className="post_grids">
-                  <PostCard/>
-                  <VideoCard/>
-                  <PostCard/>
-                  <AudioPlayer/>
-                  <PostCard/>
-              </motion.div> 
+                    {posts?.map(p => (
+                      <div onClick={() =>navigate(`/${p.id}`)}>{RenderPost(p)} </div>
+                    ))}
+               </motion.div> 
           </div>
           <div className="main_right">
-                        <div className="main_right_item">
-                            <h3 className="card_title">
-                                Ukumbi wa Nikah
-                                <button className='btn_view'><BsArrowRight/></button>
-                            </h3>                          
-                            <div className="nikah_imgs">
-                              {nikahs && nikahs.map((item, index) => (
-                                <NikahCard key={index} item={item}/>
-                              ))}
-                            </div>
-                            
-                           
-                        </div>
-                        <div className="donate" onClick={() =>navigate('/subscriptions')}>
-                            Tuunge Mkono
-                            <button className='btn_next'><BsArrowRight/></button>
-                        </div>
-                        <div className="main_right_item">
-                            <h3 className="card_title">
-                                Mada ya Wiki
-                                <button className='btn_view'><BsArrowRight/></button>
-                            </h3>                            
-                            <MadaCard/>
-                            
-                        </div>
-                        <div className="main_right_item">
-                            <h3 className="card_title">
-                                Mikutano
-                                <button className='btn_view'><BsArrowRight/></button>
-                            </h3>
+            <div className="main_right_item">
+                <h3 className="card_title">
+                    Waliojiunga Punder
+                    <button className='btn_view'><BsArrowRight/></button>
+                </h3>
                                 
-                            <div className="meeting_grids">
-                               <MeetingCard/>
-                               <MeetingCard/>
-                               {/* <MeetingCard/> */}
-                              
-                            </div>
-                            
+                <div className="new_users">
+                    {users?.slice(0,5).map(u => (
+                        <div className="new_user">
+                            <img src={u.photo} alt="" />
                         </div>
+                    ))}                              
+                </div>
+                            
+                </div>
+            <div className="main_right_item">
+                <h3 className="card_title">
+                    Ukumbi wa Nikah
+                    <button className='btn_view'><BsArrowRight/></button>
+                </h3>                          
+                <div className="nikah_imgs">
+                    {nikahs && nikahs.map((item, index) => (
+                    <NikahCard key={index} item={item}/>
+                     ))}
+                </div>       
+                </div>
+                <div className="donate" onClick={() =>navigate('/subscriptions')}>
+                    Tuunge Mkono
+                    <button className='btn_next'><BsArrowRight/></button>
+                </div>
+                <div className="main_right_item">
+                    <h3 className="card_title">
+                        Mada ya Wiki
+                        <button className='btn_view'><BsArrowRight/></button>
+                    </h3>                            
+                    <MadaCard/>
+                            
+                </div>
+                
                         <div className="main_right_item">
                             <h3 className="card_title">
                                 Swali Maarufu 
-                                <button className='btn_view'><BsArrowRight/></button>
+                                <button className='btn_view' onClick={() =>navigate('/questions')}><BsArrowRight/></button>
                             </h3>
+                           {questions.slice(0,1).map(q => (
+                                <>
+                                <div className="help" key={q.id}>
+                                    <div className="help_sender">
+                                        <img src={q.photo} alt="" />
+                                    </div>
+                                    <div className="help_text">
+                                    <h4>{q.que}</h4> 
+                                    <span className='timeago'>{moment(q?.createdAt?.toDate()).fromNow(true)}</span>
+                                    </div>
+                                    
+                                </div>
+                                <Remarks/>                                
+                                </>
+                           ))}
                            
-                            <div className="help">
-                                <div className="help_sender">
-                                    <img src={img7} alt="" />
-                                </div>
-                                <div className="help_text">
-                                  <h4>Je Yafaa kuswali bila udhu?</h4> 
-                                  <small>12 June 2022</small> 
-                                </div>
-                                
-                            </div>
-                            <Remarks/>
                             
                         </div>
                 </div>

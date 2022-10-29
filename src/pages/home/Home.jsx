@@ -5,6 +5,7 @@ import HomeMenu from '../../components/menu/HomeMenu';
 import Navbar from '../../components/navbar/Navbar';
 import Prayer from '../prayerTimes/Prayer';
 import { useState } from 'react';
+import Footer from '../../components/footer/Footer';
 
 
 
@@ -25,10 +26,12 @@ const Home = () => {
             <div className="home_body"> 
                 <div className="main_left" >
                     <Outlet />
-                </div>         
+                </div> 
+                      
             </div>
        
         </div>
+        <Footer/>  
     </div>
   )
 }

@@ -1,16 +1,20 @@
 import React from 'react'
-import { clinics, doctors } from '../../data'
+import { clinics } from '../../data'
 import './health.css'
 import {  BsThreeDotsVertical } from "react-icons/bs";
 import { Routes, Route, Link, useNavigate } from 'react-router-dom';
 import { FaHeartbeat } from "react-icons/fa";
 import ClinicCard from './ClinicCard';
+import Footer from '../../components/footer/Footer';
+import useData from '../../hooks/useData';
+
 
 const MainHealth = () => {
     const navigate = useNavigate()
+    const { doctors } = useData()
   return (
     <div className='main_health'>
-          <div className="health_top">
+        <div className="health_top">
             <div className="health_t_1">
                 <h1>Karibu katika Ukumbi wa Afya na Ushauri wa Kitabibu</h1>
                 <span className='health_p'>Shauriana na Daktari juu ya masuala yako ya Afya, 
@@ -21,7 +25,7 @@ const MainHealth = () => {
             <div className="health_logo">
                 <FaHeartbeat/>
             </div>
-        </div>     
+      </div>     
      
       <div className="health_inner">
         <div className="health_body">
@@ -38,7 +42,7 @@ const MainHealth = () => {
           <div className="doctors_grid">
             {doctors?.slice(0,5).map(d=> (
               <div className="doctor_card" key={d.id} onClick={() =>navigate(`/health/doctors/${d.id}`)}>
-                  <img src={process.env.PUBLIC_URL+`/${d.photo}`} alt="" />
+                  <img src={d.photo} alt="" />
                   <small>{d.name}</small>
               </div>
             ))}
@@ -46,7 +50,7 @@ const MainHealth = () => {
           </div>
           <div className="more_doctors">
               <div className="user_action">
-                <button className='btn'><BsThreeDotsVertical/></button>
+                <button className='btn' onClick={() =>navigate('/health/doctors')}><BsThreeDotsVertical/></button>
               </div>
               <h4>Angalia Madaktari Wote</h4>
             </div>
@@ -54,6 +58,7 @@ const MainHealth = () => {
          
         </div>
       </div>
+      {/* <Footer /> */}
       
     </div>
   )

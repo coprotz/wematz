@@ -1,18 +1,23 @@
 import React from 'react'
 import img10 from '../../assets/images/img10.jpg'
 import Remarks from '../../components/remarks/Remarks'
+import moment from 'moment'
+import useData from '../../hooks/useData'
 
-const PostCard = () => {
+const PostCard = ({p}) => {
+    const { users } = useData()
+    const user = users?.find(u => u.id === p?.userId)
+
   return (
     <div className='post_card'>
         <div className="post_top">
             <div className="post_card_user">
                 <div className="card_user_photo">
-                    <img src={img10} alt="" />
+                    <img src={user?.photo} alt="" />
                 </div>
                 <div className="card_username">
-                     <h5>Maher Zahir</h5>
-                     <small>12 March 2022</small>
+                     <h5>{user?.fname+" "+user?.lname}</h5>
+                     <small className='timeago'>{moment(p?.createdAt?.toDate()).fromNow(true)}</small>
                 </div>
                
             </div>
@@ -21,12 +26,9 @@ const PostCard = () => {
             </div>
         </div>
         <div className="card_body">
-            <p>With modern browsers supporting the full spectrum of 24-bit color, there are 16,777,216 different color
-                 possibilities. Use our color picker to explore all 16.7 million of them, or if that’s too many, check
-                  out our color charts for a selection of palettes focused on flat design, Material design and web safe colors.
-            </p>
+            <p>{p?.tex}</p>
         </div>
-        <Remarks/>
+        <Remarks p={p}/>
     </div>
   )
 }

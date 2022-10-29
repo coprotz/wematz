@@ -4,21 +4,25 @@
     flex-direction: column;
     gap: 5px;
 }
-.main_ques_inner{
-    background-color: white;
-    
-}
+
 .que_card{
     display: flex;
     gap: 15px;
     padding: 40px;
     border-bottom: 3px solid var(--bg);
+    
+}
+
+.que_body{
+    width: 100%;
 }
 
 .main_ques_inner{
     display: flex;
-    flex-direction: column;
-    gap: 20px;
+    flex-direction: column-reverse;
+    background-color: white;
+    gap: 10px;
+    width: 100%;
 }
 
 .que_author{
@@ -56,6 +60,9 @@
     background-color: white;
     border: 1px solid var(--sec);
     border-radius: 3px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
 .main_ques_top{
@@ -63,8 +70,21 @@
     display: flex;
     align-items: center;
     gap: 20px;
+    /* width: 100%; */
+    /* padding: 0 15px; */
+    justify-content: space-between;
     /* padding-left: 20px; */
     background-color: white;
+}
+
+.main_ques_top h3{
+    padding-left: 15px;
+}
+
+.qu_btn{
+    display: flex;
+    /* border: 1px solid red; */
+    width: 200px;
 }
 
 .main_ques_top span{
@@ -165,6 +185,7 @@
     font-size: 2rem;
     line-height: 1;
     display: block;
+    padding: 20px 0;
 }
 
 .view_que_answers{
@@ -217,6 +238,7 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+    text-align: left;
     
 }
 
@@ -235,6 +257,10 @@
     display: flex;
     flex-direction: column;
     gap: 15px;
+}
+
+.show_mobile{
+    display: none;
 }
 
 
@@ -288,6 +314,14 @@
         width: 95%;
         gap: 20px;
         
+    }
+
+    .hide_mobile{
+        display: none;
+    }
+
+    .show_mobile{
+        display: flex;
     }
     
 }

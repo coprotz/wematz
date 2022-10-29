@@ -1,6 +1,6 @@
 import './App.css';
 import Home from './pages/home/Home';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import Posts from './pages/posts/Posts';
 import Nikah from './pages/nikah/Nikah';
 import NikahView from './pages/nikah/NikahView';
@@ -36,14 +36,34 @@ import Mainlegals from './pages/legals/Mainlegals';
 import Lawyer from './pages/legals/Lawyer';
 import MainNikah from './pages/nikah/MainNikah';
 import ViewLawyer from './pages/legals/ViewLawyer';
+import NikahReg from './pages/register/NikahReg';
+import Login from './pages/login/Login';
+import { useAuth } from './hooks/useAuth';
+import Profile from './pages/profile/Profile';
+import ViewPost from './pages/posts/ViewPost';
+import RegDoctors from './pages/opportunities/RegDoctors';
+import RegLawyers from './pages/opportunities/RegLawyers';
+import AllOppo from './pages/opportunities/AllOppo';
+
 
 function App() {
+
+  const { user }= useAuth()
+
+  const RequireAuth = ({children}) => {
+    return user ? (children) : <Navigate to="/main"/>
+  }
+
   return (
     <div className="App">
       <BrowserRouter>    
         <Routes>
-          <Route path='/' element={<Home/> }>                  
+          <Route path='/' element={ 
+            <RequireAuth>
+              <Home/> 
+            </RequireAuth>}>          
             <Route index element={<Posts/>}></Route>
+            <Route path=':id' element={<ViewPost/>}></Route>
             <Route path='madas' element={<Madas/>}></Route>
             <Route path='meetings' element={<Meetings/>}></Route>
             <Route path='recipies' element={<AllRecipies/>}>
@@ -86,20 +106,35 @@ function App() {
               <Route path='legals' element={<Mainlegals/>}/>  
                <Route path=':id' element={<ViewLawyer/>}/>            
             </Route>
+          
+            
             <Route path='needHelps' element={<NeedHelps/>}></Route>
-            {/* <Route path='news' element={<News/>}></Route> */}            
-            {/* <Route path='legals' element={<Legals/>}></Route> */}
-            {/* <Route path='messages' element={<MdMessage/>}></Route> */}
-            <Route path='opportunites' element={<Opportunities/>}></Route>
-            <Route path='nikah/:id' element={<NikahView/>}></Route>
+              
+            {/* <Route path='opportunites' element={<Opportunities/>}></Route> */}
+            {/* <Route path='nikah/:id' element={<NikahView/>}></Route> */}
             {/* <Route path='nikah' element={<Nikah/>}></Route>   */}
                     
+          </Route>
+          <Route path='nikahreg' element={<NikahReg/>}></Route> 
+          <Route path='opportunities' element={ 
+              <RequireAuth>
+                <AllOppo/> 
+              </RequireAuth>}>
+              <Route index element={<Opportunities/>}></Route>
+              <Route path='doctors' element={<RegDoctors/>}></Route> 
+              <Route path='lawyers' element={<RegLawyers/>}></Route> 
+          </Route> 
+          <Route path='profile' element={ 
+            <RequireAuth>
+              <Profile/> 
+            </RequireAuth>}>
           </Route>
           <Route path='meetings/:1' element={<ViewMeeting/>}></Route>
           <Route path='main' element={<Main/>}></Route>
           <Route path='/subscriptions' element={<Subscriptions/>}></Route>
           <Route path='/prayerTimes' element={<Subscriptions/>}></Route>
           <Route path='/register' element={<Register/>}></Route>
+          <Route path='/login' element={<Login/>}></Route>
           </Routes>
       </BrowserRouter>
     </div>

@@ -1,17 +1,18 @@
 .register{
     width: 100vw;
     height: 100%;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     background-color: var(--bg);
 }
 
-.register_nav{
+/* .register_nav{
     display: flex;
     align-items: center;
     justify-content: space-evenly;
     padding: 20px;
-}
+} */
 
 .logo{
     width: 150px;
@@ -94,15 +95,17 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
+    
 }
 
 .register_title{
-    padding: 100px 200px 0;
+    padding: 40px 0;
     font-size: 3rem;
     font-weight: 800;
-    width: 30%;
-    margin: 0 auto;
-    position: relative;
+    width: 100%;
+    display: block;
+    text-align: center;
     /* border: 1px solid red; */
     /* display: block; */
 
@@ -132,6 +135,9 @@
     display: flex;
     flex-direction: column;
     padding: 20px;
+    /* width: 100%; */
+    
+    /* align-items: center; */
 }
 
 .items_group{
@@ -140,7 +146,8 @@
     align-items: flex-start;
     gap: 20px;
     padding: 20px;
-    max-width: 700px;
+    /* width: 100%; */
+    /* min-width: 700px; */
     transition: all 1s ease;
     /* border: 1px solid red; */
 }
@@ -203,7 +210,7 @@
 
 .sel_input{
     padding: 20px;
-    width: 100%;
+    /* width: 100%; */
     min-width: 200px;
     font-size: 1rem;
     border-radius: 5px;    
@@ -239,24 +246,84 @@
     width: 100%;
 }
 
+.nikah_reg{
+    /* border: 1px solid red; */
+    width: 100%;
+    background-color: var(--bg);
+}
+
+.nikah_reg_inner{
+    width: 70%;
+    margin: 0 auto;
+}
+
+.nikah_reg_nav{
+    display: flex;
+    align-items: center;
+    width: 80%;
+    margin: 0 auto;
+    justify-content: space-between;
+    padding: 40px 0;
+    /* border: 1px solid red; */
+}
+
+.user_photo{
+    height: 300px;
+    width: 250px;
+    border: 1px solid #aaa;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    background-color: white;
+}
+
+.user_photo img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.btn_cancel{
+    background-color: transparent;
+    color: var(--primary);
+    border: none;
+    font-size: 1.2rem;
+    width: 100%;
+    text-align: center;
+}
+
 
 @media screen and (max-width: 440px){
     .mneu_items{
         display: none;
     }
 
-    .register_nav{
+    /* .register_nav{
         display: flex;
         align-items: center;
         justify-content: space-between;
         padding: 10px;
+    } */
+
+    .nikah_reg_inner{
+        width: 100%;
+       
+    }
+
+    .nikah_reg_nav{
+        
+        padding: 20px 0;
+        /* border: 1px solid red; */
     }
 
     .register_title{
         padding: 20px;
-        font-size: 3rem;
+        font-size: 2.5rem;
         font-weight: 800;
-        width: 80%;
+        width: 90%;
         margin: 0 auto;
         position: relative;
         /* border: 1px solid red; */
@@ -293,7 +360,7 @@
         display: flex;
         flex-direction: column;
         /* padding: 20px; */
-        width: 80%;
+        width: 90%;
         /* border: 1px solid red; */
     }
 
@@ -303,7 +370,8 @@
         align-items: flex-start;
         gap: 20px;
         padding: 10px;
-        /* width: 100%; */
+        width: 95%;
+        margin: 0 auto;
         /* max-width: 700px; */
         transition: all 1s ease;
         /* border: 1px solid red; */
@@ -315,11 +383,17 @@
         min-width: fit-content;
         /* font-size: 1rem; */
         border-radius: 5px;    
-        /* outline: none; */
-        /* background-color: white !important; */
-        /* border: 10px solid white; */
-        /* box-shadow: inset 10px 10px 15px -10px #c3c3c3, */
-        /* inset -10px -10px 15px -10px #eaeaea; */
+     
+        
+    }
+
+    .sel_input1{
+        padding: 10px;
+        width: 100%;
+        min-width: fit-content;
+        font-size: 1rem;
+        border-radius: 5px;    
+     
         
     }
     

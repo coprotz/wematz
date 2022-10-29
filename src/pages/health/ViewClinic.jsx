@@ -1,15 +1,17 @@
 import React from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { clinics, doctors } from '../../data'
+import { clinics } from '../../data'
 import {GrClose } from "react-icons/gr";
 import DoctorCard from './DoctorCard';
+import useData from '../../hooks/useData';
 // import {  HiOutlineArrowLeft } from "react-icons/hi";
 
 
 const ViewClinic = () => {
     const { name } = useParams()
     const clinic = clinics?.find(c => c.swahir === name)
-    const docs = doctors.filter(d => d.specializes.find(s =>s.includes(`${clinic?.name}`)))
+    const { doctors } = useData()
+    const docs = doctors.filter(d => d.specialize.includes(`${clinic?.name}`))
 
     // console.log('docs', docs)
     const navigate = useNavigate()

@@ -2,20 +2,26 @@ import React from 'react'
 import ReactPlayer from 'react-player'
 import Remarks from '../../components/remarks/Remarks'
 import img9 from '../../assets/images/img9.jpg'
+import moment from 'moment'
+import useData from '../../hooks/useData'
 
 
-const VideoCard = () => {
+const VideoCard = ({p}) => {
+
+  const { users } = useData()
+  const user = users?.find(u => u.id === p?.userId)
+
   return (
   
       <div className='post_card'>
       <div className="post_top">
           <div className="post_card_user">
               <div className="card_user_photo">
-                  <img src={img9} alt="" />
+                <img src={user?.photo} alt="" />
               </div>
               <div className="card_username">
-                   <h5>Juma Mbaga</h5>
-                   <small>12 March 2022</small>
+                <h5>{user?.fname+" "+user?.lname}</h5>
+                <small className='timeago'>{moment(p?.createdAt?.toDate()).fromNow(true)}</small>
               </div>
              
           </div>
@@ -26,7 +32,7 @@ const VideoCard = () => {
       <div className='home_video'>
         <div className="home_video_player">
             <ReactPlayer
-                url='https://www.youtube.com/watch?v=J8juV2ZHaLc'
+                url={p?.url}
                 width='100%'
                 height='100%'
                 controls={true}            
@@ -34,7 +40,7 @@ const VideoCard = () => {
         </div>
        
     </div>
-      <Remarks/>
+      <Remarks p={p}/>
   </div>
   )
 }

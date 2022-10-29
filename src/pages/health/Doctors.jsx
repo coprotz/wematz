@@ -1,13 +1,15 @@
 import React from 'react'
-import { doctors } from '../../data'
+// import { doctors } from '../../data'
 import {  BsArrowLeft } from "react-icons/bs";
 import { useNavigate } from 'react-router-dom';
 import Search from '../../components/search/Search';
 import DoctorCard from './DoctorCard';
+import useData from '../../hooks/useData';
 
 
 const Doctors = () => {
     const navigate = useNavigate()
+    const { doctors } = useData()
   return (
     <div className='doctors_wrappers'>
         <div className="meeting_top">            
@@ -15,7 +17,7 @@ const Doctors = () => {
                 <h4>Machapisho</h4>
         </div>
         <div className="doctors_top">
-            <h1>Karibu kwenye ukurasa wa Madaktari wetu, Madaktari wapo tayari kukusikiliza na kukushauri!!!</h1>
+            <h1>Karibu kwenye ukurasa watu wa WemaDocta, Madaktari wapo tayari kukusikiliza na kukushauri!!!</h1>
             <div>
               <button className='btn_sign' onClick={() => navigate('/health')} >Tazama Clinics</button>  
             </div>

@@ -1,10 +1,12 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { doctors } from '../../data'
+// import { doctors } from '../../data'
+import useData from '../../hooks/useData'
 
 const ClinicCard = ({c}) => {
     const navigate = useNavigate()
-    const docs = doctors?.filter(d =>d.specializes.find(s =>s.includes(`${c.name}`)))
+    const { doctors } = useData()
+    const docs = doctors?.filter(d =>d.specialize.includes(`${c.name}`))
 
     console.log('docs', docs)
   return (
