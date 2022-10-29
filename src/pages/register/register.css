@@ -174,7 +174,7 @@
 .sel_item label{
     padding: 4px 19px;
     background-color: white;
-    border: 10px solid transparent;
+    /* border: 10px solid transparent; */
     border-radius: 7px;
     font-size: 1.1rem;
     box-shadow: -2px -2px 5px rgba(255, 255, 255, 1),
@@ -342,7 +342,7 @@
     .sel_item label{
         padding: 4px 19px;
         background-color: white;
-        border: 10px solid transparent;
+        /* border: 10px solid transparent; */
         border-radius: 7px;
         font-size: 1.1rem;
         /* width: 100%; */
@@ -365,8 +365,8 @@
     }
 
     .items_group{
-        display: flex;
-        flex-direction: column;
+        /* display: inline-block; */
+        /* flex-direction: column; */
         align-items: flex-start;
         gap: 20px;
         padding: 10px;
