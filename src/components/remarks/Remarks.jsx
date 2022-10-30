@@ -4,7 +4,7 @@ import useData from '../../hooks/useData'
 import './remarks.css'
 
 
-const Remarks = ({p}) => {
+const Remarks = ({p, setShow}) => {
   const { comments } = useData()
 
   const coms = comments?.filter(c => c.docId === p?.id)
@@ -16,7 +16,7 @@ const Remarks = ({p}) => {
           <span>12 Penda</span> 
         </div>
               
-        <span>{coms?.length} Maoni</span>
+        <span onClick={() => setShow(p.id)}>{coms?.length} Maoni</span>
     </div>
   )
 }

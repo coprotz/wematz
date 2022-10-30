@@ -4,12 +4,17 @@ import Remarks from '../../components/remarks/Remarks'
 import img9 from '../../assets/images/img9.jpg'
 import moment from 'moment'
 import useData from '../../hooks/useData'
+import { useState } from 'react'
+import Reviews from '../../components/reviews/Reviews'
+
+
 
 
 const VideoCard = ({p}) => {
 
   const { users } = useData()
   const user = users?.find(u => u.id === p?.userId)
+  const [show, setShow] = useState(null)
 
   return (
   
@@ -40,7 +45,10 @@ const VideoCard = ({p}) => {
         </div>
        
     </div>
-      <Remarks p={p}/>
+    <Remarks p={p} setShow={setShow}/>
+      {show &&
+      <Reviews doc={p} setShow={setShow}/>
+      }
   </div>
   )
 }

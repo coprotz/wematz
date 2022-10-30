@@ -4,6 +4,9 @@ import fatha from '../../assets/audio/fatha.mp3'
 import Remarks from '../../components/remarks/Remarks'
 import moment from 'moment'
 import useData from '../../hooks/useData'
+import { useState } from 'react'
+import Reviews from '../../components/reviews/Reviews'
+
 // import {  BsCaretRightFill } from "react-icons/bs";
 
 
@@ -13,6 +16,7 @@ const AudioPlayer = ({p}) => {
 
     const { users } = useData()
     const user = users?.find(u => u.id === p?.userId)
+    const [show, setShow] = useState(null)
    
   return (
     <div className='post_card'>
@@ -37,7 +41,10 @@ const AudioPlayer = ({p}) => {
         </div>   
 
     </div>
-    <Remarks p={p}/>
+    <Remarks p={p} setShow={setShow}/>
+    {show &&
+    <Reviews doc={p} setShow={setShow}/>
+    }
 </div>
   )
 }

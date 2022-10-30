@@ -11,7 +11,7 @@ import moment from 'moment'
 
 import './reviews.css'
 
-const Reviews = ({doc}) => {
+const Reviews = ({doc, setShow}) => {
 
     const { users, comments } = useData()
 
@@ -32,14 +32,24 @@ const Reviews = ({doc}) => {
         <div className="reviews_patients">
             {revs?.map(r => (            
             <div className="review_card">
-                <div className="review_photo">
+                <div className="post_card_user">
+                    <div className="card_user_photo">
+                        <img src={r?.photo} alt="" />
+                    </div>
+                    <div className="card_username">
+                        <h5 className='author_name'>{r?.name}</h5>
+                        <small className='timeago'>{moment(r?.createdAt?.toDate()).fromNow(true)}</small>
+                    </div>
+                
+                </div>
+                {/* <div className="review_photo">
                     <img src={r?.photo} alt="" />
                     <div className="review_body_name">
                         <h3>{r?.name}</h3>                        
                     </div>                    
-                </div>
+                </div> */}
                 <div className="reviews_body">                    
-                    <small>{moment(r?.createdAt?.toDate()).fromNow(true)}</small>                 
+                    {/* <small>{moment(r?.createdAt?.toDate()).fromNow(true)}</small>                  */}
                     <p className="review_status">{r?.text}</p>
                 </div>
             </div>
@@ -48,6 +58,7 @@ const Reviews = ({doc}) => {
          
         </div>
         <CreateReview title='Toa Maoni yako' doc={doc}/>
+        <h4 onClick={() => setShow(null)} style={{color:'blue'}}>Ficha Maoni</h4>
       
     </div>
   )

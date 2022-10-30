@@ -3,10 +3,13 @@ import img10 from '../../assets/images/img10.jpg'
 import Remarks from '../../components/remarks/Remarks'
 import moment from 'moment'
 import useData from '../../hooks/useData'
+import Reviews from '../../components/reviews/Reviews'
+import { useState } from 'react'
 
 const PostCard = ({p}) => {
     const { users } = useData()
     const user = users?.find(u => u.id === p?.userId)
+    const [show, setShow] = useState(null)
 
   return (
     <div className='post_card'>
@@ -28,7 +31,10 @@ const PostCard = ({p}) => {
         <div className="card_body">
             <p>{p?.tex}</p>
         </div>
-        <Remarks p={p}/>
+        <Remarks p={p} setShow={setShow}/>
+        {show &&
+        <Reviews doc={p} setShow={setShow}/>
+        }
     </div>
   )
 }

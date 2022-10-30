@@ -1,7 +1,7 @@
 .reviews_container{
-    background-color: #edf6ff;
-    padding: 25px;
-    margin-top: 15px;
+    /* background-color: #edf6ff; */
+    padding: 3px;
+    /* margin-top: 15px; */
     border-radius: 7px;
     /* width: 100%; */
     /* border: 1px solid red; */
@@ -102,8 +102,10 @@
 }
 
 .patient_reviews{
-    padding: 1.2vh 0;
-    color: #aaa;
+    padding-top: 10px;
+    font-size: 1rem;
+    border-top: 1px solid var(--sec);
+    /* color: #aaa; */
 }
 
 .review_share{

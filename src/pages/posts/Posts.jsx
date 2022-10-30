@@ -100,7 +100,7 @@ const Posts = () => {
                   transition={{ ease: "easeOut", duration: 0.5 }} 
                   className="post_grids">
                     {posts?.map(p => (
-                      <div onClick={() =>navigate(`/${p.id}`)}>{RenderPost(p)} </div>
+                      <div>{RenderPost(p)} </div>
                     ))}
                </motion.div> 
           </div>

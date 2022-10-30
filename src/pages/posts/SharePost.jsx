@@ -52,15 +52,15 @@ const SharePost = ({setVideo,setAudio, setImage}) => {
             </div> */}
             <div className="share_details">
                 <div className="share_text">
-                    <input 
-                        type="text" 
+                    <textarea 
+                        type= 'textarea'  
                         placeholder='Unataka kuwaambia nini WanaWema?' 
                         className='sel_input'
-                        name='message'
+                        name='message'                        
                         value={message} 
-                        style={{width:'100%'}}
-                        onChange={(e) =>setMessage(e.target.value)}
-                    /> 
+                        style={{width:'100%', height: message? '200px': '30px'}}
+                        onChange={(e) =>setMessage(e.target.value)}>
+                    </textarea> 
                     {!message &&                  
                      <div className="share_others">
                         <button className='btn_btn' onClick={() =>setImage(true)}>
