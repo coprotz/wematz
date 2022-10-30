@@ -61,8 +61,12 @@ const SharePost = ({setVideo,setAudio, setImage}) => {
                         style={{width:'100%', height: message? '200px': '30px'}}
                         onChange={(e) =>setMessage(e.target.value)}>
                     </textarea> 
-                    {!message &&                  
+                                     
                      <div className="share_others">
+                     {!message && <>
+                     
+                     
+                    
                         <button className='btn_btn' onClick={() =>setImage(true)}>
                             <BsCardImage/>
                         </button>               
@@ -74,15 +78,17 @@ const SharePost = ({setVideo,setAudio, setImage}) => {
                         </buttton>
                         <buttton className='btn_btn' onClick={() =>setAudio(true)}>
                             <BsSoundwave/>
-                        </buttton>
-                    </div>}
+                        </buttton> </>}
+                        <button 
+                            className='btn_sign'
+                            style={{minWidth: '70px', height: '50px'}}
+                            disabled={!message}
+                            onClick={handlePost}
+                            >{loading? 'Sending' : <BsFillShareFill/>}
+                        </button>
+                    </div>
                     
-                    <button 
-                    className='btn_sign'
-                    style={{minWidth: '70px', height: '50px'}}
-                    disabled={!message}
-                    onClick={handlePost}
-                    >{loading? 'Sending' : <BsFillShareFill/>}</button>
+                    
                 </div>
                
             </div>
