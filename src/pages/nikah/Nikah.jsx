@@ -10,6 +10,7 @@ import { FcLike } from "react-icons/fc";
 import { GiLovers } from "react-icons/gi";
 import { useAuth } from '../../hooks/useAuth';
 import useData from '../../hooks/useData';
+import NewChat from '../messages/NewChat';
 
 
 const Nikah = () => {
@@ -62,7 +63,7 @@ const Nikah = () => {
                         <div className="meetings_actions">                    
                             <button className='btn_btn'><FcLike/></button>
                             <button onClick={() =>navigate(`/nikah/${item.id}`)} className='btn_btn'><BsFillPersonFill/></button>
-                            <button className='btn_btn'><BsChatLeftDotsFill/></button>          
+                            <NewChat id={item.id} name={item?.username} myid ={marry?.id}/>       
                         </div>
                     </div>
                 </div>

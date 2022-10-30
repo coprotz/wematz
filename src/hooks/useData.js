@@ -17,6 +17,10 @@ const useData = () => {
     const questionsRef = collection(db, 'questions')
     const [doctors, setDoctors] = useState([])
     const doctorsRef = collection(db, 'doctors')
+    const [chats, setChats] = useState([])
+    const chatsRef = collection(db, 'chats')
+    const [messages, setMessages] = useState([])
+    const messagesRef = collection(db, 'messages')
 
 
     const allUsers = query(usersRef, orderBy("createdAt")); 
@@ -25,8 +29,8 @@ const useData = () => {
     const allMarriages = query(marriagesRef, orderBy("createdAt"));  
     const allQuestions = query(questionsRef, orderBy("createdAt"));  
     const allDoctors = query(doctorsRef, orderBy("createdAt")); 
-    // const allAgents = query(agentsRef, orderBy("createdAt")); 
-    // const allPilgrims = query(pilgrimsRef, orderBy("createdAt")); 
+    // const allChats = query(chatsRef, orderBy("createdAt")); 
+    const allMessages = query(messagesRef, orderBy("createdAt")); 
     // const allInvoices = query(invoicesRef, orderBy("createdAt")); 
 
    
@@ -94,10 +98,31 @@ const useData = () => {
         })
     },[])
 
+    useEffect(() => {
+        onSnapshot(chatsRef, snapshot => {
+            setChats(snapshot.docs.map(doc => {
+                return {
+                    id: doc.id,
+                    ...doc.data()
+                }
+            }))
+        })
+    },[])
+    useEffect(() => {
+        onSnapshot(allMessages, snapshot => {
+            setMessages(snapshot.docs.map(doc => {
+                return {
+                    id: doc.id,
+                    ...doc.data()
+                }
+            }))
+        })
+    },[])
+
 
   
 
-    return {  users, posts, comments, marriages, questions, doctors }
+    return {  users, posts, comments, marriages, questions, doctors, chats, messages }
 }
 
 export default useData;

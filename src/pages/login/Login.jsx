@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import { useForm } from "react-hook-form";
 import './login.css'
+import Loading from '../../components/loading/Loading';
 
 
 const Login = () => {
@@ -135,7 +136,7 @@ const Login = () => {
                         
                     </div>
                     <div className="items_group">
-                        <button className='btn_reg' onClick={handleLogin}>INGIA</button>
+                        <button className='btn_reg' onClick={handleLogin}>{loading? <Loading/> : 'INGIA'}</button>
                     </div>
                     <div className="profile_photo_edit">                            
                         <button className='btn_cancel' onClick={() =>setSignup('')}>ONDOA</button>
