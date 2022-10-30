@@ -326,7 +326,19 @@ audio{
     /* border: 1px solid red; */
 }
 
+.author_name{
+    font-size: 1rem;
+}
+
 .view_post{
+    width: 95%;
+    margin: 0 auto;
+}
+
+.posts_cont{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
     width: 95%;
     margin: 0 auto;
 }

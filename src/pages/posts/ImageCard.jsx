@@ -16,7 +16,7 @@ const ImageCard = ({p}) => {
                     <img src={user?.photo} alt="" />
                 </div>
                 <div className="card_username">
-                     <h5>{user?.fname+" "+user?.lname}</h5>
+                     <h5 className='author_name'>{user?.fname+" "+user?.lname}</h5>
                      <small className='timeago'>{moment(p?.createdAt?.toDate()).fromNow(true)}</small>
                 </div>
                

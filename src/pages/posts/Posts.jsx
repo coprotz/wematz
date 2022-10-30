@@ -27,6 +27,7 @@ import ShareAudio from './ShareAudio';
 import ImageCard from './ImageCard';
 import ShareImage from './ShareImage';
 import moment from 'moment'
+import Search from '../../components/search/Search';
 
 
 const nikahs = [
@@ -88,7 +89,11 @@ const Posts = () => {
         {image && <ShareImage setImage={setImage}/> }          
         <div className="posts_wrapper">
           <div className="posts_inner">
-              <SharePost setVideo={setVideo} setAudio={setAudio} setImage={setImage}/>        
+            <div className="posts_cont">
+                <SharePost setVideo={setVideo} setAudio={setAudio} setImage={setImage}/> 
+                <Search title='Tafuta Chapisho'/>  
+            </div>
+                   
               <motion.div 
                   initial={{ y:'100vw'}}
                   animate={{y:0}} 
@@ -107,7 +112,7 @@ const Posts = () => {
                 </h3>
                                 
                 <div className="new_users">
-                    {users?.slice(0,5).map(u => (
+                    {users?.slice(0,7).map(u => (
                         <div className="new_user">
                             <img src={u.photo} alt="" />
                         </div>

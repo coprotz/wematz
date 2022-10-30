@@ -331,7 +331,7 @@
 
 
 
-@media screen and (max-width: 440px){
+@media screen and (max-width: 940px){
     .nikah_donated{
         display: flex;
         flex-direction: column;
