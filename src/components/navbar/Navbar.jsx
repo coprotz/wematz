@@ -12,12 +12,17 @@ import useData from '../../hooks/useData';
 const Navbar = ({active, setActive}) => {
     const navigate = useNavigate();
 
-    const { user, logOut } = useAuth()
-    const {users} = useData()
+    const { user, logOut } = useAuth()  
+    const { marriages, users } = useData() 
+
+    const cuUser = users?.find(u => u.id === user.uid)
+    const marry = marriages?.find(m => m.userId === user.uid)
+    const isMarry = user.uid === marry?.userId
+
     const [show, setShow] = useState(null)
     const [photo, setPhoto] = useState(null)
 
-    const cuUser = users?.find(u => u.id === user?.uid)
+ 
 
     console.log('photo', user)
    
@@ -45,7 +50,10 @@ const Navbar = ({active, setActive}) => {
                     <div className="user_menu">
                         <span onClick={() => {navigate('/');setShow(null)}}>Nyumbani</span>
                         <span onClick={() => {navigate('/profile');setShow(null)}}>Badili Picha</span> 
-                        <span onClick={() => {navigate('/subscriptions');setShow(null)}}>Unga Mkono</span>                       
+                        {isMarry &&
+                        <span onClick={() => {navigate(`/nikah/${marry?.id}`);setShow(null)}}>Wasifu wa Nikah</span>
+                        }
+                        <span onClick={() => {navigate('/subscriptions');setShow(null)}}>Unga Mkono</span>                      
                         <span onClick={() => logOut()}>ONDOKA</span>
                     </div>}
                 </div>

@@ -9,13 +9,20 @@ import { doc, updateDoc } from 'firebase/firestore';
 import useStorage from '../../hooks/useStorage';
 import Navbar from '../../components/navbar/Navbar';
 import Footer from '../../components/footer/Footer';
+import { useParams } from 'react-router-dom';
 
 
 const Profile = () => {
 
+    const { id } = useParams()
+
+    
+
     const { user } = useAuth()
-    const { users } = useData()
+    const { users, marriages } = useData()
     const cuUser = users?.find(u => u.id === user?.uid)
+
+   
 
     const [file, setFile] = useState(null)
     const [error, setError] = useState('')

@@ -291,7 +291,7 @@
     color: var(--primary);
     border: none;
     font-size: 1.2rem;
-    width: 100%;
+    /* width: 100%; */
     text-align: center;
 }
 

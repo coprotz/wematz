@@ -158,6 +158,10 @@ const NikahReg = () => {
                                         id="photo" style={{display: 'none'}}
                                         onChange={handleSelect}
                                     />
+                                    <div className="nikah_pic">
+                                        <span>Weka Picha</span>
+                                        <span className='attached_photo'><BsCamera/></span>
+                                    </div>
                                     <span className='attached_photo'><BsCamera/></span>
                                 </label>
                             }
@@ -176,12 +180,12 @@ const NikahReg = () => {
                         <h3 className='item_title'>Jina la kutumika</h3>
                         <div className="sel_items">
                             <input 
-                            type="text" 
-                            placeholder='Jina la Kutumika'
-                            className='sel_input'
-                            name='username'
-                            {...register("username", { required: true })}
-                            style={{width: '100%'}}
+                                type="text" 
+                                placeholder='Jina la Kutumika'
+                                className='sel_input'
+                                name='username'
+                                {...register("username", { required: true })}
+                                style={{width: '100%'}}
                             /> 
                         </div>                      
                     </div>
@@ -531,20 +535,20 @@ const NikahReg = () => {
                                 <label htmlFor="2900">Chochote</label>
                             </div> 
                             <div className="sel_item">
-                                <input type="radio" id='002900' value='Najua Alfatha tu' name='pquran' {...register("pquran", { required: true })}/>
-                                <label htmlFor="002900">Najua Alfatha tu</label>
+                                <input type="radio" id='002900' value='Ajue hata Alfatha tu' name='pquran' {...register("pquran", { required: true })}/>
+                                <label htmlFor="002900">Ajue hata Alfatha tu</label>
                             </div> 
                             <div className="sel_item">
                                 <input type="radio" id='2100' value='Juzuu Amma' name='pquran' {...register("pquran", { required: true })}/>
                                 <label htmlFor="2100">Juzuu Amma</label>
                             </div>
                             <div className="sel_item">
-                                <input type="radio" id='2200' value='Nasoma Mashafu' name='pquran' {...register("pquran", { required: true })}/>
-                                <label htmlFor="2200">Nasoma Mashafu</label>
+                                <input type="radio" id='2200' value='Aweze Kusoma Mashafu' name='pquran' {...register("pquran", { required: true })}/>
+                                <label htmlFor="2200">Aweze Kusoma Mashafu</label>
                             </div>  
                             <div className="sel_item">
                                 <input type="radio" id='2300' value='Sijui Quran' name='quran' {...register("signup", { required: true })}/>
-                                <label htmlFor="2300">Sijui Quran</label>
+                                <label htmlFor="2300">Hata Asipojua Quran</label>
                             </div>                                    
                         </div>
                     </div>
@@ -876,7 +880,12 @@ const NikahReg = () => {
                                         
                     </div>
                     <div className="items_group">
-                        <button className='btn_reg' onClick={handleNikah}>{loading? 'Inatuma': 'TUMA USAJIRI'}</button>
+                        <button 
+                            className='btn_reg' 
+                            onClick={handleNikah}
+                            disabled={!isValid || !url}
+                            >{loading? 'Inatuma': 'TUMA USAJIRI'}
+                            </button>
                     </div>
 
 
