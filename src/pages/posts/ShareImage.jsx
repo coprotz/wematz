@@ -66,7 +66,7 @@ const ShareImage = ({setImage}) => {
 
 
     }
-    console.log('file', url)
+    // console.log('file', url)
   return (
     <div className="share_video_outer">
         <div className="shared_video"> 
@@ -97,7 +97,7 @@ const ShareImage = ({setImage}) => {
             {file && <>
             <button 
                 onClick={handleAudio}
-                disabled={!file} 
+                disabled={!url} 
                 className='btn_sign'>{loading? 'Inatuma' : 'TUMA'}
             </button>
             

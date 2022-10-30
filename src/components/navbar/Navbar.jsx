@@ -39,12 +39,13 @@ const Navbar = ({active, setActive}) => {
                 <div className="profile_img">
                     <img src={cuUser?.photo} />
                 </div>
-                <div className="user_action">
-                    <button className='btn' onClick={() =>setShow(!show)}><BsThreeDotsVertical/></button>
+                <div className="user_action" onMouseEnter={() =>setShow(true)} onMouseLeave={() =>setShow(false)}>
+                    <button className='btn' ><BsThreeDotsVertical/></button>
                     {show &&
                     <div className="user_menu">
-                        <span onClick={() => {navigate('/');setShow(null)}}>Myumbani</span>
-                        <span onClick={() => {navigate('/profile');setShow(null)}}>Wasifu Wangu</span>                        
+                        <span onClick={() => {navigate('/');setShow(null)}}>Nyumbani</span>
+                        <span onClick={() => {navigate('/profile');setShow(null)}}>Badili Picha</span> 
+                        <span onClick={() => {navigate('/subscriptions');setShow(null)}}>Unga Mkono</span>                       
                         <span onClick={() => logOut()}>ONDOKA</span>
                     </div>}
                 </div>
