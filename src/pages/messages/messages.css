@@ -16,9 +16,10 @@
 }
 
 .mes_chatlists{
-    min-height: calc(100vh - 210px);
+    height: calc(100vh - 210px);
     padding-top: 25px;
     padding: 15px;
+    overflow-y: scroll;
     background-color: white;
 }
 

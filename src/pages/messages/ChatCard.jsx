@@ -32,24 +32,47 @@ const ChatCard = ({chat}) => {
     const cuMsgs = messages && messages.filter(m => m.room === chat.id)
     const lastMsg = messages && messages.findLast((m) => m.room === chat.id)
 
-    const memberId = chat.members?.find(m => m?.memberId)?.memberId
+    const memberId = chat.members?.find(m => m !== user.uid)
 
-    const member =
-    doctors?.find(a => a.id === memberId) ||           
-    marriages?.find(a => a.id === memberId)
+    console.log('memberId', memberId)
+
+    const member = doctors?.find(a => a.userId === memberId) || marriages?.find(a => a.userId === memberId)  
+    
+    
+    // console.log('member', member)
+    // console.log('id', chat.id)
+    // console.log('chatid', chat?.chatId)
+    
 
     const Name = () => {
-      if(marriages?.find(a => a.id === memberId)){
+      if(marriages?.find(a => a.userId === memberId) && marriages?.find(a => a.id === chat?.chatId)){
         return (
           <>{member?.username }</>
         )
-      }else if(doctors?.find(a => a.id === memberId)){
+      }else if(doctors?.find(a => a.userId === memberId) && doctors?.find(a => a.id === chat?.chatId)){
         return (
           <>{member?.name}</>
         )
       }else {
         return (
           <>{member?.fname+" "+member?.lname}</>
+        )
+      }
+    }
+
+    const Photo = () => {
+      if(marriages?.find(a => a.userId === memberId) && marriages?.find(a => a.id === chat?.chatId)){
+        return (
+          // <>{member?.photo }</>
+          <img src={member?.photo} />
+        )
+      }else if(doctors?.find(a => a.userId === memberId) && doctors?.find(a => a.id === chat?.chatId)){
+        return (
+          <img src={member?.photo} />
+        )
+      }else {
+        return (
+          null
         )
       }
     }
@@ -62,7 +85,7 @@ const ChatCard = ({chat}) => {
       <div className="chat_wrap">
         <div className="chat_wrleft">
           <div className="chat_rec_photo">
-              <img src={member?.photo} />
+              {Photo()} 
           </div>
           <div className="chat_body">
               <h4 className='chat_member_name'>{Name()}</h4>

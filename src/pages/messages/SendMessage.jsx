@@ -23,10 +23,11 @@ const SendMessage = ({chat}) => {
 
   console.log('chat', chat)
 
-  const memberId = chat?.members?.find(m => m?.memberId)?.memberId
+  const memberId = chat?.members?.find(m => m !== user.uid)
 
-  const docId = doctors?.find(d => d.id === memberId)?.id
-  const isDoc = docId === memberId
+  const doc = doctors?.find(d => d.userId === memberId)
+
+  const isDoc = doc?.userId === memberId
 
   console.log('isDoc', isDoc)
 

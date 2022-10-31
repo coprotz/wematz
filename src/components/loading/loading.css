@@ -10,8 +10,10 @@
 
 .loading::after{
     content: "";
-    height: 15px;
-    width: 15px;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
     aspect-ratio: 1;
     border: 3px solid #e0edff;
     border-top-color: #0d366b;

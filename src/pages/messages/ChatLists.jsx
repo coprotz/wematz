@@ -21,14 +21,21 @@ const ChatLists = () => {
 
     const userChats = chats?.filter(c =>c.members.find(m =>m.myId === cuUser?.id))
     const marryChats = chats?.filter(c =>c.members.find(m =>m.myId === marry?.id))
-    const docChats = chats?.filter(c =>c.members.includes(`${doc?.id}`))
+    const docChats = chats?.filter(c =>c.members.find(m =>m.myId === doc?.id))
+
+    // const mychats = chats?.filter(c =>c.members.find(m =>m.myId === user?.uid))
+    
+    const mychats = chats && chats.filter(c => c.members.includes(`${user.uid}`))
+    
 
     const allchats = userChats.concat(marryChats)
-    const mychats = allchats.concat(docChats)
+    // const mychats = allchats.concat(docChats)
+
     const adminId = process.env.REACT_APP_ADMIN_ID
+
     const [viewAction, setViewAction] = useState(null)
 
-    console.log('chats',chats)
+    console.log('mychats',mychats)
 
   return (
     <div className="messages_lists">

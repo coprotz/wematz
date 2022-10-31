@@ -18,7 +18,7 @@ const DoctorCard = ({d}) => {
             <div className="meetings_actions">                    
                 <button className='btn'><BsCalendarDay/></button>
                 <button className='btn' onClick={() =>navigate(`/health/doctors/${d.id}`)}><BsFillPersonFill/></button>
-                <NewChat name={d.name} id={d.id} myid={user.uid}/>        
+                <NewChat item={d}/>        
             </div>
             
         </div>

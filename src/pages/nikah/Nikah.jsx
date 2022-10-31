@@ -63,7 +63,7 @@ const Nikah = () => {
                         <div className="meetings_actions">                    
                             <button className='btn_btn'><FcLike/></button>
                             <button onClick={() =>navigate(`/nikah/${item.id}`)} className='btn_btn'><BsFillPersonFill/></button>
-                            <NewChat id={item.id} name={item?.username} myid ={marry?.id}/>       
+                            <NewChat item={item}/>       
                         </div>
                     </div>
                 </div>

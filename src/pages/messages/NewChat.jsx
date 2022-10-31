@@ -9,7 +9,7 @@ import { BsChatLeftDotsFill } from 'react-icons/bs'
 
 
 
-const NewChat = ({id, name, myid}) => {
+const NewChat = ({item}) => {
     const { user } = useAuth()
     const { users, doctors, marriages, chats } = useData()
 
@@ -17,25 +17,43 @@ const NewChat = ({id, name, myid}) => {
     const marry = marriages?.find(a => a.userId === user.uid)
     const doctor = doctors?.find(a => a.userId === user.uid)
 
+    // const { id, name, photo, userId, username } = item
+
     const chatsRef = collection(db, 'chats')
     const [action, setAction] = useState(null)
     const [open, setOpen] = useState(null)
     const [sending, setSending] = useState(null)
     const navigate = useNavigate();
 
-    const userChats = chats && chats.filter(c => c.members.includes(`${cuUser?.id}`))
-    const marryChats = chats && chats.filter(c => c.members.includes(`${marry?.id}`))
-    const doctorChats = chats && chats.filter(c => c.members.includes(`${doctor?.id}`))
+    // const userChats = chats && chats.filter(c => c.members.includes(`${cuUser?.id}`))
+    // const marryChats = chats && chats.filter(c => c.members.includes(`${marry?.id}`))
+    // const doctorChats = chats && chats.filter(c => c.members.includes(`${doctor?.id}`))
 
-    const allchats = userChats.concat(marryChats)
-    const mychats = allchats.concat(doctorChats)
+    // const userChats = chats?.filter(c =>c.members.find(m =>m.myId === cuUser?.id))
+    // const marryChats = chats?.filter(c =>c.members.find(m =>m.myId === marry?.id))
+    // const doctorChats = chats?.filter(c =>c.members.find(m =>m.myId === doctor?.id))
+
+    // const allchats = userChats.concat(marryChats)
+
+    console.log('item', item)
+
+    const mychats = chats?.filter(c =>c.members.includes(`${user.uid}`))
+
+    // const memberId = item?.userId
+  
 
     // const oldChats = 
     //   cuUser? userChats :
     //   marry? marryChats :
     //   doctor? doctorChats : null
 
-      const oldChat = mychats?.find(c => c.members.includes(`${id}`))
+      // const memberId = marriages?.find(m => m.userId === id)?.userId
+
+      const oldChat = mychats?.find(c => c.members.find(m =>m === item?.userId))
+
+      
+
+      // console.log('memberId',memberId)
 
       // const myId =  
       // cuUser? cuUser.id :
@@ -55,7 +73,8 @@ const NewChat = ({id, name, myid}) => {
           }
           else{
             const data = {
-              members : [{myId:`${ myid}`}, {memberId:`${id}`}]
+              members : [`${ user.uid}`, `${item?.userId}`],
+              chatId: item?.id
             }
         
             const chat = await addDoc(chatsRef, data)
@@ -85,12 +104,12 @@ const NewChat = ({id, name, myid}) => {
       // onMouseEnter={() =>setAction(true)} 
       // onMouseLeave={() =>setAction(null)}
       >
-    <button className='btn_btn' onClick={() =>setOpen(id)}><BsChatLeftDotsFill/></button>
+    <button className='btn_btn' onClick={() =>setOpen(item?.id)}><BsChatLeftDotsFill/></button>
     {/* {action && <span className='div_span'>Messeji</span>} */}
     {open &&
     <div className="pop_new_msg">        
       <div className="pop_new_chat">
-          <span>Send message to <strong>{name}</strong>?</span>
+          <span>Send message to <strong>{item?.username || item?.name}</strong>?</span>
           <div className="group_btns">
               <button onClick={handleNew} className='btn_sign'>{sending? <Loading/>: 'SAWA'}</button>
               <button onClick={() => setOpen(null)} className='btn_cancel'>BATILISHA</button>
