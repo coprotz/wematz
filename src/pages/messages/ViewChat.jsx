@@ -15,10 +15,10 @@ import { useState } from 'react';
 const ViewChat = () => {
     const { id } = useParams()
     const { user } = useAuth()
-    const { users, chats, messages, doctors, marriages } = useData()
+    const { users, chats, messages, doctors, marriages, lawyers } = useData()
 
-    const cuUser = users?.find(u => u.id === user.uid)
-    const marry = marriages?.find(p=>p.userId === user.uid)
+    // const cuUser = users?.find(u => u.id === user.uid)
+    // const marry = marriages?.find(p=>p.userId === user.uid)
     const [viewAction, setViewAction] = useState(null)
 
     const chat = chats?.find(c => c.id === id)
@@ -29,7 +29,7 @@ const ViewChat = () => {
 
     const memberId = chat?.members?.find(m => m !== user.uid)
 
-    const member = doctors?.find(a => a.userId === memberId) || marriages?.find(a => a.userId === memberId)
+    const member = doctors?.find(a => a.userId === memberId) || marriages?.find(a => a.userId === memberId) || lawyers?.find(a => a.userId === memberId) 
 
                
     
@@ -40,6 +40,10 @@ const ViewChat = () => {
           <>{member?.username }</>
         )
       }else if(doctors?.find(a => a.userId === memberId) && doctors?.find(a => a.id === chat?.chatId)){
+        return (
+          <>{member?.name}</>
+        )
+      }else if(lawyers?.find(a => a.userId === memberId) && lawyers?.find(a => a.id === chat?.chatId)){
         return (
           <>{member?.name}</>
         )
@@ -60,6 +64,10 @@ const ViewChat = () => {
           return (
             <img src={member?.photo} />
           )
+        }else if(lawyers?.find(a => a.userId === memberId) && lawyers?.find(a => a.id === chat?.chatId)){
+          return (
+            <img src={member?.photo} />
+          )
         }else {
           return (
             null
@@ -68,12 +76,7 @@ const ViewChat = () => {
       }
 
       console.log('memberId', memberId)
-    
-    
-    
-    
-    
-   
+
     const chatMessages = messages?.filter(m =>m.room === id)
     const navigate = useNavigate()
 

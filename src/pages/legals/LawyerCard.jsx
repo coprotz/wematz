@@ -1,9 +1,12 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { BsChatLeftDotsFill,BsFillPersonFill, BsCalendarDay } from "react-icons/bs";
+import NewChat from '../messages/NewChat';
 
 const LawyerCard = ({d}) => {
     const navigate = useNavigate()
+
+    console.log('d', d)
   return (
     <div className="doc_card" key={d.id}>
         <img src={d.photo} />
@@ -15,7 +18,7 @@ const LawyerCard = ({d}) => {
             <div className="meetings_actions">                    
                 <button className='btn'><BsCalendarDay/></button>
                 <button className='btn' onClick={() =>navigate(`/legals/${d.id}`)}><BsFillPersonFill/></button>
-                <button className='btn'><BsChatLeftDotsFill/></button>          
+                <NewChat item={d}/>          
             </div>
             
         </div>

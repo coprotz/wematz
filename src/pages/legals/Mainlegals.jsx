@@ -13,6 +13,7 @@ const Mainlegals = () => {
   const { lawyers } = useData()
 
   console.log('lawyers', lawyers)
+  
   return (
     <div className='main_legals'>
       

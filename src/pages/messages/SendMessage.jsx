@@ -11,7 +11,7 @@ import Loading from '../../components/loading/Loading';
 
 const SendMessage = ({chat}) => {
 
-  const { users, marriages, doctors } = useData();
+  const { users, marriages, doctors, lawyers } = useData();
   const { user } = useAuth()
   const { uid } = user
   const [message, setMessage] = useState('')
@@ -26,21 +26,38 @@ const SendMessage = ({chat}) => {
   const memberId = chat?.members?.find(m => m !== user.uid)
 
   const doc = doctors?.find(d => d.userId === memberId)
+  const law = lawyers?.find(d => d.userId === memberId)
 
   const isDoc = doc?.userId === memberId
+  const isLaw = law?.userId === memberId
 
   console.log('isDoc', isDoc)
+  console.log('isLaw', isLaw)
 
   const cuUser = users?.find(u => u.id === user.uid)
   const marry = marriages?.find(p=>p.userId === user.uid)
+
+  const Name = () => {
+    if(isDoc){
+      return (
+        <>{cuUser?.fname+" "+cuUser?.fname}</>
+      )
+    }else if(isLaw){
+      return (
+        <>{cuUser?.fname+" "+cuUser?.fname}</>
+      )
+    }else{
+      <>{marry.username}</>
+    }
+  }
 
   const handleSubmit = async(e) => {
     e.preventDefault()
     setLoding(true)
     const data = {
             uid,
-            name: isDoc? cuUser?.fname+" "+cuUser?.fname : marry.username, 
-            photo: isDoc? cuUser?.photo : marry.photo,       
+            name: isDoc? cuUser?.fname+" "+cuUser?.fname : isLaw? cuUser?.fname+" "+cuUser?.fname: marry.username, 
+            photo: isDoc? cuUser?.photo : isLaw? cuUser?.photo : marry.photo,       
             createdAt: serverTimestamp(),
             text: message,
             room: chat.id,

@@ -31,7 +31,7 @@ const useData = () => {
     const allMarriages = query(marriagesRef, orderBy("createdAt"));  
     const allQuestions = query(questionsRef, orderBy("createdAt"));  
     const allDoctors = query(doctorsRef, orderBy("createdAt")); 
-    const allLawyers = query(doctorsRef, orderBy("createdAt")); 
+    const allLawyers = query(lawyersRef, orderBy("createdAt")); 
     // const allChats = query(chatsRef, orderBy("createdAt")); 
     const allMessages = query(messagesRef, orderBy("createdAt")); 
     // const allInvoices = query(invoicesRef, orderBy("createdAt")); 

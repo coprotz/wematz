@@ -10,7 +10,7 @@ const ChatCard = ({chat}) => {
     const { id } = useParams()
 
     const { user } = useAuth();
-    const { messages, users, marriages, doctors, chats } = useData()
+    const { messages, marriages, doctors, lawyers } = useData()
 
     // const activeChat = chats?.find(c =>c.id === id)
 
@@ -36,7 +36,7 @@ const ChatCard = ({chat}) => {
 
     console.log('memberId', memberId)
 
-    const member = doctors?.find(a => a.userId === memberId) || marriages?.find(a => a.userId === memberId)  
+    const member = doctors?.find(a => a.userId === memberId) || marriages?.find(a => a.userId === memberId) || lawyers?.find(a => a.userId === memberId) 
     
     
     // console.log('member', member)
@@ -50,6 +50,10 @@ const ChatCard = ({chat}) => {
           <>{member?.username }</>
         )
       }else if(doctors?.find(a => a.userId === memberId) && doctors?.find(a => a.id === chat?.chatId)){
+        return (
+          <>{member?.name}</>
+        )
+      }else if(lawyers?.find(a => a.userId === memberId) && lawyers?.find(a => a.id === chat?.chatId)){
         return (
           <>{member?.name}</>
         )
@@ -67,6 +71,10 @@ const ChatCard = ({chat}) => {
           <img src={member?.photo} />
         )
       }else if(doctors?.find(a => a.userId === memberId) && doctors?.find(a => a.id === chat?.chatId)){
+        return (
+          <img src={member?.photo} />
+        )
+      }else if(lawyers?.find(a => a.userId === memberId) && lawyers?.find(a => a.id === chat?.chatId)){
         return (
           <img src={member?.photo} />
         )
