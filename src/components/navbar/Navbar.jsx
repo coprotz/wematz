@@ -24,7 +24,7 @@ const Navbar = ({active, setActive}) => {
 
  
 
-    console.log('photo', user)
+    // console.log('photo', user)
    
   return (
     <div className="home_top">
@@ -32,12 +32,8 @@ const Navbar = ({active, setActive}) => {
             <h1 onClick={() =>navigate('/')}>Wema</h1>
             <Button active={active} setActive={setActive} onClick={() =>setActive(false)}/>
         </div>
-        <div className="home_profile">
-            {/* <div className="search">
-                <Search/>
-            </div> */}
-            <div className="profile">
-                {/* <span>Message</span> */}
+        <div className="home_profile">          
+            <div className="profile">             
                 <div className="notify">
                     <button className='btn'><BsBell /></button>                    
                 </div>               

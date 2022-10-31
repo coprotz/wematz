@@ -61,6 +61,7 @@ const ChatCard = ({chat}) => {
         </div>
         <div className="chat_timer">
           <small className='chat_la_time'>{moment(lastMsg?.createdAt?.toDate()).fromNow(true)}</small> 
+          <span className='card_small_qty'>{cuMsgs && cuMsgs.length}</span>
         </div>
         </div>
     </div>

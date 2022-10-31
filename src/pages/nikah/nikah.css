@@ -223,10 +223,10 @@
 }
 
 .btn{
-    width: 35px;
-    height: 35px;
+    width: 40px;
+    height: 40px;
     display: flex;
-    background-color: transparent;
+    background-color: var(--bg);
     border-radius: 50%;
     justify-content: center;
     align-items: center;
@@ -238,7 +238,7 @@
     inset 0 0 15px rgba(55, 84, 170,0),
     inset 0 0 20px rgba(255, 255, 255,0),
     7px 7px 15px rgba(55, 84, 170,.15),
-    -7px -7px 20px rgba(255, 255, 255,1),
+    /* -7px -7px 20px rgba(255, 255, 255,1), */
     inset 0px 0px 4px rgba(255, 255, 255,.2);
 }
 

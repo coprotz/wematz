@@ -82,8 +82,8 @@ const NikahView = () => {
         </motion.div>
         
         <div className="nikah_View_top">
-            <button onClick={() => navigate(-1)} className='btn'><BsArrowLeft/></button>
-            {nikah && nikah.name}
+            <button onClick={() => navigate(-1)} className='btn_btn'><BsArrowLeft/></button>
+            <h3>{nikah && nikah.name}</h3>
         </div>
         <div className="nikah_view_bottom">
             <div className="nikah_view_left">

@@ -1,18 +1,27 @@
 import React from 'react'
-import { BsFilePostFill } from "react-icons/bs";
+// import { BsFilePostFill } from "react-icons/bs";
 import { GiLovers, GiCook, GiTeacher } from "react-icons/gi";
 import { IoIosChatbubbles } from "react-icons/io";
 import { FaHeartbeat, FaRegNewspaper } from "react-icons/fa";
 import { GoLaw } from "react-icons/go";
 import { RiTeamLine, RiQuestionnaireFill } from "react-icons/ri";
 import { HiHome } from "react-icons/hi";
-import { TbBusinessplan } from "react-icons/tb";
+import {  FiActivity } from "react-icons/fi";
+// import { TbBusinessplan } from "react-icons/tb";
 import './menu.css'
 import { NavLink } from 'react-router-dom'
+import { useAuth } from '../../hooks/useAuth';
+import useData from '../../hooks/useData';
 
 
 
 const HomeMenu = ({active, setActive}) => {
+    const { user } = useAuth()
+    const { marriages, users } = useData();
+    const cuUser = users?.find(u => u.id === user.uid)
+    const marry = marriages?.find(m => m.userId === user.uid)
+    const isMarry = user.uid === marry?.userId
+
   return (
     <div className={active? "home_menu" : 'home_no'}>
         <NavLink to='/' className="menu_item" onClick={() =>setActive(!active)}>
@@ -27,6 +36,11 @@ const HomeMenu = ({active, setActive}) => {
             <GiLovers/>
             <span>Ukumbi wa Nikah</span>
         </NavLink>
+        {isMarry &&
+        <NavLink to='/activites' className="menu_item" onClick={() =>setActive(!active)}>
+            <FiActivity/>
+            <span>Matukio</span>
+        </NavLink>}
         <NavLink to='/meetings' className="menu_item" onClick={() =>setActive(!active)}>
             <RiTeamLine/>
             <span>Mikutano</span>
@@ -35,10 +49,10 @@ const HomeMenu = ({active, setActive}) => {
             <GiTeacher/>
             <span>Mada ya Wiki</span>
         </NavLink>
-        <NavLink to='/recipies' className="menu_item" onClick={() =>setActive(!active)}>
+        {/* <NavLink to='/recipies' className="menu_item" onClick={() =>setActive(!active)}>
             <GiCook/>
             <span>Mapishi</span>
-        </NavLink>
+        </NavLink> */}
         <NavLink to='/health' className="menu_item" onClick={() =>setActive(!active)}>
             <FaHeartbeat/>
             <span>Afya</span>

@@ -34,6 +34,7 @@ const SendMessage = ({chat}) => {
             createdAt: serverTimestamp(),
             text: message,
             room: chat.id,
+            isRead: false
            
     }
 

@@ -3,7 +3,7 @@
     flex-direction: column;
     gap: 0.5vh;
     width: 100%;
-    padding: 0 10px;
+    /* padding: 0 10px; */
 }
 
 .home_menu a{
@@ -22,8 +22,12 @@
     padding: 1vh;
     border-radius: 0 25px 25px 0;
     align-items: center;
-    font-size: 1rem;
-    color: #000;
+    font-size: 0.9rem;
+    color: white;
+}
+
+.menu_item svg{
+    font-size: 1.5rem;
 }
 
 .menu_item:hover{
@@ -33,7 +37,7 @@
 
 .active{
     background-color: white;
-    color: black;
+    color: black !important;
     font-weight: 700;
     padding-left: 20px;
     border-left: 4px solid var(--primary);
@@ -50,6 +54,17 @@
 }
 
 @media screen and (max-width: 740px){
+
+    .menu_item{     
+       
+        gap: 25px;       
+        font-size: 1.3rem;
+        color: white;
+    }
+    
+    .menu_item svg{
+        font-size: 2rem;
+    }
   
 
     /* .menu_item svg{

@@ -6,6 +6,10 @@ import { useAuth } from '../../hooks/useAuth';
 import useData from '../../hooks/useData';
 import SendMessage from './SendMessage';
 import MessageCard from './MessageCard';
+import { BsBell, BsCameraVideo, BsThreeDotsVertical } from 'react-icons/bs';
+import { useState } from 'react';
+
+
 
 
 const ViewChat = () => {
@@ -15,6 +19,7 @@ const ViewChat = () => {
 
     const cuUser = users?.find(u => u.id === user.uid)
     const marry = marriages?.find(p=>p.userId === user.uid)
+    const [viewAction, setViewAction] = useState(null)
 
     const chat = chats?.find(c => c.id === id)
     
@@ -64,14 +69,30 @@ const ViewChat = () => {
           
           <div className="chat_room_body">
             <div className="chatroom_head">
-            <div className="view_que_back">
-                <button onClick={() =>navigate('/messages')} className='btn_back'><HiOutlineArrowLeft/></button>
-            </div>
-                <div className="chat_rec_photo">
-                    <img src={member?.photo} />
+                <div className="chat_head_left">
+                    <div className="view_que_back">
+                        <button onClick={() =>navigate('/messages')} className='btn_btn'><HiOutlineArrowLeft/></button>
+                    </div>
+                    <div className="chat_rec_photo">
+                        <img src={member?.photo} onClick={() => navigate(`/nikah/${member?.id}`)}/>
+                    </div>
+                    <div className="chat_body">
+                        <h4 className='chat_member_name'>{member?.username}</h4>                    
+                    </div>
                 </div>
-                <div className="chat_body">
-                    <h4>{member?.username}</h4>                    
+                <div className="chat_head_right">
+                    <button className='btn_btn'><BsCameraVideo /></button> 
+                    <div className="member_action" onMouseEnter={() =>setViewAction(true)} onMouseLeave={() =>setViewAction(null)}>
+                      <button className='btn_btn' ><BsThreeDotsVertical/></button>
+                      {viewAction &&
+                      <div className="chat_member_action" >
+                        <span onClick={() => navigate(`/nikah/${member?.id}`)}>Angalia Wasifu Wake</span>
+                        <span>Zuia Mawasiliano</span>
+                        <span>Mripoti kwa Kudhalilisha</span>
+                        
+                      </div>}
+                    </div> 
+                  
                 </div>
             </div>
             <div className="chat_room_bottom">

@@ -285,8 +285,8 @@
 }
 
 .btn_btn{
-    height: 50px;
-    width: 50px;
+    height: 40px;
+    width: 40px;
     display: flex;
     justify-content: center;
     background-color: var(--bg);
@@ -434,6 +434,47 @@
     height: 100%;
     object-fit: cover;
     border-radius: 50%;
+}
+
+.chat_timer{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+
+.card_small_qty{
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--primary);
+    font-size: 12px;
+    color: white;
+}
+
+.member_action{
+    position: relative;
+}
+
+
+.chat_member_action{
+    position: absolute;
+    background-color: white;
+    padding: 15px;
+    right: 0;
+    top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    font-size: 1.1rem;
+    width: 200px;
+    z-index: 15;
+    box-shadow: var(--shadow);
+    border-radius: 5px;
 }
 
 
