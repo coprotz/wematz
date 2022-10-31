@@ -11,7 +11,7 @@ import Loading from '../../components/loading/Loading';
 
 const SendMessage = ({chat}) => {
 
-  const { users, marriages } = useData();
+  const { users, marriages, doctors } = useData();
   const { user } = useAuth()
   const { uid } = user
   const [message, setMessage] = useState('')
@@ -21,6 +21,15 @@ const SendMessage = ({chat}) => {
   const messageRef = collection(db, 'messages')
   const [error, setError] = useState('')
 
+  console.log('chat', chat)
+
+  const memberId = chat?.members?.find(m => m?.memberId)?.memberId
+
+  const docId = doctors?.find(d => d.id === memberId)?.id
+  const isDoc = docId === memberId
+
+  console.log('isDoc', isDoc)
+
   const cuUser = users?.find(u => u.id === user.uid)
   const marry = marriages?.find(p=>p.userId === user.uid)
 
@@ -29,8 +38,8 @@ const SendMessage = ({chat}) => {
     setLoding(true)
     const data = {
             uid,
-            name: marry.username, 
-            photo: marry.photo,       
+            name: isDoc? cuUser?.fname+" "+cuUser?.fname : marry.username, 
+            photo: isDoc? cuUser?.photo : marry.photo,       
             createdAt: serverTimestamp(),
             text: message,
             room: chat.id,

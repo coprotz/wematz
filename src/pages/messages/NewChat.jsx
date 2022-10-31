@@ -37,10 +37,10 @@ const NewChat = ({id, name, myid}) => {
 
       const oldChat = mychats?.find(c => c.members.includes(`${id}`))
 
-      const myId =  
-      cuUser? cuUser.id :
-      marry ?  marry?.id :
-      doctor ? doctor?.id: null
+      // const myId =  
+      // cuUser? cuUser.id :
+      // marry ?  marry?.id :
+      // doctor ? doctor?.id: null
 
       const handleNew = async(e) => {
 
@@ -55,7 +55,7 @@ const NewChat = ({id, name, myid}) => {
           }
           else{
             const data = {
-              members : [`${ myid}`, `${id}`]
+              members : [{myId:`${ myid}`}, {memberId:`${id}`}]
             }
         
             const chat = await addDoc(chatsRef, data)

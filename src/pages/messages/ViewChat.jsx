@@ -23,14 +23,23 @@ const ViewChat = () => {
 
     const chat = chats?.find(c => c.id === id)
     
-    const memberId = 
+    const memberId = chat?.members?.find(m => m?.memberId)?.memberId
     // cuUser? chat?.members?.find(m =>m !== cuUser?.id) :
-    marry? chat?.members?.find(m =>m !== marry?.id) : null
+    // marry? chat?.members?.find(m =>m !== marry?.id) : null
+
+    const member = 
+
+    doctors?.find(a => a.id === memberId) ||           
+    marriages?.find(a => a.id === memberId)
 
     const Name = () => {
         if(marriages?.find(a => a.id === memberId)){
           return (
             <>{member?.username }</>
+          )
+        }else if(doctors?.find(a => a.id === memberId)){
+          return (
+            <>{member?.name}</>
           )
         }else {
           return (
@@ -38,13 +47,12 @@ const ViewChat = () => {
           )
         }
       }
-    
-    
-    
-    const member = 
 
-    // users?.find(a => a.id === memberId) ||           
-    marriages?.find(a => a.id === memberId)
+      console.log('memberId', memberId)
+    
+    
+    
+    
     
    
     const chatMessages = messages?.filter(m =>m.room === id)
@@ -59,7 +67,7 @@ const ViewChat = () => {
     })
 
     console.log('chats', chats)
-    console.log('messages', messages)
+    console.log('member', member)
 
   return (   
     <div className='main_messages'>
@@ -77,7 +85,7 @@ const ViewChat = () => {
                         <img src={member?.photo} onClick={() => navigate(`/nikah/${member?.id}`)}/>
                     </div>
                     <div className="chat_body">
-                        <h4 className='chat_member_name'>{member?.username}</h4>                    
+                        <h4 className='chat_member_name'>{member?.username || member?.name}</h4>                    
                     </div>
                 </div>
                 <div className="chat_head_right">

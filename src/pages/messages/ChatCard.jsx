@@ -10,9 +10,11 @@ const ChatCard = ({chat}) => {
     const { id } = useParams()
 
     const { user } = useAuth();
-    const { messages, users, marriages } = useData()
+    const { messages, users, marriages, doctors, chats } = useData()
 
-    const marry = marriages?.find(p=>p.userId === user.uid)
+    // const activeChat = chats?.find(c =>c.id === id)
+
+    // const marry = marriages?.find(p=>p.userId === user.uid)
 
     // const cuUser = users?.find(u => u.id === user.uid)
     // const marry = marriages?.find(a => a.userId === user.uid)
@@ -22,20 +24,28 @@ const ChatCard = ({chat}) => {
 
     // const allChats = userChats.concat(marryChats)
 
+    // console.log('activeChat', activeChat)
+
  
-    const memberId =  marry? chat?.members?.find(m =>m !== marry?.id) : null
+    // const memberId =  marry? chat?.members?.find(m =>m !== marry?.id) : null
 
     const cuMsgs = messages && messages.filter(m => m.room === chat.id)
     const lastMsg = messages && messages.findLast((m) => m.room === chat.id)
 
+    const memberId = chat.members?.find(m => m?.memberId)?.memberId
+
     const member =
-    // users?.find(a => a.id === memberId) ||           
+    doctors?.find(a => a.id === memberId) ||           
     marriages?.find(a => a.id === memberId)
 
     const Name = () => {
       if(marriages?.find(a => a.id === memberId)){
         return (
           <>{member?.username }</>
+        )
+      }else if(doctors?.find(a => a.id === memberId)){
+        return (
+          <>{member?.name}</>
         )
       }else {
         return (
@@ -55,7 +65,7 @@ const ChatCard = ({chat}) => {
               <img src={member?.photo} />
           </div>
           <div className="chat_body">
-              <h4 className='chat_member_name'>{member?.username}</h4>
+              <h4 className='chat_member_name'>{Name()}</h4>
               <span className='chat_text'>{lastMsg?.text}</span>
           </div>
         </div>

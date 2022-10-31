@@ -1,9 +1,12 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { BsChatLeftDotsFill,BsFillPersonFill, BsCalendarDay } from "react-icons/bs";
+import NewChat from '../messages/NewChat';
+import { useAuth } from '../../hooks/useAuth';
 
 const DoctorCard = ({d}) => {
     const navigate = useNavigate()
+    const { user } = useAuth()
   return (
     <div className="doc_card" key={d.id}>
         <img src={d.photo} />
@@ -15,7 +18,7 @@ const DoctorCard = ({d}) => {
             <div className="meetings_actions">                    
                 <button className='btn'><BsCalendarDay/></button>
                 <button className='btn' onClick={() =>navigate(`/health/doctors/${d.id}`)}><BsFillPersonFill/></button>
-                <button className='btn'><BsChatLeftDotsFill/></button>          
+                <NewChat name={d.name} id={d.id} myid={user.uid}/>        
             </div>
             
         </div>

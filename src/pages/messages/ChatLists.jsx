@@ -13,19 +13,22 @@ import { useState } from 'react'
 const ChatLists = () => {
 
     const { user } = useAuth()
-    const { users, marriages, chats, messages } = useData()
+    const { users, marriages, chats, doctors, messages } = useData()
 
     const cuUser = users?.find(u => u.id === user.uid)
     const marry = marriages?.find(p=>p.userId === user.uid)
+    const doc = doctors?.find(p=>p.userId === user.uid)
 
-    const userChats = chats?.filter(c =>c.members.includes(`${cuUser?.id}`))
-    const marryChats = chats?.filter(c =>c.members.includes(`${marry?.id}`))
+    const userChats = chats?.filter(c =>c.members.find(m =>m.myId === cuUser?.id))
+    const marryChats = chats?.filter(c =>c.members.find(m =>m.myId === marry?.id))
+    const docChats = chats?.filter(c =>c.members.includes(`${doc?.id}`))
 
-    const mychats = userChats.concat(marryChats)
+    const allchats = userChats.concat(marryChats)
+    const mychats = allchats.concat(docChats)
     const adminId = process.env.REACT_APP_ADMIN_ID
     const [viewAction, setViewAction] = useState(null)
 
-    console.log('admin',adminId)
+    console.log('chats',chats)
 
   return (
     <div className="messages_lists">
