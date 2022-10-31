@@ -19,7 +19,7 @@ const RegDoctors = () => {
       return ( 
         <>
           <div className="oppo_head">
-            <button onClick={() => navigate('/opportunities')} className='btn'><BsArrowLeft/></button>
+            <button onClick={() => navigate('/opportunities')} className='btn_btn'><BsArrowLeft/></button>
             <h1>Karibu kujisajili kama WemaDocta</h1>
           </div>
           <div className="opp_doc_body">

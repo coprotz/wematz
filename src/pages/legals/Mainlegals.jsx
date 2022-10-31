@@ -1,13 +1,18 @@
 import React from 'react'
 import { GoLaw } from "react-icons/go";
 import Search from '../../components/search/Search';
-import { lawyers } from '../../data';
+// import { lawyers } from '../../data';
+import useData from '../../hooks/useData';
 // import CreateMada from '../mada/CreateMada';
 import LawyerCard from './LawyerCard';
 import './legals.css'
 
 
 const Mainlegals = () => {
+
+  const { lawyers } = useData()
+
+  console.log('lawyers', lawyers)
   return (
     <div className='main_legals'>
       

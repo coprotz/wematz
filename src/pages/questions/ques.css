@@ -263,6 +263,11 @@
     display: none;
 }
 
+.view_que_back{
+    margin-top: 15px;
+    /* margin-left: 15px; */
+}
+
 
 @media screen and (max-width: 940px){
     .que_card{

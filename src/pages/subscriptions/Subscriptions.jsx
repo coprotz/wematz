@@ -1,12 +1,15 @@
 import React from 'react'
 import { useState } from 'react'
-import Nav from '../../components/nav/Nav'
+// import Nav from '../../components/nav/Nav'
 import './subscript.css'
 import { useForm } from "react-hook-form";
 // import { useEffect } from 'react';
 import { MdSecurity } from "react-icons/md";
 import visa from '../../assets/images/visa.png'
 import master from '../../assets/images/master.png'
+import Navbar from '../../components/navbar/Navbar';
+import {  HiOutlineArrowLeft } from "react-icons/hi";
+import { useNavigate } from 'react-router-dom';
 
 
 const Subscriptions = () => {
@@ -28,11 +31,15 @@ const Subscriptions = () => {
     // const amount = watch('amount')
 
     console.log('donate', donate)
+    const navigate = useNavigate()
 
   return (
     <div className='subscript'>
-        <Nav/>
+        <Navbar/>
         <div className="subscript_wrapper">
+            <div className="view_que_back">
+                <button onClick={() =>navigate(-1)} className='btn_btn'><HiOutlineArrowLeft/></button>
+            </div>
             <div className="subcript_top">
                 <h3>Asante kwa kutembelea ukuraha huu, mchango wako ni muhimu kwetu katika kusimamia 
                     tovuti hii kwa manufaa ya wanaWema wote. Kwa masiku yajayo, tutagawana na wanaohitajia misaada</h3>
@@ -72,7 +79,7 @@ const Subscriptions = () => {
                                     // {...register("donate", { required: true })} 
                                     // onChange={(e) => setCont(e.target.value)}
                                 />
-                                <label htmlFor="2">$2</label>
+                                <label htmlFor="2" className='label'>$2</label>
                                 </div>
                             
                             <div className="selection_group">   
@@ -85,7 +92,7 @@ const Subscriptions = () => {
                                     // {...register("donate", { required: true })} 
                                     onChange={(e) =>setAmount(e.target.value)}
                                     // onChange={(e) => setCont(e.target.value)}
-                                    /> <label htmlFor="5">$5</label>
+                                    /> <label htmlFor="5" className='label'>$5</label>
                                     </div>
                             
                             <div className="selection_group">   
@@ -99,7 +106,7 @@ const Subscriptions = () => {
                                     // {...register("donate", { required: true })} 
                                     onChange={(e) =>setAmount(e.target.value)}
                                     // onChange={(e) => setCont(e.target.value)}
-                                    /><label htmlFor="10">$10</label>
+                                    /><label htmlFor="10" className='label'>$10</label>
                                     </div>
                             
                             <div className="selection_group">   
@@ -112,7 +119,7 @@ const Subscriptions = () => {
                                     // {...register("donate", { required: true })} 
                                     onChange={(e) =>setAmount(e.target.value)}
                                     // onChange={(e) => setCont(e.target.value)}
-                                    /><label htmlFor="20">$20</label>
+                                    /><label htmlFor="20" className='label'>$20</label>
                                     </div>
                             
                             <div className="selection_group">   
@@ -125,7 +132,7 @@ const Subscriptions = () => {
                                     // {...register("donate", { required: true })} 
                                     onChange={(e) =>setAmount(e.target.value)}
                                     // onChange={(e) => setCont(e.target.value)}
-                                    /><label htmlFor="50">$50</label>
+                                    /><label htmlFor="50" className='label'>$50</label>
                                     </div>
                             
                             <div className="selection_group">                       
@@ -138,17 +145,17 @@ const Subscriptions = () => {
                                     // {...register("donate", { required: true })} 
                                     onChange={(e) =>setAmount(e.target.value)}
                                     // onChange={(e) => setCont(e.target.value)}
-                                    /> <label htmlFor="100">$100</label> 
+                                    /> <label htmlFor="100" className='label'>$100</label> 
                             </div>
                                     
                         </div>
-                        <div className="sel_input amount_fig">
+                        <div className="sel_input22 ">
                             <div className="figure_details">
                                 <span>$</span>
                                 <input 
                                     type="text" 
                                     value={amount}
-                                    className='fig_input'
+                                    // className='fig_input'
                                     name='amount2'
                                     // {...register("amount", { required: true })} 
                                     style={{fontSize: '1.5rem'}}

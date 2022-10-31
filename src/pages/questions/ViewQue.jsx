@@ -17,7 +17,7 @@ const ViewQue = () => {
   return (
     <div className='view_que'>
         <div className="view_que_back">
-            <button onClick={() =>navigate(-1)} className='btn_back'><HiOutlineArrowLeft/>Rudi Nyuma</button>
+            <button onClick={() =>navigate(-1)} className='btn_btn'><HiOutlineArrowLeft/></button>
         </div>
         <div className="view_que_top">
             <h1>{que?.que}</h1>

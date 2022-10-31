@@ -1,12 +1,15 @@
 import React from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { doctors, lawyers, reviews } from '../../data'
+import { reviews } from '../../data'
 import { BsChatLeftDotsFill,BsFillPersonFill, BsCalendarDay } from "react-icons/bs";
 import {GrClose, GrLike } from "react-icons/gr";
 import Reviews from '../../components/reviews/Reviews';
 import { BsStar,BsStarFill } from "react-icons/bs";
+import useData from '../../hooks/useData';
 
 const ViewLawyer = () => {
+
+    const { lawyers } = useData()
 
     const { id } = useParams()
     const lawyer = lawyers?.find(d => d.id === id)
@@ -32,9 +35,9 @@ const ViewLawyer = () => {
   return (
     <div className='view_doctor_wrapper'>
       <div className="view_doc_top">
-        <img src={process.env.PUBLIC_URL+`/${lawyer?.photo}`} />
+        <img src={lawyer?.photo} />
         <div className="view_doc_photo">
-            <img src={process.env.PUBLIC_URL+`/${lawyer?.photo}`} />
+            <img src={lawyer?.photo} />
            
         </div>
         <button className='btn btn_close2' onClick={() => navigate(-1)}><GrClose/></button>
@@ -42,15 +45,13 @@ const ViewLawyer = () => {
       <div className="view_doc_inner">
         <div className="view_doc_left">
             <h2>{lawyer?.name}</h2>
-            <span>{lawyer?.specializes[0]}</span>
-            <div className="doc_specializes">
+            <span>{lawyer?.specialize}</span>
+            {/* <div className="doc_specializes">
                 {lawyer?.specializes.map(s => (
                    <small className='doc_spec'>{s}</small> 
                 ))}
-            </div>
-            <p className='doc_profile_desc'>{lawyer?.name} is Specialized doctor in all areas related to
-            heart. He has more that 25 years experience in his professional. He has been working as 
-            professional Doctor at Muhimibli Hospital for so many years</p>
+            </div> */}
+            <p className='doc_profile_desc'>{lawyer?.desc}</p>
             
         </div>
         <div className="doc_body">
@@ -108,8 +109,12 @@ const ViewLawyer = () => {
         <div className="doc_right">
             <button className='btn_sign'>Weka Miadi</button>
             <div className="hosp_name">
-              <h4>Company</h4>
-              <h2>{lawyer?.hospital}</h2>
+              <h4>Office</h4>
+              <h2>{lawyer?.office}</h2>
+            </div>
+            <div className="hosp_name">
+              <h4>Mahakama Ninayopatikana</h4>
+              <h2>{lawyer?.court}</h2>
             </div>
             <div className="doc_rating">
               <span>Unaweza kumpa kiwango kipi mawasiliano na ushauri wa Daktari huyu?. Ushiriki wako ni muhimu ili kuwasaidia wengine</span>

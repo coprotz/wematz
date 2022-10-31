@@ -143,4 +143,9 @@
         flex-direction: column;
         gap: 15px;
     }
+
+    .opp_reviews h2{
+        font-size: 2rem;
+    }
+    
 }
