@@ -44,6 +44,7 @@ import ViewPost from './pages/posts/ViewPost';
 import RegDoctors from './pages/opportunities/RegDoctors';
 import RegLawyers from './pages/opportunities/RegLawyers';
 import AllOppo from './pages/opportunities/AllOppo';
+import Activities from './pages/activities/Activities';
 
 
 function App() {
@@ -66,6 +67,7 @@ function App() {
             <Route path=':id' element={<ViewPost/>}></Route>
             <Route path='madas' element={<Madas/>}></Route>
             <Route path='meetings' element={<Meetings/>}></Route>
+            <Route path='activities' element={<Activities/>}></Route>
             <Route path='recipies' element={<AllRecipies/>}>
               <Route index element={<Recipies/>}/>
               <Route path='recipies' element={<Recipies/>}/>

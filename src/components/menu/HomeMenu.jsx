@@ -37,7 +37,7 @@ const HomeMenu = ({active, setActive}) => {
             <span>Ukumbi wa Nikah</span>
         </NavLink>
         {isMarry &&
-        <NavLink to='/activites' className="menu_item" onClick={() =>setActive(!active)}>
+        <NavLink to='/activities' className="menu_item" onClick={() =>setActive(!active)}>
             <FiActivity/>
             <span>Matukio</span>
         </NavLink>}
