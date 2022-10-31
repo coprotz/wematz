@@ -81,9 +81,12 @@ const NewChat = ({id, name, myid}) => {
     
 
   return (
-    <div className='new_chat_app' onMouseEnter={() =>setAction(true)} onMouseLeave={() =>setAction(null)}>
+    <div className='new_chat_app' 
+      // onMouseEnter={() =>setAction(true)} 
+      // onMouseLeave={() =>setAction(null)}
+      >
     <button className='btn_btn' onClick={() =>setOpen(id)}><BsChatLeftDotsFill/></button>
-    {action && <span className='div_span'>Messeji</span>}
+    {/* {action && <span className='div_span'>Messeji</span>} */}
     {open &&
     <div className="pop_new_msg">        
       <div className="pop_new_chat">
