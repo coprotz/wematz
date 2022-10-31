@@ -11,32 +11,20 @@ const ChatCard = ({chat}) => {
 
     const { user } = useAuth();
     const { messages, marriages, doctors, lawyers } = useData()
-
-    // const activeChat = chats?.find(c =>c.id === id)
-
-    // const marry = marriages?.find(p=>p.userId === user.uid)
-
-    // const cuUser = users?.find(u => u.id === user.uid)
-    // const marry = marriages?.find(a => a.userId === user.uid)
-
-    // const userChats = chat?.members?.find(m =>m !== cuUser?.id)
-    // const marryChats = chat?.members?.find(m =>m !== marry?.id)
-
-    // const allChats = userChats.concat(marryChats)
-
-    // console.log('activeChat', activeChat)
-
- 
-    // const memberId =  marry? chat?.members?.find(m =>m !== marry?.id) : null
+    
 
     const cuMsgs = messages && messages.filter(m => m.room === chat.id)
     const lastMsg = messages && messages.findLast((m) => m.room === chat.id)
 
     const memberId = chat.members?.find(m => m !== user.uid)
 
-    console.log('memberId', memberId)
+    console.log('chat', chat)
 
-    const member = doctors?.find(a => a.userId === memberId) || marriages?.find(a => a.userId === memberId) || lawyers?.find(a => a.userId === memberId) 
+    const member = 
+      doctors?.find(a => a.userId === memberId) || 
+      marriages?.find(a => a.userId === memberId) || 
+      lawyers?.find(a => a.userId === memberId) || 
+      users?.find(a =>a.id === memberId) 
     
     
     // console.log('member', member)
@@ -80,7 +68,7 @@ const ChatCard = ({chat}) => {
         )
       }else {
         return (
-          null
+          <img src={member?.photo} />
         )
       }
     }

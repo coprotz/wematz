@@ -18,6 +18,9 @@ const SendMessage = ({chat}) => {
   const [loading, setLoding] = useState(null)
   const [attached, setAttached] = useState(null)
 
+  const doctor = doctors?.find(a =>a.userId === user.uid)
+  const lawyer = lawyers?.find(l =>l.userId === user.uid)
+
   const messageRef = collection(db, 'messages')
   const [error, setError] = useState('')
 
@@ -27,15 +30,17 @@ const SendMessage = ({chat}) => {
 
   const doc = doctors?.find(d => d.userId === memberId)
   const law = lawyers?.find(d => d.userId === memberId)
+  const marry = marriages?.find(d => d.userId === memberId)
 
   const isDoc = doc?.userId === memberId
   const isLaw = law?.userId === memberId
+  const isMarry = marry?.userId === memberId
 
   console.log('isDoc', isDoc)
   console.log('isLaw', isLaw)
 
   const cuUser = users?.find(u => u.id === user.uid)
-  const marry = marriages?.find(p=>p.userId === user.uid)
+  // const marry = marriages?.find(p=>p.userId === user.uid)
 
   const Name = () => {
     if(isDoc){
@@ -56,8 +61,8 @@ const SendMessage = ({chat}) => {
     setLoding(true)
     const data = {
             uid,
-            name: isDoc? cuUser?.fname+" "+cuUser?.fname : isLaw? cuUser?.fname+" "+cuUser?.fname: marry.username, 
-            photo: isDoc? cuUser?.photo : isLaw? cuUser?.photo : marry.photo,       
+            name: isDoc? cuUser?.fname+" "+cuUser?.fname : isLaw? cuUser?.fname+" "+cuUser?.fname: isMarry? marry.username : doctor?.name || lawyer?.name,
+            photo: isDoc? cuUser?.photo : isLaw? cuUser?.photo :isMarry? marry.photo : doctor?.photo || lawyer?.photo,       
             createdAt: serverTimestamp(),
             text: message,
             room: chat.id,

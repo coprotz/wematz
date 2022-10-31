@@ -17,21 +17,20 @@ const ViewChat = () => {
     const { user } = useAuth()
     const { users, chats, messages, doctors, marriages, lawyers } = useData()
 
-    // const cuUser = users?.find(u => u.id === user.uid)
-    // const marry = marriages?.find(p=>p.userId === user.uid)
     const [viewAction, setViewAction] = useState(null)
 
     const chat = chats?.find(c => c.id === id)
-    
-    // const memberId = chat?.members?.find(m => m?.memberId)?.memberId
-    // cuUser? chat?.members?.find(m =>m !== cuUser?.id) :
-    // marry? chat?.members?.find(m =>m !== marry?.id) : null
+
 
     const memberId = chat?.members?.find(m => m !== user.uid)
 
-    const member = doctors?.find(a => a.userId === memberId) || marriages?.find(a => a.userId === memberId) || lawyers?.find(a => a.userId === memberId) 
+    const member = 
+      doctors?.find(a => a.userId === memberId) || 
+      marriages?.find(a => a.userId === memberId) || 
+      lawyers?.find(a => a.userId === memberId) || 
+      users?.find(a =>a.id === memberId)
 
-               
+      console.log('member', member)        
     
 
     const Name = () => {
@@ -70,7 +69,7 @@ const ViewChat = () => {
           )
         }else {
           return (
-            null
+            <img src={member?.photo} />
           )
         }
       }
