@@ -13,7 +13,7 @@ import { useState } from 'react'
 const ChatLists = () => {
 
     const { user } = useAuth()
-    const {  chats } = useData()
+    const {  chats, marriages, doctors, lawyers } = useData()
 
     // const cuUser = users?.find(u => u.id === user.uid)
     // const marry = marriages?.find(p=>p.userId === user.uid)
@@ -24,8 +24,12 @@ const ChatLists = () => {
     // const docChats = chats?.filter(c =>c.members.find(m =>m.myId === doc?.id))
 
     // const mychats = chats?.filter(c =>c.members.find(m =>m.myId === user?.uid))
+
+    const myId = user.uid || doctors?.find(d => d.userId === user.uid)?.id || 
+    marriages?.find(m =>m.userId === user.uid)?.id ||
+    lawyers?.find(l => l.userId === user.uid)?.id
     
-    const mychats = chats && chats.filter(c => c.members.includes(`${user.uid}`))
+    const mychats = chats && chats.filter(c => c.members.includes(`${myId}`))
     
 
     // const allchats = userChats.concat(marryChats)

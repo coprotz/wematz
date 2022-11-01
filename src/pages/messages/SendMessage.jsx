@@ -24,17 +24,34 @@ const SendMessage = ({chat}) => {
   const messageRef = collection(db, 'messages')
   const [error, setError] = useState('')
 
+  const myId = 
+    user.uid || 
+    doctors?.find(d => d.userId === user.uid)?.id || 
+    marriages?.find(m =>m.userId === user.uid)?.id ||
+    lawyers?.find(l => l.userId === user.uid)?.id
+
+
+  const myDoc = doctors?.find(d => d.userId === user.uid)
+  const myMarry = marriages?.find(m =>m.userId === user.uid)
+  const myLaw = lawyers?.find(m =>m.userId === user.uid)
+
+
   console.log('chat', chat)
 
-  const memberId = chat?.members?.find(m => m !== user.uid)
+  const memberId = chat?.members?.find(m => m !== myId)
 
-  const doc = doctors?.find(d => d.userId === memberId)
-  const law = lawyers?.find(d => d.userId === memberId)
-  const marry = marriages?.find(d => d.userId === memberId)
+  // const doc = doctors?.find(d => d.id === memberId)
+  // const law = lawyers?.find(d => d.id === memberId)
+  // const marry = marriages?.find(d => d.id === memberId)
 
-  const isDoc = doc?.userId === memberId
-  const isLaw = law?.userId === memberId
-  const isMarry = marry?.userId === memberId
+  // const isDoc = doc?.id === memberId
+  // const isLaw = law?.id === memberId
+  // const isMarry = marry?.id === memberId
+
+    // const isUser = users?.find(u => u.id === memberId)
+    const isMarry = marriages?.find(m => m.id === memberId)
+    const isDoc = doctors?.find(d => d.id === memberId)
+    const isLaw = lawyers?.find(l => l.id === memberId)
 
   console.log('isDoc', isDoc)
   console.log('isLaw', isLaw)
@@ -42,27 +59,27 @@ const SendMessage = ({chat}) => {
   const cuUser = users?.find(u => u.id === user.uid)
   // const marry = marriages?.find(p=>p.userId === user.uid)
 
-  const Name = () => {
-    if(isDoc){
-      return (
-        <>{cuUser?.fname+" "+cuUser?.fname}</>
-      )
-    }else if(isLaw){
-      return (
-        <>{cuUser?.fname+" "+cuUser?.fname}</>
-      )
-    }else{
-      <>{marry.username}</>
-    }
-  }
+  // const Name = () => {
+  //   if(isMarry){
+  //     return (
+  //       <>{myMarry?.name}</>
+  //     )
+  //   }else if(isLaw){
+  //     return (
+  //       <>{cuUser?.fname+" "+cuUser?.fname}</>
+  //     )
+  //   }else{
+  //     <>{marry.username}</>
+  //   }
+  // }
 
   const handleSubmit = async(e) => {
     e.preventDefault()
     setLoding(true)
     const data = {
             uid,
-            name: isDoc? cuUser?.fname+" "+cuUser?.fname : isLaw? cuUser?.fname+" "+cuUser?.fname: isMarry? marry.username : doctor?.name || lawyer?.name,
-            photo: isDoc? cuUser?.photo : isLaw? cuUser?.photo :isMarry? marry.photo : doctor?.photo || lawyer?.photo,       
+            name: isDoc? cuUser?.fname+" "+cuUser?.fname : isLaw? cuUser?.fname+" "+cuUser?.fname: isMarry? myMarry.username : myDoc?.name || myLaw?.name,
+            photo: isDoc? cuUser?.photo : isLaw? cuUser?.photo :isMarry? myMarry.photo : myDoc?.photo || myLaw?.photo,       
             createdAt: serverTimestamp(),
             text: message,
             room: chat.id,

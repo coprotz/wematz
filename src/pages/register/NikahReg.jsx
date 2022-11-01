@@ -162,7 +162,7 @@ const NikahReg = () => {
                                         <span>Weka Picha</span>
                                         <span className='attached_photo'><BsCamera/></span>
                                     </div>
-                                    <span className='attached_photo'><BsCamera/></span>
+                                   
                                 </label>
                             }
                         </div>                  
@@ -883,7 +883,7 @@ const NikahReg = () => {
                         <button 
                             className='btn_reg' 
                             onClick={handleNikah}
-                            disabled={!isValid || !url}
+                            disabled={!isValid && !url}
                             >{loading? 'Inatuma': 'TUMA USAJIRI'}
                             </button>
                     </div>

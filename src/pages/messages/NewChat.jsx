@@ -11,54 +11,42 @@ import { BsChatLeftDotsFill } from 'react-icons/bs'
 
 const NewChat = ({item}) => {
     const { user } = useAuth()
-    const { users, doctors, marriages, chats } = useData()
+    const { users, doctors, marriages, chats, lawyers } = useData()
 
-    const cuUser = users && users.find(a => a.id === user.uid)
-    const marry = marriages?.find(a => a.userId === user.uid)
-    const doctor = doctors?.find(a => a.userId === user.uid)
+    const isUser = users?.find(u => u.id === item?.id)
+    const isMarry = marriages?.find(m => m.id === item?.id)
+    const isDoc = doctors?.find(d => d.id === item?.id)
+    const isLaw = lawyers?.find(l => l.id === item?.id)
+
+    const myMarryId = marriages?.find(m => m.userId === user.uid)?.id
+    const myLawId = lawyers?.find(l => l.userId === user.uid)?.id
+    const myDocId = doctors?.find(d => d.userId === user.uid)?.id 
+
+    // const cuUser = users && users.find(a => a.id === user.uid)
+    // const marry = marriages?.find(a => a.userId === user.uid)
+    // const doctor = doctors?.find(a => a.userId === user.uid)
 
     // const { id, name, photo, userId, username } = item
 
     const chatsRef = collection(db, 'chats')
-    const [action, setAction] = useState(null)
+    // const [action, setAction] = useState(null)
     const [open, setOpen] = useState(null)
     const [sending, setSending] = useState(null)
+
+    const myId = user.uid || 
+      doctors?.find(d => d.userId === user.uid)?.id || 
+      marriages?.find(m =>m.userId === user.uid)?.id ||
+      lawyers?.find(l => l.userId === user.uid)?.id
+
+    const myid = isMarry? myMarryId : isUser? myLawId || myDocId : user.uid
+
     const navigate = useNavigate();
-
-    // const userChats = chats && chats.filter(c => c.members.includes(`${cuUser?.id}`))
-    // const marryChats = chats && chats.filter(c => c.members.includes(`${marry?.id}`))
-    // const doctorChats = chats && chats.filter(c => c.members.includes(`${doctor?.id}`))
-
-    // const userChats = chats?.filter(c =>c.members.find(m =>m.myId === cuUser?.id))
-    // const marryChats = chats?.filter(c =>c.members.find(m =>m.myId === marry?.id))
-    // const doctorChats = chats?.filter(c =>c.members.find(m =>m.myId === doctor?.id))
-
-    // const allchats = userChats.concat(marryChats)
 
     console.log('item', item)
 
-    const mychats = chats?.filter(c =>c.members.includes(`${user.uid}`))
+      const mychats = chats?.filter(c =>c.members.includes(`${myId}`))   
 
-    // const memberId = item?.userId
-  
-
-    // const oldChats = 
-    //   cuUser? userChats :
-    //   marry? marryChats :
-    //   doctor? doctorChats : null
-
-      // const memberId = marriages?.find(m => m.userId === id)?.userId
-
-      const oldChat = mychats?.find(c => c.members.find(m =>m === item?.userId))
-
-      
-
-      // console.log('memberId',memberId)
-
-      // const myId =  
-      // cuUser? cuUser.id :
-      // marry ?  marry?.id :
-      // doctor ? doctor?.id: null
+      const oldChat = mychats?.find(c => c.members.find(m =>m === item?.id))
 
       const handleNew = async(e) => {
 
@@ -73,8 +61,8 @@ const NewChat = ({item}) => {
           }
           else{
             const data = {
-              members : [`${ user.uid}`, `${item?.userId}`],
-              chatId: item?.id
+              members : [`${ myid}`, `${item?.id}`]
+             
             }
         
             const chat = await addDoc(chatsRef, data)

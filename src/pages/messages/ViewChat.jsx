@@ -21,49 +21,56 @@ const ViewChat = () => {
 
     const chat = chats?.find(c => c.id === id)
 
+    const myId = user.uid || doctors?.find(d => d.userid === user.uid).id || 
+      marriages?.find(m =>m.userId === user.uid) ||
+      lawyers?.find(l => l.userId === user.uid)
+
+      console.log('myid', myId)
+
+
 
     const memberId = chat?.members?.find(m => m !== user.uid)
 
     const member = 
-      doctors?.find(a => a.userId === memberId) || 
-      marriages?.find(a => a.userId === memberId) || 
-      lawyers?.find(a => a.userId === memberId) || 
-      users?.find(a =>a.id === memberId)
+    doctors?.find(a => a.id === memberId) || 
+    marriages?.find(a => a.id === memberId) || 
+    lawyers?.find(a => a.id === memberId) || 
+    users?.find(a =>a.id === memberId) 
 
       console.log('member', member)        
     
 
-    const Name = () => {
-      if(marriages?.find(a => a.userId === memberId) && marriages?.find(a => a.id === chat?.chatId)){
-        return (
-          <>{member?.username }</>
-        )
-      }else if(doctors?.find(a => a.userId === memberId) && doctors?.find(a => a.id === chat?.chatId)){
-        return (
-          <>{member?.name}</>
-        )
-      }else if(lawyers?.find(a => a.userId === memberId) && lawyers?.find(a => a.id === chat?.chatId)){
-        return (
-          <>{member?.name}</>
-        )
-      }else {
-        return (
-          <>{member?.fname+" "+member?.lname}</>
-        )
+      const Name = () => {
+        if(marriages?.find(a => a.id === memberId)){
+          return (
+            <>{member?.username }</>
+          )
+        }else if(doctors?.find(a => a.id === memberId)){
+          return (
+            <>{member?.name}</>
+          )
+        }else if(lawyers?.find(a => a.id === memberId)){
+          return (
+            <>{member?.name}</>
+          )
+        }else {
+          return (
+            <>{member?.fname+" "+member?.lname}</>
+          )
+        }
       }
-    }
-
+  
       const Photo = () => {
-        if(marriages?.find(a => a.userId === memberId) && marriages?.find(a => a.id === chat?.chatId)){
+        if(marriages?.find(a => a.id === memberId)){
           return (
             // <>{member?.photo }</>
             <img src={member?.photo} />
           )
-        }else if(doctors?.find(a => a.userId === memberId) && doctors?.find(a => a.id === chat?.chatId)){
+        }else if(doctors?.find(a => a.id === memberId)){
           return (
             <img src={member?.photo} />
           )
-        }else if(lawyers?.find(a => a.userId === memberId) && lawyers?.find(a => a.id === chat?.chatId)){
+        }else if(lawyers?.find(a => a.id === memberId)){
           return (
             <img src={member?.photo} />
           )
