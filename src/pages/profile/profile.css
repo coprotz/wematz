@@ -93,6 +93,7 @@
     border: 1px solid var(--sec);
     padding: 40px;
     background-color: white;
+    width: 70%;
     border-radius: 5px;
 }
 

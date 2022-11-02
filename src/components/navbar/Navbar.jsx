@@ -35,13 +35,13 @@ const Navbar = ({active, setActive}) => {
         <div className="home_profile">          
             <div className="profile">             
                 <div className="notify">
-                    <button className='btn'><BsBell /></button>                    
+                    <button className='btn_btn'><BsBell /></button>                    
                 </div>               
                 <div className="profile_img">
                     <img src={cuUser?.photo} />
                 </div>
                 <div className="user_action" onMouseEnter={() =>setShow(true)} onMouseLeave={() =>setShow(false)}>
-                    <button className='btn' ><BsThreeDotsVertical/></button>
+                    <button className='btn_btn' ><BsThreeDotsVertical/></button>
                     {show &&
                     <div className="user_menu">
                         <span onClick={() => {navigate('/');setShow(null)}}>Nyumbani</span>
