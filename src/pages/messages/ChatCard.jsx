@@ -1,6 +1,6 @@
 import React from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { chats, users } from '../../data'
+// import { chats, users } from '../../data'
 import { useAuth } from '../../hooks/useAuth'
 import useData from '../../hooks/useData'
 import moment from 'moment'
@@ -10,26 +10,58 @@ const ChatCard = ({chat}) => {
     const { id } = useParams()
 
     const { user } = useAuth();
-    const { messages, marriages, doctors, lawyers } = useData()
+    const { messages, marriages, doctors, lawyers, users } = useData()
+
+    const cuUser = users?.find(u => u.id === user.uid)
+    const marry = marriages?.find(p=>p.userId === user.uid)
+    const doc = doctors?.find(p=>p.userId === user.uid)
+    const law = lawyers?.find(p=>p.userId === user.uid)
+
+    // const userChat = chat.members.find(m =>m !== cuUser?.id)
+    // const marryChat = chat.members.find(m =>m !== marry?.id)
+    // const docChat = chat.members.find(m =>m !== doc?.id)
+
+    const memberId = 
+      chat?.members.find(m =>m !== cuUser?.id) ||
+      chat?.members.find(m =>m !== marry?.id) ||
+      chat?.members.find(m =>m !== law?.id) ||
+      chat?.members.find(m =>m !== doc?.id)
+
+    const isMarry = marriages?.find(m => m.id === memberId)
+    const isDoc = doctors?.find(d => d.id === memberId)
+    const isLaw = lawyers?.find(l => l.id === memberId)
+    const isUser = users?.find(a =>a.id === memberId) 
     
 
     const cuMsgs = messages && messages.filter(m => m.room === chat.id)
     const lastMsg = messages && messages.findLast((m) => m.room === chat.id)
 
-    const myId = user.uid || doctors?.find(d => d.userId === user.uid)?.id || 
-    marriages?.find(m =>m.userId === user.uid)?.id ||
-    lawyers?.find(l => l.userId === user.uid)?.id
+    // console.log('userchat',userChat)
+    // console.log('marryChat',marryChat)
+    // console.log('docChat',docChat)
+
+    // const myId = 
+    //   user.uid || 
+    //   doctors?.find(d => d.userId === user.uid)?.id || 
+    //   marriages?.find(m =>m.userId === user.uid)?.id ||
+    //   lawyers?.find(l => l.userId === user.uid)?.id
 
 
-    const memberId = chat.members?.find(m => m !== myId)
+   
 
-    console.log('memberId', memberId)
+    // console.log('chat', chat)
 
-    const member = 
-      doctors?.find(a => a.id === memberId) || 
-      marriages?.find(a => a.id === memberId) || 
-      lawyers?.find(a => a.id === memberId) || 
-      users?.find(a =>a.id === memberId) 
+    // const member = 
+    //   doctors?.find(a => a.id === memberId) || 
+    //   marriages?.find(a => a.id === memberId) || 
+    //   lawyers?.find(a => a.id === memberId) || 
+    //   users?.find(a =>a.id === memberId) 
+
+    // console.log('isDoc', isDoc)
+    // console.log('isLaw', isLaw)
+    // console.log('isMarry', isMarry)
+
+    console.log('chat', chat)
     
     
     // console.log('member', member)
@@ -38,46 +70,46 @@ const ChatCard = ({chat}) => {
     
 
     const Name = () => {
-      if(marriages?.find(a => a.id === memberId)){
+      if(isMarry){
         return (
-          <>{member?.username }</>
+          <>{isMarry?.username }</>
         )
-      }else if(doctors?.find(a => a.id === memberId)){
+      }else if(isDoc){
         return (
-          <>{member?.name}</>
+          <>{isDoc?.name}</>
         )
-      }else if(lawyers?.find(a => a.id === memberId)){
+      }else if(isLaw){
         return (
-          <>{member?.name}</>
+          <>{isLaw?.name}</>
         )
       }else {
         return (
-          <>{member?.fname+" "+member?.lname}</>
+          <>{isUser?.fname+" "+isUser?.lname}</>
         )
       }
     }
+
 
     const Photo = () => {
-      if(marriages?.find(a => a.id === memberId)){
+      if(isMarry){
         return (
           // <>{member?.photo }</>
-          <img src={member?.photo} />
+          <img src={isMarry?.photo} />
         )
-      }else if(doctors?.find(a => a.id === memberId)){
+      }else if(isDoc){
         return (
-          <img src={member?.photo} />
+          <img src={isDoc?.photo} />
         )
-      }else if(lawyers?.find(a => a.id === memberId)){
+      }else if(isLaw){
         return (
-          <img src={member?.photo} />
+          <img src={isLaw?.photo} />
         )
       }else {
         return (
-          <img src={member?.photo} />
+          <img src={isUser?.photo} />
         )
       }
     }
-
   
     const navigate = useNavigate()
 

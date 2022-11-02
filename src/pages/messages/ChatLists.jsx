@@ -13,23 +13,29 @@ import { useState } from 'react'
 const ChatLists = () => {
 
     const { user } = useAuth()
-    const {  chats, marriages, doctors, lawyers } = useData()
+    const {  chats, marriages, doctors, lawyers, users } = useData()
 
-    // const cuUser = users?.find(u => u.id === user.uid)
-    // const marry = marriages?.find(p=>p.userId === user.uid)
-    // const doc = doctors?.find(p=>p.userId === user.uid)
+    const cuUser = users?.find(u => u.id === user.uid)
+    const marry = marriages?.find(p=>p.userId === user.uid)
+    const doc = doctors?.find(p=>p.userId === user.uid)
 
-    // const userChats = chats?.filter(c =>c.members.find(m =>m.myId === cuUser?.id))
-    // const marryChats = chats?.filter(c =>c.members.find(m =>m.myId === marry?.id))
-    // const docChats = chats?.filter(c =>c.members.find(m =>m.myId === doc?.id))
+    const userChats = chats?.filter(c =>c.members.includes(`${cuUser?.id}`))
+    const marryChats = chats?.filter(c =>c.members.includes(`${marry?.id}`))
+    const docChats = chats?.filter(c =>c.members.includes(`${doc?.id}`))
+
+    const allChats = userChats.concat(marryChats)
+
+    const mychats = allChats.concat(docChats)
 
     // const mychats = chats?.filter(c =>c.members.find(m =>m.myId === user?.uid))
 
-    const myId = user.uid || doctors?.find(d => d.userId === user.uid)?.id || 
-    marriages?.find(m =>m.userId === user.uid)?.id ||
-    lawyers?.find(l => l.userId === user.uid)?.id
+    // const myId = 
+    //   user.uid || 
+    //   doctors?.find(d => d.userId === user.uid)?.id || 
+    //   marriages?.find(m =>m.userId === user.uid)?.id ||
+    //   lawyers?.find(l => l.userId === user.uid)?.id
     
-    const mychats = chats && chats.filter(c => c.members.includes(`${myId}`))
+    // const mychats = chats && chats.filter(c => c.members.includes(`${myId}`))
     
 
     // const allchats = userChats.concat(marryChats)

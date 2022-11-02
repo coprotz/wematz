@@ -111,7 +111,7 @@ const Register = () => {
                                 />
                             <label htmlFor="1">Barua Pepe na Neno la Siri</label>
                         </div>
-                        <div className="sel_item">
+                        {/* <div className="sel_item">
                             <input 
                                 type="radio" 
                                 id='2' 
@@ -121,8 +121,8 @@ const Register = () => {
                                 {...register("signup", { required: true })}
                                 />
                             <label htmlFor="2">Google</label>
-                        </div>
-                        <div className="sel_item">
+                        </div> */}
+                        {/* <div className="sel_item">
                             <input 
                                 type="radio" 
                                 id='3' 
@@ -132,7 +132,7 @@ const Register = () => {
                                 {...register("signup", { required: true })}
                                 />
                             <label htmlFor="3">Facebook</label>
-                        </div>
+                        </div> */}
                      
                     </div>
                     

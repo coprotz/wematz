@@ -55,6 +55,7 @@ const SendMessage = ({chat}) => {
 
   console.log('isDoc', isDoc)
   console.log('isLaw', isLaw)
+  console.log('isMarry', isMarry)
 
   const cuUser = users?.find(u => u.id === user.uid)
   // const marry = marriages?.find(p=>p.userId === user.uid)

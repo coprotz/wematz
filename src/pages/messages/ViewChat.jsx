@@ -19,69 +19,90 @@ const ViewChat = () => {
 
     const [viewAction, setViewAction] = useState(null)
 
+    const cuUser = users?.find(u => u.id === user.uid)
+    const marry = marriages?.find(p=>p.userId === user.uid)
+    const doc = doctors?.find(p=>p.userId === user.uid)
+    const law = lawyers?.find(p=>p.userId === user.uid)
+
     const chat = chats?.find(c => c.id === id)
 
-    const myId = user.uid || doctors?.find(d => d.userid === user.uid).id || 
-      marriages?.find(m =>m.userId === user.uid) ||
-      lawyers?.find(l => l.userId === user.uid)
+    // const userChat = chat?.members.find(m =>m !== cuUser?.id)
+    // const marryChat = chat?.members.find(m =>m !== marry?.id)
+    // const docChat = chat?.members.find(m =>m !== doc?.id)
+    // const lawChat = chat?.members.find(m =>m !== law?.id)
 
-      console.log('myid', myId)
+    // const myId = 
+    //   user.uid || 
+    //   doctors?.find(d => d.userid === user.uid).id || 
+    //   marriages?.find(m =>m.userId === user.uid) ||
+    //   lawyers?.find(l => l.userId === user.uid)
 
+    const memberId = 
+      chat?.members.find(m =>m !== cuUser?.id) ||
+      chat?.members.find(m =>m !== marry?.id) ||
+      chat?.members.find(m =>m !== law?.id) ||
+      chat?.members.find(m =>m !== doc?.id)
 
+      const isMarry = marriages?.find(m => m.id === memberId)
+      const isDoc = doctors?.find(d => d.id === memberId)
+      const isLaw = lawyers?.find(l => l.id === memberId)
+      const isUser = users?.find(a =>a.id === memberId) 
 
-    const memberId = chat?.members?.find(m => m !== user.uid)
+     
 
-    const member = 
-    doctors?.find(a => a.id === memberId) || 
-    marriages?.find(a => a.id === memberId) || 
-    lawyers?.find(a => a.id === memberId) || 
-    users?.find(a =>a.id === memberId) 
+      // console.log('myId', myId) 
 
-      console.log('member', member)        
+    // console.log('memberId', memberId)   
+    // console.log('userchat',userChat)
+    // console.log('marryChat',marryChat)
+    // console.log('docChat',docChat)
+    // console.log('chat', chat)
+    // console.log('member', member)      
     
 
       const Name = () => {
-        if(marriages?.find(a => a.id === memberId)){
+        if(isMarry){
           return (
-            <>{member?.username }</>
+            <>{isMarry?.username }</>
           )
-        }else if(doctors?.find(a => a.id === memberId)){
+        }else if(isDoc){
           return (
-            <>{member?.name}</>
+            <>{isDoc?.name}</>
           )
-        }else if(lawyers?.find(a => a.id === memberId)){
+        }else if(isLaw){
           return (
-            <>{member?.name}</>
+            <>{isLaw?.name}</>
           )
         }else {
           return (
-            <>{member?.fname+" "+member?.lname}</>
+            <>{isUser?.fname+" "+isUser?.lname}</>
           )
         }
       }
   
       const Photo = () => {
-        if(marriages?.find(a => a.id === memberId)){
+        if(isMarry){
           return (
             // <>{member?.photo }</>
-            <img src={member?.photo} />
+            <img src={isMarry?.photo} />
           )
-        }else if(doctors?.find(a => a.id === memberId)){
+        }else if(isDoc){
           return (
-            <img src={member?.photo} />
+            <img src={isDoc?.photo} />
           )
-        }else if(lawyers?.find(a => a.id === memberId)){
+        }else if(isLaw){
           return (
-            <img src={member?.photo} />
+            <img src={isLaw?.photo} />
           )
         }else {
           return (
-            <img src={member?.photo} />
+            <img src={isUser?.photo} />
           )
         }
       }
 
-      console.log('memberId', memberId)
+      // console.log('memberId', memberId)
+      // console.log('name', Name())
 
     const chatMessages = messages?.filter(m =>m.room === id)
     const navigate = useNavigate()
@@ -94,8 +115,7 @@ const ViewChat = () => {
       }
     })
 
-    console.log('chats', chats)
-    console.log('member', member)
+   
 
   return (   
     <div className='main_messages'>
@@ -122,7 +142,7 @@ const ViewChat = () => {
                       <button className='btn_btn' ><BsThreeDotsVertical/></button>
                       {viewAction &&
                       <div className="chat_member_action" >
-                        <span onClick={() => navigate(`/nikah/${member?.id}`)}>Angalia Wasifu Wake</span>
+                        <span onClick={() => navigate(`/nikah/${memberId}`)}>Angalia Wasifu Wake</span>
                         <span>Zuia Mawasiliano</span>
                         <span>Mripoti kwa Kudhalilisha</span>
                         
