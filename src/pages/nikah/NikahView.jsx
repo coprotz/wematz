@@ -10,6 +10,8 @@ import { db, useAuth } from '../../hooks/useAuth';
 import { doc, updateDoc } from 'firebase/firestore';
 import Alert from '../../components/alert/Alert';
 import { motion } from 'framer-motion';
+import NewChat from '../messages/NewChat';
+
 
 
 
@@ -109,7 +111,7 @@ const NikahView = () => {
                 {!isOwn &&
                 <div className="nikah_view_action">
                     <button className='btn_like'><FcLike/></button>
-                    <button className='btn_like btn_chat'><BsFillChatLeftTextFill/></button>
+                    <NewChat item={nikah}/>   
                 </div>}
             </div>
             {error && <span className='error error_profile'>{error}<button onClick={() =>setError('')} className='btn_error'>x</button></span>}                                     

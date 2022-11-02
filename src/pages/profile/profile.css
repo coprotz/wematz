@@ -66,3 +66,39 @@
     margin: 0 auto;
     /* border: 1px solid red; */
 }
+
+.my_accounts{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* border: 1px solid red; */
+    min-height: 80vh;
+}
+
+.my_acc_top{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding-left: 15px;
+    padding-top: 15px;
+    gap: 15px;
+}
+
+.acc_doc{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+    border: 1px solid var(--sec);
+    padding: 40px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.acc_doc img{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+}

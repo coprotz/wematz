@@ -45,6 +45,7 @@ import RegDoctors from './pages/opportunities/RegDoctors';
 import RegLawyers from './pages/opportunities/RegLawyers';
 import AllOppo from './pages/opportunities/AllOppo';
 import Activities from './pages/activities/Activities';
+import MyAccounts from './pages/profile/MyAccounts';
 
 
 function App() {
@@ -111,6 +112,7 @@ function App() {
           
             
             <Route path='needHelps' element={<NeedHelps/>}></Route>
+            <Route path='myAccounts' element={<MyAccounts/>}></Route>
               
             {/* <Route path='opportunites' element={<Opportunities/>}></Route> */}
             {/* <Route path='nikah/:id' element={<NikahView/>}></Route> */}

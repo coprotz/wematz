@@ -18,9 +18,9 @@ const NewChat = ({item}) => {
     const isDoc = doctors?.find(d => d.id === item?.id)
     const isLaw = lawyers?.find(l => l.id === item?.id)
 
-    const myMarryId = marriages?.find(m => m.userId === user.uid)?.id
-    const myLawId = lawyers?.find(l => l.userId === user.uid)?.id
-    const myDocId = doctors?.find(d => d.userId === user.uid)?.id 
+    const myMarryId = marriages?.find(m => m.userId === user.uid)
+    const myLawId = lawyers?.find(l => l.userId === user.uid)
+    const myDocId = doctors?.find(d => d.userId === user.uid)
 
     // const cuUser = users && users.find(a => a.id === user.uid)
     // const marry = marriages?.find(a => a.userId === user.uid)
@@ -33,18 +33,21 @@ const NewChat = ({item}) => {
     const [open, setOpen] = useState(null)
     const [sending, setSending] = useState(null)
 
-    const myId = user.uid || 
-      doctors?.find(d => d.userId === user.uid)?.id || 
-      marriages?.find(m =>m.userId === user.uid)?.id ||
-      lawyers?.find(l => l.userId === user.uid)?.id
+    // const myId = user.uid || 
+    //   doctors?.find(d => d.userId === user.uid)?.id || 
+    //   marriages?.find(m =>m.userId === user.uid)?.id ||
+    //   lawyers?.find(l => l.userId === user.uid)?.id
 
-    const myid = isMarry? myMarryId : isUser? myLawId || myDocId : user.uid
+    // const myId = isMarry? 
+
+    const myid = isMarry? myMarryId?.id : isUser? myLawId?.id || myDocId?.id : isDoc? user.uid : isLaw? user.uid : null
 
     const navigate = useNavigate();
 
-    console.log('item', item)
+    console.log('myid', myid)
+    console.log('otherId', item?.id)
 
-      const mychats = chats?.filter(c =>c.members.includes(`${myId}`))   
+      const mychats = chats?.filter(c =>c.members.includes(`${myid}`))   
 
       const oldChat = mychats?.find(c => c.members.find(m =>m === item?.id))
 

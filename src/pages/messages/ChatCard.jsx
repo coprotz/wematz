@@ -27,6 +27,8 @@ const ChatCard = ({chat}) => {
       chat?.members.find(m =>m !== law?.id) ||
       chat?.members.find(m =>m !== doc?.id)
 
+    
+
     const isMarry = marriages?.find(m => m.id === memberId)
     const isDoc = doctors?.find(d => d.id === memberId)
     const isLaw = lawyers?.find(l => l.id === memberId)
@@ -57,11 +59,12 @@ const ChatCard = ({chat}) => {
     //   lawyers?.find(a => a.id === memberId) || 
     //   users?.find(a =>a.id === memberId) 
 
-    // console.log('isDoc', isDoc)
-    // console.log('isLaw', isLaw)
-    // console.log('isMarry', isMarry)
+    console.log('isDoc', isDoc)
+    console.log('isLaw', isLaw)
+    console.log('memberId', memberId)
+    console.log('isMarry', isMarry)
 
-    console.log('chat', chat)
+    console.log('marry', marry?.id)
     
     
     // console.log('member', member)

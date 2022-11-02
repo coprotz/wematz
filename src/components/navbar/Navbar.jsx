@@ -46,9 +46,10 @@ const Navbar = ({active, setActive}) => {
                     <div className="user_menu">
                         <span onClick={() => {navigate('/');setShow(null)}}>Nyumbani</span>
                         <span onClick={() => {navigate('/profile');setShow(null)}}>Badili Picha</span> 
-                        {isMarry &&
+                        <span onClick={() => {navigate('/myAccounts');setShow(null)}}>Akaunti Zangu</span> 
+                        {/* {isMarry &&
                         <span onClick={() => {navigate(`/nikah/${marry?.id}`);setShow(null)}}>Wasifu wa Nikah</span>
-                        }
+                        } */}
                         <span onClick={() => {navigate('/subscriptions');setShow(null)}}>Unga Mkono</span>                      
                         <span onClick={() => logOut()}>ONDOKA</span>
                     </div>}

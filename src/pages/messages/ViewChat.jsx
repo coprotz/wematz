@@ -57,7 +57,11 @@ const ViewChat = () => {
     // console.log('marryChat',marryChat)
     // console.log('docChat',docChat)
     // console.log('chat', chat)
-    // console.log('member', member)      
+    // console.log('member', member)
+    
+    console.log('isDoc', isDoc)
+    console.log('isLaw', isLaw)
+    console.log('isMarry', isMarry)
     
 
       const Name = () => {

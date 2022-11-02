@@ -10,6 +10,7 @@ import useData from '../../hooks/useData';
 const Doctors = () => {
     const navigate = useNavigate()
     const { doctors } = useData()
+    
   return (
     <div className='doctors_wrappers'>
         <div className="meeting_top">            
