@@ -11,6 +11,8 @@ import { GiLovers } from "react-icons/gi";
 import { useAuth } from '../../hooks/useAuth';
 import useData from '../../hooks/useData';
 import NewChat from '../messages/NewChat';
+import { HiOutlineArrowLeft } from 'react-icons/hi';
+
 
 
 const Nikah = () => {
@@ -29,7 +31,11 @@ const Nikah = () => {
 
     <div className='nikah'>       
         <div className="health_top">
+           
             <div className="health_t_1">
+                <div className="view_que_back">
+                    <button onClick={() =>navigate(-1)} className='btn_btn'><HiOutlineArrowLeft/></button>
+                </div>
                 <h1>Ukumbi wa Nikah</h1>
                 <span className='health_p'>Unatafuta mke au mume au mchumba, kuna wanaWema humu wanatafuta wenza wao, kwa uwezo wa Allah ukumbi utakupatia unayemtafuta.
                 </span>

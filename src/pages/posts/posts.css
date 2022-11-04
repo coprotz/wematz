@@ -322,6 +322,7 @@ audio{
     display: flex;
     align-items: center;
     gap: 5px;
+    flex-direction: row-reverse;
     /* width: 100%; */
     /* border: 1px solid red; */
 }
@@ -340,7 +341,7 @@ audio{
     flex-direction: column;
     gap: 10px;
     width: 95%;
-    margin: 0 auto;
+    margin: 10px auto;
 }
 
 /* .view_post_bofy{

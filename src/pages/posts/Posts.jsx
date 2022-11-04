@@ -28,6 +28,7 @@ import ImageCard from './ImageCard';
 import ShareImage from './ShareImage';
 import moment from 'moment'
 import Search from '../../components/search/Search';
+import { useAuth } from '../../hooks/useAuth';
 
 
 const nikahs = [
@@ -50,7 +51,9 @@ const Posts = () => {
     const [video, setVideo] = useState(false)
     const [audio, setAudio] = useState(false)
     const [image, setImage] = useState(false)
-    const { posts, users, questions } = useData();
+    const { user } = useAuth()
+    const { posts, users, questions, marriages } = useData();
+    const cuUser = users?.find(u => u.id === user.uid)
 
     const RenderPost = (p) => {
         if(p.type === 'text'){
@@ -107,8 +110,8 @@ const Posts = () => {
           <div className="main_right">
             <div className="main_right_item">
                 <h3 className="card_title">
-                    Waliojiunga Punder
-                    <button className='btn_view'><BsArrowRight/></button>
+                    Waliojiunga Punde
+                    {/* <button className='btn_view'><BsArrowRight/></button> */}
                 </h3>
                                 
                 <div className="new_users">
@@ -123,10 +126,10 @@ const Posts = () => {
             <div className="main_right_item">
                 <h3 className="card_title">
                     Ukumbi wa Nikah
-                    <button className='btn_view'><BsArrowRight/></button>
+                    <button className='btn_view' onClick={() =>navigate('/nikah')}><BsArrowRight/></button>
                 </h3>                          
                 <div className="nikah_imgs">
-                    {nikahs && nikahs.map((item, index) => (
+                    {marriages && marriages.filter(m =>m.gender !== cuUser?.gender).slice(0,5).map((item, index) => (
                     <NikahCard key={index} item={item}/>
                      ))}
                 </div>       
@@ -138,7 +141,7 @@ const Posts = () => {
                 <div className="main_right_item">
                     <h3 className="card_title">
                         Mada ya Wiki
-                        <button className='btn_view'><BsArrowRight/></button>
+                        <button className='btn_view' onClick={() =>navigate('/madas')}><BsArrowRight/></button>
                     </h3>                            
                     <MadaCard/>
                             

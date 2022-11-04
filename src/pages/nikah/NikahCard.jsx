@@ -21,32 +21,28 @@ const NikahCard = ({item}) => {
   const [view, setView] = useState(null)
   return (
     <div className="nikah_photo" onMouseEnter={() => setView(item)} onMouseLeave={() => setView(null)}>
-        <img src={item.url} alt="" />
+        <img src={item.photo} alt="" />
         {view &&
         <div className="nikah_detail">
           <div className="detail_top">
             <div className="nikah_image">
-              <img src={item.url} alt="" />
+              <img src={item.photo} alt="" />
             </div>
             <div className="nikah_info">
-              <h4>{item.name} ({item.age})</h4>
+              <h4>{item.username} ({item.age})</h4>
               <div className="nikah_loc">
                 <span>{item.tribe} -</span>
-                <span> {item.live}</span>
+                <span> {item.location}</span>
               </div>
              
             </div>
           </div>
-          <div className="meetings_actions">                    
+          {/* <div className="meetings_actions">                    
               <button className='btn'><FcLike/></button>
               <button className='btn'><BsFillPersonFill/></button>
               <button className='btn'><BsChatLeftDotsFill/></button>          
-          </div>
-          {/* <div className="nikah_bottom">
-            <button>View Detail</button>
-            <button>Like</button>
-            <button>chat</button>
           </div> */}
+         
         </div>}
     </div>
   )

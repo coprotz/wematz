@@ -263,9 +263,15 @@
     display: none;
 }
 
-.view_que_back{
-    /* margin-top: 15px; */
-    /* margin-left: 15px; */
+.main_que_top{
+    display: flex;
+    align-items: center;
+    /* gap: 7px; */
+    padding-left: 10px;
+}
+
+.main_right{
+    margin-top: 10px;
 }
 
 
