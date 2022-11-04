@@ -1,3 +1,7 @@
+.loading_wrapper{
+    width: 15px;
+    height: 15px;
+}
 .loading{
     display: flex;
     justify-content: center;
@@ -20,6 +24,18 @@
     border-radius: 50%;
     animation: loading 1s linear infinite;
     
+}
+
+.loading_page{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary);
 }
 
 @keyframes loading{

@@ -10,6 +10,7 @@ import Footer from '../../components/footer/Footer';
 import useData from '../../hooks/useData';
 import { useAuth } from '../../hooks/useAuth';
 import Loading from '../../components/loading/Loading';
+import LoadingPage from '../../components/loading/LoadingPage';
 
 
 
@@ -47,7 +48,7 @@ const Home = () => {
         }else {
             return (
                 <div className="loading_wrapper">
-                    <Loading />
+                    <LoadingPage/>
                 </div>
                 
             )

@@ -7,6 +7,7 @@ import { useAuth } from '../../hooks/useAuth';
 import { useForm } from "react-hook-form";
 import './login.css'
 import Loading from '../../components/loading/Loading';
+import Error from '../../components/error/Error';
 
 
 const Login = () => {
@@ -50,6 +51,7 @@ const Login = () => {
                 <button className='btn_sign' onClick={() =>navigate('/register')}>Jisajiri</button>
             </div>
         </div>
+        
         <motion.div 
              initial={{ y:'100vw'}}
              animate={{y:0}} 
@@ -57,7 +59,9 @@ const Login = () => {
             className="register_body">
             <h1 className='register_title'>Weka Taarifa Kuingia</h1>
             <span className='res_span'></span>
-            {err && <span>{err}</span>}
+            {err && 
+            <Error err={err} setErr={setErr}/>}
+           
             <div className="register_form">
                 <div className="items_group">
                     <h3 className='item_title'>Chagua njia ya Kuingia</h3>
@@ -136,7 +140,7 @@ const Login = () => {
                         
                     </div>
                     <div className="items_group">
-                        <button className='btn_reg' onClick={handleLogin}>{loading? <Loading/> : 'INGIA'}</button>
+                        <button className='btn_reg' onClick={handleLogin}>{loading && !err? <Loading/>  : 'INGIA'}</button>
                     </div>
                     <div className="profile_photo_edit">                            
                         <button className='btn_cancel' onClick={() =>setSignup('')}>ONDOA</button>
