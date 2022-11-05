@@ -371,15 +371,15 @@ gender:'NA',
 ]
 
 export const meetings = [
-    {name: 'Rashid Omary', url: img11},
-    {name: 'Omary Hassan', url: img12},
-    {name: 'Baraka Omary', url: img13},
-    {name: 'Saidia Juma', url: img14},
-    {name: 'Omary Shamte', url: img15},
+    {name: 'Rashid', url: img11},
+    {name: 'Omary', url: img12},
+    {name: 'Baraka', url: img13},
+    {name: 'Saidia', url: img14},
+    {name: 'Omary', url: img15},
     {name: 'Azam Tv', url: img16},
-    {name: 'Mwandonga Rashid', url: img17},
-    {name: 'Peter Juma', url: img18},
-    {name: 'Aliya Ally', url: img19},
+    {name: 'Mwandonga', url: img17},
+    {name: 'Peter', url: img18},
+    {name: 'Aliya', url: img19},
     {name: 'You', url: img20},
 
 ]
@@ -1304,31 +1304,31 @@ export const users = [
     },
     {
         id:'ewewewewsdrfg',
-        name:'Monica Nasoro',
+        name:'Monica',
         photoUrl: 'users/img10.jfif',
 
     },
     {
         id:'ewewewebnn4w',
-        name:'Monica Nasoro',
+        name:'Monica',
         photoUrl: 'users/img11.jfif',
 
     },
     {
         id:'eweweweiiuow',
-        name:'Monica Nasoro',
+        name:'Monica',
         photoUrl: 'users/img12.jfif',
 
     },
     {
         id:'ewewew445ew',
-        name:'Monica Nasoro',
+        name:'Monica',
         photoUrl: 'users/img13.jfif',
 
     },
     {
         id:'ewewewewkkol',
-        name:'Monica Nasoro',
+        name:'Monica',
         photoUrl: 'users/img14.jfif',
 
     },

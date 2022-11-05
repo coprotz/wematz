@@ -37,11 +37,11 @@ const NikahCard = ({item}) => {
              
             </div>
           </div>
-          {/* <div className="meetings_actions">                    
-              <button className='btn'><FcLike/></button>
-              <button className='btn'><BsFillPersonFill/></button>
-              <button className='btn'><BsChatLeftDotsFill/></button>          
-          </div> */}
+          <div className="meetings_actions">                    
+              <button className='btn_btn'><FcLike/></button>
+              <button className='btn_btn'><BsFillPersonFill/></button>
+              <button className='btn_btn'><BsChatLeftDotsFill/></button>          
+          </div>
          
         </div>}
     </div>

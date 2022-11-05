@@ -54,14 +54,14 @@ const ViewMeeting = () => {
                                     <button className='part_audio'><BsMicMute/></button>
                                 </div> 
                                 <div className="part_action">
-                                    <span>{item.name}</span>                                    
+                                    <h4>{item.name}</h4>                                    
                                 </div>
                             </div>
                        
                         ))}
                         
                     </div> 
-                    <div className="meetings_actions">                    
+                    <div className="mtngs_actions">                    
                         <button className='btn_btn' style={{backgroundColor: "#fff"}}><BsChatLeftText/></button>                       
                         <button className='btn_btn' style={{backgroundColor: "#fff"}}><IoHandRightOutline/></button>
                         <h4 onClick={() => navigate(-1)} className='leave_btn'><FaRegHandPeace/>Jiondoe</h4>

@@ -11,7 +11,7 @@
 
 .home_wrapper{
     width: 95%;
-    height: auto;
+    /* height: auto; */
     display: flex;
     min-height: calc(100vh - 150px);
     /* border: 1px solid red; */
@@ -39,6 +39,7 @@
     flex-direction: column;
     flex: 4;
     gap: 15px;
+    height: 100%;
     margin-top: 15px;
     /* border: 1px solid rgb(133, 96, 96); */
 }
@@ -176,7 +177,7 @@
 @media screen and (max-width: 940px){
     .home_wrapper{
         width: 100%;
-        height: auto;
+        /* height: auto; */
         display: flex;
         /* flex-direction: column; */
         /* border: 1px solid red; */
