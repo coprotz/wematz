@@ -10,6 +10,7 @@ import useStorage from '../../hooks/useStorage';
 import Navbar from '../../components/navbar/Navbar';
 import Footer from '../../components/footer/Footer';
 import { useParams } from 'react-router-dom';
+import Success from '../../components/success/Success';
 
 
 const Profile = () => {
@@ -29,6 +30,7 @@ const Profile = () => {
     const [loading, setLoading] = useState(false)
     const [fname, setFname] = useState(cuUser?.fname)
     const [lname, setlname] = useState(cuUser?.lname)
+    const [message, setMessage] = useState("")
 
     const types = ['image/png', 'image/jpeg']
 
@@ -55,6 +57,7 @@ const Profile = () => {
             await updateDoc(userRef, {
                 photo: url
             })
+            setMessage('Picha yako imebadilishwa vizuri')
         } catch (error) {
             setError(error.message)
         }
@@ -68,6 +71,7 @@ const Profile = () => {
     transition={{ ease: "easeOut", duration: 0.5 }} >
     <div className="profile_wrapper"> 
         <Navbar/>
+        {message && <Success message={message}/>}
         <div className="profile_inner">            
             { file?  
                 <div className="user_photo1">
