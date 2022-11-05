@@ -341,7 +341,7 @@ audio{
     flex-direction: column;
     gap: 10px;
     width: 95%;
-    margin: 10px auto;
+    margin: 0 auto;
 }
 
 /* .view_post_bofy{
