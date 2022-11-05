@@ -13,6 +13,7 @@
     width: 95%;
     height: auto;
     display: flex;
+    min-height: calc(100vh - 150px);
     /* border: 1px solid red; */
     margin: 0 auto;
     gap: 50px;
