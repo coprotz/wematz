@@ -85,6 +85,7 @@
 .meet_part{
     color: #aaa;
     font-weight: 300;
+    text-transform: uppercase;
 }
 
 .memb_photo{
@@ -424,6 +425,10 @@
     border-top: 1px solid var(--bg);
     /* background-color: var(--bg); */
    
+}
+
+.room_name{
+    text-transform: uppercase;
 }
 
 .mtngs_actions{

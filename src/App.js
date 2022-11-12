@@ -46,6 +46,7 @@ import RegLawyers from './pages/opportunities/RegLawyers';
 import AllOppo from './pages/opportunities/AllOppo';
 import Activities from './pages/activities/Activities';
 import MyAccounts from './pages/profile/MyAccounts';
+import Members from './pages/members/Members';
 
 
 function App() {
@@ -67,6 +68,7 @@ function App() {
             <Route index element={<Posts/>}></Route>
             <Route path=':id' element={<ViewPost/>}></Route>
             <Route path='madas' element={<Madas/>}></Route>
+            <Route path='members' element={<Members/>}></Route>
             <Route path='meetings' element={<Meetings/>}></Route>
             <Route path='activities' element={<Activities/>}></Route>
             <Route path='recipies' element={<AllRecipies/>}>
@@ -133,7 +135,7 @@ function App() {
               <Profile/> 
             </RequireAuth>}>
           </Route>
-          <Route path='meetings/:1' element={<ViewMeeting/>}></Route>
+          <Route path='meetings/:id' element={<ViewMeeting/>}></Route>
           <Route path='main' element={<Main/>}></Route>
           <Route path='/subscriptions' element={<Subscriptions/>}></Route>
           <Route path='/prayerTimes' element={<Subscriptions/>}></Route>

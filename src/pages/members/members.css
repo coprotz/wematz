@@ -1,0 +1,58 @@
+.wema_grids{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 300px);
+    gap: 15px;
+    padding: 20px;
+}
+
+.wema_card{
+    display: flex;
+    gap: 5px;
+    padding: 15px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.wema_info{
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.btn_follow{
+    padding: 7px 15px;
+    background-color: var(--primary);
+    border-radius: 25px;
+    color: white;
+    font-size: 0.9rem;
+    border: none;
+    width: fit-content;
+    cursor: pointer;
+}
+
+.btn_isFollow{
+    padding: 7px 15px;
+    background-color: #ccc;
+    border-radius: 25px;
+    color: #aaa;
+    font-size: 0.9rem;
+    border: none;
+    width: fit-content;
+    cursor: pointer;
+}
+
+
+
+.btn_follow:hover{
+    background-color: darkblue;
+}
+
+@media screen and (max-width: 740px){
+    .wema_grids{
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 15px;
+        padding: 20px;
+    }
+    
+}

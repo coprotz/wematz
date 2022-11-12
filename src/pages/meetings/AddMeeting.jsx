@@ -3,10 +3,60 @@ import {  meetings } from '../../data'
 import {  BsArrowLeft } from "react-icons/bs";
 import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
+import { db, useAuth } from '../../hooks/useAuth';
+import useData from '../../hooks/useData';
+import { addDoc, collection, doc, serverTimestamp, setDoc } from 'firebase/firestore';
+import Loading from '../../components/loading/Loading';
+import { useState } from 'react';
+
 
 
 const AddMeeting = ({setAdd}) => {
     const { register,  watch, formState: { isValid } } = useForm({mode: 'all'});
+    const { user } = useAuth()
+    const { clubs } = useData()
+    const [loading, setLoading] = useState(false)
+    const [err, setErr] = useState('')
+
+    const partRef = collection(db, 'participants')
+    const roomRef = collection(db, 'rooms')
+
+    const name = watch('name')
+    const clubId = watch('club')
+    const start_date = watch('date')
+    const start_time = watch('time')
+
+    const handleClub = async(e) => {
+        e.preventDefault()
+
+        setLoading(true)
+
+        const data = {
+            name,
+            clubId,
+            start_date,
+            start_time, 
+            date: serverTimestamp()         
+        }
+        try {
+          const newRoom = await addDoc(roomRef, data)  
+          await addDoc(partRef, {
+            role: 'HOST',
+            userId: user.uid,
+            roomId: newRoom.id
+          })
+          setLoading(false)
+          setAdd(null)
+        } catch (error) {
+            setErr(error.message)
+        }
+        
+
+
+
+    }
+
+
   return (
     <motion.div 
              initial={{ x:'100vw'}}
@@ -16,82 +66,75 @@ const AddMeeting = ({setAdd}) => {
          <div className="top_meeting_wrapper">
             <div className="meeting_top">            
                 <button onClick={() => setAdd(null)} className='btn_btn'><BsArrowLeft/></button>
-                <h4>Anzisha Mdahalo</h4> 
+                <h4>Anzisha Ukumbi</h4> 
+                {err && <span>{err}</span>}
             </div>
             {/* <div className="create_new" onClick={() =>setAdd(!add)}>
                 Create a Meeting
             </div>        */}
         </div>
         <div className="items_group">
-            <h3 className='item_title'>Jina la Mdahalo</h3>
+            <h3 className='item_title'>Jina la Ukumbi</h3>
             <div className="sel_items">
                 <input 
                     type="text" 
-                    placeholder='Jina la Mdahalo'
+                    placeholder='Jina la Ukumbi'
                     className='sel_input'
-                    style={{width:'100%'}}
-                    name='title'
+                    name='name'
+                    {...register("name", { required: true })}
+                    style={{width:'100%'}}                  
                     /> 
             </div>       
-        </div>
-        {/* <div className="items_group">
-            <h3 className='item_title'>Maelezo kuhusu Mkutano</h3>                   
-            <textarea  
-                name='revert' 
-                placeholder='Maelezo kuhusu Mkutano' 
-                className='sel_textarea'
-                />                  
-        </div> */}
+        </div>      
         <div className="items_group">
             <h3 className='item_title'>Weka Washiriki</h3>
             <div className="selection_btns">
-                <div className="sel_item">
-                    <input type="radio" id='1001' value='Mnene' name='body' {...register("body", { required: true })}/>
-                    <label htmlFor="1001">WOTE</label>
-                </div>
-                <div className="sel_item">
-                    <input type="radio" id='1011' value='Mwembamba' name='body' {...register("body", { required: true })}/>
-                    <label htmlFor="1011">WAMAMA</label>
-                </div>
-                <div className="sel_item">
-                    <input type="radio" id='1012' value='Mwenye misuli' name='body' {...register("body", { required: true })}/>
-                    <label htmlFor="1012">WABABA</label>
-                </div>
-                <div className="sel_item">
-                    <input type="radio" id='101211' value='Mwenye misuli' name='body' {...register("body", { required: true })}/>
-                    <label htmlFor="101211">VIJANA</label>
-                </div>
-                        
-                        
+                {clubs.map(c => (
+                    <div className="sel_item">
+                        <input 
+                            type="radio" 
+                            id={c?.id} 
+                            value={c?.id} 
+                            name='club' 
+                            {...register("club", { required: true })}
+                            />
+                        <label htmlFor={c?.id}>{c?.name}</label>
+                    </div>
+                ))}        
             </div>
                     
         </div>
         <div className="items_group">
-            <h3 className='item_title'>Tarehe ya Mdahalo</h3>
+            <h3 className='item_title'>Tarehe ya Ukumbi</h3>
             <div className="sel_items">
                 <input 
                     type="date" 
                     placeholder='Jina la Mkutano'
                     className='sel_input'
                     name='date'
+                    {...register("date", { required: true })}
                     style={{width:'100%'}}
                     /> 
             </div>       
         </div>
         <div className="items_group">
-            <h3 className='item_title'>Muda wa Mdahalo</h3>
+            <h3 className='item_title'>Muda wa Ukumbi</h3>
             <div className="sel_items">
                 <input 
                     type="time" 
-                    placeholder='Jina la Mkutano'
+                    placeholder='Muda wa Ukumbi'
                     className='sel_input'
                     name='time'
+                    {...register("time", { required: true })}
                     style={{width:'100%'}}
                     /> 
             </div>       
         </div>
         <div className="items_group">
-            <button className='btn_reg'>ANZISHA MKUTANO</button>
+            <button 
+                className='btn_reg'
+                onClick={handleClub}
+                >{loading? <Loading/> : 'ANZISHA UKUMBI'}</button>
         </div>
     </motion.div>
   )

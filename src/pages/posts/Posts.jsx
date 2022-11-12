@@ -111,7 +111,7 @@ const Posts = () => {
             <div className="main_right_item">
                 <h3 className="card_title">
                     Waliojiunga Punde
-                    {/* <button className='btn_view'><BsArrowRight/></button> */}
+                    <button className='btn_view' onClick={() =>navigate('/members')}><BsArrowRight/></button>
                 </h3>
                                 
                 <div className="new_users">

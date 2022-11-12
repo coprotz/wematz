@@ -37,7 +37,7 @@ const Register = () => {
     const edu = watch('edu')
     const emplo = watch('emplo')
     const prayer = watch('prayer')
-    const profession = watch('profession')
+    const profes = watch('profes')
     const location = watch('location')
 
 
@@ -51,12 +51,13 @@ const Register = () => {
             email,           
             fname,
             lname,
-            photo: '/users/profile.webp',
+            photo: '',
             gender,
             email,
             emplo,
             age,
             religion,
+            profes,
             islam,
             set,
             mosque,
@@ -775,6 +776,22 @@ const Register = () => {
                         </div>              
                     </div>
                 </div>
+                <div className="items_group">
+                        <h3 className='item_title'>Taaluma yako ipi?</h3>
+                        <div className="sel_items">
+
+                            <input 
+                            type="text" 
+                            placeholder='Taaluma au ujuzi'
+                            className='sel_input'
+                            name='profes'
+                            style={{width: '100%'}}
+                            {...register("profes", { required: true })}
+                            /> 
+                        </div>
+                       
+                        
+                    </div>
                
                 {/* <div className="items_group">
                     <h3 className='item_title'>Una mpango wa kutafuta Mwenza (Nikah) humu?</h3>

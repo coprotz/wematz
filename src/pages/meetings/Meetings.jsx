@@ -6,12 +6,23 @@ import { useState } from 'react';
 import AddMeeting from './AddMeeting';
 import { meetings } from '../../data';
 import { FaRegCommentDots, FaRegUser } from 'react-icons/fa';
+import useData from '../../hooks/useData';
+import MeetingCard from './MeetingCard';
+import moment from 'moment';
 
 
 
 const Meetings = () => {
     const navigate = useNavigate()
     const [add, setAdd] = useState(null)
+    const { rooms } = useData()
+   
+
+    const today = moment(new Date()).format('YYYY-M-DD') 
+    const time = moment(new Date()).format('HH:mm') 
+
+    console.log('today', today)
+  
   return (
     <>
     {!add ?
@@ -26,79 +37,27 @@ const Meetings = () => {
             </div>       
         </div>
         <h3 className='title'>Midahalo Inayoendelea sasa hivi</h3>  
-        <div className="meetings_inner"> 
-               
-                <div className="current_meetings">
-                    <div className="current_meeting_card" onClick={() =>navigate('/meetings/1')}>
-                        <h3 className='meet_part'>WOTE</h3>
-                        <h4>JE KUNA ULAZIMA WA KUSWALI BILA UDHU?</h4>
-                        <div className="meeting_teams">
-                            <div className="team_photos">
-                                {meetings.slice(0,2).map(item => (
-                                    <div className="memb_photo">
-                                        <img src={item.url} alt="" />                                            
-                                    </div>
-                                ))}
-
-                            </div>
-                            <div className="team_names_wrapper">
-                                <div className="team_names">
-                                    <span>Kwame Mkuruma</span>
-                                    <span>Monica Seka</span>
-                                    <span>Ally Mbaya</span>
-                                </div>
-                                <div className="meeting_status">
-                                    <div className="meet_peopl">
-                                        <FaRegUser/>12
-                                    </div>
-                                    <div className="meet_peopl">
-                                        <FaRegCommentDots/>12
-                                    </div>
-                                </div>
-                            </div>
-                        </div>                    
-                        {/* <button className='btn_ask'>Jiunge</button> */}
-                    </div>
+        <div className="meetings_inner">                
+            <div className="current_meetings">
+            {rooms.filter(r =>r.start_date === today).map(room => (                    
+                <MeetingCard room={room} onClick={() =>navigate(`/meetings/${room?.id}`)}/>
+            ))}
                         
-                    <div className="current_meeting_card">
-                        <h3 className='meet_part'>WABABA</h3>
-                        <h4>KWANN TATIZO LA NGUVU ZA KIUME LIMEKUWA KUBWA?</h4>
-                        <div className="meeting_teams">
-                            <div className="team_photos">
-                                {meetings.slice(3,5).map(item => (
-                                    <div className="memb_photo">
-                                        <img src={item.url} alt="" />                                            
-                                    </div>
-                                ))}
-
-                            </div>
-                            <div className="team_names_wrapper">
-                                <div className="team_names">
-                                    <span>Kwame Mkuruma</span>
-                                    <span>Monica Seka</span>
-                                    <span>Ally Mbaya</span>
-                                </div>
-                                <div className="meeting_status">
-                                    <div className="meet_peopl">
-                                        <FaRegUser/>12
-                                    </div>
-                                    <div className="meet_peopl">
-                                        <FaRegCommentDots/>12
-                                    </div>
-                                </div>
-                            </div>
-                        </div>                    
-                        {/* <button className='btn_ask'>Jiunge</button> */}
-                    </div>
-                
-                </div>
             </div>
-            
+        </div>
+        <h3 className='title'>Midahalo Inayokuja</h3> 
+        <div className="meetings_inner">                
+            <div className="current_meetings">
+            {rooms.filter(r =>r.start_date !== today).map(room => (                    
+                <MeetingCard room={room}/>
+            ))}
+                        
+            </div>
+        </div>
 
-    
-        </div>:
+    </div>:
         <AddMeeting setAdd={setAdd}/>}
-     </>
+    </>
   )
 }
 

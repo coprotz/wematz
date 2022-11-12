@@ -23,6 +23,18 @@ const useData = () => {
     const messagesRef = collection(db, 'messages')
     const [lawyers, setLawyers] = useState([])
     const lawyersRef = collection(db, 'lawyers')
+    const [rooms, setRooms] = useState([])
+    const roomsRef = collection(db, 'rooms')
+    const [clubs, setClubs] = useState([])
+    const clubsRef = collection(db, 'clubs')
+    const [participants, setParticipants] = useState([])
+    const participantsRef = collection(db, 'participants')
+    const [topics, setTopics] = useState([])
+    const topicsRef = collection(db, 'topics')
+    const [followers, setFollowers] = useState([])
+    const followersRef = collection(db, 'followers')
+    const [likes, setLikes] = useState([])
+    const likesRef = collection(db, 'likes')
 
 
     const allUsers = query(usersRef, orderBy("createdAt")); 
@@ -34,9 +46,68 @@ const useData = () => {
     const allLawyers = query(lawyersRef, orderBy("createdAt")); 
     // const allChats = query(chatsRef, orderBy("createdAt")); 
     const allMessages = query(messagesRef, orderBy("createdAt")); 
-    // const allInvoices = query(invoicesRef, orderBy("createdAt")); 
+    const allrooms = query(roomsRef, orderBy("date")); 
 
-   
+    useEffect(() => {
+        onSnapshot(likesRef, snapshot => {
+            setLikes(snapshot.docs.map(doc => {
+                return {
+                    id: doc.id,
+                    ...doc.data()
+                }
+            }))
+        })
+    },[])
+    useEffect(() => {
+        onSnapshot(allrooms, snapshot => {
+            setRooms(snapshot.docs.map(doc => {
+                return {
+                    id: doc.id,
+                    ...doc.data()
+                }
+            }))
+        })
+    },[])
+    useEffect(() => {
+        onSnapshot(followersRef, snapshot => {
+            setFollowers(snapshot.docs.map(doc => {
+                return {
+                    id: doc.id,
+                    ...doc.data()
+                }
+            }))
+        })
+    },[])
+    useEffect(() => {
+        onSnapshot(clubsRef, snapshot => {
+            setClubs(snapshot.docs.map(doc => {
+                return {
+                    id: doc.id,
+                    ...doc.data()
+                }
+            }))
+        })
+    },[])
+    useEffect(() => {
+        onSnapshot(topicsRef, snapshot => {
+            setTopics(snapshot.docs.map(doc => {
+                return {
+                    id: doc.id,
+                    ...doc.data()
+                }
+            }))
+        })
+    },[])
+    useEffect(() => {
+        onSnapshot(participantsRef, snapshot => {
+            setParticipants(snapshot.docs.map(doc => {
+                return {
+                    id: doc.id,
+                    ...doc.data()
+                }
+            }))
+        })
+    },[])
     useEffect(() => {
         onSnapshot(allUsers, snapshot => {
             setUsers(snapshot.docs.map(doc => {
@@ -135,7 +206,7 @@ const useData = () => {
 
   
 
-    return {  users, posts, comments, marriages, questions, doctors, chats, messages, lawyers }
+    return {  users, posts, followers,likes, comments, participants, clubs, topics, marriages, questions, doctors, chats, messages, lawyers, rooms }
 }
 
 export default useData;

@@ -41,6 +41,10 @@ const HomeMenu = ({active, setActive}) => {
             <FiActivity/>
             <span>Matukio</span>
         </NavLink>}
+        <NavLink to='/members' className="menu_item" onClick={() =>setActive(!active)}>
+            <RiTeamLine/>
+            <span>WanaWema</span>
+        </NavLink>
         <NavLink to='/meetings' className="menu_item" onClick={() =>setActive(!active)}>
             <RiTeamLine/>
             <span>Ukumbi wa Midahalo</span>
