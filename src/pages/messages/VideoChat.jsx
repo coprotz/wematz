@@ -35,7 +35,7 @@ const VideoChat = ({myname, memberId, setReceivingCall, receivingCall, roomId}) 
     // const myVideo = document.createElement('video')
     const myVideo = useRef()
     const userVideo = useRef()
-    myVideo.muted = true
+    // myVideo.muted = true
 
     const connectionRef = useRef()
 
@@ -75,7 +75,7 @@ const VideoChat = ({myname, memberId, setReceivingCall, receivingCall, roomId}) 
    
 
     useEffect(() => {
-        navigator.mediaDevices.getUserMedia({ video: true, audio: false }).then((stream) => {
+        navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then((stream) => {
             setStream(stream)
             myVideo.current.srcObject = stream
         })
