@@ -59,12 +59,12 @@ const ChatCard = ({chat}) => {
     //   lawyers?.find(a => a.id === memberId) || 
     //   users?.find(a =>a.id === memberId) 
 
-    console.log('isDoc', isDoc)
-    console.log('isLaw', isLaw)
-    console.log('memberId', memberId)
-    console.log('isMarry', isMarry)
+    // console.log('isDoc', isDoc)
+    // console.log('isLaw', isLaw)
+    // console.log('memberId', memberId)
+    // console.log('isMarry', isMarry)
 
-    console.log('marry', marry?.id)
+    // console.log('marry', marry?.id)
     
     
     // console.log('member', member)
