@@ -162,7 +162,7 @@ const ViewChat = () => {
                   
                 </div>
             </div>
-            {!videoChat?
+            {videoChat?
             <div className="chat_room_bottom">
                 <div className="chat_messages" ref={scrollRef}>
                     {chatMessages?.map(m => (
