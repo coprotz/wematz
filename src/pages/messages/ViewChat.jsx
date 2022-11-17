@@ -162,7 +162,7 @@ const ViewChat = () => {
                   
                 </div>
             </div>
-            {videoChat?
+            {/* {videoChat?
             <div className="chat_room_bottom">
                 <div className="chat_messages" ref={scrollRef}>
                     {chatMessages?.map(m => (
@@ -171,8 +171,14 @@ const ViewChat = () => {
                     ))}
                 </div>
                 <SendMessage chat={chat}/>
-            </div> :
-            <VideoChat myname={myname} memberId={memberId} receivingCall={receivingCall} setReceivingCall={setReceivingCall} roomId ={id}/>}
+            </div> : */}
+            <VideoChat 
+              myname={myname} 
+              memberId={memberId} 
+              receivingCall={receivingCall} 
+              setReceivingCall={setReceivingCall} 
+              roomId ={id}/>
+            {/* } */}
           </div>
     </div>
     )
