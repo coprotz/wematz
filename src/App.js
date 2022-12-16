@@ -47,11 +47,23 @@ import AllOppo from './pages/opportunities/AllOppo';
 import Activities from './pages/activities/Activities';
 import MyAccounts from './pages/profile/MyAccounts';
 import Members from './pages/members/Members';
+import AddMeeting from './pages/meetings/AddMeeting';
+import MeetingOutline from './pages/meetings/MeetingOutline';
+import Invited from './pages/meetings/Invited';
+import MyMeetings from './pages/meetings/MyMeetings';
+import Edit from './pages/meetings/Edit';
+import NewChat from './pages/messages/NewChat';
+import Donates from './pages/donates/Donates';
+import AdminMain from './pages/admin/AdminMain';
+import Admin from './pages/admin/Admin';
+import MainMada from './pages/mada/MainMada';
+import ViewMada from './pages/mada/ViewMada';
+import ViewMember from './pages/members/ViewMember';
 
 
 function App() {
 
-  const { user }= useAuth()
+  const { user, alert, confirm }= useAuth()
 
   const RequireAuth = ({children}) => {
     return user ? (children) : <Navigate to="/main"/>
@@ -67,9 +79,20 @@ function App() {
             </RequireAuth>}>          
             <Route index element={<Posts/>}></Route>
             <Route path=':id' element={<ViewPost/>}></Route>
-            <Route path='madas' element={<Madas/>}></Route>
+            <Route path='madas' element={<MainMada/>}>
+              <Route index element={<Madas/>}/>
+              <Route path=':id' element={<ViewMada/>}/>
+            </Route>
             <Route path='members' element={<Members/>}></Route>
-            <Route path='meetings' element={<Meetings/>}></Route>
+            <Route path='members/:id' element={<ViewMember/>}></Route>
+            <Route path='meetings' element={<MeetingOutline/>}>
+              <Route index element={<Meetings/>}/>
+              <Route path='create' element={<AddMeeting/>}/>
+              <Route path='mymeetings' element={<MyMeetings/>}/>
+              <Route path='invited' element={<Invited/>}/>
+              <Route path='edit' element={<Edit/>}/>
+              <Route path='id' element={<ViewMeeting/>}/>
+            </Route>
             <Route path='activities' element={<Activities/>}></Route>
             <Route path='recipies' element={<AllRecipies/>}>
               <Route index element={<Recipies/>}/>
@@ -111,10 +134,10 @@ function App() {
               <Route path='legals' element={<Mainlegals/>}/>  
                <Route path=':id' element={<ViewLawyer/>}/>            
             </Route>
-          
-            
+            <Route path='admin' element={<Admin/>}></Route>            
             <Route path='needHelps' element={<NeedHelps/>}></Route>
             <Route path='myAccounts' element={<MyAccounts/>}></Route>
+            <Route path='mjaheed' element={<Donates/>}></Route>
               
             {/* <Route path='opportunites' element={<Opportunities/>}></Route> */}
             {/* <Route path='nikah/:id' element={<NikahView/>}></Route> */}
@@ -135,7 +158,7 @@ function App() {
               <Profile/> 
             </RequireAuth>}>
           </Route>
-          <Route path='meetings/:id' element={<ViewMeeting/>}></Route>
+          {/* <Route path='meetings/:id' element={<ViewMeeting/>}></Route> */}
           <Route path='main' element={<Main/>}></Route>
           <Route path='/subscriptions' element={<Subscriptions/>}></Route>
           <Route path='/prayerTimes' element={<Subscriptions/>}></Route>
@@ -143,6 +166,8 @@ function App() {
           <Route path='/login' element={<Login/>}></Route>
           </Routes>
       </BrowserRouter>
+      {alert && <div className='alert_container'>{alert}</div>}
+      {/* {confirm && <NewChat/>} */}
     </div>
   );
 }

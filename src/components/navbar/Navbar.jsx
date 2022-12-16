@@ -8,51 +8,80 @@ import Button from '../button/Button';
 import { useState } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 import useData from '../../hooks/useData';
+import Alerts from '../alert/Alerts';
+import CreateMada from '../../pages/mada/CreateMada';
+import logo from '../../assets/images/logo_w.png'
+
 
 const Navbar = ({active, setActive}) => {
     const navigate = useNavigate();
 
-    const { user, logOut } = useAuth()  
-    const { marriages, users } = useData() 
+    const { user, logOut, newMada, setNewMada } = useAuth()  
+    const { users,doctors, lawyers, notifics, marriages } = useData() 
 
     const cuUser = users?.find(u => u.id === user.uid)
     const marry = marriages?.find(m => m.userId === user.uid)
     const isMarry = user.uid === marry?.userId
+    const [alert, setAlert] = useState(null)
 
     const [show, setShow] = useState(null)
     const [photo, setPhoto] = useState(null)
+
+    const dr = doctors?.find(d => d.userId === user.uid)
+    const law = lawyers?.find(l =>l.userId === user.uid)
+
+    const usernots = notifics?.filter(n => n.target_id === user.uid)
+    const drnots = notifics?.filter(n => n.target_id === dr?.id)
+    const lawnots = notifics?.filter(n => n.target_id === law?.id)
+    const marrynots = notifics?.filter(n => n.target_id === marry?.id)
+
+    const a = drnots.concat(usernots)
+    const b = a.concat(lawnots)
+    const allnots = b.concat(marrynots)
+    const mynots = allnots?.filter(a => a.isSeen == false)
+
+    console.log('allnots', mynots)
+    
 
  
 
     // console.log('photo', user)
    
   return (
-    <div className="home_top">
-        <div className="home_logo">
-            <h1 onClick={() =>navigate('/')}>Wema</h1>
-            <Button active={active} setActive={setActive} onClick={() =>setActive(false)}/>
-        </div>
-        <div className="home_profile">          
-            <div className="profile">             
-                <div className="notify">
-                    <button className='btn_btn'><BsBell /></button>                    
-                </div>               
-                <div className="profile_img">
-                    <img src={cuUser?.photo} />
+    <div className="home_top_wrapper">
+        {newMada && <CreateMada/>} 
+        {alert && <Alerts setAlert={setAlert} allnots={mynots}/>}
+          
+        <div className="home_top">
+            <div className="home_logo">
+                <div className="logo nav_logo" onClick={() => navigate('/')}>
+                    <img src={logo} alt="" />
                 </div>
-                <div className="user_action" onMouseEnter={() =>setShow(true)} onMouseLeave={() =>setShow(false)}>
-                    <button className='btn_btn' ><BsThreeDotsVertical/></button>
-                    {show &&
-                    <div className="user_menu">
-                        <span onClick={() => {navigate('/');setShow(null)}}>Nyumbani</span>
-                        <span onClick={() => {navigate('/profile');setShow(null)}}>Badili Picha</span> 
-                        <span onClick={() => {navigate('/myAccounts');setShow(null)}}>Akaunti Zangu</span> 
-                        {/* {isMarry &&
-                        <span onClick={() => {navigate(`/nikah/${marry?.id}`);setShow(null)}}>Wasifu wa Nikah</span>
-                        } */}
-                        <span onClick={() => {navigate('/subscriptions');setShow(null)}}>Unga Mkono</span>                      
-                        <span onClick={() => logOut()}>ONDOKA</span>
-                    </div>}
+                <Button active={active} setActive={setActive} onClick={() =>setActive(false)}/>
+            </div>
+            <div className="home_profile">          
+                <div className="profile">             
+                    <div className="notify">
+                        <button className='btn_btn' onClick={() =>setAlert(true)}><BsBell /></button> 
+                        {mynots?.length > 0 && <span className="nots_true"></span> }                                        
+                    </div>               
+                    <div className="profile_img">
+                        <img src={cuUser?.photo ? cuUser?.photo : process.env.PUBLIC_URL + cuUser?.avatar} />
+                    </div>
+                    <div className="user_action" onMouseEnter={() =>setShow(true)} onMouseLeave={() =>setShow(false)}>
+                        <button className='btn_btn' ><BsThreeDotsVertical/></button>
+                        {show &&
+                        <div className="user_menu">
+                            <span onClick={() => {navigate('/');setShow(null)}}>Nyumbani</span>
+                            <span onClick={() => {navigate('/mjaheed');setShow(null)}}>Kuwa Mjaheed</span> 
+                            <span onClick={() => {navigate('/myAccounts');setShow(null)}}>Akaunti Zangu</span> 
+                            {/* {isMarry &&
+                            <span onClick={() => {navigate(`/nikah/${marry?.id}`);setShow(null)}}>Wasifu wa Nikah</span>
+                            } */}
+                            <span onClick={() => {navigate('/subscriptions');setShow(null)}}>Unga Mkono</span>                      
+                            <span onClick={() => logOut()}>ONDOKA</span>
+                        </div>}
+                    </div>
                 </div>
             </div>
         </div>

@@ -35,9 +35,26 @@ const useData = () => {
     const followersRef = collection(db, 'followers')
     const [likes, setLikes] = useState([])
     const likesRef = collection(db, 'likes')
+    const [calls, setCalls] = useState([])
+    const callsRef = collection(db, 'calls')
+    const [views, setViews] = useState([])
+    const viewsRef = collection(db, 'views')
+    const [donates, setDonates] = useState([])
+    const donatesRef = collection(db, 'donates')
+    const [blocks, setBlocks] = useState([])
+    const blocksRef = collection(db, 'blocks')
+    const [madas, setMadas] = useState([])
+    const madasRef = collection(db, 'madas')
+    const [appoints, setAppoints] = useState([])
+    const appointsRef = collection(db, 'appoints')
+    const [ratings, setRatings] = useState([])
+    const ratingsRef = collection(db, 'ratings')
+    const [notifics, setNotifics] = useState([])
+    const notificsRef = collection(db, 'notifics')
 
 
     const allUsers = query(usersRef, orderBy("createdAt")); 
+    const allnotifics = query(notificsRef, orderBy("createdAt"));
     const allPosts = query(postsRef, orderBy("createdAt")); 
     const allComments = query(commentsRef, orderBy("createdAt"));
     const allMarriages = query(marriagesRef, orderBy("createdAt"));  
@@ -48,6 +65,86 @@ const useData = () => {
     const allMessages = query(messagesRef, orderBy("createdAt")); 
     const allrooms = query(roomsRef, orderBy("date")); 
 
+    useEffect(() => {
+        onSnapshot(allnotifics, snapshot => {
+            setNotifics(snapshot.docs.map(doc => {
+                return {
+                    id: doc.id,
+                    ...doc.data()
+                }
+            }))
+        })
+    },[])
+    useEffect(() => {
+        onSnapshot(ratingsRef, snapshot => {
+            setRatings(snapshot.docs.map(doc => {
+                return {
+                    id: doc.id,
+                    ...doc.data()
+                }
+            }))
+        })
+    },[])
+    useEffect(() => {
+        onSnapshot(appointsRef, snapshot => {
+            setAppoints(snapshot.docs.map(doc => {
+                return {
+                    id: doc.id,
+                    ...doc.data()
+                }
+            }))
+        })
+    },[])
+    useEffect(() => {
+        onSnapshot(madasRef, snapshot => {
+            setMadas(snapshot.docs.map(doc => {
+                return {
+                    id: doc.id,
+                    ...doc.data()
+                }
+            }))
+        })
+    },[])
+    useEffect(() => {
+        onSnapshot(blocksRef, snapshot => {
+            setBlocks(snapshot.docs.map(doc => {
+                return {
+                    id: doc.id,
+                    ...doc.data()
+                }
+            }))
+        })
+    },[])
+    useEffect(() => {
+        onSnapshot(donatesRef, snapshot => {
+            setDonates(snapshot.docs.map(doc => {
+                return {
+                    id: doc.id,
+                    ...doc.data()
+                }
+            }))
+        })
+    },[])
+    useEffect(() => {
+        onSnapshot(viewsRef, snapshot => {
+            setViews(snapshot.docs.map(doc => {
+                return {
+                    id: doc.id,
+                    ...doc.data()
+                }
+            }))
+        })
+    },[])
+    useEffect(() => {
+        onSnapshot(callsRef, snapshot => {
+            setCalls(snapshot.docs.map(doc => {
+                return {
+                    id: doc.id,
+                    ...doc.data()
+                }
+            }))
+        })
+    },[])
     useEffect(() => {
         onSnapshot(likesRef, snapshot => {
             setLikes(snapshot.docs.map(doc => {
@@ -206,7 +303,31 @@ const useData = () => {
 
   
 
-    return {  users, posts, followers,likes, comments, participants, clubs, topics, marriages, questions, doctors, chats, messages, lawyers, rooms }
+    return {  
+        users,
+        calls, 
+        posts, 
+        followers,
+        likes, 
+        comments, 
+        participants, 
+        clubs, 
+        topics, 
+        marriages, 
+        questions, 
+        doctors, 
+        chats, 
+        messages, 
+        lawyers, 
+        rooms,
+        views,
+        donates,
+        blocks,
+        madas,
+        appoints,
+        ratings,
+        notifics
+     }
 }
 
 export default useData;

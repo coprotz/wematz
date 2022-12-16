@@ -1,0 +1,91 @@
+.star_rate_container{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 50;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+}
+
+.rate_photo{
+    height: 200px;
+    width: 170px;
+}
+
+.rate_photo img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+.star_rate_inner{
+    background-color: white;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 300px;
+    border-radius: 10px;
+    gap: 15px;
+}
+
+.rate_btns{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.rate_body {
+    float: left;
+    height: 46px;
+    padding: 0 10px;
+}
+.rate_body:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+}
+.rate_body:not(:checked) > label {
+    float:right;
+    width:1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:30px;
+    color:#ccc;
+}
+.rate_body:not(:checked) > label:before {
+    content: '★ ';
+}
+.rate_body > input:checked ~ label {
+    color: #ffc700;    
+}
+.rate_body:not(:checked) > label:hover,
+.rate_body:not(:checked) > label:hover ~ label {
+    color: #deb217;  
+}
+.rate_body > input:checked + label:hover,
+.rate_body > input:checked + label:hover ~ label,
+.rate_body > input:checked ~ label:hover,
+.rate_body > input:checked ~ label:hover ~ label,
+.rate_body > label:hover ~ input:checked ~ label {
+    color: #c59b08;
+}
+
+.btn_remove{
+    background-color: transparent;
+    color: red;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 7px;
+    border-radius: 3px;
+}
+
+.btn_remove:hover{
+    background-color: rgb(245, 211, 211);
+}

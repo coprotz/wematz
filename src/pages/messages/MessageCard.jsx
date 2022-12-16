@@ -19,11 +19,11 @@ const MessageCard = ({m}) => {
       className='messages_inner'>       
         <div className={`message_card ${messageClass}`}>
             <div className="chat_rec_photo">
-                <img src={photo}/>
+                <img src={photo? photo : process.env.PUBLIC_URL + `${m?.avatar}`}/>
             </div>
             <div className={`message_body ${bgClass}`}>
                 <p className='message_p'>{text}</p> 
-                <small className='mes_body_time'>{moment(createdAt && createdAt.toDate()).fromNow(true)}</small>  
+                <small className='mes_body_time'>{moment(createdAt && createdAt.toDate()).format('MMM Do YY, LT')}</small>  
             </div>
        </div>
     </motion.div>

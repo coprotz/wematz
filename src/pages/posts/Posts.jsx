@@ -9,17 +9,17 @@ import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion';
 import NikahCard from '../nikah/NikahCard';
 import MadaCard from '../mada/MadaCard';
-import MeetingCard from '../meetings/MeetingCard';
+// import MeetingCard from '../meetings/MeetingCard';
 import Remarks from '../../components/remarks/Remarks';
 import {  BsArrowRight } from "react-icons/bs";
-import img1 from '../../assets/images/img1.png'
-import img2 from '../../assets/images/img2.jpg'
-import img3 from '../../assets/images/img3.jpg'
-import img4 from '../../assets/images/img4.jpg'
-import img5 from '../../assets/images/img5.jpg'
-import img6 from '../../assets/images/img6.jpg'
-import img7 from '../../assets/images/img7.jpg'
-import img9 from '../../assets/images/img9.jpg'
+// import img1 from '../../assets/images/img1.png'
+// import img2 from '../../assets/images/img2.jpg'
+// import img3 from '../../assets/images/img3.jpg'
+// import img4 from '../../assets/images/img4.jpg'
+// import img5 from '../../assets/images/img5.jpg'
+// import img6 from '../../assets/images/img6.jpg'
+// import img7 from '../../assets/images/img7.jpg'
+// import img9 from '../../assets/images/img9.jpg'
 import useData from '../../hooks/useData';
 import ShareVideo from './ShareVideo';
 import { useState } from 'react';
@@ -31,17 +31,6 @@ import Search from '../../components/search/Search';
 import { useAuth } from '../../hooks/useAuth';
 
 
-const nikahs = [
-  {name: 'Asha Juma', url: img1,  live: 'Tanga', tribe: 'Zaramo', age:'25'},
-  {name: 'Juma Rashid', url: img2,  live: 'Moshi', tribe: 'Haya', age:'30'},
-  {name: 'Mwana Achi', url: img3,  live: 'Kisarawe', tribe: 'Fipa', age:'18'},
-  {name: 'Haruna Shani', url: img4,  live: 'Dar es Salaam', tribe: 'Ruguru', age:'40'},
-  {name: 'Shykuru Hamisi', url: img5,  live: 'Zanzibar', tribe: 'Pare', age:'55'},
-  {name: 'Mwanaisha Abdul', url: img6,  live: 'Pemba', tribe: 'Sukuma', age:'27'},
-  {name: 'Hamisa Mbeto', url: img7,  live: 'Mbeya', tribe: 'Hehe', age:'80'},
-  {name: 'Bob Marley', url: img9,  live: 'Iringa', tribe: 'Chaga', age:'12'},
-]
-
 
 
 
@@ -52,8 +41,10 @@ const Posts = () => {
     const [audio, setAudio] = useState(false)
     const [image, setImage] = useState(false)
     const { user } = useAuth()
-    const { posts, users, questions, marriages } = useData();
+    const { posts, users, questions, marriages, madas } = useData();
     const cuUser = users?.find(u => u.id === user.uid)
+
+    console.log('user', user?.displayName)
 
     const RenderPost = (p) => {
         if(p.type === 'text'){
@@ -117,7 +108,7 @@ const Posts = () => {
                 <div className="new_users">
                     {users?.slice(0,7).map(u => (
                         <div className="new_user">
-                            <img src={u.photo} alt="" />
+                            <img src={u.photo || process.env.PUBLIC_URL + u?.avatar} alt="" />
                         </div>
                     ))}                              
                 </div>
@@ -138,22 +129,28 @@ const Posts = () => {
                     Tuunge Mkono
                     <button className='btn_next'><BsArrowRight/></button>
                 </div>
+
                 <div className="main_right_item">
-                    <h3 className="card_title">
-                        Mada ya Wiki
-                        <button className='btn_view' onClick={() =>navigate('/madas')}><BsArrowRight/></button>
-                    </h3>                            
-                    <MadaCard/>
+                    {madas?.slice(0,1).map(m => (
+                    <div key={m.id}>             
+                        <h3 className="card_title">
+                            Mada ya Wiki
+                            <button className='btn_view' onClick={() =>navigate(`/madas/${m.id}`)}><BsArrowRight/></button>
+                        </h3>                            
+                        <MadaCard m={m}/>
+                    </div>
+                    ))}
                             
                 </div>
                 
-                        <div className="main_right_item">
-                            <h3 className="card_title">
-                                Swali Maarufu 
-                                <button className='btn_view' onClick={() =>navigate('/questions')}><BsArrowRight/></button>
-                            </h3>
-                           {questions.slice(0,1).map(q => (
+                <div className="main_right_item">
+                            
+                    {questions.slice(0,1).map(q => (
                                 <>
+                                <h3 className="card_title">
+                                    Swali Maarufu 
+                                    <button className='btn_view' onClick={() =>navigate(`/questions/${q.id}`)}><BsArrowRight/></button>
+                                </h3>
                                 <div className="help" key={q.id}>
                                     <div className="help_sender">
                                         <img src={q.photo} alt="" />
@@ -164,7 +161,7 @@ const Posts = () => {
                                     </div>
                                     
                                 </div>
-                                <Remarks/>                                
+                                <Remarks p={q}/>                                
                                 </>
                            ))}
                            

@@ -6,7 +6,7 @@ import useData from '../../hooks/useData'
 const ClinicCard = ({c}) => {
     const navigate = useNavigate()
     const { doctors } = useData()
-    const docs = doctors?.filter(d =>d.specialize.includes(`${c.name}`))
+    const docs = doctors?.filter(m =>m.status === 'Amethibitishwa').filter(d => d.specialize.includes(`${c?.name}`))
 
     console.log('docs', docs)
   return (

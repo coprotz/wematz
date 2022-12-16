@@ -20,7 +20,7 @@
     top: 0;
     aspect-ratio: 1;
     border: 3px solid #e0edff;
-    border-top-color: #0d366b;
+    border-top-color: var(--primary);
     border-radius: 50%;
     animation: loading 1s linear infinite;
     
@@ -36,6 +36,24 @@
     align-items: center;
     justify-content: center;
     background-color: var(--primary);
+}
+
+.login_failure{
+    background-color: white;
+    /* width: 90%; */
+    margin: 20px;
+    padding: 15px;
+    font-size: 1rem;
+    border-radius: 5px;
+    color: #aaa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.login_failure svg{
+    font-size: 4rem;
 }
 
 @keyframes loading{

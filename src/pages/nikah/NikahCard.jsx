@@ -19,6 +19,7 @@ import { FcLike } from "react-icons/fc";
 
 const NikahCard = ({item}) => {
   const [view, setView] = useState(null)
+  
   return (
     <div className="nikah_photo" onMouseEnter={() => setView(item)} onMouseLeave={() => setView(null)}>
         <img src={item.photo} alt="" />

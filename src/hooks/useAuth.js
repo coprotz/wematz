@@ -11,7 +11,10 @@ import {
     getAuth,
     sendSignInLinkToEmail, 
     isSignInWithEmailLink,
-    createUserWithEmailAndPassword
+    createUserWithEmailAndPassword,
+    GoogleAuthProvider,
+    signInWithPopup,
+    signInWithRedirect
 } from 'firebase/auth'
 
 const firebaseConfig = {
@@ -49,6 +52,9 @@ export const onMessageHandler = () =>
 export function AuthProvider({ children }) {
     const [user, setUser] = useState(null)
     const [isAuthenticating, setIsAuthenticating] = useState(true)
+    const [alert, setAlert] = useState('')
+    const [newMada, setNewMada] = useState(null)
+    const [confirm, setConfirm] = useState('Do you want to send this mesaji?')
 
     const sendLink = (email) =>{
         return sendSignInLinkToEmail(auth, email, {
@@ -62,6 +68,12 @@ export function AuthProvider({ children }) {
     function signIn(email, password){
         return signInWithEmailAndPassword(auth, email, password)
     }
+
+    function googleSignIn() {
+        const provider = new GoogleAuthProvider();
+        return signInWithPopup(auth, provider)
+    }
+
 
     function isSign(email){
         return isSignInWithEmailLink(auth, email).then(() => {
@@ -92,7 +104,22 @@ export function AuthProvider({ children }) {
  
 
     return (
-        <AuthContext.Provider value={{ user, db, sendLink, signIn, logOut, isSign, signUp }}>
+        <AuthContext.Provider value={{ 
+            user, 
+            db, 
+            sendLink, 
+            signIn, 
+            logOut, 
+            isSign, 
+            signUp, 
+            alert, 
+            setAlert, 
+            confirm, 
+            setConfirm,
+            newMada, 
+            setNewMada,
+            googleSignIn
+             }}>
             {!isAuthenticating && children}
         </AuthContext.Provider>
     )

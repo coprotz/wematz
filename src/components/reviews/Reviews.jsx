@@ -1,7 +1,7 @@
 import React from 'react'
-import { useState } from 'react';
-import { BsStar,BsStarFill } from "react-icons/bs";
-import { reviews } from '../../data';
+// import { useState } from 'react';
+// import { BsStar,BsStarFill } from "react-icons/bs";
+// import { reviews } from '../../data';
 import useData from '../../hooks/useData';
 import CreateReview from './CreateReview';
 import moment from 'moment'
@@ -13,15 +13,15 @@ import './reviews.css'
 
 const Reviews = ({doc, setShow}) => {
 
-    const { users, comments } = useData()
+    const {  comments } = useData()
 
     const revs = comments?.filter(r =>r.docId === doc?.id)
-    const user = users?.find(u => u.id === doc?.userId)
+    // const user = users?.find(u => u.id === doc?.userId)
 
     console.log('doc', doc)
 
     // const reviews = [ 1,2,3,4,5]
-    const rate = 4.2;
+    // const rate = 4.2;
    
 
   return (

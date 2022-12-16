@@ -11,7 +11,7 @@ const ViewClinic = () => {
     const { name } = useParams()
     const clinic = clinics?.find(c => c.swahir === name)
     const { doctors } = useData()
-    const docs = doctors.filter(d => d.specialize.includes(`${clinic?.name}`))
+    const docs = doctors?.filter(m =>m.status === 'Amethibitishwa').filter(d => d.specialize.includes(`${clinic?.name}`))
 
     // console.log('docs', docs)
     const navigate = useNavigate()

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useParams, useNavigate } from 'react-router-dom';
 import { nikahs } from '../../data';
-import {  BsFillChatLeftTextFill,BsArrowLeft, BsCamera } from "react-icons/bs";
+import {  BsFillChatLeftTextFill, BsChatLeftDotsFill, BsArrowLeft, BsCamera } from "react-icons/bs";
 import { FcLike } from "react-icons/fc";
 import useData from '../../hooks/useData';
 import useStorage from '../../hooks/useStorage';
@@ -11,6 +11,10 @@ import { doc, updateDoc } from 'firebase/firestore';
 import Alert from '../../components/alert/Alert';
 import { motion } from 'framer-motion';
 import NewChat from '../messages/NewChat';
+import Likes from '../../components/reactions/Likes';
+import NewDonate from '../donates/NewDonate';
+import moment from 'moment';
+
 
 
 
@@ -18,7 +22,7 @@ import NewChat from '../messages/NewChat';
 const NikahView = () => {
     const { id } = useParams()
     const { user } = useAuth()
-    const { marriages } = useData()
+    const { marriages, donates } = useData()
     const nikah = marriages.find(n => n.id === id)
     const navigate = useNavigate()
 
@@ -28,15 +32,26 @@ const NikahView = () => {
     const [loading, setLoading] = useState(false)
     const { perc, url } = useStorage(file)
 
-    const marry = marriages?.find(m => m.id === id)
+    const [donate, setDonate] = useState(false)
+    const [open, setOpen] = useState(null)
+
+    const user_id = donate?.userId
+
+    const mujaheed = donates?.find(d => d?.user_id === user.uid)
+    const a = new Date().getTime()
+    const today = moment(a).format('MMM Do YY, LT')
+    const expire = moment(mujaheed?.expiredAt).format('MMM Do YY, LT')
+    const valid = expire > today
+
     
+
+    const marry = marriages?.find(m => m?.id === id)    
     const isOwn = marry?.userId === user.uid
+    const myid = marriages?.find(m => m?.userId === user.uid)
 
-    console.log('isOwn', user.uid)
+    
 
-    console.log('id', marry?.userId)
-
-    console.log('marry', marry)
+  
 
     const types = ['image/png', 'image/jpeg']
 
@@ -74,6 +89,14 @@ const NikahView = () => {
         }
     }
 
+    const handelNew = (nikah) => {
+        if(valid){
+            setOpen(nikah)
+        }else{
+            setDonate(nikah)
+        }
+    }
+
   return (
     <div className='nikahview'>
         <motion.div 
@@ -82,10 +105,13 @@ const NikahView = () => {
             transition={{ ease: "easeOut", duration: 0.5 }} >
             {alert && <Alert alert={alert}/>}    
         </motion.div>
+        {donate && <NewDonate setDonate={setDonate} item={donate}/>}
+        {open && <NewChat setOpen={setOpen} myId={myid.id} item={open}/>} 
         
         <div className="nikah_View_top">
             <button onClick={() => navigate(-1)} className='btn_btn'><BsArrowLeft/></button>
-            <h3>{nikah && nikah.name}</h3>
+            <h3 className='title'>{nikah && nikah.name}</h3>
+            {/* <h3>{nikah && nikah.name}</h3> */}
         </div>
         <div className="nikah_view_bottom">
             <div className="nikah_view_left">
@@ -110,8 +136,10 @@ const NikahView = () => {
             }
                 {!isOwn &&
                 <div className="nikah_view_action">
-                    <button className='btn_like'><FcLike/></button>
-                    <NewChat item={nikah}/>   
+                    <button className='btn_like'>
+                        <Likes p={nikah} myId={myid?.id}/>                      
+                    </button>
+                    <button className='btn_btn' onClick={() =>handelNew(nikah)}><BsChatLeftDotsFill/></button>  
                 </div>}
             </div>
             {error && <span className='error error_profile'>{error}<button onClick={() =>setError('')} className='btn_error'>x</button></span>}                                     

@@ -8,6 +8,10 @@ import { useForm } from "react-hook-form";
 import Nav from '../../components/nav/Nav';
 import { db, useAuth } from '../../hooks/useAuth';
 import { doc, serverTimestamp, setDoc } from 'firebase/firestore';
+import { FcGoogle } from 'react-icons/fc';
+import {  HiOutlineArrowLeft } from "react-icons/hi";
+import Loading from '../../components/loading/Loading';
+import useData from '../../hooks/useData';
 
 
 
@@ -15,9 +19,15 @@ const Register = () => {
     const navigate = useNavigate();
     const [err, setErr] = useState('')
     const [loading, setLoading] = useState(null)
+    const [page, setPage] = useState(0)
 
-    const { signUp } = useAuth()
+    
+
+    const { signUp, googleSignIn, user } = useAuth()
+    const { users } = useData()
     const { register,  watch, formState: { isValid } } = useForm({mode: 'all'});
+
+   
 
     const email = watch('email')
     const password = watch('password')
@@ -40,222 +50,267 @@ const Register = () => {
     const profes = watch('profes')
     const location = watch('location')
 
+    const [thanks, setThanks] = useState(null)
+    const [reg, setReg] = useState(0)
 
+    const data = {
+        email: user?.email,           
+        name:  user?.displayName ,
+        photo: user?.photoURL,
+        gender,   
+        emplo,
+        age,
+        religion,
+        profes,
+        islam: 'NA' || islam,
+        set: 'NA' || set,
+        mosque: 'NA' || mosque,
+        location,
+        avatar: '/users/profile.webp',
+        prayer: 'NA' || prayer,
+        quran: 'NA' || quran,
+        revert: 'NA' || revert,         
+        edu,
+   
+    }
+
+    const fullname = fname+" "+lname
+
+    const data1 = {
+        email,           
+        name: fullname,
+        photo: '',
+        gender,   
+        emplo,
+        age,
+        religion,
+        profes,
+        islam: 'NA' || islam,
+        set: 'NA' || set,
+        mosque: 'NA' || mosque,
+        location,
+        avatar: '/users/profile.webp',
+        prayer: 'NA' || prayer,
+        quran: 'NA' || quran,
+        revert: 'NA' || revert,      
+        edu,
+   
+    }
+
+    console.log('name', fname+" "+lname)
 
     const handleRegister = async(e) => {
         e.preventDefault()
-
-        setLoading(true)
         
-        const data = {
-            email,           
-            fname,
-            lname,
-            photo: '',
-            gender,
-            email,
-            emplo,
-            age,
-            religion,
-            profes,
-            islam,
-            set,
-            mosque,
-            location,
-            prayer,
-            quran,
-            revert: 'NA' || revert,
-            revert_res: 'NA' || revert_res,
-            revert_plan: 'NA' || revert_plan,
-            edu,
-       
+        setLoading(true)
+        const existemail = users?.find(u => u.email === user.email)
+
+        if(existemail){
+            alert('Email hii inatumika humu, tafadhari login au chagua email nyingine')
+        }else{
+
+        
+
+        if(user) {
+            try {
+                await setDoc(doc(db, 'users', `${user.uid}`), {
+                   ...data,
+                   createdAt: serverTimestamp()
+               })
+               setLoading(false)
+               navigate('/')
+           } catch (error) {
+               setErr(error.message)
+           }
+        }else{
+            try {
+                const newUser = await signUp(email, password)
+                await setDoc(doc(db, 'users', `${newUser.user.uid}`), {
+                ...data1,
+                createdAt: serverTimestamp()
+                })
+                setLoading(false)
+                navigate('/')
+
+                        // console.log('data', data)
+                } catch (error) {
+                setErr(error.message)
+            }
         }
 
-        try {
-            const newUser = await signUp(email, password)
-            await setDoc(doc(db, 'users', `${newUser.user.uid}`), {
-                ...data,
-                createdAt: serverTimestamp()
-            })
-            setLoading(false)
-            navigate('/')
+    }
 
-            // console.log('data', data)
+        
+ 
+       
+    }
+
+   
+    const signWithGoogle = async (e) => {
+        e.preventDefault();
+
+        try {
+           await googleSignIn()
+           setPage(1)
+            
         } catch (error) {
             setErr(error.message)
         }
+
     }
-  return (
-    <div className='register'>
-        <Nav/>
-        
-        <motion.div 
-             initial={{ y:'100vw'}}
-             animate={{y:0}} 
-             transition={{ ease: "easeOut", duration: 0.5 }} 
-            className="register_body">
-            <h1 className='register_title'>Tunaomba utupe taarifa zako</h1>
-            <span className='res_span'></span>
-            {err && <span>{err}</span>}
-            <div className="register_form">
-                <div className="items_group">
-                    <h3 className='item_title'>Chagua njia ya Kuingia</h3>
-                    <div className="selection_btns">
-                        <div className="sel_item">
-                            <input 
-                                type="radio" 
-                                id='1' 
-                                value='normal' 
-                                name='signup' 
-                                // onChange={(e) => setSignup(e.target.value)}
-                                {...register("signup", { required: true })}
-                                />
-                            <label htmlFor="1">Barua Pepe na Neno la Siri</label>
-                        </div>
-                        {/* <div className="sel_item">
-                            <input 
-                                type="radio" 
-                                id='2' 
-                                value='google' 
-                                name='signup' 
-                                // onChange={(e) => setSignup(e.target.value)}
-                                {...register("signup", { required: true })}
-                                />
-                            <label htmlFor="2">Google</label>
-                        </div> */}
-                        {/* <div className="sel_item">
-                            <input 
-                                type="radio" 
-                                id='3' 
-                                value='facebook' 
-                                name='signup' 
-                                // onChange={(e) => setSignup(e.target.value)}
-                                {...register("signup", { required: true })}
-                                />
-                            <label htmlFor="3">Facebook</label>
-                        </div> */}
-                     
-                    </div>
-                    
-                </div>
-                {signup === 'normal' && 
-                
+
+    const RenderPage = () => {
+        if(page === 0){
+            return (
                 <motion.div 
-                    initial={{y:'100vh', opacity:0}}
-                    animate={{y: '0', opacity:1}} 
-                    transition={{ ease: "easeOut", duration: 0.5 }}
-                    style={{width: '100%'}} >
-                    <div className="items_group">
-                        <h3 className='item_title'>Jina la Kwanza</h3>
-                        <div className="sel_items">
-
-                            <input 
-                            type="text" 
-                            placeholder='Jina la Kwanza'
-                            className='sel_input'
-                            name='fname'
-                            style={{width: '100%'}}
-                            {...register("fname", { required: true })}
-                            /> 
-                        </div>
-                       
-                        
-                    </div>
-                    <div className="items_group">
-                        <h3 className='item_title'>Jina la Mwisho</h3>
-                        <div className="sel_items">
-
-                            <input 
-                            type="text" 
-                            placeholder='Jina la Mwisho'
-                            className='sel_input'
-                            name='lname'
-                            style={{width: '100%'}}
-                            {...register("lname", { required: true })}
-                            /> 
-                        </div>
-                       
-                        
-                    </div>
-                    <div className="items_group">
-                        <h3 className='item_title'>Barua Pepe</h3>
-                        <div className="sel_items">
-
-                            <input 
-                            type="email" 
-                            placeholder='Barua Pepe'
-                            className='sel_input'
-                            name='email'
-                            style={{width: '100%'}}
-                            {...register("email", { required: true })}
-                            /> 
-                        </div>
-                       
-                        
-                    </div>
-                    <div className="items_group" >
-                        <h3 className='item_title'>Neno la Siri</h3>
-                        <div className="sel_items">
-
-                            <input 
-                            type="password" 
-                            placeholder='Neno la Siri'
-                            className='sel_input'
-                            name='password'
-                            style={{width: '100%'}}
-                            {...register("password", { required: true })}
-                            />
-                        </div>
-                        
-                        
-                    </div>
-                </motion.div>
-                }
-                {signup === 'google'  && 
-                <motion.div 
-                    initial={{y:'100vh', opacity:0}}
-                    animate={{y: '0', opacity:1}} 
+                    initial={{ y:'100vw'}}
+                    animate={{y:0}} 
                     transition={{ ease: "easeOut", duration: 0.5 }} 
-                    className="items_group">
-                        <h3 className='item_title'>Barua Pepe</h3>
-                        <div className="sel_items">
+                    className="register_body">
+                    <h1 className='register_title'>{reg === 1? 'Umechagua kuingia kwa Google' : reg === 2 ? 'Umechagua kuingia kwa Email na Password' : 'Tafadhari Chagua njia ya Kuingia'}</h1>
+                    <span className='res_span'></span>
+                    {err && <span>{err}</span>}
+                    <div className="register_form">
+                        <div className="items_group">
+                            {reg === 0 && 
+                            <div className="selection_btns">
+                                <div className="sel_item">
+                                    <input 
+                                        type="radio" 
+                                        id='2' 
+                                        value='google' 
+                                        name='signup'
+                                        onClick={() => setReg(1)} 
+                                        // onChange={(e) => setSignup(e.target.value)}
+                                        {...register("signup", { required: true })}
+                                        />
+                                    <label htmlFor="2" className='g_signup'><FcGoogle/>Google</label>
+                                </div>
+                                <div className="sel_item">
+                                    <input 
+                                        type="radio" 
+                                        id='1' 
+                                        value='normal' 
+                                        name='signup' 
+                                        onClick={() => setReg(2)} 
+                                        // onChange={(e) => setSignup(e.target.value)}
+                                        {...register("signup", { required: true })}
+                                        />
+                                    <label htmlFor="1"  className='g_signup'>Barua Pepe na Neno la Siri</label>
+                                </div>            
+                            </div>}
+                            
+                        </div>
+                        {reg === 2 &&                 
+                            <motion.div 
+                                initial={{y:'100vh', opacity:0}}
+                                animate={{y: '0', opacity:1}} 
+                                transition={{ ease: "easeOut", duration: 0.5 }}
+                                style={{width: '100%'}} >
+                                <div className="items_group">
+                                    <h3 className='item_title'>Jina la Kwanza</h3>
+                                    <div className="sel_items">
 
-                             <input 
-                            type="email" 
-                            placeholder='forum@forum.com'
-                            className='sel_input'
-                            name='email'
-                            style={{width: '100%'}}
-                            {...register("email", { required: true })}
-                            />
-                        </div>
-                       
-                        
-                 
-                </motion.div>
-                }
-                {signup === 'facebook' && 
-                <motion.div 
-                    initial={{y:'100vh', opacity:0}}
-                    animate={{y: '0', opacity:1}} 
-                    transition={{ ease: "easeOut", duration: 0.5 }}
-                    className="items_group">
-                        <h3 className='item_title'>Barua Pepe</h3>
-                        <div className="sel_items">
-                            <input 
-                            type="email" 
-                            placeholder='forum@forum.com'
-                            className='sel_input'
-                            name='email'
-                            style={{width: '100%'}}
-                            {...register("email", { required: true })}
-                            />
-                        </div>
-                </motion.div>                
-                }
-               
+                                        <input 
+                                        type="text" 
+                                        placeholder='Jina la Kwanza'
+                                        className='sel_input'
+                                        name='fname'
+                                        style={{width: '100%'}}
+                                        {...register("fname", { required: reg === 2 ? true : false })}
+                                        /> 
+                                    </div>
+                                
+                                    
+                                </div>
+                                <div className="items_group">
+                                    <h3 className='item_title'>Jina la Mwisho</h3>
+                                    <div className="sel_items">
+
+                                        <input 
+                                        type="text" 
+                                        placeholder='Jina la Mwisho'
+                                        className='sel_input'
+                                        name='lname'
+                                        style={{width: '100%'}}
+                                        {...register("lname", { required: reg === 2 ? true : false })}
+                                        /> 
+                                    </div>
+                                
+                                    
+                                </div>
+                                <div className="items_group">
+                                    <h3 className='item_title'>Barua Pepe</h3>
+                                    <div className="sel_items">
+
+                                        <input 
+                                        type="email" 
+                                        placeholder='Barua Pepe'
+                                        className='sel_input'
+                                        name='email'
+                                        style={{width: '100%'}}
+                                        {...register("email", { required: reg === 2  ? true : false })}
+                                        /> 
+                                    </div>
+                                
+                                    
+                                </div>
+                                <div className="items_group" >
+                                    <h3 className='item_title'>Neno la Siri</h3>
+                                    <div className="sel_items">
+
+                                        <input 
+                                        type="password" 
+                                        placeholder='Neno la Siri'
+                                        className='sel_input'
+                                        name='password'
+                                        style={{width: '100%'}}
+                                        {...register("password", { required: reg === 2  ? true : false })}
+                                        />
+                                    </div>
+                                    
+                                    
+                                </div>
+                                <button onClick={() =>setPage(1)} className='btn_reg' disabled={!isValid}>Endelea</button>
+                                <div className="profile_photo_edit">                            
+                                    <button className='btn_cancel' onClick={() =>setReg(0)}>ONDOA</button>
+                                </div>
+                            </motion.div>
+                            }
+                             {reg === 1 && 
                 
-                <div className="items_group" style={{width: '93%'}}>
+                                <motion.div 
+                                    initial={{y:'100vh', opacity:0}}
+                                    animate={{y: '0', opacity:1}} 
+                                    transition={{ ease: "easeOut", duration: 0.5 }}
+                                    style={{width:'100%'}} >       
+                                    <div className="items_group">
+                                        <button className='btn_reg' onClick={signWithGoogle}>{loading && !err? <Loading/>  : 'Ingia kwa Google'}</button>
+                                    </div>
+                                    <div className="profile_photo_edit">                            
+                                        <button className='btn_cancel' onClick={() =>setReg(0)}>ONDOA</button>
+                                    </div>
+                                </motion.div>
+                                }
+                   </div>
+                </motion.div>
+            )
+        }else if(page === 1){
+            return (
+                <motion.div 
+                    initial={{ y:'100vw'}}
+                    animate={{y:0}} 
+                    transition={{ ease: "easeOut", duration: 0.5 }} 
+                    className="register_body">
+                        <div className="view_que_back" style={{width: '90%'}}>
+                            <button onClick={() =>setPage(0)} className='btn_btn'><HiOutlineArrowLeft/></button>
+                            <h4>Rudi Nyuma</h4>
+                        </div>
+                    <h1 className='register_title'>Tunaomba utupe taarifa zako zingine</h1>
+                    <span className='res_span'></span>
+                    {err && <span>{err}</span>}
+                    <div className="register_form">
+                    <div className="items_group" style={{width: '93%'}}>
                     <h3 className='item_title'>Chagua Iinsia</h3>
                     <div className="selection_btns">
                         <div className="sel_item">
@@ -378,7 +433,7 @@ const Register = () => {
                                 id='411' 
                                 value='Kuzaliwa' 
                                 name='islam'
-                                {...register("islam", { required: true })}
+                                {...register("islam", { required: religion === 'islam' ? true : false })}
                                 />
                             <label htmlFor="411">Kuzaliwa</label>
                         </div>
@@ -398,7 +453,7 @@ const Register = () => {
                                 type="radio" id='7' 
                                 value='Sunni' 
                                 name='set'
-                                {...register("set", { required: true })}
+                                {...register("set", { required: religion === 'islam' ? true : false })}
                                 />
                             <label htmlFor="7">Sunni</label>
                         </div>
@@ -408,7 +463,7 @@ const Register = () => {
                                 id='8' 
                                 value='Sarafi' 
                                 name='set'
-                                {...register("set", { required: true })}
+                                {...register("set", { required: religion === 'islam' ? true : false })}
                                 />
                             <label htmlFor="8">Sarafi</label>
                         </div>
@@ -418,7 +473,7 @@ const Register = () => {
                                 id='9' 
                                 value='Shia' 
                                 name='set'
-                                {...register("set", { required: true })}
+                                {...register("set", { required: religion === 'islam' ? true : false })}
                                 />
                             <label htmlFor="9">Shia</label>
                         </div>
@@ -428,7 +483,7 @@ const Register = () => {
                                 id='10' 
                                 value='Ibadhi' 
                                 name='set'
-                                {...register("set", { required: true })}
+                                {...register("set", { required: religion === 'islam' ? true : false })}
                                 />
                             <label htmlFor="10">Ibadhi</label>
                         </div>
@@ -438,7 +493,7 @@ const Register = () => {
                                 id='11' 
                                 value='Kadiani' 
                                 name='set'
-                                {...register("set", { required: true })}
+                                {...register("set", { required: religion === 'islam' ? true : false })}
                                 />
                             <label htmlFor="11">Kadiani</label>
                         </div>
@@ -457,7 +512,7 @@ const Register = () => {
                             className='sel_input'
                             name='mosque'
                             style={{width: '100%'}}
-                            {...register("mosque", { required: true })}
+                            {...register("mosque", { required: religion === 'islam' ? true : false })}
                         />
                     </div>
                     
@@ -470,7 +525,7 @@ const Register = () => {
                                 type="radio" id='29' 
                                 value='Alfatha' 
                                 name='quran'
-                                {...register("quran", { required: true })}
+                                {...register("quran", { required: religion === 'islam' ? true : false })}
                                 />
                             <label htmlFor="29">Najua Alfatha tu</label>
                         </div>  
@@ -479,7 +534,7 @@ const Register = () => {
                                 type="radio" id='21' 
                                 value='Juzuu Amma' 
                                 name='quran'
-                                {...register("quran", { required: true })}
+                                {...register("quran", { required: religion === 'islam' ? true : false })}
                                 />
                             <label htmlFor="21">Juzuu Amma</label>
                         </div>
@@ -488,7 +543,7 @@ const Register = () => {
                                 type="radio" id='22' 
                                 value='Nasoma Msahafu' 
                                 name='quran'
-                                {...register("quran", { required: true })}
+                                {...register("quran", { required: religion === 'islam' ? true : false })}
                                 />
                             <label htmlFor="22">Nasoma Mashafu</label>
                         </div>  
@@ -498,7 +553,7 @@ const Register = () => {
                                 id='23' 
                                 value='Sijui Quran' 
                                 name='quran'
-                                {...register("quran", { required: true })}
+                                {...register("quran", { required: religion === 'islam' ? true : false })}
                                 />
                             <label htmlFor="23">Sijui Quran</label>
                         </div>                                    
@@ -513,7 +568,7 @@ const Register = () => {
                                     id='1001454' 
                                     value='Nachunga vipindi vyote vya swala' 
                                     name='prayer' 
-                                    {...register("prayer", { required: true })}/>
+                                    {...register("prayer", { required: religion === 'islam' ? true : false })}/>
                                 <label htmlFor="1001454">Nachunga vipindi vyote vya swala</label>
                             </div>
                             <div className="sel_item">
@@ -522,7 +577,7 @@ const Register = () => {
                                     id='1011454' 
                                     value='Kuna wakati baadhi ya swala zinanipita' 
                                     name='prayer' 
-                                    {...register("prayer", { required: true })}/>
+                                    {...register("prayer", { required: religion === 'islam' ? true : false })}/>
                                 <label htmlFor="1011454">Kuna wakati baadhi ya swala zinanipita</label>
                             </div>
                             <div className="sel_item">
@@ -530,7 +585,7 @@ const Register = () => {
                                     type="radio" 
                                     id='1012454' 
                                     value='Sijaanza bado kuswal' 
-                                    name='prayer' {...register("prayer", { required: true })}/>
+                                    name='prayer' {...register("prayer", { required: religion === 'islam' ? true : false })}/>
                                 <label htmlFor="1012454">Sijaanza bado kuswali</label>
                             </div>
                         </div>
@@ -548,7 +603,7 @@ const Register = () => {
                                 value='Ndio' 
                                 name='revert' 
                                 // onChange={e =>setRevert(e.target.value)}
-                                {...register("revert", { required: true })}
+                                {...register("revert", { required: religion === 'christian'? true : false })}
                                 />
                             <label htmlFor="12">Ndio</label>
                         </div>
@@ -558,57 +613,14 @@ const Register = () => {
                                 value='Hapana' 
                                 name='revert' 
                                 // onChange={e =>setRevert(e.target.value)}
-                                {...register("revert", { required: true })}
+                                {...register("revert", { required: religion === 'christian'? true : false  })}
                                 />
                             <label htmlFor="13">Hapana</label>
                         </div>                 
                     </div>
                     
                 </div>
-                {revert === 'Ndio'  && <>                
-                <div className="items_group">
-                    <h3 className='item_title'>Kwanini unataka kuwa Muislamu?</h3>                   
-                    <textarea  
-                        name='revert_res' 
-                        placeholder='Tunaomba Sababu Tafadhari' 
-                        className='sel_textarea'
-                        style={{width: '100%'}}
-                        {...register("revert_res", { required: true })}
-                        />                  
-                </div>
-                <div className="items_group">
-                    <h3 className='item_title'>Lini unataraji kusilimu?</h3>
-                    <div className="selection_btns">
-                        <div className="sel_item">
-                            <input 
-                                type="radio" id='14' 
-                                value='Mwaka huu' 
-                                name='revert_plan'
-                                {...register("revert_plan", { required: true })}
-                                />
-                            <label htmlFor="14">Mwaka huu</label>
-                        </div>
-                        <div className="sel_item">
-                            <input 
-                                type="radio" id='15' 
-                                value='Mwakani' 
-                                name='revert_plan'
-                                {...register("revert_plan", { required: true })}
-                                />
-                            <label htmlFor="15">Mwakani</label>
-                        </div>  
-                        <div className="sel_item">
-                            <input 
-                                type="radio" id='16' 
-                                value='sijapanga' 
-                                name='revert_plan'
-                                {...register("revert_plan", { required: true })}
-                                />
-                            <label htmlFor="16">Bado sijapanga</label>
-                        </div>                
-                    </div>
-                </div>
-                </>}
+               
                 
                 
                 </>}
@@ -622,7 +634,7 @@ const Register = () => {
                                 value='Ndio' 
                                 name='revert' 
                                 // onChange={e =>setRevert(e.target.value)}
-                                {...register("revert", { required: true })}
+                                {...register("revert", { required: religion === 'others'? true : false })}
                                 
                                 />
                             <label htmlFor="12">Ndio</label>
@@ -634,65 +646,18 @@ const Register = () => {
                                 value='Hapana' 
                                 name='revert' 
                                 // onChange={e =>setRevert(e.target.value)}
-                                {...register("revert", { required: true })}
+                                {...register("revert", { required: religion === 'others'? true : false })}
                                 />
                             <label htmlFor="13">Hapana</label>
                         </div>                 
                     </div>
                     
-                </div>
-                {revert === 'Ndio'  && <>                
-                <div className="items_group">
-                    <h3 className='item_title'>Kwanini unataka kuwa Muislamu?</h3>  
-                    <div className="sel_items">
-                        <textarea  
-                            name='revert_res' 
-                            placeholder='Tunaomba Sababu Tafadhari' 
-                            className='sel_textarea'
-                            style={{width: '100%'}}
-                            {...register("revert_res", { required: true })}
-                            />  
-                    </div>                 
-                                    
-                </div>
-                <div className="items_group">
-                    <h3 className='item_title'>Lini unataraji kusilimu?</h3>
-                    <div className="selection_btns">
-                        <div className="sel_item">
-                            <input 
-                                type="radio" id='14' 
-                                value='Mwaka huu' 
-                                name='revert_plan'
-                                {...register("revert_plan", { required: true })}
-                                />
-                            <label htmlFor="14">Mwaka huu</label>
-                        </div>
-                        <div className="sel_item">
-                            <input 
-                                type="radio" id='15' 
-                                value='Mwakani' 
-                                name='revert_plan'
-                                {...register("revert_plan", { required: true })}
-                                />
-                            <label htmlFor="15">Mwakani</label>
-                        </div>  
-                        <div className="sel_item">
-                            <input 
-                                type="radio" id='16' 
-                                value='sijapanga' 
-                                name='revert_plan'
-                                {...register("revert_plan", { required: true })}
-                                />
-                            <label htmlFor="16">Bado sijapanga</label>
-                        </div>                
-                    </div>
-                </div>
-                </>}
+                </div>          
                 
                 
                 </>}
 
-                {religion === 'islam' && <>
+               
     
                 <div className="items_group">
                     <h3 className='item_title'>Kiwango chako cha Elimu</h3>
@@ -702,7 +667,7 @@ const Register = () => {
                                 type="radio" id='25' 
                                 value='Cheti' 
                                 name='edu'
-                                {...register("edu", { required: true })}
+                                {...register("edu", {  required:  true  })}
                                 />
                             <label htmlFor="25">Cheti</label>
                         </div>
@@ -711,7 +676,7 @@ const Register = () => {
                                 type="radio" id='26' 
                                 value='Stashahada'
                                  name='edu'
-                                 {...register("edu", { required: true })}
+                                 {...register("edu", { required: true} )}
                                  />
                             <label htmlFor="26">Stashahada</label>
                         </div>  
@@ -729,7 +694,7 @@ const Register = () => {
                                 type="radio" id='28' 
                                 value='Zaidi' 
                                 name='edu'
-                                {...register("edu", { required: true })}
+                                {...register("edu", {required: true })}
                                 />
                             <label htmlFor="28">Zaidi ya Shahada</label>
                         </div>              
@@ -793,210 +758,30 @@ const Register = () => {
                         
                     </div>
                
-                {/* <div className="items_group">
-                    <h3 className='item_title'>Una mpango wa kutafuta Mwenza (Nikah) humu?</h3>
-                    <div className="selection_btns">
-                        <div className="sel_item">
-                            <input 
-                                type="radio" id='100' 
-                                value='ndio' name='nikah' 
-                                // onChange={e => setNikah(e.target.value)}
-                                {...register("nikah", { required: true })}
-                                />
-                            <label htmlFor="100">Ndio</label>
-                        </div>
-                        <div className="sel_item">
-                            <input 
-                                type="radio" 
-                                id='101' 
-                                value='hapana' 
-                                name='nikah' 
-                                // onChange={e => setNikah(e.target.value)}
-                                {...register("nikah", { required: true })}
-                                />
-                            <label htmlFor="101">Hapana</label>
-                        </div>
-                       
-                     
-                    </div>
-                    
-                </div> */}
-                </>}
-                {/* {religion === 'islam' && nikah === 'ndio' &&<> */}
-                {/* <div className="items_group">
-                    <h3 className='item_title'>Kabila lako</h3>
-                    <div className="selection_btns">
-                        <div className="sel_items">
-                            <select name='tribe'  className='sel_input'>
-                                    <option value='' >Chagua</option> 
-                                    {tribes.map((age, index) => (
-                                    <option value={age} key={index}>{age}</option> 
-                                    ))}
-                                
-                            </select>                          
-                        </div>
-                    </div>
-                    
-                </div> */}
-                {/* <div className="items_group">
-                    <h3 className='item_title'>Urefu wako</h3>
-                    <div className="selection_btns">
-                        <div className="sel_items">
-                        <select name='height'  className='sel_input'>
-                                <option value='' >Chagua</option> 
-                                {heights.map((item, index) => (
-                                   <option value={item} key={index}>{item} cm</option> 
-                                ))}
-                               
-                            </select>                          
-                        </div>
-                    </div>
-                    
-                </div> */}
-                {/* <div className="items_group">
-                    <h3 className='item_title'>Uzito wako</h3>
-                    <div className="selection_btns">
-                        <div className="sel_items">
-                        <select name='weight'  className='sel_input'>
-                                <option value='' >Chagua</option> 
-                                {weight.map((item, index) => (
-                                   <option value={item} key={index}>{item} kg</option> 
-                                ))}
-                               
-                            </select>                          
-                        </div>
-                    </div>
-                    
-                </div> */}
-                {/* <div className="items_group">
-                    <h3 className='item_title'>Kundi lako la damu</h3>
-                    <div className="selection_btns">
-                        <div className="sel_items">
-                        <select name='weight'  className='sel_input'>
-                                <option value='' >Chagua</option> 
-                                {blood.map((item, index) => (
-                                   <option value={item} key={index}>{item}</option> 
-                                ))}
-                               
-                            </select>                          
-                        </div>
-                    </div>
-                    
-                </div> */}
-                {/* <div className="items_group">
-                    <h3 className='item_title'>Aina la umbile lako</h3>
-                    <div className="selection_btns">
-                        <div className="sel_item">
-                            <input type="radio" id='1001' value='ndio' name='body'/>
-                            <label htmlFor="1001">Mnene</label>
-                        </div>
-                        <div className="sel_item">
-                            <input type="radio" id='1011' value='hapana' name='body'/>
-                            <label htmlFor="1011">Mwembamba</label>
-                        </div>
-                        <div className="sel_item">
-                            <input type="radio" id='1012' value='hapana' name='body'/>
-                            <label htmlFor="1012">Mwenye misuli</label>
-                        </div>
-                       
-                     
-                    </div>
-                    
-                </div> */}
-                {/* <div className="items_group">
-                    <h3 className='item_title'>Hali yako ya ndoa</h3>
-                    <div className="selection_btns">
-                        {gender === 'M' &&<>  
-                        <div className="sel_item">
-                            <input type="radio" id='10011' value='Sijaoa' name='marital'/>
-                            <label htmlFor="10011">Sijaoa</label>
-                        </div>
-                        <div className="sel_item">
-                            <input type="radio" id='10113' value='Nimetaliki' name='marital'/>
-                            <label htmlFor="10113">Nimetaliki</label>
-                        </div>
-                        <div className="sel_item">
-                            <input type="radio" id='10115' value='Naongeza Mke' name='marital'/>
-                            <label htmlFor="10115">Naongeza Mke</label>
-                        </div>
-                        </>}
-                        {gender === 'F' &&<>           
-                        <div className="sel_item">
-                            <input type="radio" id='10111' value='Sijaolewa' name='marital'/>
-                            <label htmlFor="10111">Sijaolewa</label>
-                        </div>
-                        <div className="sel_item">
-                            <input type="radio" id='10112' value='Nimetalikiwa' name='marital'/>
-                            <label htmlFor="10112">Nimetalikiwa</label>
-                        </div></>}
-                        
-                        <div className="sel_item">
-                            <input type="radio" id='10114' value='Mjane' name='marital'/>
-                            <label htmlFor="10114">Mjane</label>
-                        </div>
-                       
-                       
-                     
-                    </div>
-                    
-                </div> */}
-                {/* <div className="items_group">
-                    <h3 className='item_title'>Una mtoto au watoto?</h3>
-                    <div className="selection_btns">
-                        <div className="sel_item">
-                            <input type="radio" id='10011' value='Sina' name='child'/>
-                            <label htmlFor="10011">Sina</label>
-                        </div>
-                        <div className="sel_item">
-                            <input type="radio" id='10111' value='Ninao naishi nao' name='child'/>
-                            <label htmlFor="10111">Ninae-ninao naishi nao</label>
-                        </div>
-                        <div className="sel_item">
-                            <input type="radio" id='10112' value='Ninao siishi nao' name='child'/>
-                            <label htmlFor="10112">Ninae-ninao siishi nao</label>
-                        </div>
-                       
-                     
-                    </div>
-                    
-                </div> */}
-                {/* <div className="items_group">
-                    <h3 className='item_title'>Una ishi na nani?</h3>
-                    <div className="selection_btns">
-                        <div className="sel_item">
-                            <input type="radio" id='100111' value='Peke yangu' name='live'/>
-                            <label htmlFor="100111">Peke yangu</label>
-                        </div>
-                        <div className="sel_item">
-                            <input type="radio" id='101112' value='Na familia' name='live'/>
-                            <label htmlFor="101112">Na familia</label>
-                        </div>
-                        <div className="sel_item">
-                            <input type="radio" id='101123' value='Na marafiki' name='live'/>
-                            <label htmlFor="101123">Na marafiki</label>
-                        </div>
-                       
-                     
-                    </div>
-                    
-                </div> */}
-                {/* <div className="items_group">
-                    <h3 className='item_title'>Maelezo kwa ufupi juu ya sifa za ziada ya mwenza unayemtafuta</h3>  
-                    <div className="sel_items">
-                        <textarea  name='desc' placeholder='Sifa za ziada' className='sel_textarea'/> 
-                    </div>                 
-                                     
-                </div> */}
-                {/* </>} */}
+             
                 
-               
+              
+   
                 <div className="items_group">
-                    <button className='btn_reg' onClick={handleRegister}>{loading? 'Inatuma' : 'TUMA USAJIRI'}</button>
+                    {revert === 'Hapana'? <button className='btn_reg' onClick={() => setThanks(true)}>TUMA</button> :                    
+                    <button className='btn_reg' onClick={handleRegister} disabled={!isValid}>{loading? <Loading/> : 'TUMA USAJIRI'}</button> 
+                    }
                 </div>
-                
-                
+                </div>
+            </motion.div>
+            )
+        }
+    }
+  return (
+    <div className='register'>
+        {thanks && <div className='thanks_wrapper'>
+            <div className="thanks_inner">
+                Asante kwa maombi yako, ila tunasikita kuwa jukwaa hili ni kwa Waislamu au wale wanaotarajia kuwa Waislam tu.
+                <button onClick={() =>setThanks(null)} className='btn_reg'>Rudi</button>
             </div>
-        </motion.div>
+        </div>}
+        <Nav/>
+        {RenderPage()}   
       
     </div>
   )

@@ -14,6 +14,18 @@ const CreateReview = ({title, doc}) => {
     const cuUser = users?.find(u => u.id === user?.uid)
 
     const commentRef = collection(db, 'comments')
+    const likeRef = collection(db, 'likes')
+    const notificRef = collection(db, 'notifics')
+  
+    const newNotific = {
+      target_id: doc?.userId,
+      uid: user.uid,
+      type: 'swali lako',
+      action: 'amejibu',
+      isSeen: false,
+      createdAt: serverTimestamp()
+    }
+    console.log('doc', doc)
     
     const handleComment = async(e) => {
         e.preventDefault()
@@ -23,16 +35,18 @@ const CreateReview = ({title, doc}) => {
         const data = {
             docId: doc.id,
             userId: user.uid,
-            name: cuUser?.fname+" "+cuUser?.lname,
+            name: cuUser?.name,
             createdAt: serverTimestamp(),
             text: message,           
-            photo: cuUser?.photo
+            photo: cuUser?.photo ? cuUser?.photo : process.env.PUBLIC_URL + cuUser?.avatar
         }
 
         try {
             await addDoc(commentRef, data)
-            setLoading(null)
+            await addDoc(notificRef, newNotific)
             setMessage('')
+            setLoading(null)
+            
            
         } catch (error) {
             console.log(error.message)
@@ -45,14 +59,16 @@ const CreateReview = ({title, doc}) => {
   return (
     <div className="review_share">
         <div className="share_text">
-            <input 
-                type="text" 
-                placeholder={title}
-                className='sel_input'
-                style={{width:'100%'}}
-                name={message}
-                onChange={(e) =>setMessage(e.target.value)}
-                />
+            <textarea 
+                type= 'textarea'  
+                placeholder={title} 
+                className='sel_input3'
+                name='message'                        
+                value={message} 
+                 style={{width:'100%', height: message? '200px': '30px'}}
+                onChange={(e) =>setMessage(e.target.value)}>
+            </textarea> 
+         
             
         </div>
         <div className="share_action">       

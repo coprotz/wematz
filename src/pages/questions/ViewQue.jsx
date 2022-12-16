@@ -28,7 +28,7 @@ const ViewQue = () => {
                 <img src={que?.photo} />
             </div>           
             <h4>{que?.name}</h4>          
-            <span>{moment(que?.createdAt?.toDate()).fromNow(true)}</span>
+            <span>{moment(que?.createdAt.seconds * 1000).format('MMM Do YY, LT') }</span>
         </div>
         <div className="view_que_answers">
             <h3 className='sub_title'>Majibu</h3>
@@ -41,7 +41,7 @@ const ViewQue = () => {
                         <div className="answered_body">
                             <p>{a.text}</p>
                             <small className='answered_small'>
-                                <span>{moment(a?.createdAt?.toDate()).fromNow(true)}</span>
+                                <span>{moment(a.createdAt?.seconds * 1000).format('MMM Do YY, LT') }</span>
                             </small>
                         </div>
                     </div>

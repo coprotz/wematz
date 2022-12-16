@@ -6,6 +6,7 @@ import { FaHeartbeat, FaRegNewspaper } from "react-icons/fa";
 import { GoLaw } from "react-icons/go";
 import { RiTeamLine, RiQuestionnaireFill } from "react-icons/ri";
 import { HiHome } from "react-icons/hi";
+import { MdOutlineVerifiedUser } from "react-icons/md";
 import {  FiActivity } from "react-icons/fi";
 // import { TbBusinessplan } from "react-icons/tb";
 import './menu.css'
@@ -21,6 +22,7 @@ const HomeMenu = ({active, setActive}) => {
     const cuUser = users?.find(u => u.id === user.uid)
     const marry = marriages?.find(m => m.userId === user.uid)
     const isMarry = user.uid === marry?.userId
+    const admin = cuUser?.isAdmin == true
 
   return (
     <div className={active? "home_menu" : 'home_no'}>
@@ -73,6 +75,15 @@ const HomeMenu = ({active, setActive}) => {
             <IoIosChatbubbles/>
             <span>Meseji</span>
         </NavLink>
+        <NavLink to='/mjaheed' className="menu_item" onClick={() =>setActive(!active)}>
+            <MdOutlineVerifiedUser/>
+            <span>Kuwa Mjaheed</span>
+        </NavLink>
+        {admin &&
+        <NavLink to='/admin' className="menu_item" onClick={() =>setActive(!active)}>
+            <MdOutlineVerifiedUser/>
+            <span>Admin</span>
+        </NavLink>}
         {/* <NavLink to='/needHelps' className="menu_item" onClick={() =>setActive(active)}>
             <SiHomeassistant/>
             <span>Wanaohitaji</span>

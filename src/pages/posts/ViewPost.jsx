@@ -56,15 +56,16 @@ const ViewPost = () => {
   return (
     <div className='view_post'>
         <div className="view_que_back">
-            <button onClick={() =>navigate(-1)} className='btn_back'><HiOutlineArrowLeft/>Rudi Nyuma</button>
+            <button onClick={() =>navigate(-1)} className='btn_btn'><HiOutlineArrowLeft/></button>
+            <h3 className='title'>Angalia Posti</h3>
         </div>
         <div className="post_card_user">
             <div className="card_user_photo">
-                <img src={user?.photo} alt="" />
+                <img src={user?.photo? user?.photo : process.env.PUBLIC_URL + user?.avatar} alt="" />
             </div>
             <div className="card_username" style={{marginTop: '10px', marginBottom: '10px'}}>
                 <h5>{user?.fname+" "+user?.lname}</h5>
-                <small className='timeago'>{moment(post?.createdAt?.toDate()).fromNow(true)}</small>
+                <small className='timeago'>{moment(post?.createdAt?.toDate()).format('MMM Do YY, LT')}</small>
             </div>
                
         </div>

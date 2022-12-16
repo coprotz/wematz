@@ -32,7 +32,7 @@ const Home = () => {
                     <div className="home_wrapper">            
                         <div className={active ? "home_sidebar" :  'no_sidebar'}>                
                             <HomeMenu active={active} setActive={setActive}/> 
-                            <Prayer/>             
+                            {/* <Prayer/>              */}
                         </div>
                         <div className="home_body"> 
                             <div className="main_left" >

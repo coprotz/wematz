@@ -3,7 +3,8 @@
     border-top: 1px solid grey;
     background-color: white;
     border-radius: 0 0 5px 5px;
-    min-height: 100px;
+    min-height: 55vh;
+    overflow-y: scroll;
 }
 
 .menu_bar{

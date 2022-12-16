@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { BsArrowLeft, BsCamera } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
+import Loading from '../../components/loading/Loading';
 import { clinics } from '../../data';
 import { db, useAuth } from '../../hooks/useAuth';
 import useData from '../../hooks/useData';
@@ -68,6 +69,7 @@ const FormDoc = ({setPage}) => {
             isOnline: true,
             approved: false,
             edu: cuUser?.edu,
+            status: 'Hajathibitishwa',
             createdAt: serverTimestamp()
 
         }
@@ -85,7 +87,8 @@ const FormDoc = ({setPage}) => {
     <div className="opp_form">
     <div className="oppo_head">
       <button onClick={() => setPage(1)} className='btn'><BsArrowLeft/></button>
-      <h1>Maombi ya Kuwa WemaDocta</h1>
+      {/* <h1>Maombi ya Kuwa WemaDocta</h1> */}
+      <h3 className='title'>Maombi ya Kuwa WemaDocta</h3>
     </div>
     <div className="profile_header">
         <div className="user_photo">
@@ -185,8 +188,8 @@ const FormDoc = ({setPage}) => {
       <div className="items_group">
         <button 
             className='btn_reg' 
-            disabled={!isValid}
-            onClick={handleDoctor}>{loading? 'Inatuma': 'TUMA USAJIRI'}</button>
+            disabled={!isValid || !url}
+            onClick={handleDoctor}>{loading? <Loading/>: 'TUMA USAJIRI'}</button>
       </div>
     
   </div>

@@ -23,11 +23,11 @@ const ShareVideo = ({setVideo}) => {
 
         const data = {
             userId: user.uid,
-            name: cuUser?.fname+" "+cuUser?.lname,
+            name: cuUser?.name,
             createdAt: serverTimestamp(),
             url: message,
             type: 'video',
-            photo: cuUser?.photo
+            photo: cuUser?.photo? cuUser?.photo : process.env.PUBLIC_URL + cuUser?.avatar
         }
 
         try {
@@ -47,8 +47,8 @@ const ShareVideo = ({setVideo}) => {
             <h3>Weka Url ya Video</h3>      
             <input 
                 type="text" 
-                placeholder='Weka Url ya Video' 
-                className='sel_input'
+                placeholder='Weka Url ya Video kutoka Youtube' 
+                className='sel_input3'
                 name='message'
                 value={message} 
                 // style={{width:'100%'}}

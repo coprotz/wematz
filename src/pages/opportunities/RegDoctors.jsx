@@ -20,7 +20,8 @@ const RegDoctors = () => {
         <>
           <div className="oppo_head">
             <button onClick={() => navigate('/opportunities')} className='btn_btn'><BsArrowLeft/></button>
-            <h1>Karibu kujisajili kama WemaDocta</h1>
+            {/* <h1>Karibu kujisajili kama WemaDocta</h1> */}
+            <h3 className='title'>Karibu kujisajili kama WemaDocta</h3>
           </div>
           <div className="opp_doc_body">
             <h3>Madaktari watakaoshiriki katika jukaa hili, watajulikana kama WemaDocta na watawashauri kwa kadri ya uwezo wao ndugu zao walioomu humu kwa kujibu jumbe zao au 

@@ -1,10 +1,32 @@
 import React from 'react'
+import { useEffect } from 'react'
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../../hooks/useAuth'
 import Loading from './Loading'
+import { FcHighPriority } from 'react-icons/fc';
 
 const LoadingPage = () => {
+  const [counts, setCounts] = useState(0)
+  // const navigate = useNavigate()
+  const { user, logOut, } = useAuth()
+
+  // console.log('user', user)
+
+  useEffect(() => {
+    setInterval(() => {
+      setCounts(5)
+    },5000)
+  },[])
+  
   return (
     <div className='loading_page'>
-        <Loading/>
+        {counts === 5? 
+          <div className='login_failure'>
+            <FcHighPriority/>
+            <h1>Inaonesha kama hauna akaunti au kuna tatizo la mtandao, tafadhari fungua akaunti na ujaribu tena</h1>
+            <button onClick={() =>logOut()} className='btn_reg'>Nyumbani</button>
+          </div> : <Loading/>}
     </div>
   )
 }

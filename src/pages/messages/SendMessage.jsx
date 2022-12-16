@@ -11,87 +11,99 @@ import Loading from '../../components/loading/Loading';
 
 const SendMessage = ({chat}) => {
 
-  const { users, marriages, doctors, lawyers } = useData();
-  const { user } = useAuth()
-  const { uid } = user
-  const [message, setMessage] = useState('')
-  const [loading, setLoding] = useState(null)
-  const [attached, setAttached] = useState(null)
+  // const { users, marriages, doctors, lawyers } = useData();
+  // const { user } = useAuth()
+  // const { uid } = user
+  // const [message, setMessage] = useState('')
+  // const [loading, setLoding] = useState(null)
+  // const [attached, setAttached] = useState(null)
 
-  const doctor = doctors?.find(a =>a.userId === user.uid)
-  const lawyer = lawyers?.find(l =>l.userId === user.uid)
+  // const doctor = doctors?.find(a =>a.userId === user.uid)
+  // const lawyer = lawyers?.find(l =>l.userId === user.uid)
 
-  const messageRef = collection(db, 'messages')
-  const [error, setError] = useState('')
-
-  const myId = 
-    user.uid || 
-    doctors?.find(d => d.userId === user.uid)?.id || 
-    marriages?.find(m =>m.userId === user.uid)?.id ||
-    lawyers?.find(l => l.userId === user.uid)?.id
+  // const messageRef = collection(db, 'messages')
+  // const [error, setError] = useState('')
 
 
-  const myDoc = doctors?.find(d => d.userId === user.uid)
-  const myMarry = marriages?.find(m =>m.userId === user.uid)
-  const myLaw = lawyers?.find(m =>m.userId === user.uid)
 
+  
+    // const isMarry = marriages?.find(m => m.id === myid)?.photo
+    // const isDoc = doctors?.find(d => d.id === myid)?.photo
+    // const isLaw = lawyers?.find(l => l.id === myid)?.photo
+    // const isUser = users?.find(u => u.id === myid)?.photo
 
-  console.log('chat', chat)
+    // const isMary = marriages?.find(m => m.id === myid)?.username
+    // const isDo = doctors?.find(d => d.id === myid)?.username
+    // const isLa = lawyers?.find(l => l.id === myid)?.username
+    // const isUse = users?.find(u => u.id === myid)?.fname
 
-  const memberId = chat?.members?.find(m => m !== myId)
+    // const myphoto = isMarry || isDoc || isLaw || isUser
+    // const myname = isMary || isDo || isLa || isUse
 
-  // const doc = doctors?.find(d => d.id === memberId)
-  // const law = lawyers?.find(d => d.id === memberId)
-  // const marry = marriages?.find(d => d.id === memberId)
+    const { users, marriages, doctors, lawyers } = useData();
+    const { user } = useAuth()
+    const { uid } = user
+    const [message, setMessage] = useState('')
+    const [loading, setLoding] = useState(null)
 
-  // const isDoc = doc?.id === memberId
-  // const isLaw = law?.id === memberId
-  // const isMarry = marry?.id === memberId
+    const messageRef = collection(db, 'messages')
+    const [error, setError] = useState('')
+  
+    const myId = 
+      user.uid || 
+      doctors?.find(d => d.userId === user.uid)?.id || 
+      marriages?.find(m =>m.userId === user.uid)?.id ||
+      lawyers?.find(l => l.userId === user.uid)?.id
+  
+  
+    const myDoc = doctors?.find(d => d.userId === user.uid)
+    const myMarry = marriages?.find(m =>m.userId === user.uid)
+    const myLaw = lawyers?.find(m =>m.userId === user.uid)
 
-    // const isUser = users?.find(u => u.id === memberId)
+    const memberId = chat?.members?.find(m => m !== myId)
+
+  
     const isMarry = marriages?.find(m => m.id === memberId)
     const isDoc = doctors?.find(d => d.id === memberId)
     const isLaw = lawyers?.find(l => l.id === memberId)
-
-  console.log('isDoc', isDoc)
-  console.log('isLaw', isLaw)
-  console.log('isMarry', isMarry)
+    
+  
 
   const cuUser = users?.find(u => u.id === user.uid)
-  // const marry = marriages?.find(p=>p.userId === user.uid)
-
-  // const Name = () => {
-  //   if(isMarry){
-  //     return (
-  //       <>{myMarry?.name}</>
-  //     )
-  //   }else if(isLaw){
-  //     return (
-  //       <>{cuUser?.fname+" "+cuUser?.fname}</>
-  //     )
-  //   }else{
-  //     <>{marry.username}</>
-  //   }
-  // }
 
   const handleSubmit = async(e) => {
     e.preventDefault()
     setLoding(true)
     const data = {
             uid,
-            name: isDoc? cuUser?.fname+" "+cuUser?.fname : isLaw? cuUser?.fname+" "+cuUser?.fname: isMarry? myMarry.username : myDoc?.name || myLaw?.name,
-            photo: isDoc? cuUser?.photo : isLaw? cuUser?.photo :isMarry? myMarry.photo : myDoc?.photo || myLaw?.photo,       
+            name: isDoc? cuUser?.name : isLaw? cuUser?.name : isMarry? myMarry.username : myDoc?.name || myLaw?.name || cuUser?.name,
+            photo: isDoc? cuUser?.photo ? cuUser?.photo : cuUser?.avatar : isLaw? cuUser?.photo ? cuUser?.photo : cuUser?.avatar :isMarry? myMarry.photo : myDoc?.photo || myLaw?.photo || cuUser?.photo,        
             createdAt: serverTimestamp(),
+            avatar: '/users/profile.webp',
             text: message,
             room: chat.id,
             isRead: false
            
     }
 
+    const notificRef = collection(db, 'notifics')
+
+    const newNotific = {
+      target_id: memberId,
+      uid: user.uid,
+      type: 'message',
+      action: 'amekutumia',
+      isSeen: false,
+      createdAt: serverTimestamp()
+    }
+
     try {
         await addDoc(messageRef, data)
+        await addDoc(notificRef, newNotific)
         setLoding(null);
         setMessage('');
+
+        
         
     } catch (error) {
         console.log(error.message)

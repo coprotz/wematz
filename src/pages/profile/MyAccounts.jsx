@@ -25,9 +25,9 @@ const MyAccounts = () => {
         {cuUser &&
         <div className="acc_doc">
             <h4>Mtumiaji wa Kawaida</h4>
-            <img src={cuUser?.photo} />
-            <h4>{cuUser?.fname+" "+cuUser?.lname}</h4>
-            <button className='btn_sign'>Angalia Profile</button>
+            <img src={cuUser?.photo ? cuUser?.photo : process.env.PUBLIC_URL + cuUser?.avatar} />
+            <h4>{cuUser?.name}</h4>
+            <button className='btn_sign' onClick={() => navigate(`/members/${cuUser?.id}`)}>Angalia Profile</button>
         </div>}
         {mydoc &&
         <div className="acc_doc">

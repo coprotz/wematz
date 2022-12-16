@@ -1,10 +1,10 @@
 import React from 'react'
-import { useState } from 'react'
+// import { useState } from 'react'
 import {useNavigate } from 'react-router-dom'
 import './donate.css'
 
-const Donate = ({setDonate}) => {
-    const [cont, setCont] = useState('')
+const Donate = () => {
+    // const [cont, setCont] = useState('')
     const navigate = useNavigate()
   return (
     <div className="nikah_donate">

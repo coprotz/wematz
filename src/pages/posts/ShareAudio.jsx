@@ -52,7 +52,7 @@ const ShareAudio = ({setAudio}) => {
             createdAt: serverTimestamp(),
             clip: url,
             type: 'audio',
-            photo: cuUser?.photo
+            photo: cuUser?.photo? cuUser?.photo : process.env.PUBLIC_URL + cuUser?.avatar
         }
 
         try {

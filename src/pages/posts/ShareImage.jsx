@@ -48,11 +48,11 @@ const ShareImage = ({setImage}) => {
 
         const data = {
             userId: user.uid,
-            name: cuUser?.fname+" "+cuUser?.lname,
+            name: cuUser?.name,
             createdAt: serverTimestamp(),
             pic: url,
             type: 'image',
-            photo: cuUser?.photo
+            photo: cuUser?.photo? cuUser?.photo : process.env.PUBLIC_URL + cuUser?.avatar
         }
 
         try {

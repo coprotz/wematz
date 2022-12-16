@@ -1,6 +1,6 @@
 .wema_grids{
     display: grid;
-    grid-template-columns: repeat(auto-fit, 300px);
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 15px;
     padding: 20px;
 }
@@ -45,6 +45,64 @@
 
 .btn_follow:hover{
     background-color: darkblue;
+}
+
+.member_info_div{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 5px;
+}
+
+.u_edit_photo{
+    display: flex;
+    align-items: center;
+    /* width: 200px; */
+    /* border: 1px solid red; */
+    position: absolute;
+    top: 270px;
+    gap: 5px;
+    left: 50px;
+    background-color: var(--sec);
+    padding: 9px;
+}
+
+.doc_mjaheed{
+    /* border: 1px solid red; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #aaa;
+}
+
+.doc_mjaheed span{
+    background-color: var(--primary);
+    padding: 7px 11px;
+    color: white;
+    margin-left: 5px;
+    border-radius: 5px;
+}
+
+.btn_edit{
+    background-color: var(--primary);
+    border: none;
+    padding: 9px 13px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.btn_edit:hover{
+    background-color: blue;
+}
+
+
+.member_adctions{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 10px;
 }
 
 @media screen and (max-width: 740px){

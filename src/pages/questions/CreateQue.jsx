@@ -32,8 +32,8 @@ const CreateQue = () => {
             cat,
             que,
             userId: user.uid,
-            photo: cuUser.photo,
-            name: cuUser?.fname+" "+cuUser?.lname,
+            photo: cuUser.photo ? cuUser?.photo : process.env.PUBLIC_URL + cuUser?.avatar,
+            name: cuUser?.name,
             createdAt: serverTimestamp()
         }
 
@@ -50,7 +50,9 @@ const CreateQue = () => {
   return (
     <div className='create_que'>
         <div className="view_que_back">
-            <button onClick={() =>navigate(-1)} className='btn_back'><HiOutlineArrowLeft/>Rudi Nyuma</button>
+            <button onClick={() =>navigate(-1)} className='btn_btn'><HiOutlineArrowLeft/></button>
+            {/* <h3>Uliza Swali</h3> */}
+            <h3 className='title'>Uliza Swali</h3>
         </div>
        <div className="items_group que_cat">
             <h3 className='item_title'>Kategoria ya Swali</h3>

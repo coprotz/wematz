@@ -2,36 +2,65 @@ import React from 'react'
 import { useState } from 'react'
 import Tiptak from '../../components/tiptap/Tiptap'
 import parser from 'html-react-parser'
+import { db, useAuth } from '../../hooks/useAuth'
+import {GrClose } from "react-icons/gr";
+import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
+import Loading from '../../components/loading/Loading'
 
 
 
 const CreateMada = () => {
     const [body, setBody] = useState('')
-  return (
-    
-    <div className="create_mada">
-        <textarea 
-            name="title" 
-            id="" placeholder='Kichwa cha Habari'
-            class="finder"
-            style={{fontSize: '1.2rem'}}
-            >
-        </textarea>
-        <Tiptak setBody={setBody}/>
-        {/* <textarea 
-            name="" id="" 
-            cols="30" 
-            rows="10" 
-            value={body}
-            placeholder='Mada'
-            class="finder"
-            style={{fontSize: '1.2rem'}}
-            >
+    const { setNewMada, user, setAlert } = useAuth()
+    const [title, setTitle] = useState('')
+    const [ loading, setLoading ] = useState(null)
 
-        </textarea> */}
-        <p>{parser(body)}</p>
-        <button className='btn_create'>Anzisha</button>
-    </div>  
+
+    const handleMada = async () => {
+      setLoading(true)
+      const madaRef = collection(db, 'madas')
+      const data = {
+        title,
+        body,
+        uid: user.uid,
+        createdAt: serverTimestamp()
+      }
+
+      try {
+        await addDoc(madaRef, data)
+        setLoading(null)
+        setNewMada(null)
+        setAlert('Mada has been added successiful')
+        setInterval(() => {
+          setAlert('')
+        },3000)
+      } catch (error) {
+        console.log(error.message)
+      }
+    }
+    
+  return (
+    <div className="new_mada_wrapper">        
+      <div className="create_mada">
+        <div className="not_inner_top">
+            <h2>Anzisha Mada</h2>
+            <button className='btn_btn' onClick={() => setNewMada(null)}><GrClose/></button>
+          </div>
+        
+          <textarea 
+              name="title" 
+              id="" placeholder='Kichwa cha Habari'
+              class="finder"
+              value={title}
+              style={{fontSize: '1.2rem'}}
+              onChange={(e) => setTitle(e.target.value)}
+              >
+          </textarea>
+          <Tiptak setBody={setBody}/>         
+          {/* <p>{parser(body)}</p> */}
+          <button className='btn_create' onClick={handleMada}>{loading? <Loading/> : 'Anzisha'}</button>
+      </div> 
+    </div> 
   )
 }
 

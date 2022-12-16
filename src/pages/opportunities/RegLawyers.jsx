@@ -21,7 +21,8 @@ const RegLawyers = () => {
         <>
           <div className="oppo_head">
             <button onClick={() => navigate('/opportunities')} className='btn_btn'><BsArrowLeft/></button>
-            <h1>Karibu kujisajili kama WemaSheria</h1>
+            {/* <h1>Karibu kujisajili kama WemaSheria</h1> */}
+            <h3 className='title'>Karibu kujisajili kama WemaSheria</h3>
           </div>
           <div className="opp_doc_body">
             <h3>Wanasheria watakaoshiriki katika jukaa hili, watajulikana kama WemaSheria na watawashauri kwa kadri ya uwezo wao ndugu zao 

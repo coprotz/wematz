@@ -1,0 +1,112 @@
+.doc_photo_appoint{
+    width: 100px;
+    height: 100px;
+}
+
+.doc_photo_appoint img{
+    border: 5px solid var(--primary);
+}
+
+.doc_name{
+    font-size: 1.2rem;
+}
+
+.appoints_contents{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    /* border: 1px solid red; */
+    width: 80%;
+    align-items: center;
+}
+
+.group_inputs{
+    display: flex;
+    flex-direction: column; 
+    width: 100%;
+}
+
+.appoint_card1{
+    background-color: var(--bg);
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    border-radius: 6px;
+}
+
+.apo_wrapper{
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.app_name{
+    color: var(--primary);
+    font-weight: 700;
+}
+
+.app_accepted{
+    background-color: var(--primary);
+    padding: 5px 10px;
+    border-radius: 3px;
+    color: white;
+    width: fit-content;
+    border: none;
+    font-size: 1rem;
+}
+
+.card_app_top{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.app_pending{
+    background-color: rgb(246, 246, 134);
+    padding: 5px 10px;
+    border-radius: 3px;
+    /* color: white; */
+    width: fit-content;
+    border: none;
+}
+
+.app_rejected{
+    background-color: red;
+    padding: 5px 10px;
+    border-radius: 3px;
+    color: white;
+    width: fit-content;
+    border: none;
+    font-size: 1rem;
+}
+
+.app_details{
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.app_details img{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.app_no_booked{
+    display: flex;
+    color: #aaa;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    text-align: center;
+
+}
+
+.apo_actions_btns{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 10px;
+}

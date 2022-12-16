@@ -3,9 +3,9 @@ import useData from '../../hooks/useData'
 
 const PartName = ({part}) => {
     const { users } = useData()
-    const memberName = users.find(u => u.id === part.userId)
+    const memberName = users.find(u => u.id === part)
   return (
-    <span>{memberName?.fname+" "+memberName?.lname}</span>
+    <span>{memberName?.name}</span>
   )
 }
 

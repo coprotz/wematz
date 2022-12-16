@@ -1,12 +1,13 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import logo from '../../assets/images/logo500.png'
 
 const Nav = () => {
     const navigate = useNavigate()
   return (
     <div className="register_nav">
         <div className="logo" onClick={() => navigate('/')}>
-            Wema
+            <img src={logo} alt="" />
         </div>
         {/* <div className="mneu_items">
             <span>Nyumbani</span>

@@ -14,9 +14,10 @@ const QueMain = () => {
         <div className="main_ques_top">
             <div className="main_que_top">
                 <div className="view_que_back">
-                    <button onClick={() =>navigate(-1)} className='btn_btn'><HiOutlineArrowLeft/></button>                    
+                    <button onClick={() =>navigate(-1)} className='btn_btn'><HiOutlineArrowLeft/></button>   
+                    <h3 className='title'>Maswali na Majibu</h3>                 
                 </div>
-                <h3>Maswali na Majibu</h3>
+                {/* <h3>Maswali na Majibu</h3> */}
             </div>                
             <div className='qu_btn'>
                 <button className='btn_que' onClick={() =>navigate('/questions/createQue')}>Uliza Swali</button>

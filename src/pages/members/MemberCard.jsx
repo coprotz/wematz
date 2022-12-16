@@ -1,12 +1,13 @@
-import { addDoc, collection } from 'firebase/firestore'
+import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
 import React from 'react'
 import { useState } from 'react'
 import Loading from '../../components/loading/Loading'
 import { db, useAuth } from '../../hooks/useAuth'
 import useData from '../../hooks/useData'
+import { BsChatLeftDotsFill,BsFillPersonFill } from "react-icons/bs";
 
 
-const MemberCard = ({member}) => {
+const MemberCard = ({member, handelNew}) => {
     const { followers } = useData()
     const { user } = useAuth()
     const [loading, setLoading] = useState(false)
@@ -16,6 +17,16 @@ const MemberCard = ({member}) => {
     console.log('myfoll', myFollowers)
 
     const followRef = collection(db, 'followers')
+    const notificRef = collection(db, 'notifics')
+  
+    const newNotific = {
+      target_id: member?.id,
+      uid: user.uid,
+      type: '',
+      action: 'anakufatilia',
+      isSeen: false,
+      createdAt: serverTimestamp()
+    }
 
     const handleFollow = async(e) => {
         e.preventDefault()
@@ -29,6 +40,7 @@ const MemberCard = ({member}) => {
         if(!isFollower){
            try {
             await addDoc(followRef, data)
+            await addDoc(notificRef, newNotific)
             setLoading(null)
             } catch (error) {
             console.log(error.message)
@@ -43,15 +55,20 @@ const MemberCard = ({member}) => {
   return (
     <div className="wema_card" key={member?.id}>
         <div className="part_info">
-            <img src={member?.photo} alt="" />                                            
+            <img src={member?.photo? member?.photo : process.env.PUBLIC_URL + member?.avatar} alt="" />                                            
         </div>
         <div className="wema_info">
-            <h3>{member?.fname+" "+member?.lname}</h3>
+            <h3>{member?.name}</h3>
             <span>{member?.profes}</span>
-            <button 
-                className={isFollower? 'btn_isFollow' : 'btn_follow'}
-                onClick={handleFollow}
-                >{loading? <Loading/> : isFollower? 'Unamfatilia' : 'Mfatilie'}</button>
+            <div className="member_adctions">
+                <button 
+                    className={isFollower? 'btn_isFollow' : 'btn_follow'}
+                    onClick={handleFollow}
+                    >{loading? <Loading/> : isFollower? 'Unamfatilia' : 'Mfatilie'}
+                </button>
+                <button className='btn_btn' onClick={() =>handelNew(member)}><BsChatLeftDotsFill/></button> 
+            </div>
+            
         </div>
     </div>
   )

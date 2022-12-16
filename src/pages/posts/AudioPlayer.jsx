@@ -23,11 +23,11 @@ const AudioPlayer = ({p}) => {
     <div className="post_top">
         <div className="post_card_user">
             <div className="card_user_photo">
-                <img src={user?.photo} alt="" />
+                <img src={user?.photo? user?.photo : process.env.PUBLIC_URL + user?.avatar} alt="" />
             </div>
             <div className="card_username">
-                 <h4 className='author_name'>{user?.fname+" "+user?.lname}</h4>
-                 <small className='timeago'>{moment(p?.createdAt?.toDate()).fromNow(true)}</small>
+                 <h4 className='author_name'>{user?.name}</h4>
+                 <small className='timeago'>{moment(p?.createdAt?.toDate()).format('MMM Do YY, LT')}</small>
             </div>
            
         </div>

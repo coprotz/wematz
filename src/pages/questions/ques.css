@@ -70,6 +70,7 @@
     display: flex;
     align-items: center;
     gap: 20px;
+    padding-left: 15px;
     /* width: 100%; */
     /* padding: 0 15px; */
     justify-content: space-between;
@@ -150,7 +151,12 @@
 .activity_card{
     display: flex;
     gap: 10px;
+    padding: 5px;
     
+}
+
+.activity_card:hover{
+    background-color: aliceblue;
 }
 
 .activies_inner_body{
@@ -268,6 +274,20 @@
     align-items: center;
     /* gap: 7px; */
     padding-left: 10px;
+}
+
+.view_que_back{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.q_date{
+    color: var(--primary);
+}
+
+.last_time{
+    color: var(--primary);
 }
 
 

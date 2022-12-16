@@ -17,15 +17,19 @@ const ChatCard = ({chat}) => {
     const doc = doctors?.find(p=>p.userId === user.uid)
     const law = lawyers?.find(p=>p.userId === user.uid)
 
+    const myid = chat?.members.find(m => m === cuUser?.id || marry?.id || doc?.id || law?.id)
+
     // const userChat = chat.members.find(m =>m !== cuUser?.id)
     // const marryChat = chat.members.find(m =>m !== marry?.id)
     // const docChat = chat.members.find(m =>m !== doc?.id)
 
-    const memberId = 
-      chat?.members.find(m =>m !== cuUser?.id) ||
-      chat?.members.find(m =>m !== marry?.id) ||
-      chat?.members.find(m =>m !== law?.id) ||
-      chat?.members.find(m =>m !== doc?.id)
+    // const memberId = 
+    //   chat?.members.find(m =>m !== cuUser?.id) ||
+    //   chat?.members.find(m =>m !== marry?.id) ||
+    //   chat?.members.find(m =>m !== law?.id) ||
+    //   chat?.members.find(m =>m !== doc?.id)
+
+    const memberId = chat?.members.find(m =>m !== myid)
 
     
 
@@ -87,7 +91,7 @@ const ChatCard = ({chat}) => {
         )
       }else {
         return (
-          <>{isUser?.fname+" "+isUser?.lname}</>
+          <>{isUser?.name}</>
         )
       }
     }
@@ -101,7 +105,7 @@ const ChatCard = ({chat}) => {
         )
       }else if(isDoc){
         return (
-          <img src={isDoc?.photo} />
+          <img src={isDoc?.photo? isUser?.photo : isUser?.avatar} />
         )
       }else if(isLaw){
         return (
@@ -109,7 +113,7 @@ const ChatCard = ({chat}) => {
         )
       }else {
         return (
-          <img src={isUser?.photo} />
+          <img src={isUser?.photo? isUser?.photo : isUser?.avatar} />
         )
       }
     }

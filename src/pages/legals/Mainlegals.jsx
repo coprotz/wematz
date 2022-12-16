@@ -46,8 +46,8 @@ const Mainlegals = () => {
            <Search title='Tafuta Mwanasheria'/> 
         </div>
         <div className="doctors_inner">
-            {lawyers.map(d => (
-              <LawyerCard d={d}/>
+            {lawyers?.filter(l => l.status === 'Amethibitishwa').map(d => (
+              <LawyerCard d={d} key={d.id}/>
             ))}
             
         </div>

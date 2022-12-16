@@ -3,6 +3,7 @@ import moment from 'moment'
 import { useNavigate } from 'react-router-dom'
 import useData from '../../hooks/useData'
 import { GrLike } from 'react-icons/gr'
+import Loading from '../../components/loading/Loading'
 
 
 
@@ -18,11 +19,11 @@ const QueCard = ({q}) => {
   return (
     <div className="que_card" key={q.id}>
         <div className="que_author">
-            <img src={q?.photo} />
+            {q?.photo?  <img src={q?.photo} /> :<Loading/>}
         </div>
         <div className="que_body">
             <div className="que_date">
-                <small>{moment(q?.createdAt?.toDate()).fromNow(true)}</small>
+                <small>{moment(q?.createdAt?.seconds * 1000).format('MMM Do YY, LT') }</small>
             </div>
             <div className="que_title" onClick={()=>navigate(`/questions/${q.id}`)}>
                 <h2>{q.que}</h2>
@@ -30,7 +31,7 @@ const QueCard = ({q}) => {
             <div className="que_last">
                 <p>{lastanswer?.text}</p>
             </div>
-            <small>{moment(lastanswer?.createdAt?.toDate()).fromNow(true)}</small>
+            <small className='last_time'>{moment(lastanswer?.createdAt?.seconds * 1000).format('MMM Do YY, LT') }</small>
             <div className="que_cations">
                 <div className="ques_act_left">
                     <div className="que_answers">

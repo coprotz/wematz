@@ -76,7 +76,7 @@
     gap: 15px;
     justify-content: center;
     filter: blur(8px);
-    -webkit-filter: blur(8px);
+    -webkit-filter: blur(12px);
     width: 90%;
     margin: 0 auto;
 }
@@ -280,15 +280,18 @@
     min-height: 70vh;
     position: relative;
     background-color: white;
+    display: flex;
+    flex-direction: column;
 }
 
 .nikah_view_action{
-    position: absolute;
+    /* position: absolute; */
     bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
+    /* left: 50%;
+    transform: translateX(-50%); */
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 15px;
 }
 
@@ -346,6 +349,12 @@
 
 .nikah_right_item:nth-of-type(even){
     background-color: #2a95ff;
+}
+
+.heading_top{
+    display: flex;
+    align-items: center;
+    gap: 15px;
 }
 
 

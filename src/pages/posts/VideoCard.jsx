@@ -22,11 +22,11 @@ const VideoCard = ({p}) => {
       <div className="post_top">
           <div className="post_card_user">
               <div className="card_user_photo">
-                <img src={user?.photo} alt="" />
+                <img src={user?.photo || process.env.PUBLIC_URL + user?.avatar} alt="" />
               </div>
               <div className="card_username">
-                <h5 className='author_name'>{user?.fname+" "+user?.lname}</h5>
-                <small className='timeago'>{moment(p?.createdAt?.toDate()).fromNow(true)}</small>
+                <h5 className='author_name'>{user?.name}</h5>
+                <small className='timeago'>{moment(p?.createdAt?.toDate()).format('MMM Do YY, LT')}</small>
               </div>
              
           </div>

@@ -2,21 +2,24 @@ import React from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import {  HiOutlineArrowLeft } from "react-icons/hi";
 import ChatLists from './ChatLists'
-import { useAuth } from '../../hooks/useAuth';
+import { db, useAuth } from '../../hooks/useAuth';
 import useData from '../../hooks/useData';
 import SendMessage from './SendMessage';
 import MessageCard from './MessageCard';
 import { BsBell, BsCameraVideo, BsThreeDotsVertical } from 'react-icons/bs';
 import { useState } from 'react';
 import VideoChat from './VideoChat';
+import 'webrtc-adapter'
+import { doOffer } from '../../hooks/FirebaseModule';
+import {doc,  addDoc, collection, deleteDoc } from 'firebase/firestore';
 
 
 
 
 const ViewChat = () => {
     const { id } = useParams()
-    const { user } = useAuth()
-    const { users, chats, messages, doctors, marriages, lawyers } = useData()
+    const { user, alert, setAlert } = useAuth()
+    const { users, chats, messages, doctors, marriages, lawyers, calls, blocks } = useData()
 
     const [viewAction, setViewAction] = useState(null)
     const [receivingCall, setReceivingCall] = useState(null)
@@ -24,49 +27,40 @@ const ViewChat = () => {
 
     const cuUser = users?.find(u => u.id === user.uid)
     const marry = marriages?.find(p=>p.userId === user.uid)
-    const doc = doctors?.find(p=>p.userId === user.uid)
+    const dr = doctors?.find(p=>p.userId === user.uid)
     const law = lawyers?.find(p=>p.userId === user.uid)
+
+    
 
     const chat = chats?.find(c => c.id === id)
 
-    const myname = cuUser?.fname || marry?.username || doc?.name || law?.name
+    const myid = chat?.members.find(m => m === cuUser?.id || marry?.id || dr?.id || law?.id)
 
-    // const userChat = chat?.members.find(m =>m !== cuUser?.id)
-    // const marryChat = chat?.members.find(m =>m !== marry?.id)
-    // const docChat = chat?.members.find(m =>m !== doc?.id)
-    // const lawChat = chat?.members.find(m =>m !== law?.id)
+    console.log('myid', myid)
 
-    // const myId = 
-    //   user.uid || 
-    //   doctors?.find(d => d.userid === user.uid).id || 
-    //   marriages?.find(m =>m.userId === user.uid) ||
-    //   lawyers?.find(l => l.userId === user.uid)
-
-    const memberId = 
-      chat?.members.find(m =>m !== cuUser?.id) ||
-      chat?.members.find(m =>m !== marry?.id) ||
-      chat?.members.find(m =>m !== law?.id) ||
-      chat?.members.find(m =>m !== doc?.id)
+    const myname = cuUser?.name || marry?.username || dr?.name || law?.name
+    const myphoto = cuUser?.photo? cuUser?.photo : process.env.PUBLIC_URL + `${cuUser?.avatar}` || marry?.photo || dr?.photo || law?.photo
+    const memberId = chat?.members.find(m =>m !== myid)
+    console.log('memberId', memberId)
+    
 
       const isMarry = marriages?.find(m => m.id === memberId)
       const isDoc = doctors?.find(d => d.id === memberId)
       const isLaw = lawyers?.find(l => l.id === memberId)
-      const isUser = users?.find(a =>a.id === memberId) 
+      const isUser = users?.find(a =>a.id === memberId)
+      
+      const userid =  
+        marriages?.find(m => m.id===memberId)?.userId ||  
+        doctors?.find(d => d.id===memberId)?.userId ||
+        lawyers?.find(l => l.id === memberId)?.userId 
+
+
 
       const [ idToCall, setIdToCall ] = useState(null)
 
-      // console.log('myId', myId) 
-
-    // console.log('memberId', memberId)   
-    // console.log('userchat',userChat)
-    // console.log('marryChat',marryChat)
-    // console.log('docChat',docChat)
-    // console.log('chat', chat)
-    // console.log('member', member)
     
-    // console.log('isDoc', isDoc)
-    // console.log('isLaw', isLaw)
-    // console.log('isMarry', isMarry)
+    // console.log('user', user.uid)
+    // console.log('userid', userid)
     
 
       const Name = () => {
@@ -84,7 +78,7 @@ const ViewChat = () => {
           )
         }else {
           return (
-            <>{isUser?.fname+" "+isUser?.lname}</>
+            <>{isUser?.name}</>
           )
         }
       }
@@ -105,7 +99,7 @@ const ViewChat = () => {
           )
         }else {
           return (
-            <img src={isUser?.photo} />
+            <img src={isUser?.photo || process.env.PUBLIC_URL + `${cuUser?.avatar}`} />
           )
         }
       }
@@ -116,6 +110,10 @@ const ViewChat = () => {
     const chatMessages = messages?.filter(m =>m.room === id)
     const navigate = useNavigate()
 
+    const handleVideo = () => {
+      doOffer()
+    }
+
     const scrollRef = React.useRef(null);
 
     React.useLayoutEffect(() => {
@@ -125,6 +123,59 @@ const ViewChat = () => {
     })
 
     const [videoChat, setVideoChat] = useState(null)
+
+    const call = calls.find(c => c.to === memberId)
+
+
+    const handleNavigate = () => {
+      if(isMarry){
+        navigate(`/nikah/${isMarry?.id}`)
+      }else if(isDoc){
+        navigate(`/health/doctors/${isDoc?.id}`)
+      }else if(isLaw){
+        navigate(`/legals/${isLaw?.id}`)
+      }else if(isUser){
+        navigate(`/profile/${isUser?.id}`)
+      }
+    }
+
+    const blocksRef = collection(db, 'blocks')
+
+    const myblocks = blocks?.filter(b => b.user_id === myid)
+    const isbloc = myblocks && myblocks.find(m => m.target_id === memberId)
+
+    const myblocked = blocks?.filter(b => b.target_id === myid)
+    const bloc_me = myblocked.find(m => m.user_id === memberId)
+
+    const blocRef = doc(db, 'blocks', `${isbloc?.id}`)
+
+    console.log('bloc_me', bloc_me)
+    // console.log('myblocks', myblocks)
+    console.log('isbloc', isbloc)
+    // console.log('myblocked', myblocked)
+
+    const handleBlock = async(e) => {
+      e.preventDefault()
+
+      const data = {
+        target_id: memberId,
+        user_id: myid
+      }
+
+      if(!isbloc){
+        await addDoc(blocksRef, data)
+        // setAlert('Umemblock')
+        // setInterval(() => {
+        //   setAlert('')
+        // },3000)
+      }else {
+        await deleteDoc(blocRef)
+        // setAlert('Umemuachia')
+        // setInterval(() => {
+        //   setAlert('')
+        // },3000)
+      }
+    }
 
    
 
@@ -153,8 +204,8 @@ const ViewChat = () => {
                       <button className='btn_btn' ><BsThreeDotsVertical/></button>
                       {viewAction &&
                       <div className="chat_member_action" >
-                        <span onClick={() => navigate(`/nikah/${memberId}`)}>Angalia Wasifu Wake</span>
-                        <span>Zuia Mawasiliano</span>
+                        <span onClick={handleNavigate}>Angalia Wasifu Wake</span>
+                        <span onClick={handleBlock}>{isbloc? 'Ruhusu Mawasiliano': 'Zuia Mawasiliano'}</span>
                         <span>Mripoti kwa Kudhalilisha</span>
                         
                       </div>}
@@ -170,11 +221,13 @@ const ViewChat = () => {
                       
                     ))}
                 </div>
-                <SendMessage chat={chat}/>
+                {bloc_me?.id===memberId? <span className='block_user'>{Name()} amekuzuia kutumia ujumbe</span> :
+                <SendMessage chat={chat} photo={myphoto} name={myname} myid={myid}/>}
             </div> :
             <VideoChat 
               myname={myname} 
               memberId={memberId} 
+              call={call}
               receivingCall={receivingCall} 
               setReceivingCall={setReceivingCall} 
               roomId ={id}/>

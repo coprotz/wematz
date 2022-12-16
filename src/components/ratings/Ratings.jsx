@@ -4,7 +4,7 @@ import { reviews } from '../../data'
 
 
 const Ratings = () => {
-    const [review, setReview] = useState(null)
+    // const [review, setReview] = useState(null)
 
     const RenderReview = (value) => {
         if(value > rate){

@@ -1,4 +1,4 @@
-import { addDoc, collection } from 'firebase/firestore'
+import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
 import React from 'react'
 import { useState } from 'react'
 import { AiFillLike } from 'react-icons/ai'
@@ -19,10 +19,20 @@ const Remarks = ({p, setShow}) => {
 
   const isLike = lks.find(l =>l.user_id === user.uid)
 
-  // console.log('coms', coms)
+  // console.log('p', p)
  
 
   const likeRef = collection(db, 'likes')
+  const notificRef = collection(db, 'notifics')
+
+  const newNotific = {
+    target_id: p?.userId || p?.uid,
+    uid: user.uid,
+    type: 'posti yako',
+    action: 'ameipenda',
+    isSeen: false,
+    createdAt: serverTimestamp()
+  }
 
   const handleLike = async(e) => {
     e.preventDefault()
@@ -37,6 +47,7 @@ const Remarks = ({p, setShow}) => {
     try {
       if(!isLike){
         await addDoc(likeRef, data)
+        await addDoc(notificRef, newNotific)
         setLoading(null)
       }else{
         alert('Ushaipenda hii')

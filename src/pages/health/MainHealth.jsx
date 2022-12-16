@@ -40,7 +40,7 @@ const MainHealth = () => {
         <div className="page_side">
           <h4>Doctors online</h4>
           <div className="doctors_grid">
-            {doctors?.slice(0,5).map(d=> (
+            {doctors?.filter(m => m.status === 'Amethibitishwa')?.slice(0,5).map(d=> (
               <div className="doctor_card" key={d.id} onClick={() =>navigate(`/health/doctors/${d.id}`)}>
                   <img src={d.photo} alt="" />
                   <small>{d.name}</small>

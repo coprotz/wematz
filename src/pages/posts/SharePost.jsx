@@ -26,11 +26,11 @@ const SharePost = ({setVideo,setAudio, setImage}) => {
 
         const data = {
             userId: user.uid,
-            name: cuUser?.fname+" "+cuUser?.lname,
+            name: cuUser?.name,
             createdAt: serverTimestamp(),
             tex: message,
             type: 'text',
-            photo: cuUser?.photo
+            photo: cuUser?.photo? cuUser?.photo : process.env.PUBLIC_URL + cuUser?.avatar
         }
 
         try {

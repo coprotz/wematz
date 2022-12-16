@@ -62,13 +62,17 @@ const ChatLists = () => {
                     <span>Mpangilio</span>
                       <span>Anzisha ujumbe kwa Admin</span>                        
                     </div>}
-                </div> 
+            </div> 
           
         </div>        
         <div className="mes_chatlists">
+          {mychats.length > 0 ? 
+          <>
             {mychats?.map(chat => (
-              <ChatCard chat={chat}/>
-            ))}
+                <ChatCard chat={chat}/>
+              ))}
+          </> : 'Hauna Chats'}
+            
         </div>
       </div>
   )

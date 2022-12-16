@@ -4,10 +4,16 @@ import useData from '../../hooks/useData'
 
 const PartPhoto = ({part}) => {
     const { users } = useData()
-    const memberName = users.find(u => u.id === part.userId)
+    const memberName = users.find(u => u.id === part)
   return (
     <div className="memb_photo">
-        <img src={memberName?.photo} alt="" />                                            
+        {memberName?.photo ? <img src={memberName?.photo} alt="" /> : 
+        <div 
+          className='avatar'
+          style={{backgroundColor: `#${Math.floor(Math.random()*16777215).toString(16)}`}}
+          >{memberName?.name[0]}
+        </div>
+        }                                           
     </div>
   )
 }

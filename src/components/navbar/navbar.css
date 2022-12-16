@@ -1,15 +1,23 @@
+.home_top_wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--primary);
+    height: 70px;
+    position: sticky;
+    top: 0;
+    margin: 0 auto;
+    width: 100%;
+    z-index: 15;
+}
 .home_top{
     display: flex;
     justify-content: space-between;
-    width: 95%;
-    margin: 0 auto;
-    padding: 10px;
+    width: 95%; 
     align-items: center;
-    height: 50px;
-    position: sticky;
-    top: 0;
-    background-color: var(--primary);
-    z-index: 15;
+    /* padding: 15px 0; */
+    
+    
    
 }
 
@@ -71,6 +79,18 @@
     justify-content: center;
     align-items: center;
     font-size: 1.1rem;
+    position: relative;
+}
+
+.nots_true{
+    width: 10px;
+    height: 10px;
+    background-color: red;
+    border-radius: 50%;
+    position: absolute;
+    top: 20px;
+    right: 152px;
+    /* z-index: 50; */
 }
 
 .user_action{
@@ -102,3 +122,9 @@
     text-decoration: underline;
     cursor: pointer;
 }
+
+.nav_logo{
+    width: 50px !important;
+    height: 50px !important;
+}
+
