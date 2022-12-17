@@ -77,10 +77,10 @@ const Main = () => {
         <div className="main_footer">
             <div className="m_f_logo" onClick={() =>navigate('/')}>Wema</div>
             <div className="m_f_items">
-                <span onClick={navigate('/about')}>Kuhusu</span>              
+                <span onClick={() =>navigate('/about')}>Kuhusu</span>              
                 <span>Vigezo</span>
                 <span>Faragha</span>
-                <span>Mawasiliano</span>
+                <span onClick={() =>navigate('/contacts')}>Mawasiliano</span>
             </div>
         </div>    
     </div>

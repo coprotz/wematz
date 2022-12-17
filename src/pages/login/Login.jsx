@@ -1,6 +1,6 @@
 import React from 'react'
 import { motion } from 'framer-motion';
-import Nav from '../../components/nav/Nav';
+// import Nav from '../../components/nav/Nav';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { db, useAuth } from '../../hooks/useAuth';
@@ -11,12 +11,16 @@ import Error from '../../components/error/Error';
 import { FcGoogle } from 'react-icons/fc';
 import logo from '../../assets/images/logo_512.png'
 import { doc, updateDoc } from 'firebase/firestore';
+import useData from '../../hooks/useData';
+
 
 
 const Login = () => {
-    const [signup, setSignup] = useState('')
-    const [go, setGo] = useState(null)
-    const [login, setLogin] = useState(0)
+    // const [signup, setSignup] = useState('')
+    // const [go, setGo] = useState(null)
+    const [login, setLogin] = useState(0)  
+    const { users } = useData()
+    const cuUser = users?.find(u => u.id === user?.uid)
     const navigate = useNavigate();
     const { user, signIn, googleSignIn } = useAuth()
     const [loading, setLoading] = useState()
@@ -26,7 +30,7 @@ const Login = () => {
     const email = watch('email')
     const password = watch('password')
 
-    console.log('user', user)
+    // console.log('user', user)
 
    
 
@@ -59,22 +63,34 @@ const Login = () => {
     }
 
 
+
+
   return (
     <div className='register'>
         <div className="register_nav">
-            <div className="logo" onClick={() => navigate('/')}>
+            <div className="logo" style={{width:'90px', height: '90px'}} onClick={() => navigate('/')}>
                 <img src={logo} alt="" />
             </div>
             <div className="mneu_items">
-                <span>Nyumbani</span>
-                <span>Kuhusu sisi</span>             
-                <span>Mawasiliano</span>
+                <span onClick={() =>navigate('/')}>Nyumbani</span>
+                <span onClick={() =>navigate('/about')}>Kuhusu sisi</span>
+                {/* <span>Bei</span> */}
+                <span onClick={() =>navigate('/contacts')}>Mawasiliano</span>
             </div>
+           
+            {cuUser ?         
+            <div className="profile_img" onClick={() => navigate('/')}>
+                <img src={cuUser?.photo ? cuUser?.photo : process.env.PUBLIC_URL + cuUser?.avatar} />
+            </div>
+             :
+    
             <div className="sign_in">
                 <span>Sio mwanachama?</span>
                 <button className='btn_sign' onClick={() =>navigate('/register')}>Jisajiri</button>
             </div>
+             }
         </div>
+      
         
         <motion.div 
              initial={{ y:'100vw'}}
