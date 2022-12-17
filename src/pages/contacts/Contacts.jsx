@@ -16,6 +16,7 @@ import Footer from '../../components/footer/Footer';
 import { db, useAuth } from '../../hooks/useAuth';
 import Loading from '../../components/loading/Loading';
 import useData from '../../hooks/useData';
+import AlertSms from '../../components/alert/AlertSms';
 
 const Contacts = () => {
 
@@ -54,7 +55,7 @@ const Contacts = () => {
     } catch (error) {
       console.log(error)
     }
-    setMessageAlert('Your message has been delivered successiful, our team will contact you soon, thank you.')
+    setMessageAlert('Ujumbe wako, umetufikia, Timu yetu itakurudia baada ya muda mfupi.')
     setTimeout(() => {
       setMessageAlert('')
     }, 6000);
@@ -79,12 +80,11 @@ const Contacts = () => {
       
       <div className="contact_wrapper">
         {messageAlert != '' &&
-              <div className="message_alert1">
-                {messageAlert}
-              </div>
+          <AlertSms alert={messageAlert}/>
         }
       <motion.div initial={{ x: '-100vw'}}
-        animate={{x:0}} className="contact_top">
+        animate={{x:0}} 
+        className="contact_top">
           <div action="" className='form'>
             {!user && <> 
             <div className="form_group">

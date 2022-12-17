@@ -9,6 +9,7 @@
 .news_wrapper{
     display: flex;
     gap: 20px;
+    margin-bottom: 65px;
     /* border: 1px solid red; */
 }
 
@@ -24,6 +25,37 @@
     position: sticky;
     top: 60px;
     height: 700px;
+}
+
+.user_photo5{
+    width: 100%;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #aaa;
+}
+.profile_photo{
+    font-size: 3rem;
+}
+
+.user_photo5 img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.shared_video1{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    align-items: center;
+}
+
+.text_head{
+    
+    padding: 25px;
 }
 
 .top_news{
@@ -119,8 +151,9 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    border: 1px solid red;
-    /* height: 100%; */
+    padding: 10px;
+    /* border: 1px solid red; */
+    height: 155px;
 }
 
 /* .new_actions{

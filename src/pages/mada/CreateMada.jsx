@@ -6,6 +6,7 @@ import { db, useAuth } from '../../hooks/useAuth'
 import {GrClose } from "react-icons/gr";
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
 import Loading from '../../components/loading/Loading'
+import AlertSms from '../../components/alert/AlertSms'
 
 
 
@@ -13,6 +14,7 @@ const CreateMada = () => {
     const [body, setBody] = useState('')
     const { setNewMada, user, setAlert } = useAuth()
     const [title, setTitle] = useState('')
+    const [messageAlert, setMessageAlert] = useState('')
     const [ loading, setLoading ] = useState(null)
 
 
@@ -30,7 +32,7 @@ const CreateMada = () => {
         await addDoc(madaRef, data)
         setLoading(null)
         setNewMada(null)
-        setAlert('Mada has been added successiful')
+        setMessageAlert('Mada imewekwa vizuri sana...!')
         setInterval(() => {
           setAlert('')
         },3000)
@@ -40,7 +42,10 @@ const CreateMada = () => {
     }
     
   return (
-    <div className="new_mada_wrapper">        
+    <div className="new_mada_wrapper"> 
+       {messageAlert != '' &&
+          <AlertSms alert={messageAlert}/>
+        }       
       <div className="create_mada">
         <div className="not_inner_top">
             <h2>Anzisha Mada</h2>

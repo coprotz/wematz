@@ -269,13 +269,24 @@
 .a_info_card{
     background-color: var(--sec);
     border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    gap: 20px;
 }
 
+
+
 .admin_mada{
-    color: var(--primary);
+    background-color: var(--primary);
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 25px;
+    color: white;
+    border-radius: 5px;
 }
 
 .admin_mada:hover{

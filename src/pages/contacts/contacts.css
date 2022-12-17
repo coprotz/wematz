@@ -3,20 +3,7 @@
     width: 100%;
 }
 
-.message_alert1{
-    position: absolute;
-    right: 20px;
-    top: 2px;
-    padding: 6px 20px;
-    background-color: var(--primary); 
-    border-left: 4px solid var(--primary);
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-    animation: message 0.5s;
-    opacity: 1;
-    max-width: 450px;
-    z-index: 10;
 
-}
 
 .contacts_wrapper{
     background-color: var(--bg);

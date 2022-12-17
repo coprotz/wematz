@@ -13,6 +13,7 @@ import Users from './Users';
 import Nikah from './Nikah';
 import Mujaheed from './Mujaheed';
 import Admins from './Admins';
+import CreateNews from '../news/CreateNews';
 
 const Admin = () => {
   const navigate = useNavigate()
@@ -21,7 +22,7 @@ const Admin = () => {
   const [page, setPage] = useState(1)
   const [loading, setLoading] = useState(null)
   const [active, setActive] = useState(null)
-  const { setNewMada } = useAuth()
+  const { setNewMada, setHabari, habari } = useAuth()
 
   const admins = users.filter(u =>u.isAdmin == true)
 
@@ -86,8 +87,9 @@ const Admin = () => {
           <div className="a_info_card">
             
           </div>
-          <div className="a_info_card admin_mada" onClick={() => setNewMada(true)}>
-              <h3>Add Mada of the Week</h3>
+          <div className="a_info_card">
+              <div className="admin_mada" onClick={() => setNewMada(true)}><h3>Add Mada of the Week</h3></div>  
+              <div className="admin_mada" onClick={() => setHabari(true)}><h3>Add Habari</h3></div>             
           </div>
         </div>
       </div> 
@@ -123,7 +125,8 @@ const Admin = () => {
     }
   }
   return (
-    <div className="admin_container">     
+    <div className="admin_container"> 
+      {habari && <CreateNews/>}    
       {RenderPage()}     
     </div>
   )
