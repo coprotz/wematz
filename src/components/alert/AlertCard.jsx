@@ -3,6 +3,7 @@ import { db, useAuth } from '../../hooks/useAuth'
 import useData from '../../hooks/useData'
 import moment from 'moment'
 import { doc, updateDoc } from 'firebase/firestore'
+import { GrClose } from "react-icons/gr";
 
 
 
@@ -22,7 +23,7 @@ const AlertCard = ({item}) => {
                 <small className='q_date'>{moment(item?.createdAt.seconds * 1000).format('MMM Do YY, LT') }</small>
             </div>            
         </div>
-        <button className='btn_alert' onClick={() =>updateDoc(doc(db, 'notifics', `${item.id}`), {isSeen: true})}>X</button>
+        <button className='btn_alert' onClick={() =>updateDoc(doc(db, 'notifics', `${item.id}`), {isSeen: true})}><GrClose/></button>
     </div>
   )
 }

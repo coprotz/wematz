@@ -6,9 +6,9 @@ const Footer = () => {
     const navigate = useNavigate()
   return (
     <div className='footer_wrapper'>
-        <div className="m_f_logo">Wema</div>
+        <div className="m_f_logo" onClick={() =>navigate('/')}>Wema</div>
         <div className="m_f_items">
-            <span>Kuhusu</span>
+            <span onClick={() =>navigate('/about')}>Kuhusu</span>
             {/* <span>Sadaka</span> */}
             <span>Vigezo</span>
             <span>Faragha</span>

@@ -342,7 +342,9 @@
 
 @media screen and (max-width: 940px){
     .mneu_items{
-        display: none;
+        display: flex;
+        font-size: 1rem;
+        margin: 15px 0;
     }
 
     /* .register_nav{

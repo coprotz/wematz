@@ -59,6 +59,7 @@ import Admin from './pages/admin/Admin';
 import MainMada from './pages/mada/MainMada';
 import ViewMada from './pages/mada/ViewMada';
 import ViewMember from './pages/members/ViewMember';
+import About from './pages/about/About';
 
 
 function App() {
@@ -164,6 +165,7 @@ function App() {
           <Route path='/prayerTimes' element={<Subscriptions/>}></Route>
           <Route path='/register' element={<Register/>}></Route>
           <Route path='/login' element={<Login/>}></Route>
+          <Route path='/about' element={<About/>}></Route>
           </Routes>
       </BrowserRouter>
       {alert && <div className='alert_container'>{alert}</div>}

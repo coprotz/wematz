@@ -20,7 +20,7 @@ const Alerts = ({setAlert, allnots}) => {
             {allnots?.length > 0 ?
             <div className="alerts_inner">
                 {allnots?.map(a => (
-                    <AlertCard item={a}/>
+                    <AlertCard item={a} key={a.id}/>
                 ))}             
             </div>:
             

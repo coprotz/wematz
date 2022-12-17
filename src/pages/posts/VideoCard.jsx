@@ -6,6 +6,7 @@ import moment from 'moment'
 import useData from '../../hooks/useData'
 import { useState } from 'react'
 import Reviews from '../../components/reviews/Reviews'
+import Loading from '../../components/loading/Loading'
 
 
 
@@ -35,6 +36,7 @@ const VideoCard = ({p}) => {
           </div>
       </div>
       <div className='home_video'>
+        {p?.url ?
         <div className="home_video_player">
             <ReactPlayer
                 url={p?.url}
@@ -42,7 +44,10 @@ const VideoCard = ({p}) => {
                 height='100%'
                 controls={true}            
             />
-        </div>
+        </div>:
+        <div className="home_video_player">
+          <Loading/>
+        </div>}
        
     </div>
     <Remarks p={p} setShow={setShow}/>

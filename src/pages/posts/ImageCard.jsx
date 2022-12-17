@@ -5,6 +5,7 @@ import moment from 'moment'
 import useData from '../../hooks/useData'
 import { useState } from 'react'
 import Reviews from '../../components/reviews/Reviews'
+import Loading from '../../components/loading/Loading'
 
 
 
@@ -30,9 +31,14 @@ const ImageCard = ({p}) => {
                 
             </div>
         </div>
+        {p?.pic ?
         <div className="card_image">
             <img src={p?.pic} alt="" />
         </div>
+        :
+        <div className="card_image">
+            <Loading/>
+        </div>}
         <Remarks p={p} setShow={setShow}/>
         {show &&
         <Reviews doc={p} setShow={setShow}/>
