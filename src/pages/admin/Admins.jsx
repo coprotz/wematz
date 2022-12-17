@@ -3,16 +3,28 @@ import useData from '../../hooks/useData';
 import {  BsArrowLeft } from "react-icons/bs";
 import moment from 'moment';
 import Loading from '../../components/loading/Loading';
-import { deleteDoc, doc, serverTimestamp, Timestamp, updateDoc } from 'firebase/firestore';
-import { db } from '../../hooks/useAuth';
+import { addDoc, collection, deleteDoc, doc, serverTimestamp, Timestamp, updateDoc } from 'firebase/firestore';
+import { db, useAuth } from '../../hooks/useAuth';
 import Search from '../../components/search/Search';
 
 const Admins = ({setPage}) => {
-    const { users } = useData()
+    const { users} = useData()
+    const { user } = useAuth()
     const [add, setAdd] = useState(null)
     const [id, setId] = useState('')
     const [loading, setLoading] = useState(null)
     const [active, setActive] = useState(null)
+
+    const notificRef = collection(db, 'notifics')
+  
+    const newNotific = {
+      target_id: id,
+      uid: user.uid,
+      type: '',
+      action: 'amekuteua kuwa admin',
+      isSeen: false,
+      createdAt: serverTimestamp()
+    }
 
 
     const handleAdmin = async() => {
@@ -21,6 +33,7 @@ const Admins = ({setPage}) => {
             await updateDoc(doc(db, 'users', `${id}`), {
                 isAdmin: true
             })
+            await addDoc(notificRef, newNotific)
             setLoading(false)
             setAdd(false)
         } catch (error) {
@@ -85,7 +98,7 @@ const Admins = ({setPage}) => {
                             value={u.id} 
                             key={u.id}                            
                             onChange={(e) =>setId(e.target.value)}
-                        >{u.fname+" "+u.lname+"-"+u.email}</option>
+                        >{u.name+" - "+u.email}</option>
                     ))}
                    
                 </select>

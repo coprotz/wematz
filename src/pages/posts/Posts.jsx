@@ -130,43 +130,41 @@ const Posts = () => {
                     <button className='btn_next'><BsArrowRight/></button>
                 </div>
 
-                <div className="main_right_item">
+                
                     {madas?.slice(0,1).map(m => (
-                    <div key={m.id}>             
+                    <div className="main_right_item" key={m.id}>            
                         <h3 className="card_title">
                             Mada ya Wiki
                             <button className='btn_view' onClick={() =>navigate(`/madas/${m.id}`)}><BsArrowRight/></button>
                         </h3>                            
                         <MadaCard m={m}/>
                     </div>
+
                     ))}
                             
-                </div>
-                
-                <div className="main_right_item">
-                            
-                    {questions.slice(0,1).map(q => (
-                                <>
-                                <h3 className="card_title">
-                                    Swali Maarufu 
-                                    <button className='btn_view' onClick={() =>navigate(`/questions/${q.id}`)}><BsArrowRight/></button>
-                                </h3>
-                                <div className="help" key={q.id}>
-                                    <div className="help_sender">
-                                        <img src={q.photo} alt="" />
-                                    </div>
-                                    <div className="help_text">
-                                    <h4>{q.que}</h4> 
-                                    <span className='timeago'>{moment(q?.createdAt?.toDate()).fromNow(true)}</span>
-                                    </div>
+                             
+                {questions.slice(0,1).map(q => (
+                    <div className="main_right_item" key={q.id}>
+                        <h3 className="card_title">
+                            Swali Maarufu 
+                            <button className='btn_view' onClick={() =>navigate(`/questions/${q.id}`)}><BsArrowRight/></button>
+                        </h3>
+                        <div className="help" key={q.id}>
+                            <div className="help_sender">
+                                <img src={q.photo} alt="" />
+                            </div>
+                            <div className="help_text">
+                                <h4>{q.que}</h4> 
+                                <span className='timeago'>{moment(q?.createdAt?.toDate()).fromNow(true)}</span>
+                            </div>
                                     
-                                </div>
-                                <Remarks p={q}/>                                
-                                </>
-                           ))}
+                        </div>
+                        <Remarks p={q}/>                                
+                    </div>
+                ))}
                            
                             
-                        </div>
+                        
                 </div>
         </div>
              

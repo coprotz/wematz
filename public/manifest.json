@@ -1,21 +1,21 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Wema",
+  "name": "Wema Ummah",
   "icons": [
     {
-      "src": "logo80.png",
-      "sizes": "64x64 32x32 24x24 16x16",
+      "src": "/images/logo_64.png",
+      "sizes": "64x64",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "logo120.png",
+      "src": "/images/logo_192.png",
       "type": "image/png",
       "sizes": "192x192",
       "purpose": "any maskable"
     },
     {
-      "src": "logo500.png",
+      "src": "/images/logo_512.png",
       "type": "image/png",
       "sizes": "512x512",
       "purpose": "any maskable"

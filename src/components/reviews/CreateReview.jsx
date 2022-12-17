@@ -25,7 +25,7 @@ const CreateReview = ({title, doc}) => {
       isSeen: false,
       createdAt: serverTimestamp()
     }
-    console.log('doc', doc)
+    // console.log('doc', doc)
     
     const handleComment = async(e) => {
         e.preventDefault()
