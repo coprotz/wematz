@@ -1,6 +1,6 @@
 import React from 'react'
-import img8 from '../../assets/images/img8.jpg'
-import fatha from '../../assets/audio/fatha.mp3'
+// import img8 from '../../assets/images/img8.jpg'
+// import fatha from '../../assets/audio/fatha.mp3'
 import Remarks from '../../components/remarks/Remarks'
 import moment from 'moment'
 import useData from '../../hooks/useData'

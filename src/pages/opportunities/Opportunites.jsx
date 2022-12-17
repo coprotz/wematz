@@ -11,7 +11,7 @@ const Opportunities = () => {
   return (
     <div className='opportunites'>      
       <div className="oppo_head">
-        <button onClick={() => navigate(-1)} className='btn'><BsArrowLeft/></button>
+        <button onClick={() => navigate(-1)} className='btn_btn'><BsArrowLeft/></button>
         {/* <h1>Karibu katika Fursa</h1> */}
         <h3 className='title'>Karibu katika Fursa</h3>
       </div>

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-// import { doctors } from '../../data'
+
 import useData from '../../hooks/useData'
 
 const ClinicCard = ({c}) => {

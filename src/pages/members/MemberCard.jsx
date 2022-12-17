@@ -58,7 +58,14 @@ const MemberCard = ({member, handelNew}) => {
             <img src={member?.photo? member?.photo : process.env.PUBLIC_URL + member?.avatar} alt="" />                                            
         </div>
         <div className="wema_info">
-            <h3>{member?.name}</h3>
+            <div className="member_status">
+                <h3>{member?.name}</h3>
+                {member?.isOnline == true ? 
+                <span className="status_ind" style={{backgroundColor: '#0df60f'}}></span> :
+                <span className="status_ind" style={{backgroundColor: '#aaa'}}></span>
+                }
+            </div>
+            
             <span>{member?.profes}</span>
             <div className="member_adctions">
                 <button 

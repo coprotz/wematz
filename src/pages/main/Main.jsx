@@ -75,13 +75,12 @@ const Main = () => {
             </motion.div>
         </div> 
         <div className="main_footer">
-            <div className="m_f_logo">Wema</div>
+            <div className="m_f_logo" onClick={() =>navigate('/')}>Wema</div>
             <div className="m_f_items">
-                <span>Kuhusu</span>
-                <span>Sadaka</span>
+                <span onClick={navigate('/about')}>Kuhusu</span>              
                 <span>Vigezo</span>
                 <span>Faragha</span>
-                <span>Contact</span>
+                <span>Mawasiliano</span>
             </div>
         </div>    
     </div>

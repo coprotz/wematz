@@ -86,7 +86,7 @@ const FormDoc = ({setPage}) => {
   return (
     <div className="opp_form">
     <div className="oppo_head">
-      <button onClick={() => setPage(1)} className='btn'><BsArrowLeft/></button>
+      <button onClick={() => setPage(1)} className='btn_btn'><BsArrowLeft/></button>
       {/* <h1>Maombi ya Kuwa WemaDocta</h1> */}
       <h3 className='title'>Maombi ya Kuwa WemaDocta</h3>
     </div>

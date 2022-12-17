@@ -3,13 +3,14 @@ import { motion } from 'framer-motion';
 import Nav from '../../components/nav/Nav';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../hooks/useAuth';
+import { db, useAuth } from '../../hooks/useAuth';
 import { useForm } from "react-hook-form";
 import './login.css'
 import Loading from '../../components/loading/Loading';
 import Error from '../../components/error/Error';
 import { FcGoogle } from 'react-icons/fc';
-import logo from '../../assets/images/logo500.png'
+import logo from '../../assets/images/logo_512.png'
+import { doc, updateDoc } from 'firebase/firestore';
 
 
 const Login = () => {
@@ -26,6 +27,8 @@ const Login = () => {
     const password = watch('password')
 
     console.log('user', user)
+
+   
 
     const handleLogin = async(e)=> {
         e.preventDefault()
@@ -44,7 +47,9 @@ const Login = () => {
         e.preventDefault();
 
         try {
-           await googleSignIn()
+           const res = await googleSignIn()
+           await updateDoc(doc(db, 'users', `${res.user.uid}`), {isOnline: true})
+           
            navigate('/')
             
         } catch (error) {

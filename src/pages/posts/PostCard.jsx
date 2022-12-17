@@ -1,5 +1,5 @@
 import React from 'react'
-import img10 from '../../assets/images/img10.jpg'
+// import img10 from '../../assets/images/img10.jpg'
 import Remarks from '../../components/remarks/Remarks'
 import moment from 'moment'
 import useData from '../../hooks/useData'

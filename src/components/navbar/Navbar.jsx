@@ -1,16 +1,17 @@
 import React from 'react'
-import me from '../../assets/images/img8.jpg'
+// import me from '../../assets/images/img8.jpg'
 import './navbar.css'
 import {  BsThreeDotsVertical,BsBell } from "react-icons/bs";
 import Search from '../search/Search';
 import { useNavigate } from 'react-router-dom'
 import Button from '../button/Button';
 import { useState } from 'react';
-import { useAuth } from '../../hooks/useAuth';
+import { db, useAuth } from '../../hooks/useAuth';
 import useData from '../../hooks/useData';
 import Alerts from '../alert/Alerts';
 import CreateMada from '../../pages/mada/CreateMada';
-import logo from '../../assets/images/logo_w.png'
+import logo from '../../assets/images/logo512.png'
+import { doc, updateDoc } from 'firebase/firestore';
 
 
 const Navbar = ({active, setActive}) => {
@@ -41,6 +42,13 @@ const Navbar = ({active, setActive}) => {
     const mynots = allnots?.filter(a => a.isSeen == false)
 
     console.log('allnots', mynots)
+
+
+    const handleLogout = async () => {
+        await updateDoc(doc(db, 'users', `${cuUser?.id}`), { isOnline: false})
+        await logOut()
+      
+    }
     
 
  
@@ -79,7 +87,7 @@ const Navbar = ({active, setActive}) => {
                             <span onClick={() => {navigate(`/nikah/${marry?.id}`);setShow(null)}}>Wasifu wa Nikah</span>
                             } */}
                             <span onClick={() => {navigate('/subscriptions');setShow(null)}}>Unga Mkono</span>                      
-                            <span onClick={() => logOut()}>ONDOKA</span>
+                            <span onClick={handleLogout}>ONDOKA</span>
                         </div>}
                     </div>
                 </div>

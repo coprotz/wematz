@@ -1,6 +1,6 @@
 import React from 'react'
 import './posts.css'
-import me from '../../assets/images/img8.jpg'
+// import me from '../../assets/images/img8.jpg'
 import {  BsCardImage, BsPaperclip, BsCaretRightSquareFill, BsSoundwave, BsFillShareFill } from "react-icons/bs";
 import { useState } from 'react';
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
@@ -69,7 +69,7 @@ const SharePost = ({setVideo,setAudio, setImage}) => {
                     
                         <button className='btn_btn' onClick={() =>setImage(true)}>
                             <BsCardImage/>
-                        </button>               
+                        </button>              
                         <buttton className='btn_btn' onClick={() =>setVideo(true)}>
                             <BsCaretRightSquareFill />
                         </buttton>

@@ -6,6 +6,7 @@ const Footer = () => {
     const navigate = useNavigate()
   return (
     <div className='footer_wrapper'>
+      <div className="footer_inner">      
         <div className="m_f_logo" onClick={() =>navigate('/')}>Wema</div>
         <div className="m_f_items">
             <span onClick={() =>navigate('/about')}>Kuhusu</span>
@@ -13,8 +14,9 @@ const Footer = () => {
             <span>Vigezo</span>
             <span>Faragha</span>
             <span onClick={() => navigate('/opportunities')}>Fursa</span>
-            <span>Mawasiliano</span>
+            <span onClick={() => navigate('/contacts')}>Mawasiliano</span>
         </div>
+      </div>
     </div>
   )
 }

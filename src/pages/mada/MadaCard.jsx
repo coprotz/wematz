@@ -1,5 +1,5 @@
 import React from 'react'
-import img9 from '../../assets/images/img9.jpg'
+// import img9 from '../../assets/images/img9.jpg'
 import Remarks from '../../components/remarks/Remarks'
 import './madas.css'
 import moment from 'moment'

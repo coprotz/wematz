@@ -283,7 +283,8 @@
         align-items: center;
         /* border: 1px solid red; */
         width: 90%;
-        margin: 15px auto;
+        margin: 0px auto;
+        padding: 10px 0;
        
     }
 

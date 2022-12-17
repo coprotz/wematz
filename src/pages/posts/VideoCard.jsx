@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactPlayer from 'react-player'
 import Remarks from '../../components/remarks/Remarks'
-import img9 from '../../assets/images/img9.jpg'
+// import img9 from '../../assets/images/img9.jpg'
 import moment from 'moment'
 import useData from '../../hooks/useData'
 import { useState } from 'react'

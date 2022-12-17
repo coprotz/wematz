@@ -1,10 +1,11 @@
 .admin_wrapper{
     /* border: 1px solid red; */
-    min-height: calc(100vh - 150px);
+    min-height: calc(100vh - 180px);
     display: flex;
     flex-direction: column;
     gap: 10px;
     width: 100%;
+    margin-bottom: 30px;
 }
 
 .add_admin{
@@ -86,6 +87,7 @@
     display: flex;
     width: 100%;
     min-height: calc(100vh - 150px);
+    margin-bottom: 30px;
     /* border: 1px solid red; */
     gap: 15px;
 }
@@ -280,4 +282,19 @@
     background-color: var(--primary);
     color: white;
     cursor: pointer;
+}
+
+@media screen and (max-width: 440px){
+    .view_wrapper{
+        display: flex;
+        flex-direction: column;
+        background-color: var(--bg);
+        padding: 10px;
+        width: 90%;
+        gap: 10px;
+        align-items: center;
+        height: calc(100vh - 50px);
+        overflow-y: scroll;
+        
+    }
 }
