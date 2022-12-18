@@ -12,7 +12,7 @@ const News = () => {
       <div className="news_body">
         <Outlet/>
       </div>
-      <div className="news_latest">
+      {/* <div className="news_latest">
         <span>Habari Moto  Moto</span>
         {news?.slice(0,5).map(n => (
           <div className="latest_card latest_news" onClick={() => navigate(`/news/${n.id}`)}>
@@ -21,7 +21,7 @@ const News = () => {
           </div>
         ))}
 
-      </div>
+      </div> */}
       
     </div>
   )

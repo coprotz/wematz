@@ -8,6 +8,8 @@ import MemberCard from './MemberCard'
 import './members.css'
 import moment from 'moment';
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { HiOutlineArrowLeft } from 'react-icons/hi'
 
 
 
@@ -18,6 +20,7 @@ const Members = () => {
     const wemas = users.filter(u =>u.id !== user.uid)
     const [donate, setDonate] = useState(false)
     const [open, setOpen] = useState(null)
+    const navigate = useNavigate()
 
     const mujaheed = donates?.find(d => d?.user_id === user.uid)   
     const a = new Date().getTime()
@@ -40,7 +43,13 @@ const Members = () => {
         {open && <NewChat setOpen={setOpen} myId={user.uid} item={open}/>}  
         <div className="health_top">
             <div className="health_t_1">
-                <h1>WanaWema - {users?.length}</h1>
+                <div className="heading_top">                
+                    <div className="view_que_back">
+                        <button onClick={() =>navigate(-1)} className='btn_btn'><HiOutlineArrowLeft/></button>
+                    </div>
+                    <h2 className='title'>WanaWema - {users?.length}</h2>
+                    {/* <h1>Ukumbi wa Nikah</h1> */}
+                </div>               
                 <span className='health_p'>Ni jukumu la kila MwanaWema kushiriki katika platform hii bila kumkwaza mtu mwingine, lengo letu ni kushaurian katika Mema na Kukatazana mabaya.
                 </span>              
             </div>

@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import useData from '../../hooks/useData'
 import { GrLike } from 'react-icons/gr'
 import Loading from '../../components/loading/Loading'
+import Remarks from '../../components/remarks/Remarks'
 
 
 
@@ -34,12 +35,13 @@ const QueCard = ({q}) => {
             <small className='last_time'>{moment(lastanswer?.createdAt?.seconds * 1000).format('MMM Do YY, LT') }</small>
             <div className="que_cations">
                 <div className="ques_act_left">
-                    <div className="que_answers">
+                    <div className="que_answers" onClick={()=>navigate(`/questions/${q.id}`)}>
                         {coms.length} Majibu
                     </div>
                     <div className="que_answers">
-                        <button className='btn_likes'><GrLike/></button>
-                        12 Penda
+                        <Remarks p={q}/>
+                        {/* <button className='btn_likes'><GrLike/></button>
+                        12 Penda */}
                     </div>
                 </div>
                 <div>
