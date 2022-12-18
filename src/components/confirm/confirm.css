@@ -1,0 +1,61 @@
+.confirm_wrapper{
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    background-color: rgba(0,0,0,0.5);
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 60;
+}
+
+.confirm_inner{
+    background-color: white;
+    margin-top: 30%;  
+    height: fit-content; 
+    width: 100%;
+    max-width: 300px;
+    box-shadow: var(--shadow);
+}
+
+.confirm_title{
+    background-color: var(--bg);
+    display: block;
+    padding: 10px;
+    color: var(--primary);
+    text-align: center;
+    font-weight: 700;
+}
+
+.confirm_body{
+    padding: 20px;
+    display: block;
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+.confirm_btn{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    
+}
+
+.btn_yes{
+    background-color: var(--primary);
+    padding: 7px 50px;
+    border: none;
+    color: white;
+    font-size: 1.1rem;
+    border-radius: 3px;
+}
+
+.btn_no{
+    background-color:transparent;
+    padding: 7px 50px;
+    border: none;
+    color: #aaa;
+    font-size: 1.1rem;
+}

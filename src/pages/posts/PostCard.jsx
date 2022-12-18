@@ -5,32 +5,102 @@ import moment from 'moment'
 import useData from '../../hooks/useData'
 import Reviews from '../../components/reviews/Reviews'
 import { useState } from 'react'
+import Loading from '../../components/loading/Loading'
+import ReactPlayer from 'react-player'
+import { RiDeleteBinFill } from "react-icons/ri";
+import { db, useAuth } from '../../hooks/useAuth'
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
+import { deleteDoc, doc } from 'firebase/firestore'
 
-const PostCard = ({p}) => {
+
+const PostCard = ({p, setConfirm}) => {
     const { users } = useData()
-    const user = users?.find(u => u.id === p?.userId)
+    const { user } = useAuth()
+    const cuUser = users?.find(u => u.id === user.uid)
+    const author = users?.find(u => u.id === p?.userId)
     const [show, setShow] = useState(null)
+    
+
+    const RenderPost = () => {
+        const { type } = p
+        if(type === 'image') {
+            return (
+                <div className="card_image">
+                    {p?.pic ? 
+                        <img src={p?.pic} alt="" /> :
+                        <Loading/>}
+                </div>
+             
+            )
+        }else if(type === 'text') {
+            return (
+                <div className="card_body">
+                    <p>{p?.tex}</p>
+                </div>
+            )
+        }else if(type === 'video'){
+            return (
+                <div className="home_video_player">
+                    <ReactPlayer
+                        url={p?.url}
+                        width='100%'
+                        height='100%'
+                        controls={true}            
+                    />
+                </div>
+            )
+        }else if(type === 'audio'){
+            return (
+                <div className="card_player">
+                    <div className="audio_player">           
+                        <audio src={p?.clip} controls></audio>
+                    </div>   
+
+                </div>
+            )
+        }else {
+            return undefined
+        }
+    }
+
+    const deletePost = (id) => {
+        confirmAlert({
+            title: 'Thibitisha Kufuta',
+            message: 'Unataka kuifuta hii posti?',
+            buttons: [
+              {
+                label: 'Ndio',
+                onClick: () => deleteDoc(doc(db, 'posts', `${id}`))
+              },
+              {
+                label: 'Hapan',
+                //onClick: () => alert('Click No')
+              }
+            ]
+          });
+    }
 
   return (
     <div className='post_card'>
         <div className="post_top">
             <div className="post_card_user">
                 <div className="card_user_photo">
-                    <img src={user?.photo? user?.photo : process.env.PUBLIC_URL + user?.avatar} alt="" />
+                    <img src={author?.photo? author?.photo : process.env.PUBLIC_URL + author?.avatar} alt="" />
                 </div>
                 <div className="card_username">
-                     <h5 className='author_name'>{user?.name}</h5>
+                     <h5 className='author_name'>{author?.name}</h5>
                      <small className='timeago'>{moment(p?.createdAt?.toDate()).format('MMM Do YY, LT')}</small>
                 </div>
+                {cuUser?.isAdmin == true &&
+                <button className='btn_del' onClick={() => setConfirm(p.id)}><RiDeleteBinFill/></button>}
                
             </div>
             <div className="post_time">
                 
             </div>
         </div>
-        <div className="card_body">
-            <p>{p?.tex}</p>
-        </div>
+        {RenderPost()}
         <Remarks p={p} setShow={setShow}/>
         {show &&
         <Reviews doc={p} setShow={setShow}/>

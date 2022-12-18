@@ -24,11 +24,11 @@ const ViewNews = () => {
             <small>{moment(cuNews?.createdAt?.toDate()).format('MMM Do YY, LT')}</small>
         </div>
         <img src={cuNews?.pic} />
-        <div className="reaction_news">
+        {/* <div className="reaction_news">
             <Likes/>
             <View/>
             <Comments/>
-        </div>
+        </div> */}
         
         <p className='view_main_body'>{parser(`${cuNews?.body}`)}</p>
         <Reviews doc={cuNews}/>

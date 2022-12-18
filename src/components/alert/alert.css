@@ -103,13 +103,14 @@
 
 .alert_msg_inner{
     padding:25px;
-    background-color: var(--sec); 
+    background-color: white; 
     border-left: 15px solid var(--primary);
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
     animation: message 0.5s;
     color: var(--primary);
     font-size: 1.2rem;
     height: fit-content;
+    margin-top: 15%;
     
    
     

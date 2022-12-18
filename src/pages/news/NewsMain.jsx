@@ -6,6 +6,7 @@ import Remarks from '../../components/remarks/Remarks';
 import { useAuth } from '../../hooks/useAuth';
 import useData from '../../hooks/useData';
 import moment from 'moment'
+import { BsArrowLeft } from 'react-icons/bs';
 
 
 
@@ -20,8 +21,12 @@ const NewsMain = () => {
   console.log('news', news)
 
   return (
-    <div className='main_news'>     
-      <h2 className='sub_title'>Habari Kuu</h2>
+    <div className='main_news'> 
+      <div className="meeting_top">            
+                <button onClick={() => navigate(-1)} className='btn_btn'><BsArrowLeft/></button>
+                <h4 className='title'>Habari Kuu</h4> 
+            </div>    
+      {/* <h2 className='sub_title'>Habari Kuu</h2> */}
       {news?.slice(0,1).map(n => (      
       <div className="top_news" onClick={() => navigate(`/news/${topView?.id}`)} key={n.id}>
         <img src={n.pic} />
