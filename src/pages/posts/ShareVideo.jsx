@@ -51,7 +51,7 @@ const ShareVideo = ({setVideo}) => {
                 type="text" 
                 placeholder='Weka Url ya Video kutoka Youtube' 
                 className='sel_input3'
-                style={{width: '220px'}}
+                style={{width: '80%'}}
                 name='message'
                 value={message} 
                 // style={{width:'100%'}}
@@ -63,14 +63,14 @@ const ShareVideo = ({setVideo}) => {
                 className='sel_input3'
                 name='message'
                 value={caption} 
-                style={{width: '220px'}}
+                style={{width: '80%'}}
                 // style={{width:'100%'}}
                 onChange={(e) =>setCaption(e.target.value)}
             ></textarea>
             <button 
                 onClick={handleVideo}
                 disabled={!message} 
-                style={{width: '220px', margin: '0 auto'}}
+                style={{width: '95%', margin: '0 auto'}}
                 className='btn_sign'>{loading? 'Inatuma' : 'TUMA'}</button>
             <div className="profile_photo_edit">                            
                 <button className='btn_cancel' onClick={() =>setVideo(null)}>ONDOA</button>
