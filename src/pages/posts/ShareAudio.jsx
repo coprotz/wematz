@@ -13,6 +13,7 @@ const ShareAudio = ({setAudio}) => {
     const [loading, setLoading] = useState(false)
     const { user } = useAuth()
     const { users } = useData()
+    const [caption, setCaption] = useState('')
     
 
     const [file, setFile] = useState(null)
@@ -51,6 +52,7 @@ const ShareAudio = ({setAudio}) => {
             name: cuUser?.fname+" "+cuUser?.lname,
             createdAt: serverTimestamp(),
             clip: url,
+            caption,
             type: 'audio',
             photo: cuUser?.photo? cuUser?.photo : process.env.PUBLIC_URL + cuUser?.avatar
         }
@@ -74,14 +76,14 @@ const ShareAudio = ({setAudio}) => {
             {error && <span className='error error_profile'>{error}<button onClick={() =>setError('')} className='btn_error'>x</button></span>}       
             { file?                         
             <span>{file?.name}</span> :                                
-            <label htmlFor="photo" className='profile_photo'>
+            <label htmlFor="photo" className='profile_photo' style={{textAlign: 'center'}}>
                 <input 
                 type="file" 
                 name='photo' 
                 id="photo" style={{display: 'none'}}
                 onChange={handleSelect}
                 />
-                <span className='attached_photo'><BsSoundwave/></span>
+                <span className='attached_photo'><BsSoundwave/> </span>
             </label>
             
             }
@@ -96,6 +98,15 @@ const ShareAudio = ({setAudio}) => {
                 disabled={!file} 
                 className='btn_sign'>{loading? 'Inatuma' : 'TUMA'}
             </button>
+            <textarea 
+                type="text" 
+                placeholder='Weka kichwa cha habari' 
+                className='sel_input3'
+                name='message'
+                value={caption} 
+                // style={{width:'100%'}}
+                onChange={(e) =>setCaption(e.target.value)}
+            ></textarea>
             
             <div className="profile_photo_edit">                            
                 <button className='btn_cancel' onClick={() =>setFile(null)}>ONDOA</button>

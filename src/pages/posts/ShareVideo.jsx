@@ -7,6 +7,7 @@ import useData from '../../hooks/useData'
 
 const ShareVideo = ({setVideo}) => {
     const [message, setMessage] = useState('')
+    const [caption, setCaption] = useState('')
     const [loading, setLoading] = useState(false)
     const { user } = useAuth()
     const { users } = useData()
@@ -26,6 +27,7 @@ const ShareVideo = ({setVideo}) => {
             name: cuUser?.name,
             createdAt: serverTimestamp(),
             url: message,
+            caption,
             type: 'video',
             photo: cuUser?.photo? cuUser?.photo : process.env.PUBLIC_URL + cuUser?.avatar
         }
@@ -49,14 +51,26 @@ const ShareVideo = ({setVideo}) => {
                 type="text" 
                 placeholder='Weka Url ya Video kutoka Youtube' 
                 className='sel_input3'
+                style={{width: '220px'}}
                 name='message'
                 value={message} 
                 // style={{width:'100%'}}
                 onChange={(e) =>setMessage(e.target.value)}
             /> 
+             <textarea 
+                type="text" 
+                placeholder='Weka kichwa cha habari' 
+                className='sel_input3'
+                name='message'
+                value={caption} 
+                style={{width: '220px'}}
+                // style={{width:'100%'}}
+                onChange={(e) =>setCaption(e.target.value)}
+            ></textarea>
             <button 
                 onClick={handleVideo}
                 disabled={!message} 
+                style={{width: '220px', margin: '0 auto'}}
                 className='btn_sign'>{loading? 'Inatuma' : 'TUMA'}</button>
             <div className="profile_photo_edit">                            
                 <button className='btn_cancel' onClick={() =>setVideo(null)}>ONDOA</button>

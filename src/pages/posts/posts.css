@@ -427,6 +427,14 @@ audio{
     
     }
 
+    .shared_video{
+        /* border: 1px solid red; */
+        margin: 0 auto;
+        padding: 15px 0;      
+        width: 90%; 
+      
+    }
+
     .post_grids{
      
       
