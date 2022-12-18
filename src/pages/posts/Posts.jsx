@@ -15,9 +15,11 @@ import ShareAudio from './ShareAudio';
 import ShareImage from './ShareImage';
 import moment from 'moment'
 import Search from '../../components/search/Search';
-import { useAuth } from '../../hooks/useAuth';
+import { db, useAuth } from '../../hooks/useAuth';
 import DeleteConfirm from '../../components/confirm/DeleteConfirm';
 import AlertSms from '../../components/alert/AlertSms';
+import { useEffect } from 'react';
+import { doc, updateDoc } from 'firebase/firestore';
 
 
 
@@ -43,6 +45,14 @@ const Posts = () => {
           scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
         }
       })
+
+      useEffect(() => {
+        try {
+            updateDoc(doc(db, 'users', `${user.uid}`), { isOnline: true})
+        } catch (error) {
+            console.log(error.message)
+        }
+      },[])
 
   return (
     <div className="posts" ref={scrollRef}> 
