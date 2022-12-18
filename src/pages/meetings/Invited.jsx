@@ -43,7 +43,7 @@ const Invited = () => {
                 <td data-label='Washiriki' className='tab_column'>Wote</td>
                 <td data-label='Tarehe' className='tab_column'>{moment(m.start_date).format('DD-M-YYYY') }</td>
                 <td data-label='Muda' className='tab_column'>{m.start_time}</td>   
-                <td data-label='Hali' className='tab_column'><button>Jiunge Sasa</button></td>           
+                <td data-label='Hali' className='tab_column'><button onClick={() =>alert('Page under construction')}>Jiunge Sasa</button></td>           
              
             </tr>
           ))}

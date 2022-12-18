@@ -44,6 +44,8 @@
     height: 100%;
     display: flex;
     gap: 20px;
+
+
     /* background-color: white; */
 }
 
@@ -679,6 +681,7 @@
     gap: 25px;
     width: 80%;
     margin: 0 auto;
+   
 }
 
 .create_new{
@@ -745,7 +748,12 @@
 } */
 
 
-
+.join_meetings{
+    height: calc(100vh - 130px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 
 
@@ -833,6 +841,15 @@
         /* color: #5e5e5e; */
      
         
+    }
+
+    .meetings_body{       
+        padding: 30px 0;
+        margin-bottom: 30px;
+    }
+
+    .my_meetings{
+        margin-bottom: 60px;
     }
         /* align-items: center;
         gap: 15px;
