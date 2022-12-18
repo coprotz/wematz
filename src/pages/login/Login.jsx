@@ -83,7 +83,7 @@ const Login = () => {
                 <img src={cuUser?.photo ? cuUser?.photo : process.env.PUBLIC_URL + cuUser?.avatar} />
             </div>
              :
-    
+            
             <div className="sign_in">
                 <span>Sio mwanachama?</span>
                 <button className='btn_sign' onClick={() =>navigate('/register')}>Jisajiri</button>

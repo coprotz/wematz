@@ -10,18 +10,34 @@ import Loading from '../../components/loading/Loading';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+const memberTypes = [
+    {id: '1', value: 'F', name: 'Wanawake'},
+    {id: '2', value: 'M', name: 'Wanaume'},
+    {id: '3', value: '55', name: 'Vijana'},
+    {id: '4', value: 'A', name: 'Wote'},
+]
 
 
-const AddMeeting = ({setAdd}) => {
+
+const AddMeeting = () => {
     const { register,  watch, formState: { isValid } } = useForm({mode: 'all'});
     const { user } = useAuth()
-    const { clubs, users } = useData()
+    const { clubs, users, participants } = useData()
     const [loading, setLoading] = useState(false)
     const [err, setErr] = useState('')
     const navigate = useNavigate()
 
-    const partRef = collection(db, 'participants')
+    const partsRef = collection(db, 'participants')
     const roomRef = collection(db, 'rooms')
+    const [member, setMember] = useState('')
+
+    const members = member === 'A'? users : 
+        member === 'M' ? users?.filter(m => m.gender === 'M') : 
+        member === 'F' ? users?.filter(m => m.gender === 'F') : 
+        member === '55' ? users?.filter(m => m.age < '55') : null
+    
+
+
 
     const name = watch('name')
     const clubId = watch('club')
@@ -29,35 +45,40 @@ const AddMeeting = ({setAdd}) => {
     const start_date = watch('date')
     const start_time = watch('time')
 
+    console.log('members', members)
+
     const handleRoom = async(e) => {
         e.preventDefault()
 
         setLoading(true)
         
-        const member = user.uid
+        // const member = user.uid
         
 
         
 
         const data = {
-            name,
-            clubId,            
+            name,                    
             start_date,
             start_time,
             type,
-            participants: [member],
-            createdBy: member,
+            participants: member,
+            createdBy: user.uid,
             date: serverTimestamp()         
         }
         try {
-            await addDoc(roomRef, data)  
-        //   await addDoc(partRef, {
-        //     role: 'HOST',
-        //     userId: user.uid,
-        //     roomId: newRoom.id
-        //   })
-          setLoading(false)
-          setAdd(null)
+            const newRoom =  await addDoc(roomRef, data) 
+            // console.log('room', newRoom.id)
+            await setDoc(doc(db, 'participants', `${newRoom.id}`), {
+                room: newRoom.id,
+                participants: members,
+                createdAt: serverTimestamp()
+
+            })  
+            setLoading(false)
+            navigate('/meetings/mymeetings')      
+            
+           
         } catch (error) {
             setErr(error.message)
         }
@@ -125,14 +146,15 @@ const AddMeeting = ({setAdd}) => {
         <div className="items_group">
             <h3 className='item_title'>Aina ya Washiriki</h3>
             <div className="selection_btns">
-                {clubs.map(c => (
-                    <div className="sel_item">
+                {memberTypes.map(c => (
+                    <div className="sel_item" key={c.id}>
                         <input 
                             type="radio" 
                             id={c?.id} 
-                            value={c?.id} 
-                            name='club' 
-                            {...register("club", { required: true })}
+                            value={c?.value} 
+                            name='members' 
+                            onChange={(e) =>setMember(e.target.value)}
+                            // {...register("members", { required: true })}
                             />
                         <label htmlFor={c?.id}>{c?.name}</label>
                     </div>
