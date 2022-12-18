@@ -42,12 +42,15 @@ const PostCard = ({p, setConfirm}) => {
         }else if(type === 'video'){
             return (
                 <div className="home_video_player">
-                    <ReactPlayer
-                        url={p?.url}
-                        width='100%'
-                        height='100%'
-                        controls={true}            
-                    />
+                    <div className="video">
+                       <ReactPlayer
+                            url={p?.url}
+                            width='100%'
+                            height='100%'
+                            controls={true}            
+                        /> 
+                    </div>                    
+                    <h4 className='video_caption'>{p?.caption}</h4>
                 </div>
             )
         }else if(type === 'audio'){
@@ -55,6 +58,7 @@ const PostCard = ({p, setConfirm}) => {
                 <div className="card_player">
                     <div className="audio_player">           
                         <audio src={p?.clip} controls></audio>
+                        <h4 className='video_caption'>{p?.caption}</h4>
                     </div>   
 
                 </div>

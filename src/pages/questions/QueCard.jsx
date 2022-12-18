@@ -38,11 +38,9 @@ const QueCard = ({q}) => {
                     <div className="que_answers" onClick={()=>navigate(`/questions/${q.id}`)}>
                         {coms.length} Majibu
                     </div>
-                    <div className="que_answers">
-                        <Remarks p={q}/>
-                        {/* <button className='btn_likes'><GrLike/></button>
-                        12 Penda */}
-                    </div>
+                    {/* <div className="que_answers">
+                        <Remarks p={q}/>                        
+                    </div> */}
                 </div>
                 <div>
                     <button className='btn_que' onClick={()=>navigate(`/questions/${q.id}`)}>Jibu</button>  
