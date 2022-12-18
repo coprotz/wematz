@@ -15,7 +15,7 @@
     margin-top: 30%;  
     height: fit-content; 
     width: 100%;
-    max-width: 300px;
+    max-width: 500px;
     box-shadow: var(--shadow);
 }
 
@@ -58,4 +58,12 @@
     border: none;
     color: #aaa;
     font-size: 1.1rem;
+}
+
+
+@media screen and (max-width: 540px){
+    .confirm_inner{       
+        max-width: 95vw;
+       
+    }
 }

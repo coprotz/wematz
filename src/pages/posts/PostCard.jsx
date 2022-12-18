@@ -64,22 +64,7 @@ const PostCard = ({p, setConfirm}) => {
         }
     }
 
-    const deletePost = (id) => {
-        confirmAlert({
-            title: 'Thibitisha Kufuta',
-            message: 'Unataka kuifuta hii posti?',
-            buttons: [
-              {
-                label: 'Ndio',
-                onClick: () => deleteDoc(doc(db, 'posts', `${id}`))
-              },
-              {
-                label: 'Hapan',
-                //onClick: () => alert('Click No')
-              }
-            ]
-          });
-    }
+  
 
   return (
     <div className='post_card'>
