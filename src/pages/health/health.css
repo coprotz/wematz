@@ -79,6 +79,7 @@
 .health_inner{
     display: flex;
     width: 100%;
+    margin-bottom: 65px;
 }
 
 .health_body{
@@ -86,6 +87,14 @@
     flex-direction: column;
     gap: 15px;
     width: 100%;
+    
+}
+
+.clinics_btns{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
 }
 
 .clinic_card h4{
