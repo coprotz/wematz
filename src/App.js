@@ -61,6 +61,7 @@ import ViewMada from './pages/mada/ViewMada';
 import ViewMember from './pages/members/ViewMember';
 import About from './pages/about/About';
 import Contacts from './pages/contacts/Contacts';
+import Makala from './pages/health/Makala';
 
 
 function App() {
@@ -110,6 +111,7 @@ function App() {
               <Route index element={<MainHealth/>}/>
               <Route path='health' element={<MainHealth/>}/>
               <Route path='doctors' element={<Doctors/>}/>
+              <Route path='makala' element={<Makala/>}/>
               <Route path='doctors/:id' element={<ViewDoctor/>}/>
               <Route path='clinics/:name' element={<ViewClinic/>}/>
             </Route>
