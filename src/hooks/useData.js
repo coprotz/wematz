@@ -55,7 +55,10 @@ const useData = () => {
     const contactsRef = collection(db, 'contacts')
     const [news, setNews] = useState([])
     const newsRef = collection(db, 'news')
+    const [meetings, setMeetings] = useState([])
+    const meetingsRef = collection(db, 'meetings')
 
+    const allMeetings = query(meetingsRef, orderBy("createdAt")); 
     const allNews = query(newsRef, orderBy("createdAt")); 
     const allUsers = query(usersRef, orderBy("createdAt")); 
     const allnotifics = query(notificsRef, orderBy("createdAt"));
@@ -69,6 +72,16 @@ const useData = () => {
     const allMessages = query(messagesRef, orderBy("createdAt")); 
     const allrooms = query(roomsRef, orderBy("date")); 
 
+    useEffect(() => {
+        onSnapshot(allMeetings, snapshot => {
+            setMeetings(snapshot.docs.map(doc => {
+                return {
+                    id: doc.id,
+                    ...doc.data()
+                }
+            }))
+        })
+    },[])
     useEffect(() => {
         onSnapshot(allNews, snapshot => {
             setNews(snapshot.docs.map(doc => {
@@ -352,7 +365,8 @@ const useData = () => {
         ratings,
         notifics,
         contacts, 
-        news
+        news,
+        meetings
      }
 }
 

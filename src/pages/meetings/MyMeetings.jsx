@@ -17,14 +17,14 @@ import MeetingMembers from './MeetingMembers'
 
 const MyMeetings = () => {
     const navigate = useNavigate()
-    const { rooms, participants } = useData()
+    const { rooms, participants, meetings } = useData()
     const { user } = useAuth()
     const [messageAlert, setAlert] = useState(null)
     const [confirm, setConfirm] = useState(null)
     const [viewParts, setViewParts] = useState(null)
     const [ loading, setLoading ] = useState(null)
 
-    const mymeets = rooms?.filter(r => r.createdBy === user.uid)
+    const mymeets = meetings?.filter(r => r.host === user.uid)
 
     const deleteRoom = async (id) => {
       setLoading(true)

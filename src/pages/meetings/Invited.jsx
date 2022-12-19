@@ -11,10 +11,12 @@ import RoomCard from './RoomCard';
 const Invited = () => {
     const navigate = useNavigate()
     const [viewParts, setViewParts] = useState(null)
-    const { rooms, users, participants } = useData()
+    const { rooms, users, participants, meetings } = useData()
     const { user } = useAuth()
 
-    const parts = participants?.filter(p =>p.participants.filter(t =>t.id.includes(`${user.uid}`)))
+    const others = meetings?.filter(r => r.host !== user.uid)
+
+    const parts = others?.filter(p =>p.participants.filter(t =>t.id.includes(`${user.uid}`)))
 
     console.log('parts', parts)
   

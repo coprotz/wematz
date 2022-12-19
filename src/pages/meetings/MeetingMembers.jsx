@@ -34,7 +34,7 @@ const MeetingMembers = ({ setViewParts, parts }) => {
                 {room?.participants?.map(m => (
                    <div className="v_chat_card" key={m.id}>
                     <div className="v_chat_photo">
-                      <img src={m?.photo} alt="" />
+                      <img src={m?.photo? m?.photo : process.env.PUBLIC_URL + m?.avatar} alt="" />
                     </div>
                   </div>
                 ))}

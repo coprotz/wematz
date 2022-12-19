@@ -29,6 +29,7 @@ const AddMeeting = () => {
 
     const partsRef = collection(db, 'participants')
     const roomRef = collection(db, 'rooms')
+    const meetingsRef = collection(db, 'meetings')
     const [member, setMember] = useState('')
 
     const members = member === 'A'? users : 
@@ -62,19 +63,19 @@ const AddMeeting = () => {
             start_date,
             start_time,
             type,
-            participants: member,
-            createdBy: user.uid,
-            date: serverTimestamp()         
+            participants: members,
+            host: user.uid,
+            createdAt: serverTimestamp()         
         }
         try {
-            const newRoom =  await addDoc(roomRef, data) 
+            await addDoc(meetingsRef, data) 
             // console.log('room', newRoom.id)
-            await setDoc(doc(db, 'participants', `${newRoom.id}`), {
-                room: newRoom.id,
-                participants: members,
-                createdAt: serverTimestamp()
+            // await setDoc(doc(db, 'participants', `${newRoom.id}`), {
+            //     host: user.uid,
+            //     participants: members,
+            //     createdAt: serverTimestamp()
 
-            })  
+            // })  
             setLoading(false)
             navigate('/meetings/mymeetings')      
             

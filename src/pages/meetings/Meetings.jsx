@@ -29,12 +29,12 @@ const Meetings = () => {
     const today = moment(new Date()).format('YYYY-M-DD') 
     const time = moment(new Date()).format('HH:mm') 
     const [messageAlert, setAlert] = useState(null)
-    const [viewParts, setViewParts] = useState(null)
+   
   
   
   return (   
-    <>
-    {viewParts ? <MeetingMembers/> : 
+ 
+
     <div className='meetings'>
         <div className="top_meeting_wrapper">
             <div className="meeting_top">            
@@ -63,8 +63,8 @@ const Meetings = () => {
         </div>
     
 
-    </div> }
-    </>
+    </div> 
+
   )
 }
 
