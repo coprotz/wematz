@@ -10,6 +10,7 @@ import AlertSms from '../../components/alert/AlertSms';
 import { useState } from 'react';
 import { addDoc, collection, doc, serverTimestamp, setDoc, deleteDoc } from 'firebase/firestore';
 import Loading from '../../components/loading/Loading'
+import MeetingMembers from './MeetingMembers'
 
 
 
@@ -38,6 +39,9 @@ const MyMeetings = () => {
     }
 
   return (
+    <>
+    {viewParts ? <MeetingMembers parts={viewParts} setViewParts={setViewParts}/> :
+   
     <motion.div 
       initial={{ x:'100vw'}}
       animate={{x:0}} 
@@ -45,7 +49,8 @@ const MyMeetings = () => {
       className='add_meeting'>
          {confirm && <DeleteConfirm setConfirm={setConfirm} id ={confirm} body='Unataka kufuta huu mkutano..?' setAlert={setAlert}/> }
       <div className="top_meeting_wrapper my_meetings" >
-      {messageAlert && <AlertSms alert={messageAlert}/>}  
+      {messageAlert && <AlertSms alert={messageAlert}/>}
+       
   
           <div className="meeting_top">            
               <button onClick={() => navigate('/meetings')} className='btn_btn'><BsArrowLeft/></button>
@@ -71,7 +76,7 @@ const MyMeetings = () => {
                     <td data-label='SN'>{index+1}</td>     
                     <td data-label='Jina la Mdaharo' className='tab_column'>{m.name}</td>
                     <td data-label='Aina ya Ukumbi' className='tab_column'>Wazi</td>
-                    <td data-label='Washiriki' className='tab_column'>Wote</td>
+                    <td data-label='Washiriki' className='tab_column'><button onClick={() =>setViewParts(m)}>Angalia</button></td>
                     <td data-label='Tarehe' className='tab_column'>{moment(m.start_date).format('DD-M-YYYY') }</td>
                     <td data-label='Muda' className='tab_column'>{m.start_time}</td>   
                     <td data-label='Hali' className='tab_column'><button onClick={() =>alert('Page under construction')}>Jiunge Sasa</button></td>  
@@ -87,7 +92,8 @@ const MyMeetings = () => {
         </table>          
       </div>
       
-    </motion.div>
+    </motion.div>}
+    </>
   )
 }
 

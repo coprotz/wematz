@@ -481,6 +481,7 @@
 }
 
 
+
 @media screen and (max-width: 940px){
     .messages_body{
       
@@ -530,7 +531,7 @@
         display: flex;
         gap: 15px;
         min-width: 300px;
-        
+        min-height: calc(100vh - 115px);
     }
 
     .view_chatlists{

@@ -16,7 +16,7 @@ const Nav = () => {
         </div>
         <div className="mneu_items">
             <span onClick={() =>navigate('/')}>Nyumbani</span>
-            <span onClick={() =>navigate('/about')}>Kuhusu sisi</span>
+            <span onClick={() =>navigate('/about')}>Kuhusu</span>
             {/* <span>Bei</span> */}
             <span onClick={() =>navigate('/contacts')}>Mawasiliano</span>
         </div>
@@ -28,7 +28,7 @@ const Nav = () => {
         :
     
         <div className="sign_in">
-            <span>Tayari ni mwanachama?</span>
+            {/* <span>Tayari ni mwanachama?</span> */}
             <button className='btn_sign' onClick={() =>navigate('/login')}>Ingia</button>
         </div>}
     </div>

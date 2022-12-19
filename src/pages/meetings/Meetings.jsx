@@ -12,6 +12,8 @@ import moment from 'moment';
 import { db, useAuth } from '../../hooks/useAuth';
 import { collection } from 'firebase/firestore';
 import { useRef } from 'react';
+import AlertSms from '../../components/alert/AlertSms'
+import MeetingMembers from './MeetingMembers'
 
 
 
@@ -22,25 +24,17 @@ const Meetings = () => {
     const { user } = useAuth()
 
     const dbRef = collection(db, 'rooms')
-
-    // const roomRef = dbRef.child('participants')
-
-    // console.log('room', roomRef)
    
 
     const today = moment(new Date()).format('YYYY-M-DD') 
     const time = moment(new Date()).format('HH:mm') 
-
-    // const meetRef = useRef()
-
-    // console.log('meetRef', meetRef)
-
-    // const handleRoom = (room) => {
-    //     meetRef.current = room.id
-    // }
+    const [messageAlert, setAlert] = useState(null)
+    const [viewParts, setViewParts] = useState(null)
   
-  return (
-   
+  
+  return (   
+    <>
+    {viewParts ? <MeetingMembers/> : 
     <div className='meetings'>
         <div className="top_meeting_wrapper">
             <div className="meeting_top">            
@@ -49,6 +43,7 @@ const Meetings = () => {
             </div>
                    
         </div>
+        {messageAlert && <AlertSms alert={messageAlert}/>}  
         <div className="meetings_body">
             <div className="create_new" onClick={() =>navigate('/meetings/create')}>
                 <IoCreate/>
@@ -68,7 +63,8 @@ const Meetings = () => {
         </div>
     
 
-    </div>
+    </div> }
+    </>
   )
 }
 

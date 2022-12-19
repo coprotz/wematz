@@ -56,6 +56,7 @@ export function AuthProvider({ children }) {
     const [newMada, setNewMada] = useState(null)
     const [habari, setHabari] = useState(null)
     const [confirm, setConfirm] = useState('Do you want to send this mesaji?')
+    const [viewParts, setViewParts] = useState(null)
 
     const sendLink = (email) =>{
         return sendSignInLinkToEmail(auth, email, {
@@ -121,7 +122,9 @@ export function AuthProvider({ children }) {
             setNewMada,
             googleSignIn,
             habari,
-            setHabari
+            setHabari,
+            viewParts, 
+            setViewParts
              }}>
             {!isAuthenticating && children}
         </AuthContext.Provider>
