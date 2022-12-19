@@ -6,8 +6,8 @@ import { BsArrowLeft } from 'react-icons/bs';
 import useData from '../../hooks/useData';
 
 const MeetingMembers = ({ setViewParts, parts }) => {
-  const { participants } = useData()
-  const room = participants?.find(p => p.room === parts?.id)
+  const { participants, meetings } = useData()
+  const room = meetings?.find(p => p.id === parts?.id)
 
   console.log('room', room)
  

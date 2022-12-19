@@ -1,12 +1,17 @@
 .admin_wrapper{
     /* border: 1px solid red; */
     min-height: calc(100vh - 180px);
-    display: flex;
     flex-direction: column;
     gap: 10px;
     width: 100%;
     margin-bottom: 30px;
 }
+
+.admin_add{
+    display: flex;
+}
+
+
 
 .add_admin{
     min-height: calc(100vh - 150px);
@@ -84,13 +89,15 @@
 }
 
 .admin_container{
-    display: flex;
+   
     width: 100%;
     min-height: calc(100vh - 150px);
     margin-bottom: 30px;
     /* border: 1px solid red; */
     gap: 15px;
 }
+
+
 
 .add_admin{
     width: 300px;
@@ -279,6 +286,8 @@
 
 
 
+
+
 .admin_mada{
     background-color: var(--primary);
     display: flex;
@@ -307,5 +316,21 @@
         height: calc(100vh - 50px);
         overflow-y: scroll;
         
+    }
+
+    .admin_add{
+        display: none;
+    }
+
+    .add_admin{
+        width: auto;
+        min-height: calc(100vh - 165px);
+        
+        padding: 10px;
+        box-shadow: var(--shadow);
+    }
+
+    .sel_input3{
+        width: 100%;
     }
 }

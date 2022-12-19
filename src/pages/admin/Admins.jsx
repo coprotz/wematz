@@ -45,7 +45,7 @@ const Admins = ({setPage}) => {
   
   return (
     <div className="admin_container"> 
-    <div className='admin_wrapper'>
+    <div className={add ? "admin_add" : 'admin_wrapper'}>
         <div className="top_wrapper">
             <div className="dash_top">            
                 <button onClick={() => setPage(1)} className='btn_btn'><BsArrowLeft/></button>
