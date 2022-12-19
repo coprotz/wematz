@@ -56,7 +56,7 @@ const Register = () => {
     const data = {
         email: user?.email,           
         name:  user?.displayName ,
-        photo: user?.photoURL,
+        photo: "",
         gender,   
         emplo,
         age,
