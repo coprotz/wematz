@@ -6,10 +6,11 @@ import { BsArrowLeft } from 'react-icons/bs';
 import useData from '../../hooks/useData';
 
 const MeetingMembers = ({ setViewParts, parts }) => {
-  const { participants, meetings } = useData()
+  const { users, meetings } = useData()
   const room = meetings?.find(p => p.id === parts?.id)
+  const hoster = users?. find(u => u.id === room?.host)
 
-  console.log('room', room)
+  // console.log('room', room)
  
   const navigate = useNavigate()
   return (
@@ -23,12 +24,18 @@ const MeetingMembers = ({ setViewParts, parts }) => {
             <div className="top_meeting_wrapper">
               <div className="meeting_top">            
                   <button onClick={() => setViewParts(null)} className='btn_btn'><BsArrowLeft/></button>
-                  <h4 className='title'>{parts?.name}</h4> 
+                  
+                  
                   
               </div>
                     
             </div>
             <div className="view_members_body">
+              <div className="meeting_details">
+                  <h4 className='title'>{parts?.name}</h4> 
+                  <span className='meeting_dt'>Mkutano utakuwa <h4>{parts?.start_date}</h4> saa {parts?.start_time}</span>
+                  <span className='meeting_dt'>Hosted by: <h4>{hoster?.name}</h4></span>
+              </div>
               <h4 className='view_parts_b'>Washiriki</h4>
               <div className="view_members_grids">
                 {room?.participants?.map(m => (

@@ -315,6 +315,13 @@
     margin-bottom: 30px;
 }
 
+.meeting_dt{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
 .title{
     margin: 15px 0;
     border-left: 10px solid var(--primary);

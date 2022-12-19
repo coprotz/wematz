@@ -54,13 +54,39 @@ const Posts = () => {
         }
       },[])
 
+    const [userRespond, setUserRespond] = useState(false)
+
+      useEffect(() => {     
+        const  notifyUser = async (text='Asante kwa kuruhusu notification kutoka Wema') => {
+            if(!("Notification" in window)) {
+                alert("Browser does not support notifications");
+            }else if(Notification.permission === 'granted'){
+                const notification = new Notification(text);
+            }else if(Notification.permission !== 'denied') {
+                Notification.requestPermission().then((permission) => {
+                    if(permission === 'granted') {
+                        const notification = new Notification(text)
+                    }
+                })
+            }
+        } 
+        notifyUser()
+    },[])
+
+    // const notifyuser = () => {
+    //     setUserRespond(true)
+    //     notifyUser()
+    // }
+      
+
   return (
     <div className="posts" ref={scrollRef}> 
         {video && <ShareVideo setVideo={setVideo}/> }   
         {audio && <ShareAudio setAudio={setAudio}/> }   
         {image && <ShareImage setImage={setImage}/> } 
         {confirm && <DeleteConfirm setConfirm={setConfirm} id ={confirm} body='Unataka kuifuta posti hii...?' setAlert={setAlert}/> }
-        {messageAlert && <AlertSms alert={messageAlert}/>}         
+        {messageAlert && <AlertSms alert={messageAlert}/>} 
+        {/* {!(userRespond) && !(Notification.permission === 'granted') && <div className='notifs'><button onClick={notifyuser}>Ask</button></div>}         */}
         <div className="posts_wrapper">
           <div className="posts_inner">
             <div className="posts_cont">

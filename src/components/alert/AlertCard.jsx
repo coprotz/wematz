@@ -4,6 +4,8 @@ import useData from '../../hooks/useData'
 import moment from 'moment'
 import { doc, updateDoc } from 'firebase/firestore'
 import { GrClose } from "react-icons/gr";
+import { useEffect } from 'react'
+
 
 
 
@@ -11,6 +13,21 @@ const AlertCard = ({item}) => {
     // const {user} = useAuth()
     const { users } = useData()
     const cuUser = users.find(u => u.id === item?.uid)
+
+    useEffect(() => {     
+        const  notifyUser = async (text='New notication kutoka Wema') => {
+            if(Notification.permission === 'granted'){
+                const notification = new Notification(text);
+            }else if(Notification.permission !== 'denied') {
+                Notification.requestPermission().then((permission) => {
+                    if(permission === 'granted') {
+                        const notification = new Notification(text)
+                    }
+                })
+            }
+        } 
+        notifyUser()
+    },[])
     // const today = new Date().getTime()
   return (
     <div className="alert_card">    

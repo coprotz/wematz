@@ -31,8 +31,7 @@ const Invited = () => {
     <div className="top_meeting_wrapper my_meetings" >
         <div className="meeting_top">            
             <button onClick={() => navigate('/meetings')} className='btn_btn'><BsArrowLeft/></button>
-            <h4>Midaharo Niliyoalikwa</h4> 
-          
+            <h4>Midaharo Niliyoalikwa</h4>           
         </div>  
         <table className='table'>
         <thead>
@@ -45,13 +44,14 @@ const Invited = () => {
           <th className='total'>Hali</th>     
          
         </thead>
+        {parts?.length > 0 ?
         <tbody className='total'>
           {parts.map((m, index) => (
            <RoomCard  m={m} index={index} setViewParts={setViewParts}/>
           ))}
            
        
-        </tbody>
+        </tbody> : 'Hauna mwaliko'}
       </table>          
     </div>
       
