@@ -30,9 +30,9 @@ const About = () => {
             <div className="about_ceo">            
                 <img src={Achi} alt="" />
                 <div className="about_ceo_bio">
-                    <h1>Mwanaharusi Mwinyiwiwa</h1>
+                    <h1>MM Achi</h1>
                     <h3>Founder and CEO</h3>
-                    <p><FaQuoteLeft/> Hapa Wema tunaamini kila mtu anatakiwa apate taarifa sahihi ili afanye maamuzi sahihi, na tunaamini pia kila dakika ya mtu inayopita inatakiwa itumike kwenye mambo ya kheir tupu na sio mambo ya laghwi. Kwa kujiunga humu na kushirikiana na Waislamu wenzako ni njia bora ya kujinasua kwenye majukwaa yaliyoanzishwa kuharibu jamii bora ya waislamu. <FaQuoteRight/></p>
+                    <p><FaQuoteLeft/> Hapa Wema tunaamini kila mtu anatakiwa apate taarifa sahihi ili afanye maamuzi sahihi, na tunaamini pia kila dakika ya mtu inayopita inatakiwa itumike kwenye mambo ya kheir tupu na sio mambo ya laghwi na Uadui. Kwa kujiunga humu na kushirikiana na Waislamu wenzako ni njia bora ya kujinasua kwenye majukwaa yaliyoanzishwa kuharibu jamii bora ya waislamu. <FaQuoteRight/></p>
                 </div>
             </div> 
         </div>
