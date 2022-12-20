@@ -19,16 +19,6 @@ const ChatCard = ({chat}) => {
 
     const myid = chat?.members.find(m => m === cuUser?.id || marry?.id || doc?.id || law?.id)
 
-    // const userChat = chat.members.find(m =>m !== cuUser?.id)
-    // const marryChat = chat.members.find(m =>m !== marry?.id)
-    // const docChat = chat.members.find(m =>m !== doc?.id)
-
-    // const memberId = 
-    //   chat?.members.find(m =>m !== cuUser?.id) ||
-    //   chat?.members.find(m =>m !== marry?.id) ||
-    //   chat?.members.find(m =>m !== law?.id) ||
-    //   chat?.members.find(m =>m !== doc?.id)
-
     const memberId = chat?.members.find(m =>m !== myid)
 
     
@@ -41,40 +31,6 @@ const ChatCard = ({chat}) => {
 
     const cuMsgs = messages && messages.filter(m => m.room === chat.id)
     const lastMsg = messages && messages.findLast((m) => m.room === chat.id)
-
-    // console.log('userchat',userChat)
-    // console.log('marryChat',marryChat)
-    // console.log('docChat',docChat)
-
-    // const myId = 
-    //   user.uid || 
-    //   doctors?.find(d => d.userId === user.uid)?.id || 
-    //   marriages?.find(m =>m.userId === user.uid)?.id ||
-    //   lawyers?.find(l => l.userId === user.uid)?.id
-
-
-   
-
-    // console.log('chat', chat)
-
-    // const member = 
-    //   doctors?.find(a => a.id === memberId) || 
-    //   marriages?.find(a => a.id === memberId) || 
-    //   lawyers?.find(a => a.id === memberId) || 
-    //   users?.find(a =>a.id === memberId) 
-
-    // console.log('isDoc', isDoc)
-    // console.log('isLaw', isLaw)
-    // console.log('memberId', memberId)
-    // console.log('isMarry', isMarry)
-
-    // console.log('marry', marry?.id)
-    
-    
-    // console.log('member', member)
-    // console.log('id', chat.id)
-    // console.log('chatid', chat?.chatId)
-    
 
     const Name = () => {
       if(isMarry){
@@ -105,15 +61,15 @@ const ChatCard = ({chat}) => {
         )
       }else if(isDoc){
         return (
-          <img src={isDoc?.photo? isUser?.photo : isUser?.avatar} />
+          <img src={isDoc?.photo} />
         )
       }else if(isLaw){
         return (
           <img src={isLaw?.photo} />
         )
-      }else {
+      }else if(isUser) {
         return (
-          <img src={isUser?.photo? isUser?.photo : isUser?.avatar} />
+          <img src={isUser?.photo || process.env.PUBLIC_URL + `${cuUser?.avatar}`} />
         )
       }
     }

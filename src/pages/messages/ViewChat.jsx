@@ -67,7 +67,7 @@ const ViewChat = () => {
       const Name = () => {
         if(isMarry){
           return (
-            <>{isMarry?.username }</>
+            <>{isMarry?.username || isMarry?.name }</>
           )
         }else if(isDoc){
           return (
@@ -77,7 +77,7 @@ const ViewChat = () => {
           return (
             <>{isLaw?.name}</>
           )
-        }else {
+        }else if(isUser){
           return (
             <>{isUser?.name}</>
           )
@@ -98,7 +98,7 @@ const ViewChat = () => {
           return (
             <img src={isLaw?.photo} />
           )
-        }else {
+        }else if(isUser) {
           return (
             <img src={isUser?.photo || process.env.PUBLIC_URL + `${cuUser?.avatar}`} />
           )
