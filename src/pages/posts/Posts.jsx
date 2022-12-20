@@ -60,36 +60,39 @@ const Posts = () => {
         }
       },[])
 
-    const [userRespond, setUserRespond] = useState(false)
-    const [show, setShow] = useState(false);
-    const [notification, setNotification]=useState({title:"",body:""});
-    onMessageListener()
-    .then((payload) => {
-        setShow(true);
-        setNotification({
-            title: payload.notification.title,
-            body: payload.notification.body,
-        });
-        console.log(payload);
-    })
-    .catch((err) => console.log("failed: ", err));
+    
+
+    // const [userRespond, setUserRespond] = useState(false)
+    // const [show, setShow] = useState(false);
+    // const [notification, setNotification]=useState({title:"",body:""});
+    // onMessageListener()
+    // .then((payload) => {
+    //     setShow(true);
+    //     setNotification({
+    //         title: payload.notification.title,
+    //         body: payload.notification.body,
+    //     });
+    //     console.log(payload);
+    // })
+    // .catch((err) => console.log("failed: ", err));
 
 
-    const [isTokenFound, setTokenFound] = useState(false);                
-    console.log("Token found", isTokenFound);
-    useEffect(() => {
-      let data;
-      async function tokenFunc() {
-        data = await getToken(setTokenFound);
-        if (data) {
-          console.log("Token is", data);
-        }
-        return data;
-      }
-      tokenFunc();
-    }, [setTokenFound]);
+    // const [isTokenFound, setTokenFound] = useState(false);                
+    // console.log("Token found", isTokenFound);
+    // useEffect(() => {
+    //   let data;
+    //   async function tokenFunc() {
+    //     data = await getToken(setTokenFound);
+    //     if (data) {
+    //       console.log("Token is", data);
+    //     }
+    //     return data;
+    //   }
+    //   tokenFunc();
+    // }, [setTokenFound]);
 
-    // const newQue = madas?.findLast()
+    const newQue = questions?.at(-1)
+    const newMada = madas?.at(-1)
 
     // console.log('new', newQue)
    
@@ -129,7 +132,7 @@ const Posts = () => {
                 </h3>
                                 
                 <div className="new_users">
-                    {users?.slice(0,7).map(u => (
+                    {users?.slice(-7).map(u => (
                         <div className="new_user">
                             <img src={u.photo || process.env.PUBLIC_URL + u?.avatar} alt="" />
                         </div>
@@ -143,7 +146,7 @@ const Posts = () => {
                     <button className='btn_view' onClick={() =>navigate('/nikah')}><BsArrowRight/></button>
                 </h3>                          
                 <div className="nikah_imgs">
-                    {marriages && marriages.filter(m =>m.gender !== cuUser?.gender).slice(0,5).map((item, index) => (
+                    {marriages && marriages.filter(m =>m.gender !== cuUser?.gender).slice(-5).map((item, index) => (
                     <NikahCard key={index} item={item}/>
                      ))}
                 </div>       
@@ -151,40 +154,33 @@ const Posts = () => {
                 <div className="donate" onClick={() =>navigate('/subscriptions')}>
                     Tuunge Mkono
                     <button className='btn_next'><BsArrowRight/></button>
+                </div>               
+                  
+                <div className="main_right_item" >            
+                  <h3 className="card_title">
+                      Mada ya Wiki
+                      <button className='btn_view' onClick={() =>navigate(`/madas/${newMada?.id}`)}><BsArrowRight/></button>
+                  </h3>                            
+                  <MadaCard m={newMada}/>
                 </div>
-
-                
-                    {madas?.slice(0,1).map(m => (
-                    <div className="main_right_item" key={m.id}>            
-                        <h3 className="card_title">
-                            Mada ya Wiki
-                            <button className='btn_view' onClick={() =>navigate(`/madas/${m.id}`)}><BsArrowRight/></button>
-                        </h3>                            
-                        <MadaCard m={m}/>
+                <div className="main_right_item" key={newQue?.id}>
+                  <h3 className="card_title">
+                    Swali Jipya 
+                    <button className='btn_view' onClick={() =>navigate(`/questions/${newQue?.id}`)}><BsArrowRight/></button>
+                  </h3>
+                  <div className="help" key={newQue?.id}>
+                    <div className="help_sender">
+                      <img src={newQue?.photo} alt="" />
                     </div>
-
-                    ))}
-                            
-                             
-                {questions.slice(0,1).map(q => (
-                    <div className="main_right_item" key={q.id}>
-                        <h3 className="card_title">
-                            Swali Maarufu 
-                            <button className='btn_view' onClick={() =>navigate(`/questions/${q.id}`)}><BsArrowRight/></button>
-                        </h3>
-                        <div className="help" key={q.id}>
-                            <div className="help_sender">
-                                <img src={q.photo} alt="" />
-                            </div>
-                            <div className="help_text">
-                                <h4>{q.que}</h4> 
-                                <span className='timeago'>{moment(q?.createdAt?.toDate()).fromNow(true)}</span>
-                            </div>
+                    <div className="help_text">
+                        <h4>{newQue?.que}</h4> 
+                        <span className='timeago'>{moment(newQue?.createdAt?.toDate()).fromNow(true)}</span>
+                    </div>
                                     
-                        </div>
-                        <Remarks p={q}/>                                
-                    </div>
-                ))}
+                  </div>
+                  <Remarks p={newQue}/>                                
+                </div>
+                
                            
                             
                         

@@ -18,7 +18,7 @@ const Reviews = ({doc, setShow}) => {
     const revs = comments?.filter(r =>r.docId === doc?.id)
     // const user = users?.find(u => u.id === doc?.userId)
 
-    console.log('doc', doc)
+    // console.log('doc', doc)
 
     // const reviews = [ 1,2,3,4,5]
     // const rate = 4.2;

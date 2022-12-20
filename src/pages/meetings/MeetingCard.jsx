@@ -63,19 +63,19 @@ const MeetingCard = ({room}) => {
 
       else if(!isPart) {
       
-        const prevPart = room?.participants?.find(p => p !== user.uid)
+        // const prevPart = room?.participants?.find(p => p !== user.uid)
 
-        console.log('prev', prevPart)
+        // console.log('prev', prevPart)
 
-        const upd_obj = room?.participants?.findIndex(obj => obj === prevPart)
+        // const upd_obj = room?.participants?.findIndex(obj => obj === prevPart)
 
         // console.log('upd', upd_obj)
 
-        const rumref = doc(db, 'rooms' ,`${room?.id}`)
+        // const rumref = doc(db, 'rooms' ,`${room?.id}`)
 
-        const parts = rumref.whereArrayContains('participants', `${prevPart}`)
+        // const parts = rumref.whereArrayContains('participants', `${prevPart}`)
 
-        console.log('parts', parts)
+        // console.log('parts', parts)
 
         
 
@@ -89,7 +89,7 @@ const MeetingCard = ({room}) => {
           userId: user.uid
       }
 
-      console.log('offer', offerPayload)
+      // console.log('offer', offerPayload)
 
       // await updateDoc(roomRef, {
       //   participants: [...prevPart, offerPayload]

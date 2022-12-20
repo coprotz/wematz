@@ -27,11 +27,11 @@ const ChatLists = () => {
 
     const mychats = allChats.concat(docChats)
 
-    const adminId = process.env.REACT_APP_ADMIN_ID
+    // const adminId = process.env.REACT_APP_ADMIN_ID
 
     const [viewAction, setViewAction] = useState(null)
 
-    console.log('mychats',mychats)
+    // console.log('mychats',mychats)
 
   return (
     <div className="messages_lists">

@@ -34,8 +34,8 @@ const ChatCard = ({chat}) => {
     const lastMsg = messages && messages.findLast((m) => m.room === chat.id)
     const isOwn = lastMsg?.uid === user.uid
 
-    console.log('last', lastMsg)
-    console.log('isOwn', isOwn)
+    // console.log('last', lastMsg)
+    // console.log('isOwn', isOwn)
 
     const Name = () => {
       if(isMarry){
@@ -96,7 +96,7 @@ const ChatCard = ({chat}) => {
     }
 
     const isRead = lastMsg?.isRead == true
-    console.log('isread', isRead)
+    // console.log('isread', isRead)
 
   return (
     <div className={chat.id === id? 'active_chat_card' : "chat_card"} key={chat.id} onClick={handleNavigate}>

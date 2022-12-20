@@ -37,34 +37,19 @@ const ViewChat = () => {
 
     const myid = chat?.members.find(m => m === cuUser?.id || marry?.id || dr?.id || law?.id)
 
-    console.log('myid', myid)
+    // console.log('myid', myid)
 
     const myname = cuUser?.name || marry?.username || dr?.name || law?.name
     const myphoto = cuUser?.photo? cuUser?.photo : process.env.PUBLIC_URL + `${cuUser?.avatar}` || marry?.photo || dr?.photo || law?.photo
     const memberId = chat?.members.find(m =>m !== myid)
-    console.log('memberId', memberId)
+ 
     
 
       const isMarry = marriages?.find(m => m.id === memberId)
       const isDoc = doctors?.find(d => d.id === memberId)
       const isLaw = lawyers?.find(l => l.id === memberId)
       const isUser = users?.find(a =>a.id === memberId)
-      
-      const userid =  
-        marriages?.find(m => m.id===memberId)?.userId ||  
-        doctors?.find(d => d.id===memberId)?.userId ||
-        lawyers?.find(l => l.id === memberId)?.userId 
-
-
-
-      const [ idToCall, setIdToCall ] = useState(null)
-
-    
-    // console.log('user', user.uid)
-    // console.log('userid', userid)
-
-    // const memberName = isMarry ? isMarry?.username || isMarry?.name : isUser?.name
-    // const memberPhoto = isMarry ? isMarry?.photo : isUser?.photo || process.env.PUBLIC_URL + `${isUser?.avatar}`     
+     
 
       const Name = () => {
         if(isMarry){
@@ -158,9 +143,9 @@ const ViewChat = () => {
     const expire = moment(mujaheed?.expiredAt).format('MMM Do YY, LT')
     const valid = expire > today
 
-    console.log('bloc_me', bloc_me)
+    // console.log('bloc_me', bloc_me)
     // console.log('myblocks', myblocks)
-    console.log('isbloc', isbloc)
+    // console.log('isbloc', isbloc)
     // console.log('myblocked', myblocked)
 
     const handleBlock = async(e) => {
@@ -184,6 +169,25 @@ const ViewChat = () => {
         //   setAlert('')
         // },3000)
       }
+    }
+
+    console.log('mes', chatMessages)
+
+    const exitChat = chats?.find(c => c.id === id)
+
+    const deletechat = async () => {
+       if(exitChat){
+        try {
+          await deleteDoc(doc(db, 'chats', `${id}`))
+          navigate('/messages')
+        } catch (error) {
+          console.log(error.message)
+         }
+       }else {       
+        navigate('/messages')
+       }
+      
+      
     }
 
    
@@ -216,6 +220,7 @@ const ViewChat = () => {
                         <span onClick={handleNavigate}>Angalia Wasifu Wake</span>
                         <span onClick={handleBlock}>{isbloc? 'Ruhusu Mawasiliano': 'Zuia Mawasiliano'}</span>
                         <span>Mripoti kwa Kudhalilisha</span>
+                        <span onClick={deletechat}>Ondoa chat hii</span>
                         
                       </div>}
                     </div> 

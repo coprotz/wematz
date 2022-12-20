@@ -27,8 +27,8 @@ const AddMeeting = () => {
     const [err, setErr] = useState('')
     const navigate = useNavigate()
 
-    const partsRef = collection(db, 'participants')
-    const roomRef = collection(db, 'rooms')
+    // const partsRef = collection(db, 'participants')
+    // const roomRef = collection(db, 'rooms')
     const meetingsRef = collection(db, 'meetings')
     const [member, setMember] = useState('')
 
@@ -46,7 +46,7 @@ const AddMeeting = () => {
     const start_date = watch('date')
     const start_time = watch('time')
 
-    console.log('members', members)
+    // console.log('members', members)
 
     const handleRoom = async(e) => {
         e.preventDefault()

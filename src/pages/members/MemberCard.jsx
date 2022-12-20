@@ -14,7 +14,7 @@ const MemberCard = ({member, handelNew}) => {
     const myFollowers = followers.filter(f => f?.follower_id === user.uid)
     const isFollower = myFollowers.find(f =>f?.following_id === member?.id)
     const myFollowings = followers.filter(f =>f?.following_id === user.uid)
-    console.log('myfoll', myFollowers)
+    // console.log('myfoll', myFollowers)
 
     const followRef = collection(db, 'followers')
     const notificRef = collection(db, 'notifics')
@@ -22,7 +22,8 @@ const MemberCard = ({member, handelNew}) => {
     const newNotific = {
       target_id: member?.id,
       uid: user.uid,
-      type: '',
+      type: 'follow',
+      type_id: user.uid,
       action: 'anakufatilia',
       isSeen: false,
       createdAt: serverTimestamp()

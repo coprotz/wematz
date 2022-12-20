@@ -38,7 +38,7 @@ const ViewMember = () => {
 
     const { perc, url } = useStorage(file)
 
-    console.log('user', user)
+    // console.log('user', user)
 
     const handleSelect = (e) => {
         let selected = e.target.files[0];  

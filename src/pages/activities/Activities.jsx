@@ -34,7 +34,7 @@ const Activities = () => {
 
     const valid = expire > today
 
-    console.log('user', user.uid)
+    // console.log('user', user.uid)
 
     const handelNew = (d) => {
         if(!valid){

@@ -13,7 +13,7 @@ const ViewProfile = ({setView, view}) => {
   const incomes = vsms?.length * 0.1
   const vappoints = appoints?.filter(a => a.doctor_id === view?.id)
   // console.log('vchats', vchats)
-  console.log('dr_userId', dr_userId)
+  // console.log('dr_userId', dr_userId)
 
   return (
     <div className='view_outer'>

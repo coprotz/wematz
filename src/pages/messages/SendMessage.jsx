@@ -8,14 +8,19 @@ import { BsFillFileEarmarkFill } from "react-icons/bs";
 import useData from '../../hooks/useData'
 import { useState } from 'react';
 import Loading from '../../components/loading/Loading';
+import { chats } from '../../data';
+import { useParams } from 'react-router-dom';
 
 
 const SendMessage = ({chat}) => {
 
-  console.log('chat', chat)
+  // console.log('chat', chat)
+  const { id } = useParams()
+
+  console.log('id', id)
 
 
-    const { users, marriages, doctors, lawyers, donates } = useData();
+    const { users, marriages, doctors, lawyers, donates, chats } = useData();
     const { user } = useAuth()
     const { uid } = user
     const [message, setMessage] = useState('')
@@ -37,8 +42,8 @@ const SendMessage = ({chat}) => {
 
   
     const isMarry = marriages?.find(m => m.id === memberId)
-    const isDoc = doctors?.find(d => d.id === memberId)
-    const isLaw = lawyers?.find(l => l.id === memberId)
+    // const isDoc = doctors?.find(d => d.id === memberId)
+    // const isLaw = lawyers?.find(l => l.id === memberId)
 
    
  
@@ -53,37 +58,40 @@ const SendMessage = ({chat}) => {
             createdAt: serverTimestamp(),
             // avatar: '/images/profile.webp',
             text: message,
-            room: chat.id,
+            room: chat?.id,
             isRead: false
            
     }
 
 
     const notificRef = collection(db, 'notifics')
+    const exitChat = chats?.find(c => c.id === id)
+
+    console.log('exi', exitChat)
 
     const newNotific = {
       target_id: memberId,
       uid: user.uid,
       type: 'message',
       action: 'amekutumia',
+      type: 'message',
+      type_id: chat?.id,
       isSeen: false,
       createdAt: serverTimestamp()
     }
 
-    if(!memberId){
-      alert('Huyu mwanachama hayupo au amezuiliwa')
-    }else{
+    if(exitChat){
       try {
-          await addDoc(messageRef, data)
-          await addDoc(notificRef, newNotific)
-          setLoding(null);
-          setMessage('');
-
-          
-          
-      } catch (error) {
-          console.log(error.message)
-      } 
+        await addDoc(messageRef, data)
+        await addDoc(notificRef, newNotific)
+        setLoding(null);
+        setMessage('');
+    } catch (error) {
+        console.log(error.message)
+    } 
+      
+    }else if(!exitChat){
+      alert('Chat hii imeondolewa')
     }
 
   

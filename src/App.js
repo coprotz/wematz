@@ -62,15 +62,71 @@ import ViewMember from './pages/members/ViewMember';
 import About from './pages/about/About';
 import Contacts from './pages/contacts/Contacts';
 import Makala from './pages/health/Makala';
+import { useEffect } from 'react';
+import useData from './hooks/useData';
 
 
 function App() {
 
   const { user, alert, confirm }= useAuth()
+  // const { doctors, notifics, lawyers, marriages, users } = useData()
 
   const RequireAuth = ({children}) => {
     return user ? (children) : <Navigate to="/main"/>
   }
+
+    // const dr = doctors?.find(d => d.userId === user.uid)
+    // const law = lawyers?.find(l =>l.userId === user.uid)
+    // const cuUser = users?.find(u => u.id === user.uid)
+    // const marry = marriages?.find(m => m.userId === user.uid)
+
+    // const usernots = notifics?.filter(n => n.target_id === user.uid)
+    // const drnots = notifics?.filter(n => n.target_id === dr?.id)
+    // const lawnots = notifics?.filter(n => n.target_id === law?.id)
+    // const marrynots = notifics?.filter(n => n.target_id === marry?.id)
+
+    // const a = drnots.concat(usernots)
+    // const b = a.concat(lawnots)
+    // const allnots = b.concat(marrynots)
+    // const mynots = allnots?.filter(a => a.isSeen == false)
+
+    
+    // const lastnot = mynots?.at(-1)
+    // console.log('lastnot', lastnot)
+
+  // useEffect(() => {
+  //   if(!('Notification' in window)){
+  //     alert("Browser yako haikubali notifications")
+  //   } 
+    
+  //   else if(Notification.permission !== "denied") {
+  //     Notification.requestPermission().then((permission) => {
+  //       if(permission === "granted"){
+  //         const notification = new Notification("Wema Muslim Ummah", {
+  //           body: "Asante kwa kuruhusu notification kutoka Wema",
+  //           icon: "logo_512.png",
+            
+  //         })
+  //       }
+  //     })
+  //   }
+  // },[])
+
+  // const sender = users.find(u => u.id === lastnot?.uid)
+
+  // useEffect(() => {    
+  //   if(Notification.permission !== "granted") {
+  //     Notification.requestPermission().then((permission) => {
+  //       if(permission === "granted"){
+  //         const notification = new Notification("Wema Muslim Ummah", {
+  //           body: `${sender?.name}`+" "+`${lastnot?.action}`+" "+`${lastnot?.type}`,
+  //           icon: "logo_512.png",
+  //           tag: `${lastnot?.id}`
+  //         })
+  //       }
+  //     })
+  //   }
+  // },[])
 
   return (
     <div className="App">

@@ -9,28 +9,28 @@ import Search from '../../components/search/Search';
 
 const Mujaheed = ({setPage}) => {
     const { donates, users } = useData()
-    const [loading, setLoading] = useState(null)
-    const [active, setActive] = useState(null)
+    // const [loading, setLoading] = useState(null)
+    // const [active, setActive] = useState(null)
 
-    const d = Date(serverTimestamp())
-    const a = Date.now(); // This would be the timestamp you want to format
-    console.log('a', new Intl.DateTimeFormat('en-US', {year: 'numeric', month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit'}).format(a));
+    // const d = Date(serverTimestamp())
+    // const a = Date.now(); // This would be the timestamp you want to format
+    // console.log('a', new Intl.DateTimeFormat('en-US', {year: 'numeric', month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit'}).format(a));
     // console.log('date.now', new Intl.a.getTime())
-    console.log('d', d)
+    // console.log('d', d)
 
-    const h = new Date().getTime()
+    // const h = new Date().getTime()
     
 
-    const g = 86400000
-    const f = h + g
+    // const g = 86400000
+    // const f = h + g
 
-    console.log('f', f)
+    // console.log('f', f)
 
-    console.log('f', new Intl.DateTimeFormat('en-US', {year: 'numeric', month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit'}).format(f));
+    // console.log('f', new Intl.DateTimeFormat('en-US', {year: 'numeric', month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit'}).format(f));
     
-    const v = moment(f).format('MMM Do YY, LT')
+    // const v = moment(f).format('MMM Do YY, LT')
 
-    console.log('v', v)
+    // console.log('v', v)
   
   return (
     <div className='admin_wrapper'>

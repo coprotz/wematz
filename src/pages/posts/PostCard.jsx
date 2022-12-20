@@ -90,7 +90,7 @@ const PostCard = ({p, setConfirm}) => {
             </div>
         </div>
         {RenderPost()}
-        <Remarks p={p} setShow={setShow}/>
+        <Remarks p={p} setShow={setShow} type='post'/>
         {show &&
         <Reviews doc={p} setShow={setShow}/>
         }

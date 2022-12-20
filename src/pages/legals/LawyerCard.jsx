@@ -15,7 +15,7 @@ const LawyerCard = ({d}) => {
     const { user } = useAuth()
 
     const isLaw = user.uid === lawyers?.find(l =>l.userId === user.uid)
-    console.log('islaw', isLaw)
+    // console.log('islaw', isLaw)
 
     const [donate, setDonate] = useState(false)
     const [open, setOpen] = useState(null)

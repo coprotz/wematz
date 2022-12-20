@@ -11,8 +11,8 @@ import NewDonate from '../donates/NewDonate'
 
 
 const NewChat = ({item, myId, setOpen }) => {
-    const { user } = useAuth()
-    const { users, doctors, marriages, chats } = useData()   
+    // const { user } = useAuth()
+    const {  chats } = useData()   
 
     const chatsRef = collection(db, 'chats')
     // const [open, setOpen] = useState(null)
@@ -20,8 +20,8 @@ const NewChat = ({item, myId, setOpen }) => {
    
     const navigate = useNavigate();
 
-    console.log('myid', myId)
-    console.log('otherId', item?.id)
+    // console.log('myid', myId)
+    // console.log('otherId', item?.id)
 
       const mychats = chats?.filter(c =>c.members.includes(`${myId}`))
       const oldChat = mychats?.find(c => c.members.find(m =>m === item?.id))

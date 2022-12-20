@@ -18,7 +18,7 @@ const Invited = () => {
 
     const parts = others?.filter(p =>p.participants.filter(t =>t.id.includes(`${user.uid}`)))
 
-    console.log('parts', parts)
+    // console.log('parts', parts)
   
   return (
     <>

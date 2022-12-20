@@ -8,7 +8,7 @@ const ClinicCard = ({c}) => {
     const { doctors } = useData()
     const docs = doctors?.filter(m =>m.status === 'Amethibitishwa').filter(d => d.specialize.includes(`${c?.name}`))
 
-    console.log('docs', docs)
+    // console.log('docs', docs)
   return (
     <div className="clinic_card" key={c.id} onClick={() =>navigate(`/health/clinics/${c.swahir}`)}>
         <img src={process.env.PUBLIC_URL+`/${c.url}`} />

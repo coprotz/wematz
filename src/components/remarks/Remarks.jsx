@@ -10,7 +10,7 @@ import './remarks.css'
 
 
 
-const Remarks = ({p, setShow}) => {
+const Remarks = ({p, setShow, type}) => {
   const { comments, likes } = useData()
   const { user } = useAuth()
   const [loading, setLoading] = useState(false)
@@ -28,7 +28,8 @@ const Remarks = ({p, setShow}) => {
   const newNotific = {
     target_id: p?.userId || p?.uid,
     uid: user.uid,
-    type: 'posti yako',
+    type,
+    type_id: p.id,
     action: 'ameipenda',
     isSeen: false,
     createdAt: serverTimestamp()
