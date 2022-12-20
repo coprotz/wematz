@@ -29,7 +29,7 @@ const Remarks = ({p, setShow, type}) => {
     target_id: p?.userId || p?.uid,
     uid: user.uid,
     type,
-    type_id: p.id,
+    type_id: p?.id,
     action: 'ameipenda',
     isSeen: false,
     createdAt: serverTimestamp()

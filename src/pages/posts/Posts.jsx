@@ -133,7 +133,7 @@ const Posts = () => {
                                 
                 <div className="new_users">
                     {users?.slice(-7).map(u => (
-                        <div className="new_user">
+                        <div className="new_user" key={u.id}>
                             <img src={u.photo || process.env.PUBLIC_URL + u?.avatar} alt="" />
                         </div>
                     ))}                              
@@ -147,14 +147,14 @@ const Posts = () => {
                 </h3>                          
                 <div className="nikah_imgs">
                     {marriages && marriages.filter(m =>m.gender !== cuUser?.gender).slice(-5).map((item, index) => (
-                    <NikahCard key={index} item={item}/>
+                      <NikahCard key={index} item={item}/>
                      ))}
                 </div>       
                 </div>
-                <div className="donate" onClick={() =>navigate('/subscriptions')}>
+                {/* <div className="donate" onClick={() =>navigate('/subscriptions')}>
                     Tuunge Mkono
                     <button className='btn_next'><BsArrowRight/></button>
-                </div>               
+                </div>                */}
                   
                 <div className="main_right_item" >            
                   <h3 className="card_title">
