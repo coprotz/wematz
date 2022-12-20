@@ -48,8 +48,8 @@ const SendMessage = ({chat}) => {
     setLoding(true)
     const data = {
             uid,
-            name: isDoc? cuUser?.name : isLaw? cuUser?.name : isMarry? myMarry.name : cuUser?.name,
-            photo: isDoc? cuUser?.photo || cuUser?.avatar : isLaw? cuUser?.photo || cuUser?.avatar :isMarry? myMarry.photo : cuUser?.photo || cuUser?.avatar ,        
+            name: isMarry? myMarry.name || myMarry.username : cuUser?.name,
+            photo: isMarry? myMarry.photo : cuUser?.photo || cuUser?.avatar ,        
             createdAt: serverTimestamp(),
             // avatar: '/images/profile.webp',
             text: message,
