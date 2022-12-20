@@ -32,8 +32,10 @@ const ChatCard = ({chat}) => {
 
     const cuMsgs = messages && messages.filter(m => m.room === chat.id)
     const lastMsg = messages && messages.findLast((m) => m.room === chat.id)
+    const isOwn = lastMsg?.uid === user.uid
 
     console.log('last', lastMsg)
+    console.log('isOwn', isOwn)
 
     const Name = () => {
       if(isMarry){
@@ -80,8 +82,17 @@ const ChatCard = ({chat}) => {
     const navigate = useNavigate()
 
     const handleNavigate = async () => {
-      await updateDoc(doc(db, 'messages', `${lastMsg.id}`), {isRead: true})
-      navigate(`/messages/${chat.id}`)
+      if(isOwn){
+        navigate(`/messages/${chat.id}`)
+      }else{
+        try {
+          await updateDoc(doc(db, 'messages', `${lastMsg.id}`), {isRead: true})
+          navigate(`/messages/${chat.id}`)
+        } catch (error) {
+            console.log(error.message)
+        }
+      }
+      
     }
 
     const isRead = lastMsg?.isRead == true
@@ -101,7 +112,7 @@ const ChatCard = ({chat}) => {
         </div>
         <div className="chat_timer">
           <small className='chat_la_time'>{moment(lastMsg?.createdAt?.toDate()).fromNow(true)}</small> 
-          <span className={isRead ? 'msg_read' : 'card_small_qty'}>{cuMsgs && cuMsgs.length}</span>
+          <span className={ isOwn || isRead ? 'msg_read' : 'card_small_qty'}>{cuMsgs && cuMsgs.length}</span>
         </div>
         </div>
     </div>
