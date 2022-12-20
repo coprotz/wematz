@@ -1,9 +1,10 @@
 import React from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 // import { chats, users } from '../../data'
-import { useAuth } from '../../hooks/useAuth'
+import { db, useAuth } from '../../hooks/useAuth'
 import useData from '../../hooks/useData'
 import moment from 'moment'
+import { updateDoc, doc } from 'firebase/firestore'
 
 const ChatCard = ({chat}) => {
 
@@ -14,10 +15,10 @@ const ChatCard = ({chat}) => {
 
     const cuUser = users?.find(u => u.id === user.uid)
     const marry = marriages?.find(p=>p.userId === user.uid)
-    const doc = doctors?.find(p=>p.userId === user.uid)
+    const dr = doctors?.find(p=>p.userId === user.uid)
     const law = lawyers?.find(p=>p.userId === user.uid)
 
-    const myid = chat?.members.find(m => m === cuUser?.id || marry?.id || doc?.id || law?.id)
+    const myid = chat?.members.find(m => m === cuUser?.id || marry?.id || dr?.id || law?.id)
 
     const memberId = chat?.members.find(m =>m !== myid)
 
@@ -31,6 +32,8 @@ const ChatCard = ({chat}) => {
 
     const cuMsgs = messages && messages.filter(m => m.room === chat.id)
     const lastMsg = messages && messages.findLast((m) => m.room === chat.id)
+
+    console.log('last', lastMsg)
 
     const Name = () => {
       if(isMarry){
@@ -76,8 +79,16 @@ const ChatCard = ({chat}) => {
   
     const navigate = useNavigate()
 
+    const handleNavigate = async () => {
+      await updateDoc(doc(db, 'messages', `${lastMsg.id}`), {isRead: true})
+      navigate(`/messages/${chat.id}`)
+    }
+
+    const isRead = lastMsg?.isRead == true
+    console.log('isread', isRead)
+
   return (
-    <div className={chat.id === id? 'active_chat_card' : "chat_card"} key={chat.id} onClick={() =>navigate(`/messages/${chat.id}`)}>
+    <div className={chat.id === id? 'active_chat_card' : "chat_card"} key={chat.id} onClick={handleNavigate}>
       <div className="chat_wrap">
         <div className="chat_wrleft">
           <div className="chat_rec_photo">
@@ -90,7 +101,7 @@ const ChatCard = ({chat}) => {
         </div>
         <div className="chat_timer">
           <small className='chat_la_time'>{moment(lastMsg?.createdAt?.toDate()).fromNow(true)}</small> 
-          <span className='card_small_qty'>{cuMsgs && cuMsgs.length}</span>
+          <span className={isRead ? 'msg_read' : 'card_small_qty'}>{cuMsgs && cuMsgs.length}</span>
         </div>
         </div>
     </div>

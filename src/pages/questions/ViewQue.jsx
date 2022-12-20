@@ -5,6 +5,7 @@ import {  answers } from '../../data'
 import {  HiOutlineArrowLeft } from "react-icons/hi";
 import useData from '../../hooks/useData';
 import moment from 'moment'
+import CreateAnswer from './CreateAnswer';
 
 const ViewQue = () => {
     const { id } = useParams()
@@ -13,7 +14,7 @@ const ViewQue = () => {
     const navigate = useNavigate()
     const ans = comments?.filter(a => a.docId === que?.id)
 
-    // console.log('que', que)
+    console.log('que', que)
   return (
     <div className='view_que'>
         <div className="view_que_back">
@@ -28,12 +29,12 @@ const ViewQue = () => {
                 <img src={que?.photo} />
             </div>           
             <h4>{que?.name}</h4>          
-            <span>{moment(que?.createdAt.seconds * 1000).format('MMM Do YY, LT') }</span>
+            <span>{moment(que?.createdAt?.seconds * 1000).format('MMM Do YY, LT') }</span>
         </div>
         <div className="view_que_answers">
             <h3 className='sub_title'>Majibu</h3>
             <div className="view_answers_grid">
-                {ans?.map(a => (
+                {que?.answers?.map(a => (
                     <div className="que_grid_anwers" key={a.id}>
                         <div className="answerd_photo">
                             <img src={a.photo} />
@@ -41,7 +42,7 @@ const ViewQue = () => {
                         <div className="answered_body">
                             <p>{a.text}</p>
                             <small className='answered_small'>
-                                <span>{moment(a.createdAt?.seconds * 1000).format('MMM Do YY, LT') }</span>
+                                <span>{moment(a?.answeredAt).format('MMM Do YY, LT') }</span>
                             </small>
                         </div>
                     </div>
@@ -49,7 +50,7 @@ const ViewQue = () => {
             </div>
             <div className="view_que_create">
                 {/* <h3 className='sub_title'>Toa Jibu lako</h3> */}
-              <CreateReview title='Andika jibu lako' doc={que}/>  
+              <CreateAnswer title='Andika jibu lako' item={que}/>  
             </div>
             
         </div>

@@ -62,7 +62,9 @@ const ViewChat = () => {
     
     // console.log('user', user.uid)
     // console.log('userid', userid)
-    
+
+    // const memberName = isMarry ? isMarry?.username || isMarry?.name : isUser?.name
+    // const memberPhoto = isMarry ? isMarry?.photo : isUser?.photo || process.env.PUBLIC_URL + `${isUser?.avatar}`     
 
       const Name = () => {
         if(isMarry){

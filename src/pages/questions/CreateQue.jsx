@@ -34,6 +34,7 @@ const CreateQue = () => {
             userId: user.uid,
             photo: cuUser.photo ? cuUser?.photo : process.env.PUBLIC_URL + cuUser?.avatar,
             name: cuUser?.name,
+            answers: [],
             createdAt: serverTimestamp()
         }
 

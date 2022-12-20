@@ -10,10 +10,10 @@ import Remarks from '../../components/remarks/Remarks'
 
 const QueCard = ({q}) => {
     const navigate = useNavigate()
-    const { comments } = useData()
+    const { comments, questions } = useData()
     const coms = comments?.filter(c => c.docId === q.id)
 
-    const lastanswer = comments?.findLast(c => c.docId === q.id)
+    const lastanswer = q?.answers?.at(-1)
 
     console.log('lastanswer', lastanswer)
 
@@ -29,14 +29,22 @@ const QueCard = ({q}) => {
             <div className="que_title" onClick={()=>navigate(`/questions/${q.id}`)}>
                 <h2>{q.que}</h2>
             </div>
+            {lastanswer &&
             <div className="que_last">
+                <div className="answered_guy">
+                    <div className="activity_photo">
+                        <img src={lastanswer?.photo} /> 
+                    </div>
+                    amejibu 
+                    <small className='last_time'>{moment(lastanswer?.answeredAt).format('MMM Do YY, LT') }</small>
+                </div>
                 <p>{lastanswer?.text}</p>
-            </div>
-            <small className='last_time'>{moment(lastanswer?.createdAt?.seconds * 1000).format('MMM Do YY, LT') }</small>
+            </div>}
+            
             <div className="que_cations">
                 <div className="ques_act_left">
                     <div className="que_answers" onClick={()=>navigate(`/questions/${q.id}`)}>
-                        {coms.length} Majibu
+                        {q?.answers?.length > 0 ? q?.answers?.length : 0} Majibu
                     </div>
                     {/* <div className="que_answers">
                         <Remarks p={q}/>                        

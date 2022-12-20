@@ -88,6 +88,10 @@ const Posts = () => {
       }
       tokenFunc();
     }, [setTokenFound]);
+
+    // const newQue = madas?.findLast()
+
+    // console.log('new', newQue)
    
 
    

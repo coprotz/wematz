@@ -17,6 +17,13 @@
     width: 100%;
 }
 
+.answered_guy{
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 3px;
+}
+
 .main_ques_inner{
     display: flex;
     flex-direction: column-reverse;

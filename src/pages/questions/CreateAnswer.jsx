@@ -1,24 +1,26 @@
-import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
+import { addDoc, collection, serverTimestamp, updateDoc, doc } from 'firebase/firestore';
 import React from 'react'
 import { useState } from 'react';
 import {   BsFillShareFill } from "react-icons/bs";
+import { answers } from '../../data';
 import { db, useAuth } from '../../hooks/useAuth';
 import useData from '../../hooks/useData';
 
-const CreateReview = ({title, doc}) => {
+const CreateAnswer = ({title, item}) => {
     const [message, setMessage] = useState('')
     const [loading, setLoading] = useState(false)
     const { user } = useAuth()
-    const { users } = useData()
+    const { users, questions } = useData()
 
     const cuUser = users?.find(u => u.id === user?.uid)
+    const cuQue = questions?.find(q => q.id === item.id)
 
     const commentRef = collection(db, 'comments')
     const likeRef = collection(db, 'likes')
     const notificRef = collection(db, 'notifics')
   
     const newNotific = {
-      target_id: doc?.userId,
+      target_id: item?.userId,
       uid: user.uid,
       type: 'swali lako',
       action: 'amejibu',
@@ -30,19 +32,22 @@ const CreateReview = ({title, doc}) => {
     const handleComment = async(e) => {
         e.preventDefault()
 
+
+        const exiAnswers = [...item?.answers]
+
         setLoading(true)
 
         const data = {
-            docId: doc.id,
-            userId: user.uid,
-            name: cuUser?.name,
-            createdAt: serverTimestamp(),
+            docId: item.id,
+            uid: user.uid,
+            name: cuUser?.name, 
+            answeredAt: Date.now(),     
             text: message,           
             photo: cuUser?.photo ? cuUser?.photo : process.env.PUBLIC_URL + cuUser?.avatar
         }
 
         try {
-            await addDoc(commentRef, data)
+            await updateDoc(doc(db, 'questions', `${item.id}`), {answers: [...exiAnswers, data]})
             await addDoc(notificRef, newNotific)
             setMessage('')
             setLoading(null)
@@ -82,5 +87,4 @@ const CreateReview = ({title, doc}) => {
     </div>
   )
 }
-
-export default CreateReview
+export default CreateAnswer
