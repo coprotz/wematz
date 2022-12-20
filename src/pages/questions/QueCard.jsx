@@ -13,7 +13,7 @@ const QueCard = ({q}) => {
     const { comments, questions } = useData()
     const coms = comments?.filter(c => c.docId === q.id)
 
-    const lastanswer = q?.answers?.at(-1)
+    const lastanswer = comments?.findLast(c => c.docId === q.id)
 
     console.log('lastanswer', lastanswer)
 
@@ -36,7 +36,7 @@ const QueCard = ({q}) => {
                         <img src={lastanswer?.photo} /> 
                     </div>
                     amejibu 
-                    <small className='last_time'>{moment(lastanswer?.answeredAt).format('MMM Do YY, LT') }</small>
+                    <small className='last_time'>{moment(lastanswer?.createdAt?.seconds * 1000).format('MMM Do YY, LT') }</small>
                 </div>
                 <p>{lastanswer?.text}</p>
             </div>}
@@ -44,7 +44,7 @@ const QueCard = ({q}) => {
             <div className="que_cations">
                 <div className="ques_act_left">
                     <div className="que_answers" onClick={()=>navigate(`/questions/${q.id}`)}>
-                        {q?.answers?.length > 0 ? q?.answers?.length : 0} Majibu
+                        {coms?.length > 0 ? coms?.length : 0} Majibu
                     </div>
                     {/* <div className="que_answers">
                         <Remarks p={q}/>                        
