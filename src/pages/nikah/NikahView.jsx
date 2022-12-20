@@ -110,7 +110,7 @@ const NikahView = () => {
         
         <div className="nikah_View_top">
             <button onClick={() => navigate(-1)} className='btn_btn'><BsArrowLeft/></button>
-            <h3 className='title'>{nikah && nikah.name}</h3>
+            <h3 className='title'>{nikah?.username || nikah?.name}</h3>
             {/* <h3>{nikah && nikah.name}</h3> */}
         </div>
         <div className="nikah_view_bottom">

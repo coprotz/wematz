@@ -12,6 +12,7 @@ import VideoChat from './VideoChat';
 import 'webrtc-adapter'
 import { doOffer } from '../../hooks/FirebaseModule';
 import {doc,  addDoc, collection, deleteDoc } from 'firebase/firestore';
+import moment from 'moment';
 
 
 
@@ -19,7 +20,7 @@ import {doc,  addDoc, collection, deleteDoc } from 'firebase/firestore';
 const ViewChat = () => {
     const { id } = useParams()
     const { user, alert, setAlert } = useAuth()
-    const { users, chats, messages, doctors, marriages, lawyers, calls, blocks } = useData()
+    const { users, chats, messages, doctors, marriages, lawyers, calls, blocks, donates } = useData()
 
     const [viewAction, setViewAction] = useState(null)
     const [receivingCall, setReceivingCall] = useState(null)
@@ -149,6 +150,12 @@ const ViewChat = () => {
 
     const blocRef = doc(db, 'blocks', `${isbloc?.id}`)
 
+    const mujaheed = donates?.find(d => d?.user_id === user.uid)   
+    const a = new Date().getTime()
+    const today = moment(a).format('MMM Do YY, LT')
+    const expire = moment(mujaheed?.expiredAt).format('MMM Do YY, LT')
+    const valid = expire > today
+
     console.log('bloc_me', bloc_me)
     // console.log('myblocks', myblocks)
     console.log('isbloc', isbloc)
@@ -221,8 +228,8 @@ const ViewChat = () => {
                       
                     ))}
                 </div>
-                {bloc_me?.id===memberId? <span className='block_user'>{Name()} amekuzuia kutumia ujumbe</span> :
-                <SendMessage chat={chat} photo={myphoto} name={myname} myid={myid}/>}
+                {!valid? <span className='block_user'>Huwezi kutuma ujumbe kama sio Mjahidi</span> :
+                <SendMessage chat={chat} myid={myid}/>}
             </div> :
             <VideoChat 
               myname={myname} 

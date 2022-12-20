@@ -30,7 +30,7 @@ const NikahCard = ({item}) => {
               <img src={item.photo} alt="" />
             </div>
             <div className="nikah_info">
-              <h4>{item.username} ({item.age})</h4>
+              <h4>{item.username || item?.name} ({item.age})</h4>
               <div className="nikah_loc">
                 <span>{item.tribe} -</span>
                 <span> {item.location}</span>
@@ -38,11 +38,11 @@ const NikahCard = ({item}) => {
              
             </div>
           </div>
-          <div className="meetings_actions">                    
+          {/* <div className="meetings_actions">                    
               <button className='btn_btn'><FcLike/></button>
               <button className='btn_btn'><BsFillPersonFill/></button>
               <button className='btn_btn'><BsChatLeftDotsFill/></button>          
-          </div>
+          </div> */}
          
         </div>}
     </div>

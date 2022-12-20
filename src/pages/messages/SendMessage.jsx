@@ -9,12 +9,13 @@ import useData from '../../hooks/useData'
 import { useState } from 'react';
 import Loading from '../../components/loading/Loading';
 
+
 const SendMessage = ({chat}) => {
 
   console.log('chat', chat)
 
 
-    const { users, marriages, doctors, lawyers } = useData();
+    const { users, marriages, doctors, lawyers, donates } = useData();
     const { user } = useAuth()
     const { uid } = user
     const [message, setMessage] = useState('')
@@ -38,12 +39,10 @@ const SendMessage = ({chat}) => {
     const isMarry = marriages?.find(m => m.id === memberId)
     const isDoc = doctors?.find(d => d.id === memberId)
     const isLaw = lawyers?.find(l => l.id === memberId)
- 
-    
-  
 
+   
  
-
+ 
   const handleSubmit = async(e) => {
     e.preventDefault()
     setLoding(true)
@@ -71,16 +70,20 @@ const SendMessage = ({chat}) => {
       createdAt: serverTimestamp()
     }
 
-    try {
-        await addDoc(messageRef, data)
-        await addDoc(notificRef, newNotific)
-        setLoding(null);
-        setMessage('');
+    if(!memberId){
+      alert('Huyu mwanachama hayupo au amezuiliwa')
+    }else{
+      try {
+          await addDoc(messageRef, data)
+          await addDoc(notificRef, newNotific)
+          setLoding(null);
+          setMessage('');
 
-        
-        
-    } catch (error) {
-        console.log(error.message)
+          
+          
+      } catch (error) {
+          console.log(error.message)
+      } 
     }
 
   

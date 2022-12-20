@@ -27,7 +27,7 @@ const MainCard = ({id, handelNew}) => {
         </div>
         <div className="nikah_main_info">
             <div className="nikah_info">
-                <h4>{item?.username}, {item?.age}</h4>
+                <h4>{item?.username || item?.name}, {item?.age}</h4>
                 <div className="nikah_loc">
                     <span>{item?.tribe} -</span>
                     <span> {item?.location}</span>
