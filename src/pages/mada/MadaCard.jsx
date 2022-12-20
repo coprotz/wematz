@@ -18,7 +18,7 @@ const MadaCard = ({m}) => {
             <small>{moment(m?.createdAt?.toDate()).format('MMM Do YY, LT')}</small>
             <small>5 Rajab 1444</small>
         </div>
-        <h3 className='mada_title'>{m?.title}</h3>
+        <h4 className='mada_title'>{m?.title}</h4>
         <div className="mada_details">
             <div className="author_info">
                 <div className="author_wrapper">

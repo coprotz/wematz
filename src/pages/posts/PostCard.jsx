@@ -39,21 +39,30 @@ const PostCard = ({p, setConfirm}) => {
                     <p>{p?.tex}</p>
                 </div>
             )
-        }else if(type === 'video'){
+        }
+        else if(type === 'video'){
             return (
                 <div className="home_video_player">
                     <div className="video">
-                       <ReactPlayer
+                        <video className='shared_video_2' controls>
+                            <source src={p?.url} type="video/mp4"/>
+                        </video> 
+                       {/* <ReactPlayer                           
+                          
+                            sandbox = "allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox allow-presentation"  
+                            class="embed-responsive-item"
+                            allowfullScreen               
                             url={p?.url}
                             width='100%'
                             height='100%'
                             controls={true}            
-                        /> 
+                        />  */}
                     </div>                    
                     <h4 className='video_caption'>{p?.caption}</h4>
                 </div>
             )
-        }else if(type === 'audio'){
+        }
+        else if(type === 'audio'){
             return (
                 <div className="card_player">
                     <div className="audio_player">           

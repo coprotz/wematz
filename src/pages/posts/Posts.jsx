@@ -129,8 +129,7 @@ const Posts = () => {
                 <h3 className="card_title">
                     Waliojiunga Punde
                     <button className='btn_view' onClick={() =>navigate('/members')}><BsArrowRight/></button>
-                </h3>
-                                
+                </h3>                                
                 <div className="new_users">
                     {users?.slice(-7).map(u => (
                         <div className="new_user" key={u.id}>
@@ -180,11 +179,7 @@ const Posts = () => {
                   </div>
                   <Remarks p={newQue}/>                                
                 </div>
-                
-                           
-                            
-                        
-                </div>
+            </div>
         </div>
              
     </div>

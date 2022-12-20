@@ -75,9 +75,7 @@ const ShareImage = ({setImage}) => {
             <div className="user_photo">
              { file?                         
                  <img src={URL.createObjectURL(file)} alt="" /> : 
-                 <>
-                 
-                                               
+                 <>  
                  <label htmlFor="photo" className='profile_photo'>
                      <input 
                          type="file" 

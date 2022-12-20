@@ -18,7 +18,7 @@ const MainCard = ({id, handelNew}) => {
     const mylikes = likes.filter(l => l.user_id === myid?.id)
 
     const isLike = mylikes.find(m => m.target_id === id)
-    console.log('isLike', isLike)
+    // console.log('isLike', isLike)
 
   return (
     <div className="nikah_card">
