@@ -1,8 +1,9 @@
 import { useContext, useState, useEffect, createContext } from "react";
+import firebase from "firebase/compat/app";
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
-import {  getMessaging, getToken, onMessage } from 'firebase/messaging'
+import {  getMessaging,  onMessage } from 'firebase/messaging'
 import { 
     onAuthStateChanged, 
     signOut, 
@@ -29,10 +30,13 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig)
 
+firebase.initializeApp(firebaseConfig)
+
 export const db = getFirestore(app);
 export const auth = getAuth(app);
 export const storage = getStorage(app);
-export const messaging = getMessaging(app)
+const messaging = getMessaging(app)
+
 
 const AuthContext = createContext()
 
@@ -40,14 +44,33 @@ export function useAuth(){
     return useContext(AuthContext)
 }
 
+export const getToken = (setTokenFound) => {
+    return getToken(messaging, {vapidKey: 'BGQeVBD9gxLxXc-ZFLi25oiJaByod9cGe4HBifKxYRdKz111YnV6PJ_VB-ObFCqNEy5jJAyqlJA2u5c5CnrLD3c'}).then((currentToken) => {
+      if (currentToken) {
+        console.log('current token for client: ', currentToken);
+        setTokenFound(true);
+        // Track the token -> client mapping, by sending to backend server
+        // show on the UI that permission is secured
+      } else {
+        console.log('No registration token available. Request permission to generate one.');
+        setTokenFound(false);
+        // shows on the UI that permission is required 
+      }
+    }).catch((err) => {
+      console.log('An error occurred while retrieving token. ', err);
+      // catch error while creating client token
+    });
+
+}
+
 // export function onMessage
 
-export const onMessageHandler = () =>
-  new Promise((resolve) => {
-    onMessage(messaging, (payload) => {
-      resolve(payload);
-    });
-});
+// export const onMessageHandler = () =>
+//   new Promise((resolve) => {
+//     onMessage(messaging, (payload) => {
+//       resolve(payload);
+//     });
+// });
 
 export function AuthProvider({ children }) {
     const [user, setUser] = useState(null)
@@ -124,7 +147,9 @@ export function AuthProvider({ children }) {
             habari,
             setHabari,
             viewParts, 
-            setViewParts
+            setViewParts, 
+            getToken
+            // messaging
              }}>
             {!isAuthenticating && children}
         </AuthContext.Provider>

@@ -30,7 +30,7 @@ const NikahReg = () => {
 
     const navigate = useNavigate()
 
-    const username = watch('username')
+    const name = watch('username')
     const tribe = watch('tribe')
     const weight = watch('weight')
     const height = watch('height')
@@ -79,7 +79,7 @@ const NikahReg = () => {
 
         const data = {
             photo: url,
-            username,
+            name,
             userId: user.uid,
             age: cuUser?.age,
             islam: cuUser?.islam,

@@ -42,7 +42,7 @@ const Register = () => {
     const mosque = watch('mosque')
     const quran = watch('quran')
     const revert = watch('revert')
-    const revert_res = watch('revert_res')
+    const isMosque = watch('isMosque')
     const revert_plan = watch('revert_plan')
     const edu = watch('edu')
     const emplo = watch('emplo')
@@ -63,6 +63,7 @@ const Register = () => {
         religion,
         isOnline: true,
         profes,
+        isMosque: 'NA' || isMosque,
         islam: 'NA' || islam,
         set: 'NA' || set,
         mosque: 'NA' || mosque,
@@ -89,6 +90,7 @@ const Register = () => {
         isOnline: true,
         islam: 'NA' || islam,
         set: 'NA' || set,
+        isMosque: 'NA' || isMosque,
         mosque: 'NA' || mosque,
         location,
         avatar: '/images/profile.webp',
@@ -99,7 +101,7 @@ const Register = () => {
    
     }
 
-    console.log('name', fname+" "+lname)
+    // console.log('name', fname+" "+lname)
 
     const handleRegister = async(e) => {
         e.preventDefault()
@@ -505,6 +507,34 @@ const Register = () => {
                     
                 </div>
                 <div className="items_group">
+                    <h3 className='item_title'>Kuna msikiti karibu na unapoishi?</h3>
+                    <div className="selection_btns">
+                        <div className="sel_item">
+                            <input 
+                                type="radio" id='70' 
+                                value='Ndio Upo' 
+                                name='isMosque'
+                                {...register("isMosque", { required: religion === 'islam' ? true : false })}
+                                />
+                            <label htmlFor="70">Ndio Upo</label>
+                        </div>
+                        <div className="sel_item">
+                            <input 
+                                type="radio" 
+                                id='80' 
+                                value='Hapana Msikiti' 
+                                name='isMosque'
+                                {...register("isMosque", { required: religion === 'islam' ? true : false })}
+                                />
+                            <label htmlFor="80">Hapana Hakuna</label>
+                        </div>                     
+                        
+                     
+                    </div>
+                    
+                </div>
+                {isMosque === 'Ndio Upo'}
+                <div className="items_group">
                     <h3 className='item_title'>Jina la Msikiti unaoswalia unapokuwa Morogoro</h3>
                     <div className="sel_items">
 
@@ -514,7 +544,7 @@ const Register = () => {
                             className='sel_input'
                             name='mosque'
                             style={{width: '100%'}}
-                            {...register("mosque", { required: religion === 'islam' ? true : false })}
+                            {...register("mosque", { required: isMosque === 'Ndio Upo' ? true : false })}
                         />
                     </div>
                     

@@ -64,9 +64,6 @@ const SharePost = ({setVideo,setAudio, setImage}) => {
                                      
                      <div className="share_others">
                      {!message && <>
-                     
-                     
-                    
                         <button className='btn_btn' onClick={() =>setImage(true)}>
                             <BsCardImage/>
                         </button>              

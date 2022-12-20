@@ -27,20 +27,6 @@ const ChatLists = () => {
 
     const mychats = allChats.concat(docChats)
 
-    // const mychats = chats?.filter(c =>c.members.find(m =>m.myId === user?.uid))
-
-    // const myId = 
-    //   user.uid || 
-    //   doctors?.find(d => d.userId === user.uid)?.id || 
-    //   marriages?.find(m =>m.userId === user.uid)?.id ||
-    //   lawyers?.find(l => l.userId === user.uid)?.id
-    
-    // const mychats = chats && chats.filter(c => c.members.includes(`${myId}`))
-    
-
-    // const allchats = userChats.concat(marryChats)
-    // const mychats = allchats.concat(docChats)
-
     const adminId = process.env.REACT_APP_ADMIN_ID
 
     const [viewAction, setViewAction] = useState(null)
@@ -69,7 +55,7 @@ const ChatLists = () => {
           {mychats.length > 0 ? 
           <>
             {mychats?.map(chat => (
-                <ChatCard chat={chat}/>
+                <ChatCard chat={chat} key={chat.id}/>
               ))}
           </> : 'Hauna Chats'}
             

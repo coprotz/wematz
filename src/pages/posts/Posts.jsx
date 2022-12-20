@@ -15,11 +15,13 @@ import ShareAudio from './ShareAudio';
 import ShareImage from './ShareImage';
 import moment from 'moment'
 import Search from '../../components/search/Search';
-import { db, useAuth } from '../../hooks/useAuth';
+import { db, messaging, useAuth } from '../../hooks/useAuth';
 import DeleteConfirm from '../../components/confirm/DeleteConfirm';
 import AlertSms from '../../components/alert/AlertSms';
 import { useEffect } from 'react';
 import { doc, updateDoc } from 'firebase/firestore';
+import { onMessageListener } from '../../firebase';
+// import firebase from '../../hooks/useAuth';
 
 
 
@@ -31,12 +33,16 @@ const Posts = () => {
     const [video, setVideo] = useState(false)
     const [audio, setAudio] = useState(false)
     const [image, setImage] = useState(false)
-    const { user } = useAuth()
+    const { user, getToken } = useAuth()
     const { posts, users, questions, marriages, madas } = useData();
     const cuUser = users?.find(u => u.id === user.uid)
     const [confirm, setConfirm] = useState(null)
     const [messageAlert, setAlert] = useState(null)
 
+    // const [isTokenFound, setTokenFound] = useState(false);
+    // getToken(setTokenFound);
+
+    
     // console.log('user', user?.displayName)
    
 
@@ -55,29 +61,36 @@ const Posts = () => {
       },[])
 
     const [userRespond, setUserRespond] = useState(false)
+    const [show, setShow] = useState(false);
+    const [notification, setNotification]=useState({title:"",body:""});
+    onMessageListener()
+    .then((payload) => {
+        setShow(true);
+        setNotification({
+            title: payload.notification.title,
+            body: payload.notification.body,
+        });
+        console.log(payload);
+    })
+    .catch((err) => console.log("failed: ", err));
 
-      useEffect(() => {     
-        const  notifyUser = async (text='Asante kwa kuruhusu notification kutoka Wema') => {
-            if(!("Notification" in window)) {
-                alert("Browser does not support notifications");
-            }else if(Notification.permission === 'granted'){
-                const notification = new Notification(text);
-            }else if(Notification.permission !== 'denied') {
-                Notification.requestPermission().then((permission) => {
-                    if(permission === 'granted') {
-                        const notification = new Notification(text)
-                    }
-                })
-            }
-        } 
-        notifyUser()
-    },[])
 
-    // const notifyuser = () => {
-    //     setUserRespond(true)
-    //     notifyUser()
-    // }
-      
+    const [isTokenFound, setTokenFound] = useState(false);                
+    console.log("Token found", isTokenFound);
+    useEffect(() => {
+      let data;
+      async function tokenFunc() {
+        data = await getToken(setTokenFound);
+        if (data) {
+          console.log("Token is", data);
+        }
+        return data;
+      }
+      tokenFunc();
+    }, [setTokenFound]);
+   
+
+   
 
   return (
     <div className="posts" ref={scrollRef}> 

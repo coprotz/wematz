@@ -11,34 +11,8 @@ import Loading from '../../components/loading/Loading';
 
 const SendMessage = ({chat}) => {
 
-  // const { users, marriages, doctors, lawyers } = useData();
-  // const { user } = useAuth()
-  // const { uid } = user
-  // const [message, setMessage] = useState('')
-  // const [loading, setLoding] = useState(null)
-  // const [attached, setAttached] = useState(null)
+  console.log('chat', chat)
 
-  // const doctor = doctors?.find(a =>a.userId === user.uid)
-  // const lawyer = lawyers?.find(l =>l.userId === user.uid)
-
-  // const messageRef = collection(db, 'messages')
-  // const [error, setError] = useState('')
-
-
-
-  
-    // const isMarry = marriages?.find(m => m.id === myid)?.photo
-    // const isDoc = doctors?.find(d => d.id === myid)?.photo
-    // const isLaw = lawyers?.find(l => l.id === myid)?.photo
-    // const isUser = users?.find(u => u.id === myid)?.photo
-
-    // const isMary = marriages?.find(m => m.id === myid)?.username
-    // const isDo = doctors?.find(d => d.id === myid)?.username
-    // const isLa = lawyers?.find(l => l.id === myid)?.username
-    // const isUse = users?.find(u => u.id === myid)?.fname
-
-    // const myphoto = isMarry || isDoc || isLaw || isUser
-    // const myname = isMary || isDo || isLa || isUse
 
     const { users, marriages, doctors, lawyers } = useData();
     const { user } = useAuth()
@@ -48,43 +22,43 @@ const SendMessage = ({chat}) => {
 
     const messageRef = collection(db, 'messages')
     const [error, setError] = useState('')
-  
-    const myId = 
-      user.uid || 
-      doctors?.find(d => d.userId === user.uid)?.id || 
-      marriages?.find(m =>m.userId === user.uid)?.id ||
-      lawyers?.find(l => l.userId === user.uid)?.id
-  
-  
-    const myDoc = doctors?.find(d => d.userId === user.uid)
-    const myMarry = marriages?.find(m =>m.userId === user.uid)
-    const myLaw = lawyers?.find(m =>m.userId === user.uid)
 
-    const memberId = chat?.members?.find(m => m !== myId)
+    const cuUser = users?.find(u => u.id === user.uid)
+    const marry = marriages?.find(p=>p.userId === user.uid)
+    const dr = doctors?.find(p=>p.userId === user.uid)
+    const law = lawyers?.find(p=>p.userId === user.uid)
+
+    const myid = chat?.members.find(m => m === cuUser?.id || marry?.id || dr?.id || law?.id)  
+ 
+ 
+    const myMarry = marriages?.find(m =>m.id === myid) 
+    const memberId = chat?.members?.find(m => m !== myid)
 
   
     const isMarry = marriages?.find(m => m.id === memberId)
     const isDoc = doctors?.find(d => d.id === memberId)
     const isLaw = lawyers?.find(l => l.id === memberId)
+ 
     
   
 
-  const cuUser = users?.find(u => u.id === user.uid)
+ 
 
   const handleSubmit = async(e) => {
     e.preventDefault()
     setLoding(true)
     const data = {
             uid,
-            name: isDoc? cuUser?.name : isLaw? cuUser?.name : isMarry? myMarry.username : myDoc?.name || myLaw?.name || cuUser?.name,
-            photo: isDoc? cuUser?.photo ? cuUser?.photo : cuUser?.avatar : isLaw? cuUser?.photo ? cuUser?.photo : cuUser?.avatar :isMarry? myMarry.photo : myDoc?.photo || myLaw?.photo || cuUser?.photo,        
+            name: isDoc? cuUser?.name : isLaw? cuUser?.name : isMarry? myMarry.name : cuUser?.name,
+            photo: isDoc? cuUser?.photo || cuUser?.avatar : isLaw? cuUser?.photo || cuUser?.avatar :isMarry? myMarry.photo : cuUser?.photo || cuUser?.avatar ,        
             createdAt: serverTimestamp(),
-            avatar: '/users/profile.webp',
+            // avatar: '/images/profile.webp',
             text: message,
             room: chat.id,
             isRead: false
            
     }
+
 
     const notificRef = collection(db, 'notifics')
 
