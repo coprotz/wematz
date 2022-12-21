@@ -123,7 +123,7 @@ const ViewChat = () => {
       }else if(isLaw){
         navigate(`/legals/${isLaw?.id}`)
       }else if(isUser){
-        navigate(`/profile/${isUser?.id}`)
+        navigate(`/members/${isUser?.id}`)
       }
     }
 
