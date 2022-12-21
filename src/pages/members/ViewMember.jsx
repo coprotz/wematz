@@ -10,6 +10,7 @@ import Appoints from '../appointments/Appoints'
 import { BsCamera } from 'react-icons/bs';
 import Loading from '../../components/loading/Loading'
 import moment from 'moment';
+import { ages, regions } from '../../data'
 
 
 
@@ -30,7 +31,7 @@ const ViewMember = () => {
     const cuUser = users?.find(u => u.id === user?.uid)   
     const userRef = doc(db, 'users', `${cuUser?.id}`)
 
-    const mujaheed = donates?.find(d => d?.user_id === user.uid)   
+    const mujaheed = donates?.find(d => d?.user_id === member?.id)   
     const a = new Date().getTime()
     const today = moment(a).format('MMM Do YY, LT')
     const expire = moment(mujaheed?.expiredAt).format('MMM Do YY, LT')
@@ -38,7 +39,10 @@ const ViewMember = () => {
 
     const { perc, url } = useStorage(file)
 
-    // console.log('user', user)
+    // console.log('valid', valid)
+    // console.log('expire', expire)
+    // console.log('today', today)
+    // console.log('mujaheed', mujaheed)
 
     const handleSelect = (e) => {
         let selected = e.target.files[0];  
@@ -66,6 +70,15 @@ const ViewMember = () => {
         }
     }
 
+    const isOwn = user.uid === member?.id
+
+    const [editName, setEditName] = useState(null)
+    const [editAge, setEditAge] = useState(null)
+    const [editLocation, setEditLocation] = useState(null)
+    const [editEdu, setEditEdu] = useState(null)
+    const [editEmplo, setEditEmplo] = useState(null)
+    const [editProf, setEditProf] = useState(null)
+
   return (
     <div className='view_doctor_wrapper'>
          {appoints && <Appoints setAppoints={setAppoints}/>}
@@ -80,7 +93,8 @@ const ViewMember = () => {
                 </div>                      
                 : 
                 <div className="view_doc_photo">
-                    <img src={member?.photo || process.env.PUBLIC_URL + member?.avatar } />                                              
+                    <img src={member?.photo || process.env.PUBLIC_URL + member?.avatar } /> 
+                    {isOwn && (                                             
                     <label htmlFor="photo" className='user_picture'>
                         <input 
                             type="file" 
@@ -89,8 +103,8 @@ const ViewMember = () => {
                             onChange={handleSelect}
                         />
                         <span><BsCamera/></span>
-                    </label>
-                </div> 
+                    </label> )}
+                </div>
             }
             {error && <span className='error error_profile'>{error}<button onClick={() =>setError('')} className='btn_error'>x</button></span>}                                     
             {file &&                                        
@@ -113,33 +127,218 @@ const ViewMember = () => {
         </div>
         <div className="view_doc_inner">
             <div className="view_doc_left">
-                <h2>{member?.name}</h2>
-                <div className="member_info_div">
+                <div className="member_edit">
+                    {editName ? 
+                        <input type='text' value={editName} onChange={(e) =>setEditName(e.target.value)}/> :
+                        <div className="name_wrapper">
+                            <h2>{member?.name}</h2>
+                            {!editName && isOwn && <button className='btn_edit' onClick={() => setEditName(member?.name)}>Edit</button> } 
+                        </div>                        
+                    }
+                    <div>                                               
+                        {editName && 
+                        <button 
+                            onClick={() => {updateDoc(doc(db, 'users', `${id}`), {name:editName});setEditName(null)}}
+                            >Save
+                        </button>
+                        }
+                        {editName && <button onClick={() =>setEditName(null)}>Cancel</button>}
+                    </div>                    
+                    
+                </div>
+                
+                <small className='member_time'>Mwachama toka: {moment(member?.createdAt.seconds * 1000).format('MMM Do YY') }</small>
+                {/* <div className="member_info_div">
                     <span>Age :</span>
-                    <h4>{member?.age}</h4>
-                </div>
+                    <div className="member_edit">
+                       <h4>{member?.age}</h4> 
+                       <button>Edit</button>
+                    </div>
+                    
+                </div> */}
                 <div className="member_info_div">
-                    <span>Elimu :</span>
-                    <h4>{member?.edu}</h4>
+                    <span className='_info_div'>Age :</span>
+                    {editAge ? 
+                        // <input type='text' value={editAge} onChange={(e) =>setEditAge(e.target.value)}/> 
+                        <select 
+                        name='age'  
+                        value={editAge}
+                        // className='sel_input'
+                        // style={{width: '100%'}}
+                        onChange={(e) =>setEditAge(e.target.value)}
+                        >                                    
+                        {ages.map((age, index) => (
+                            <option 
+                                value={age} 
+                                key={index}
+                                
+                                >{age}</option> 
+                        ))}                                
+                        </select>
+                        :
+                        <div className="name_wrapper">
+                            <h4>{member?.age}</h4>
+                            {!editAge && isOwn && <button className='btn_edit' onClick={() => setEditAge(member?.age)}>Edit</button> } 
+                        </div>                        
+                    }
+                    <div className='_btns'>                                               
+                        {editAge && 
+                        <button 
+                            onClick={() => {updateDoc(doc(db, 'users', `${id}`), {age:editAge});setEditAge(null)}}
+                            >Save
+                        </button>
+                        }
+                        {editAge && <button onClick={() =>setEditAge(null)}>Cancel</button>}
+                    </div>                    
+                    
                 </div>
+               
                 <div className="member_info_div">
-                    <span>Kazi :</span>
-                    <h4>{member?.emplo}</h4>
+                    <span className='_info_div'>Elimu :</span>
+                    {editEdu ? 
+                        // <input type='text' value={editAge} onChange={(e) =>setEditAge(e.target.value)}/> 
+                        <select 
+                        name='age'  
+                        value={editEdu}
+                        // className='sel_input'
+                        // style={{width: '100%'}}
+                        onChange={(e) =>setEditEdu(e.target.value)}
+                        >                                 
+                         <option value='Cheti' >Cheti</option>
+                         <option value='Stashahada' >Stashahada</option>
+                         <option value='Shahada' >Shahada</option>
+                         <option value='Zaidi ya Shahada' >Zaidi ya Shahada</option>                               
+                        </select>
+                        :
+                        <div className="name_wrapper">
+                            <h4>{member?.edu}</h4>
+                            {!editEdu && isOwn && <button className='btn_edit' onClick={() => setEditEdu(member?.edu)}>Edit</button> } 
+                        </div>                        
+                    }
+                    <div className='_btns'>                                               
+                        {editEdu && 
+                        <button 
+                            onClick={() => {updateDoc(doc(db, 'users', `${id}`), {edu:editEdu});setEditEdu(null)}}
+                            >Save
+                        </button>
+                        }
+                        {editEdu && <button onClick={() =>setEditEdu(null)}>Cancel</button>}
+                    </div>                    
+                    
                 </div>
+               
                 <div className="member_info_div">
-                    <span>Ujuzi :</span>
-                    <h4>{member?.profes}</h4>
+                    <span className='_info_div'>Kazi :</span>
+                    {editEmplo ? 
+                        // <input type='text' value={editAge} onChange={(e) =>setEditAge(e.target.value)}/> 
+                        <select 
+                        name='age'  
+                        value={editEmplo}
+                        // className='sel_input'
+                        // style={{width: '100%'}}
+                        onChange={(e) =>setEditEmplo(e.target.value)}
+                        >                                 
+                         <option value='Mwanafunzi' >Mwanafunzi</option>
+                         <option value='Mfanyabiashara' >Mfanyabiashara</option>
+                         <option value='Nimeajiriwa' >Nimeajiriwa</option>
+                         <option value='Sina Shughuli Maalum' >Sina Shughuli Maalum</option>                               
+                        </select>
+                        :
+                        <div className="name_wrapper">
+                            <h4>{member?.emplo}</h4>
+                            {!editEmplo && isOwn && <button className='btn_edit' onClick={() => setEditEmplo(member?.emplo)}>Edit</button> } 
+                        </div>                        
+                    }
+                    <div className='_btns'>                                               
+                        {editEmplo && 
+                        <button 
+                            onClick={() => {updateDoc(doc(db, 'users', `${id}`), {emplo:editEmplo});setEditEmplo(null)}}
+                            >Save
+                        </button>
+                        }
+                        {editEmplo && <button onClick={() =>setEditEmplo(null)}>Cancel</button>}
+                    </div>                    
+                    
                 </div>
+               
                 <div className="member_info_div">
+                    <span className='_info_div'>Ujuzi :</span>
+                    {editProf ? 
+                        // <input type='text' value={editAge} onChange={(e) =>setEditAge(e.target.value)}/> 
+                        <input 
+                        name='age' 
+                        type='text'
+                        value={editProf}
+                        // className='sel_input'
+                        // style={{width: '100%'}}
+                        onChange={(e) =>setEditProf(e.target.value)}                                                     
+                        />
+                        :
+                        <div className="name_wrapper">
+                            <h4>{member?.profes}</h4>
+                            {!editProf && isOwn && <button className='btn_edit' onClick={() => setEditProf(member?.profes)}>Edit</button> } 
+                        </div>                        
+                    }
+                    <div className='_btns'>                                               
+                        {editProf && 
+                        <button 
+                            onClick={() => {updateDoc(doc(db, 'users', `${id}`), {profes:editProf});setEditProf(null)}}
+                            >Save
+                        </button>
+                        }
+                        {editProf && <button onClick={() =>setEditProf(null)}>Cancel</button>}
+                    </div>                    
+                    
+                </div>
+                {/* <div className="member_info_div">
                     <span>Anapoishi :</span>
                     <h4>{member?.location}</h4>
+                </div> */}
+                <div className="member_info_div">
+                    <span className='_info_div'>Anapoishi :</span>
+                    {editLocation ? 
+                        // <input type='text' value={editAge} onChange={(e) =>setEditAge(e.target.value)}/> 
+                        <select 
+                        name='age'  
+                        value={editLocation}
+                        // className='sel_input'
+                        // style={{width: '100%'}}
+                        onChange={(e) =>setEditLocation(e.target.value)}
+                        >                                    
+                         {regions.map((item, index) => (
+                               
+                               <option 
+                                   value={item.name} 
+                                   key={index}
+                                   
+                                   >{item.name}</option> 
+                           ))}                                 
+                        </select>
+                        :
+                        <div className="name_wrapper">
+                            <h4>{member?.location}</h4>
+                            {!editLocation && isOwn && <button className='btn_edit' onClick={() => setEditLocation(member?.location)}>Edit</button> } 
+                        </div>                        
+                    }
+                    <div className='_btns'>                                               
+                        {editLocation && 
+                        <button 
+                            onClick={() => {updateDoc(doc(db, 'users', `${id}`), {location:editLocation});setEditLocation(null)}}
+                            >Save
+                        </button>
+                        }
+                        {editLocation && <button onClick={() =>setEditLocation(null)}>Cancel</button>}
+                    </div>                    
+                    
                 </div>
             </div>
             <div className="doc_body" style={{border: '1px solid #aaa', display: 'flex', justifyContent: 'center', padding: '20px'}}>
                 
-                {valid ? <h2 className='doc_mjaheed'>Asante kwa kutusapoti, wewe ni <span>Mjaheed</span></h2> : 
-                <button className='btn_sign' onClick={() => navigate('/mjaheed')}>Kuwa Mjaheed</button>}
+                {valid ? <h2 className='doc_mjaheed'>Mimi ni <span>Mjaheed</span></h2> : 
+                isOwn ? <button className='btn_sign' onClick={() => navigate('/mjaheed')}>Kuwa Mjaheed</button> :
+                <h2 className='doc_mjaheed'>Bado sijawa <span>Mjaheed</span></h2>}
             </div>
+            {isOwn && (
             <div className="doc_right">
                 <button className='btn_sign' onClick={() =>setAppoints(true)} >Angalia Maombi ya Miadi</button>
                 <div className="member_info_div">
@@ -162,7 +361,7 @@ const ViewMember = () => {
                     <span>Swala :</span>
                     <h4>{member?.prayer}</h4>
                 </div>
-            </div>
+            </div> )}
         </div>
       
     </div>

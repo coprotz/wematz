@@ -760,7 +760,7 @@ const Register = () => {
                                 name='emplo'
                                 {...register("emplo", { required: true })}
                                 />
-                            <label htmlFor="27yyyy">Nimeajiliwa</label>
+                            <label htmlFor="27yyyy">Nimeajiriwa</label>
                         </div>   
                         <div className="sel_item">
                             <input 
@@ -769,7 +769,7 @@ const Register = () => {
                                 name='emplo'
                                 {...register("emplo", { required: true })}
                                 />
-                            <label htmlFor="28yyyy">Sina Shughuri Maalum</label>
+                            <label htmlFor="28yyyy">Sina Shughuli Maalum</label>
                         </div>              
                     </div>
                 </div>

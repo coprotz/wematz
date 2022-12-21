@@ -7,7 +7,7 @@ const Footer = () => {
   return (
     <div className='footer_wrapper'>
       <div className="footer_inner">      
-        <div className="m_f_logo" onClick={() =>navigate('/')}>Wema</div>
+        <div className="m_f_logo" onClick={() =>navigate('/')}>WemaForum</div>
         <div className="m_f_items">
             <span onClick={() =>navigate('/about')}>Kuhusu</span>
             {/* <span>Sadaka</span> */}

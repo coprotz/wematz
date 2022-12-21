@@ -18,6 +18,16 @@
     border-radius: 5px;
 }
 
+.member_time{
+    color: var(--primary);
+    font-size: 0.8rem;
+}
+
+.profile_name:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
 .wema_info{
     display: flex;
     flex-direction: column;
@@ -52,11 +62,47 @@
     background-color: darkblue;
 }
 
+._info_div{
+    display: block;
+    width: 1000%;
+}
+
+.name_wrapper{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    text-align: right;
+    justify-content: space-between;
+    /* border: 1px solid green; */
+    /* width: 100%; */
+}
+
 .member_info_div{
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-top: 5px;
+    width: 100%;
+    /* border: 1px solid red; */
+}
+
+.edit_member{
+    display: flex;
+    flex-direction: column;
+}
+
+.member_edit{
+    display: flex;
+    align-items: center;
+    /* flex-direction: column; */
+    gap: 5px;
+}
+
+
+._btns{
+    display: flex;
+    align-items: center;
+    gap: 3px;
 }
 
 .u_edit_photo{

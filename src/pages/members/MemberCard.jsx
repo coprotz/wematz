@@ -5,6 +5,8 @@ import Loading from '../../components/loading/Loading'
 import { db, useAuth } from '../../hooks/useAuth'
 import useData from '../../hooks/useData'
 import { BsChatLeftDotsFill,BsFillPersonFill } from "react-icons/bs";
+import { useNavigate } from 'react-router-dom'
+import moment from 'moment'
 
 
 const MemberCard = ({member, handelNew}) => {
@@ -15,6 +17,7 @@ const MemberCard = ({member, handelNew}) => {
     const isFollower = myFollowers.find(f =>f?.following_id === member?.id)
     const myFollowings = followers.filter(f =>f?.following_id === user.uid)
     // console.log('myfoll', myFollowers)
+    const navigate = useNavigate()
 
     const followRef = collection(db, 'followers')
     const notificRef = collection(db, 'notifics')
@@ -28,6 +31,8 @@ const MemberCard = ({member, handelNew}) => {
       isSeen: false,
       createdAt: serverTimestamp()
     }
+
+  
 
     const handleFollow = async(e) => {
         e.preventDefault()
@@ -60,7 +65,7 @@ const MemberCard = ({member, handelNew}) => {
         </div>
         <div className="wema_info">
             <div className="member_status">
-                <h3>{member?.name}</h3>
+                <h3 onClick={() =>navigate(`/members/${member?.id}`)} className='profile_name'>{member?.name}</h3>
                 {member?.isOnline == true ? 
                 <span className="status_ind" style={{backgroundColor: '#0df60f'}}></span> :
                 <span className="status_ind" style={{backgroundColor: '#aaa'}}></span>
@@ -68,6 +73,7 @@ const MemberCard = ({member, handelNew}) => {
             </div>
             
             <span>{member?.profes}</span>
+            <small className='member_time'>Amejiunga : {moment(member?.createdAt.seconds * 1000).format('MMM Do YY') }</small>
             <div className="member_adctions">
                 <button 
                     className={isFollower? 'btn_isFollow' : 'btn_follow'}
