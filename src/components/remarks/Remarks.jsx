@@ -73,7 +73,7 @@ const Remarks = ({p, setShow, type}) => {
             className='btn_likes'
             onClick={handleLike}
             >{isLike? <AiFillLike/> : <GrLike/>}</button>
-          <span>{lks?.length} Penda</span> 
+          <span>{lks?.length}</span> 
           <div className="likes_t">
             {lks?.slice(-3)?.filter(u =>u !==undefined)?.map(p => (
               <LikeCard item={p} key={p.id}/>
