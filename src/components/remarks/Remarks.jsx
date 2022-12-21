@@ -5,6 +5,7 @@ import { AiFillLike } from 'react-icons/ai'
 import { GrLike } from 'react-icons/gr'
 import { db, useAuth } from '../../hooks/useAuth'
 import useData from '../../hooks/useData'
+import LikeCard from './LikeCard'
 import './remarks.css'
 
 
@@ -60,6 +61,8 @@ const Remarks = ({p, setShow, type}) => {
 
 
   }
+
+  console.log('lks', lks)
   
 
   
@@ -71,6 +74,12 @@ const Remarks = ({p, setShow, type}) => {
             onClick={handleLike}
             >{isLike? <AiFillLike/> : <GrLike/>}</button>
           <span>{lks?.length} Penda</span> 
+          <div className="likes_t">
+            {lks?.slice(-3)?.filter(u =>u !==undefined)?.map(p => (
+              <LikeCard item={p} key={p.id}/>
+            ))}
+            
+          </div>
         </div>
               
         <span onClick={() => setShow(p.id)}>{coms?.length} Maoni</span>
