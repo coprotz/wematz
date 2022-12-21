@@ -19,13 +19,35 @@
     <noscript>Wema ummah.</noscript>
     <div id="root"></div>
     <script>
-      if('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-          navigator.serviceWorker.register('./serviceworker.js')
-          .then((reg) => console.log('Success: ', reg.scope))
-          .catch((err) => console.log('Failure: ', err))
-        })
+      import {Workbox} from 'https://storage.googleapis.com/workbox-cdn/releases/4.1.0/workbox-window.prod.mjs';
+
+      function createUIPrompt(opts) {
+        if (confirm('Upades mpya zinapatikana. Je, ungependa kuupdate sasa?')) {
+          opts.onAccept()
+        }
       }
+
+      if ('serviceWorker' in navigator) {
+        const wb = new Workbox('/serviceworker.js');
+        wb.addEventListener('waiting', (event) => {
+          const prompt = createUIPrompt({
+            onAccept: async () => {
+              wb.addEventListener('controlling', (event) => {
+                window.location.reload();
+              });
+              wb.messageSW({type: 'SKIP_WAITING'});
+            }
+          })
+        });
+        wb.register();
+      }
+      // if('serviceWorker' in navigator) {
+      //   window.addEventListener('load', () => {
+      //     navigator.serviceWorker.register('./serviceworker.js')
+      //     .then((reg) => console.log('Success: ', reg.scope))
+      //     .catch((err) => console.log('Failure: ', err))
+      //   })
+      // }    
     </script>
   </body>
 </html>

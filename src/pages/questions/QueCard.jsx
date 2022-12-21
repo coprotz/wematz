@@ -5,6 +5,8 @@ import useData from '../../hooks/useData'
 import { GrLike } from 'react-icons/gr'
 import Loading from '../../components/loading/Loading'
 import Remarks from '../../components/remarks/Remarks'
+import Likes from '../../components/remarks/Likes'
+
 
 
 
@@ -39,7 +41,7 @@ const QueCard = ({q}) => {
                     <small className='last_time'>{moment(lastanswer?.createdAt?.seconds * 1000).format('MMM Do YY, LT') }</small>
                 </div>
                 <p>{lastanswer?.text}</p>
-                <Remarks p={lastanswer}/>
+                <Likes p={lastanswer}/>
             </div>}
             
             <div className="que_cations">
