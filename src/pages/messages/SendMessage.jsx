@@ -56,6 +56,7 @@ const SendMessage = ({chat}) => {
             name: isMarry? myMarry.name || myMarry.username : cuUser?.name,
             photo: isMarry? myMarry.photo : cuUser?.photo || cuUser?.avatar ,        
             createdAt: serverTimestamp(),
+            sender: myid,
             // avatar: '/images/profile.webp',
             text: message,
             room: chat?.id,
