@@ -62,7 +62,7 @@ const Remarks = ({p, setShow, type}) => {
 
   }
 
-  console.log('lks', lks)
+  // console.log('lks', lks)
   
 
   
