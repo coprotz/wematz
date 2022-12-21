@@ -20,14 +20,18 @@ const AlertCard = ({item, allnots, setAlert}) => {
 
     // console.log('item', item)
 
-    const handleNavigate = () => {
+    const handleNavigate = async () => {
+        
         if(item?.type === 'message'){
+          await updateDoc(doc(db, 'notifics', `${item?.id}`), {isSeen: true})
           navigate(`/messages/${item?.type_id}`)
           setAlert(null)
         }else if(item?.type === 'post'){
+          await updateDoc(doc(db, 'notifics', `${item?.id}`), {isSeen: true})
           navigate('/')
           setAlert(null)
         }else if(item?.type === 'follow'){
+          await updateDoc(doc(db, 'notifics', `${item?.id}`), {isSeen: true})
           navigate(`/members/${item?.type_id}`)
           setAlert(null)
         }else {
