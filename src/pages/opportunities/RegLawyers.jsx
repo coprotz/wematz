@@ -29,7 +29,7 @@ const RegLawyers = () => {
               walioomu humu kwa kujibu jumbe zao pindi watakapohitaji msaada wa kisheria.
             </h3>
             <h3>Wanasharia watakaoshiriki katika jukwaa hili watalipwa kwa kila ujumbe watakaoujibu kwa watakaotaka ushauri wao wa kisheria.</h3>
-            <h3>Kwa ufafanuzi au maelekezo zaidi, tafadhari wasiliana na <span>Admin</span></h3>
+            <h3>Kwa ufafanuzi au maelekezo zaidi, tafadhari wasiliana na <span onClick={() =>navigate('/contacts')} className='team_wema'>Team Wema</span></h3>
             <div>
               <button className='btn_sign' onClick={() =>setPage(2)}>ENDELEA</button>
             </div>

@@ -19,6 +19,16 @@
     
 }
 
+.team_wema{
+    color: var(--primary);
+    font-weight: 700;
+}
+
+.team_wema:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
 .opportunit{
     background-color: var(--bg);
     min-height:100vh;

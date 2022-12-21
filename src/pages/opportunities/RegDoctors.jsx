@@ -28,7 +28,7 @@ const RegDoctors = () => {
               kukatana nao kwenye clinic zao punde watakapoomba kukutana nao.
             </h3>
             <h3>Madakatari watakaoshiriki katika jukwaa hili watalipwa kwa kila ujumbe watakaoujibu kwa watakaotaka ushauri wa kitabibu.</h3>
-            <h3>Kwa ufafanuzi au maelekezo zaidi, tafadhari wasiliana na <span>Admin</span></h3>
+            <h3>Kwa ufafanuzi au maelekezo zaidi, tafadhari wasiliana na <span onClick={() =>navigate('/contacts')} className='team_wema'>Team Wema</span></h3>
             <div>
               <button className='btn_sign' onClick={() =>setPage(2)}>ENDELEA</button>
             </div>
