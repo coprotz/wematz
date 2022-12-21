@@ -21,6 +21,12 @@
    
 }
 
+.nav_actions{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
 .home_logo{
     display: flex;
     align-items: center;
