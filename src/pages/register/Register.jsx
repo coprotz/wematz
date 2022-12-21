@@ -724,7 +724,7 @@ const Register = () => {
                         <div className="sel_item">
                             <input 
                                 type="radio" id='28' 
-                                value='Zaidi' 
+                                value='Zaidi ya Shahada' 
                                 name='edu'
                                 {...register("edu", {required: true })}
                                 />

@@ -18,7 +18,7 @@ const AlertCard = ({item, allnots, setAlert}) => {
 
     const status = allnots?.length
 
-    console.log('item', item)
+    // console.log('item', item)
 
     const handleNavigate = () => {
         if(item?.type === 'message'){
@@ -31,7 +31,7 @@ const AlertCard = ({item, allnots, setAlert}) => {
           navigate(`/profile/${item?.type_id}`)
           setAlert(null)
         }else {
-          return undefined
+          // return undefined
           setAlert(null)
         }
       }

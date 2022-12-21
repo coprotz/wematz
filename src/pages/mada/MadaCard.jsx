@@ -8,7 +8,7 @@ import useData from '../../hooks/useData'
 
 const MadaCard = ({m}) => {
     const { users } = useData()
-    const author = users?.find(u => u.id === m.uid)
+    const author = users?.find(u => u.id === m?.uid)
     // console.log('author', author)
     // console.log('m', m)
 
