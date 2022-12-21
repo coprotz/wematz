@@ -25,10 +25,10 @@ const AlertCard = ({item, allnots, setAlert}) => {
           navigate(`/messages/${item?.type_id}`)
           setAlert(null)
         }else if(item?.type === 'post'){
-          navigate(`/${item?.type_id}`)
+          navigate('/')
           setAlert(null)
         }else if(item?.type === 'follow'){
-          navigate(`/profile/${item?.type_id}`)
+          navigate(`/members/${item?.type_id}`)
           setAlert(null)
         }else {
           // return undefined
