@@ -141,7 +141,7 @@ const Contacts = () => {
         animate={{y:0}} className="contact_bottom">
           <div className="top">
             <h3>TUPIGIE</h3>
-            <span>Whatsapp: +44 7723 858243</span>
+            <span>Whatsapp: +44 7915 641831</span>
             
           </div>
           <div className="top">
@@ -153,8 +153,8 @@ const Contacts = () => {
           </div>
           <div className="top">
             <h3>BARUA PEPE</h3>
-            <span>info@wema-tz.com</span>
-            <span>www.wema-tz.com</span>
+            <span>info@wemaforum.com</span>
+            <span>https://wemaforum.com</span>
           </div>
         </motion.div>
       </div>
