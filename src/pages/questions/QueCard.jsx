@@ -39,6 +39,7 @@ const QueCard = ({q}) => {
                     <small className='last_time'>{moment(lastanswer?.createdAt?.seconds * 1000).format('MMM Do YY, LT') }</small>
                 </div>
                 <p>{lastanswer?.text}</p>
+                <Remarks p={lastanswer}/>
             </div>}
             
             <div className="que_cations">
