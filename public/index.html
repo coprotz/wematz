@@ -27,27 +27,27 @@
       //   }
       // }
 
-      if ('serviceWorker' in navigator) {
-        const wb = new Workbox('/serviceworker.js');
-        wb.addEventListener('waiting', (event) => {
-          const prompt = createUIPrompt({
-            onAccept: async () => {
-              wb.addEventListener('controlling', (event) => {
-                window.location.reload();
-              });
-              wb.messageSW({type: 'SKIP_WAITING'});
-            }
-          })
-        });
-        wb.register();
-      }
-      // if('serviceWorker' in navigator) {
-      //   window.addEventListener('load', () => {
-      //     navigator.serviceWorker.register('./serviceworker.js')
-      //     .then((reg) => console.log('Success: ', reg.scope))
-      //     .catch((err) => console.log('Failure: ', err))
-      //   })
-      // }    
+      // if ('serviceWorker' in navigator) {
+      //   const wb = new Workbox('/serviceworker.js');
+      //   wb.addEventListener('waiting', (event) => {
+      //     const prompt = createUIPrompt({
+      //       onAccept: async () => {
+      //         wb.addEventListener('controlling', (event) => {
+      //           window.location.reload();
+      //         });
+      //         wb.messageSW({type: 'SKIP_WAITING'});
+      //       }
+      //     })
+      //   });
+      //   wb.register();
+      // }
+      if('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('./serviceworker.js')
+          .then((reg) => console.log('Success: ', reg.scope))
+          .catch((err) => console.log('Failure: ', err))
+        })
+      }    
     </script>
   </body>
 </html>

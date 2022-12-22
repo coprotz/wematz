@@ -3,17 +3,31 @@ const urlsToCache = ['./manifest.json', './index.html', './offline.html', './App
 
 const self = this;
 
-self.addEventListener('install', (event) => {
+// self.addEventListener('install', (event) => {
+//     event.waitUntil(
+//         caches.open(CACHE_NAME)
+//             .then((cache) => {
+//                 console.log('Opened cache');
+//                 return cache.addAll(urlsToCache)
+//             }).then(() => {
+//                 return self.skipWaiting();
+//             })
+//     )
+// });
+
+self.addEventListener("install", event => {
+    const cacheBypassRequests = urlsToCache.map(url => new Request(url, {cache: 'reload'}));     
+  
     event.waitUntil(
-        caches.open(CACHE_NAME)
-            .then((cache) => {
-                console.log('Opened cache');
-                return cache.addAll(urlsToCache)
-            }).then(() => {
-                return self.skipWaiting();
-            })
-    )
-});
+      caches.open(CACHE_NAME).then((cache) => {
+        console.log('Opened cache');
+        return cache.addAll(cacheBypassRequests)
+        .then(() => {
+          return self.skipWaiting();
+        })
+      })
+    );
+  });
 
 self.addEventListener('fetch', (event) => {
     event.respondWith(

@@ -26,8 +26,8 @@ const MainCard = ({id, handelNew, type}) => {
     const viewed_them = views?.filter(v => v.user_id === myid)
     // const exitChat = chats?.find(c => c.id === id)
 
-    console.log('viewed_them', viewed_them)
-    console.log('id', id)
+    // console.log('viewed_them', viewed_them)
+    // console.log('id', id)
 
     const exitView = viewed_them?.find(v=> v.target_id === id)
 
