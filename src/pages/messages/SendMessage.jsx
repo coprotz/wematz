@@ -17,7 +17,7 @@ const SendMessage = ({chat}) => {
   // console.log('chat', chat)
   const { id } = useParams()
 
-  console.log('id', id)
+  // console.log('id', id)
 
 
     const { users, marriages, doctors, lawyers, donates, chats } = useData();
@@ -68,7 +68,7 @@ const SendMessage = ({chat}) => {
     const notificRef = collection(db, 'notifics')
     const exitChat = chats?.find(c => c.id === id)
 
-    console.log('exi', exitChat)
+    // console.log('exi', exitChat)
 
     const newNotific = {
       target_id: memberId,

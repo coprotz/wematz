@@ -82,7 +82,7 @@ const Donates = () => {
                 <div className="mjaheed_card" key={d.id}>
                 <h2>{d.title}</h2>
                 <span>{d.desc}</span>
-                <h1>$ {d.value}</h1>
+                {/* <h1>$ {d.value}</h1> */}
                 <button className='btn_sign' onClick={() =>{handleDonate(d);setActive(d.id)}}>{loading && active === d.id? <Loading/> : 'Chagua'}</button>
             </div> 
             ))}

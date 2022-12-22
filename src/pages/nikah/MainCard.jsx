@@ -38,7 +38,7 @@ const MainCard = ({id, handelNew}) => {
                 <button className='btn_btn'><Likes p={item} myId={myid?.id}/></button>}
                 <button onClick={() =>navigate(`/nikah/${item.id}`)} className='btn_btn'><BsFillPersonFill/></button>
                 {/* <NewChat item={item} myId={myid?.id}/>  */}
-                <button className='btn_btn' onClick={() =>handelNew(item)}><BsChatLeftDotsFill/></button>       
+                {/* <button className='btn_btn' onClick={() =>handelNew(item)}><BsChatLeftDotsFill/></button>        */}
             </div>
         </div>
     </div>

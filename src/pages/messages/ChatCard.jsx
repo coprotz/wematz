@@ -22,12 +22,21 @@ const ChatCard = ({chat}) => {
 
     const memberId = chat?.members.find(m =>m !== myid)
 
+    console.log('my', myid)
+    console.log('member', memberId)
+    console.log('user', user.uid)
+   
+
     
 
     const isMarry = marriages?.find(m => m.id === memberId)
     const isDoc = doctors?.find(d => d.id === memberId)
     const isLaw = lawyers?.find(l => l.id === memberId)
     const isUser = users?.find(a =>a.id === memberId) 
+
+    const name = isDoc?.name || isLaw?.name || isUser?.name || isMarry?.name || isMarry?.username
+    console.log('name', name)
+    console.log('isUser', isUser)
     
 
     const cuMsgs = messages && messages.filter(m => m.room === chat.id)
@@ -50,12 +59,15 @@ const ChatCard = ({chat}) => {
         return (
           <>{isLaw?.name}</>
         )
-      }else {
+      }else if(isUser) {
         return (
           <>{isUser?.name}</>
         )
       }
     }
+
+   
+    console.log('sender', chat?.user_id)
 
 
     const Photo = () => {

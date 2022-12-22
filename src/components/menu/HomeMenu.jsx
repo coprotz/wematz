@@ -71,10 +71,10 @@ const HomeMenu = ({active, setActive}) => {
             <RiQuestionnaireFill/>
             <span>Maswali na Majibu</span>
         </NavLink>
-        <NavLink to='/messages' className="menu_item" onClick={() =>setActive(!active)}>
+        {/* <NavLink to='/messages' className="menu_item" onClick={() =>setActive(!active)}>
             <IoIosChatbubbles/>
             <span>Meseji</span>
-        </NavLink>
+        </NavLink> */}
         <NavLink to='/mjaheed' className="menu_item" onClick={() =>setActive(!active)}>
             <MdOutlineVerifiedUser/>
             <span>Kuwa Mjaheed</span>

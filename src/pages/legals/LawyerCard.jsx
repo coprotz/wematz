@@ -52,10 +52,9 @@ const LawyerCard = ({d}) => {
             <div className="meetings_actions">                    
                 <button className='btn_btn'><BsCalendarDay/></button>
                 <button className='btn_btn' onClick={() =>navigate(`/legals/${d.id}`)}><BsFillPersonFill/></button>
-                {!isLaw &&
-                // <NewChat item={d} myId={user.uid}/> 
+                {/* {!isLaw &&       
                 <button className='btn_btn' onClick={() =>handelNew(d)}><BsChatLeftDotsFill/></button>   
-                }       
+                }        */}
             </div>
             
         </div>

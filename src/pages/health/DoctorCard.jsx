@@ -49,10 +49,9 @@ const DoctorCard = ({d, setAppoint}) => {
             <div className="meetings_actions">                    
                 <button className='btn_btn' onClick={() =>setAppoint(d)}><BsCalendarDay/></button>
                 <button className='btn_btn' onClick={() =>navigate(`/health/doctors/${d.id}`)}><BsFillPersonFill/></button>
-                {!isDoc && 
-                // <NewChat item={d} myId={user.uid}/> 
+                {/* {!isDoc &&            
                 <button className='btn_btn' onClick={() =>handelNew(d)}><BsChatLeftDotsFill/></button> 
-                }       
+                }        */}
             </div>
             
         </div>

@@ -37,8 +37,7 @@ const ViewChat = () => {
 
     const myid = chat?.members.find(m => m === cuUser?.id || marry?.id || dr?.id || law?.id)
 
-    // console.log('myid', myid)
-
+   
     const myname = cuUser?.name || marry?.username || dr?.name || law?.name
     const myphoto = cuUser?.photo? cuUser?.photo : process.env.PUBLIC_URL + `${cuUser?.avatar}` || marry?.photo || dr?.photo || law?.photo
     const memberId = chat?.members.find(m =>m !== myid)
@@ -49,6 +48,11 @@ const ViewChat = () => {
       const isDoc = doctors?.find(d => d.id === memberId)
       const isLaw = lawyers?.find(l => l.id === memberId)
       const isUser = users?.find(a =>a.id === memberId)
+
+       console.log('myid', myid)
+       console.log('memberId', memberId)
+       console.log('sender', chat?.sender)
+
      
 
       const Name = () => {
@@ -192,7 +196,8 @@ const ViewChat = () => {
 
    
 
-  return (   
+  return ( 
+    
     <div className='main_messages'>
         <div className="view_chatlists">
             <ChatLists/>
@@ -247,7 +252,7 @@ const ViewChat = () => {
               roomId ={id}/>
             }
           </div>
-    </div>
+    </div> 
     )
  
 }

@@ -139,7 +139,7 @@ const Nikah = () => {
                         <div className="meetings_actions">                    
                             <button className='btn_btn'><Likes p={item} myId={myid?.id}/></button>
                             <button onClick={(e) =>{handleView(e,item.id);setActive(item.id)}} className='btn_btn'>{loading && active === item.id? <Loading/> : <BsFillPersonFill/>}</button>
-                            <button className='btn_btn' onClick={() =>handelNew(item)}><BsChatLeftDotsFill/></button>
+                            {/* <button className='btn_btn' onClick={() =>handelNew(item)}><BsChatLeftDotsFill/></button> */}
                             {/* <NewChat item={item} myId={myid?.id} setDonate={setDonate}/>        */}
                         </div>
                     </div>

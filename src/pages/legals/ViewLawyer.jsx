@@ -229,7 +229,7 @@ const ViewLawyer = () => {
                     </button>                   
                     <button className='btn_members'>Watu {lks?.length} Wamempenda</button>
                     {/* <button className='btn_members'><BsChatLeftDotsFill/> Chat</button> */}
-                    <button className='btn_members' onClick={() =>handelNew(lawyer)}><BsChatLeftDotsFill/>Chat</button>   
+                    {/* <button className='btn_members' onClick={() =>handelNew(lawyer)}><BsChatLeftDotsFill/>Chat</button>    */}
                        
                             
                 </div>

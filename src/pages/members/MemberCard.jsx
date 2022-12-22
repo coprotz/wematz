@@ -80,7 +80,7 @@ const MemberCard = ({member, handelNew}) => {
                     onClick={handleFollow}
                     >{loading? <Loading/> : isFollower? 'Unamfatilia' : 'Mfatilie'}
                 </button>
-                <button className='btn_btn' onClick={() =>handelNew(member)}><BsChatLeftDotsFill/></button> 
+                {/* <button className='btn_btn' onClick={() =>handelNew(member)}><BsChatLeftDotsFill/></button>  */}
             </div>
             
         </div>
