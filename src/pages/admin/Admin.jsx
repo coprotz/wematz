@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import {  BsArrowLeft } from "react-icons/bs";
 import { useNavigate } from 'react-router-dom';
 import useData from '../../hooks/useData';
-import './admin.css'
 import moment from 'moment';
 import { deleteDoc, doc, updateDoc } from 'firebase/firestore';
 import { db, useAuth } from '../../hooks/useAuth';

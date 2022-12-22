@@ -12,11 +12,19 @@ import { Navigate, useNavigate } from 'react-router-dom'
 
 const AlertCard = ({item, allnots, setAlert}) => {
     const {user} = useAuth()
-    const { users } = useData()
+    const { users, doctors, lawyers, marriages } = useData()
     const cuUser = users.find(u => u.id === item?.uid)
     const navigate = useNavigate()
 
-    const status = allnots?.length
+    
+
+    // const status = allnots?.length
+
+    const sender = 
+      users?.find(u => u.id === item?.uid) || 
+      marriages?.find(m => m.id === item?.uid) ||
+      doctors?.find(m => m.id === item?.uid) ||
+      lawyers?.find(m => m.id === item?.uid)
 
     // console.log('item', item)
 
@@ -32,10 +40,14 @@ const AlertCard = ({item, allnots, setAlert}) => {
           setAlert(null)
         }else if(item?.type === 'follow'){
           await updateDoc(doc(db, 'notifics', `${item?.id}`), {isSeen: true})
-          navigate(`/members/${item?.type_id}`)
+          navigate(`/members/${sender?.id}`)
+          setAlert(null)
+        }else if(item?.type === 'nikah') {
+          await updateDoc(doc(db, 'notifics', `${item?.id}`), {isSeen: true})
+          navigate(`/nikah/${sender?.id}`)
           setAlert(null)
         }else {
-          // return undefined
+          await updateDoc(doc(db, 'notifics', `${item?.id}`), {isSeen: true})
           setAlert(null)
         }
       }
@@ -68,10 +80,10 @@ const AlertCard = ({item, allnots, setAlert}) => {
     <div className="alert_card" onClick={handleNavigate}>    
         <div className="activity_card" >
             <div className="activity_photo">
-                <img src={cuUser?.photo || process.env.PUBLIC_URL + cuUser?.avatar} />
+                <img src={sender?.photo || process.env.PUBLIC_URL + sender?.avatar} />
             </div>
             <div className="activies_inner_body">
-                <h4>{cuUser?.name}</h4><span>{item?.action+" "+item?.type}</span>
+                <h4>{sender?.name || sender?.username}</h4><span>{item?.action}</span>
                 <small className='q_date'>{moment(item?.createdAt.seconds * 1000).format('MMM Do YY, LT') }</small>
             </div>            
         </div>

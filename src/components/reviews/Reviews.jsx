@@ -25,10 +25,8 @@ const Reviews = ({doc, setShow}) => {
    
 
   return (
-    <div className='reviews_container'>
-        
-        <h2 className='patient_reviews'>Maoni({revs?.length})</h2>
-        
+    <div className='reviews_container'>        
+        <h2 className='patient_reviews'>Maoni({revs?.length})</h2>        
         <div className="reviews_patients">
             {revs?.map(r => (            
             <div className="review_card">
@@ -41,13 +39,7 @@ const Reviews = ({doc, setShow}) => {
                         <small className='timeago'>{moment(r?.createdAt?.toDate()).fromNow(true)}</small>
                     </div>
                 
-                </div>
-                {/* <div className="review_photo">
-                    <img src={r?.photo} alt="" />
-                    <div className="review_body_name">
-                        <h3>{r?.name}</h3>                        
-                    </div>                    
-                </div> */}
+                </div>              
                 <div className="reviews_body">                    
                     {/* <small>{moment(r?.createdAt?.toDate()).fromNow(true)}</small>                  */}
                     <p className="review_status">{r?.text}</p>

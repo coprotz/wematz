@@ -160,6 +160,7 @@
     flex-direction: column;
     gap: 15px;
     margin-top: 15px;
+    width: 100%;
 }
 
 .top_madas_wrapper{

@@ -8,7 +8,7 @@ import NewChat from '../messages/NewChat'
 import MainCard from '../nikah/MainCard'
 import NikahCard from '../nikah/NikahCard'
 import moment from 'moment';
-import './activities.css'
+
 
 const Activities = () => {
     const [page, setPage] = useState(1)
@@ -17,10 +17,16 @@ const Activities = () => {
 
     const mary = marriages.find(m => m.userId === user.uid)
 
-    const mylikes = likes.filter(l => l.user_id === mary?.id)
+    const liked_them = likes.filter(l => l.user_id === mary?.id)
     const liked_me = likes.filter(l => l.target_id === mary?.id)
-    const myviews = views.filter(l => l.user_id === mary?.id)
+    const viewd_them = views.filter(l => l.user_id === mary?.id)
     const viewed_me = views.filter(l => l.target_id === mary?.id)
+
+    console.log('liked_them', liked_them)
+    console.log('liked_me', liked_me)
+    console.log('viewd_them', viewd_them)
+    console.log('viewed_me', viewed_me)
+    console.log('myid', mary?.id)
 
     const [donate, setDonate] = useState(false)
     const [open, setOpen] = useState(null)
@@ -52,10 +58,10 @@ const Activities = () => {
             return (
                 <div className="activity_res">
                     <h2>Niliowapenda</h2>
-                    {mylikes.length > 0 ? 
+                    {liked_them.length > 0 ? 
                         <div className='likes_members'>
-                            {mylikes.map(item => (
-                               <MainCard id={item.id} key={item.id} handelNew={handelNew}/> 
+                            {liked_them.map(item => (
+                               <MainCard id={item?.target_id} key={item.id} handelNew={handelNew} type='nikah'/> 
                             ))}
                             
                         </div> 
@@ -71,7 +77,7 @@ const Activities = () => {
                     {liked_me.length > 0 ? 
                         <div className='likes_members'>
                             {liked_me.map(item => (
-                               <MainCard id={item.id} key={item.id} handelNew={handelNew}/> 
+                               <MainCard id={item?.user_id} key={item.id} handelNew={handelNew} type='nikah'/> 
                             ))}
                             
                         </div> 
@@ -83,10 +89,10 @@ const Activities = () => {
             return (
                 <div className="activity_res">
                     <h2>Niliowaangalia</h2>
-                    {myviews.length > 0 ? 
+                    {viewd_them.length > 0 ? 
                         <div className='likes_members'>
-                            {myviews.map(item => (
-                               <MainCard id={item.id} key={item.id} handelNew={handelNew}/> 
+                            {viewd_them.map(item => (
+                               <MainCard id={item?.target_id} key={item.id} handelNew={handelNew} type='nikah' /> 
                             ))}
                             
                         </div> 
@@ -101,7 +107,7 @@ const Activities = () => {
                      {viewed_me.length > 0 ? 
                         <div className='likes_members'>
                             {viewed_me.map(item => (
-                               <MainCard id={item.id} key={item.id} handelNew={handelNew}/> 
+                               <MainCard id={item?.user_id} key={item.id} handelNew={handelNew} type='nikah'/> 
                             ))}
                             
                         </div> 

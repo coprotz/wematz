@@ -1,6 +1,5 @@
 import React, {useEffect} from 'react'
 import {motion} from 'framer-motion'
-import './about.css'
 import Achi from '../../assets/images/founder.jpg'
 import { ImHome } from "react-icons/im";
 import { Link, useNavigate } from "react-router-dom";

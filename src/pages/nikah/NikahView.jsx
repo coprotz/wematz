@@ -22,8 +22,9 @@ import moment from 'moment';
 const NikahView = () => {
     const { id } = useParams()
     const { user } = useAuth()
-    const { marriages, donates } = useData()
+    const { marriages, donates, likes } = useData()
     const nikah = marriages.find(n => n.id === id)
+    const myid = marriages.find(m => m.userId === user.uid)?.id
     const navigate = useNavigate()
 
     const [file, setFile] = useState(null)
@@ -31,6 +32,9 @@ const NikahView = () => {
     const [alert, setAlert] = useState('')
     const [loading, setLoading] = useState(false)
     const { perc, url } = useStorage(file)
+
+    const mylikes = likes.filter(l => l.user_id === myid)
+    const isLike = mylikes.find(m => m.target_id === id)
 
     const [donate, setDonate] = useState(false)
     const [open, setOpen] = useState(null)
@@ -43,11 +47,13 @@ const NikahView = () => {
     const expire = moment(mujaheed?.expiredAt).format('MMM Do YY, LT')
     const valid = expire > today
 
+    console.log('islike', isLike)
+
     
 
     const marry = marriages?.find(m => m?.id === id)    
     const isOwn = marry?.userId === user.uid
-    const myid = marriages?.find(m => m?.userId === user.uid)
+    
 
     
 
@@ -136,9 +142,10 @@ const NikahView = () => {
             }
                 {!isOwn &&
                 <div className="nikah_view_action">
+                    {!isLike &&
                     <button className='btn_like'>
-                        <Likes p={nikah} myId={myid?.id}/>                      
-                    </button>
+                        <Likes p={nikah} myId={myid} type='nikah'/>                      
+                    </button>}
                     <button className='btn_btn' onClick={() =>handelNew(nikah)}><BsChatLeftDotsFill/></button>  
                 </div>}
             </div>

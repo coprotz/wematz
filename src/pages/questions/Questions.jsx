@@ -4,6 +4,7 @@ import {  FiActivity } from "react-icons/fi";
 // import { notifications, questions } from '../../data';
 import moment from 'moment';
 import useData from '../../hooks/useData';
+import ViewCard from './ViewCard';
 
 const Questions = () => {
   const navigate = useNavigate()
@@ -23,16 +24,8 @@ const Questions = () => {
         <div className="recent_activies_wrapper">
           
           <div className="activies_body">
-            {questions?.slice(0,5).map(n => (
-              <div className="activity_card" key={n.id} onClick={() =>navigate(`/questions/${n.id}`)}>
-                <div className="activity_photo">
-                  <img src={n.photo} />
-                </div>
-                <div className="activies_inner_body">
-                  <h4>{n.name}</h4><span>{n.que}</span>
-                  <small className='q_date'>{moment(n.createdAt?.seconds * 1000).format('MMM Do YY, LT') }</small>
-                </div>
-              </div>
+            {questions?.slice(-3).map(n => (
+             <ViewCard n={n} key={n.id}/>
             ))}
            
           </div>

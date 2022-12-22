@@ -1,6 +1,5 @@
 import React from 'react'
 import { clinics } from '../../data'
-import './health.css'
 import {  BsThreeDotsVertical } from "react-icons/bs";
 import { Routes, Route, Link, useNavigate } from 'react-router-dom';
 import { FaHeartbeat } from "react-icons/fa";

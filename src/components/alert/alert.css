@@ -83,11 +83,11 @@
 }
 
 
-.activity_card:hover + .btn_alert{
+/* .activity_card:hover + .btn_alert{
     display: block;
     cursor: pointer;
     background-color: #c1c1c1;
-}
+} */
 
 .message_alert_wrapper{
     top: 40px;

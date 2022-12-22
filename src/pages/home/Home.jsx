@@ -1,5 +1,5 @@
 import React from 'react'
-import './home.css'
+
 import { Outlet } from 'react-router-dom'
 import HomeMenu from '../../components/menu/HomeMenu';
 import Navbar from '../../components/navbar/Navbar';

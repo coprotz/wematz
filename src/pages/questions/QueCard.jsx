@@ -12,17 +12,18 @@ import Likes from '../../components/remarks/Likes'
 
 const QueCard = ({q}) => {
     const navigate = useNavigate()
-    const { comments, questions } = useData()
+    const { comments, questions, users } = useData()
     const coms = comments?.filter(c => c.docId === q.id)
 
     const lastanswer = comments?.findLast(c => c.docId === q.id)
+    const author = users?.find(u => u.id === q?.userId)
 
     console.log('lastanswer', lastanswer)
 
   return (
     <div className="que_card" key={q.id}>
         <div className="que_author">
-            {q?.photo?  <img src={q?.photo} /> :<Loading/>}
+            <img src={author?.photo || process.env.PUBLIC_URL + author?.avatar} /> 
         </div>
         <div className="que_body">
             <div className="que_date">
@@ -40,8 +41,8 @@ const QueCard = ({q}) => {
                     amejibu 
                     <small className='last_time'>{moment(lastanswer?.createdAt?.seconds * 1000).format('MMM Do YY, LT') }</small>
                 </div>
-                <p>{lastanswer?.text}</p>
-                <Likes p={lastanswer}/>
+                <p className='p'>{lastanswer?.text}</p>
+                <Likes p={lastanswer} type='jibu'/>
             </div>}
             
             <div className="que_cations">

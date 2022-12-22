@@ -15,7 +15,8 @@ const ActivityCard = ({id, handelNew}) => {
 
     const { user } = useAuth()
     const myid = marriages.find(m => m.userId === user.uid) 
-    const mylikes = likes.filter(l => l.user_id === myid?.id)
+    const liked_me = likes.filter(l => l.target_id === myid?.id)
+    const liked_them = likes?.filter(l => l.user_id === myid?.id)
     const isLike = mylikes.find(m => m.target_id === id)
 
     const view = views?.find(v => v.id === id)

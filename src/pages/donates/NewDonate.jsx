@@ -1,6 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import './donates.css'
+
 
 const NewDonate = ({item, setDonate}) => {
     const navigate = useNavigate()

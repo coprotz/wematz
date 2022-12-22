@@ -7,7 +7,7 @@ import useData from '../../hooks/useData';
 import Loading from '../loading/Loading';
 import './reactions.css'
 
-const Likes = ({p, myId}) => {
+const Likes = ({p, myId, type}) => {
     // const [like, setLike] = useState(null)
     const { setAlert, user } = useAuth()
     const { likes } = useData()
@@ -33,8 +33,8 @@ const Likes = ({p, myId}) => {
       const newNotific = {
         target_id: p.userId,
         uid: user.uid,
-        type: 'muonekano wako',
-        action: 'amekupenda',
+        type,
+        action: 'amekupenda',       
         isSeen: false,
         createdAt: serverTimestamp()
       }

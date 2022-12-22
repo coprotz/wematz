@@ -17,6 +17,7 @@ import { addDoc, collection, doc, serverTimestamp, updateDoc } from 'firebase/fi
 import NewDonate from '../donates/NewDonate';
 import moment from 'moment';
 import Loading from '../../components/loading/Loading';
+import MainCard from './MainCard';
 
 
 
@@ -124,26 +125,27 @@ const Nikah = () => {
         </div>     
         <div className={isMarry? 'nikah_donated' : "nikah_grid"}>            
             {marriages && marriages.filter(m =>m.gender !== cuUser?.gender).map((item, index) => (
-                <div className="nikah_card" key={index}>
-                    <div className="nikah_img">
-                        <img src={item?.photo} alt="" />
-                    </div>
-                    <div className="nikah_main_info">
-                        <div className="nikah_info">
-                            <h4>{item?.username}, {item?.age}</h4>
-                            <div className="nikah_loc">
-                                <span>{item?.tribe} -</span>
-                                <span> {item?.location}</span>
-                            </div>
-                        </div>                       
-                        <div className="meetings_actions">                    
-                            <button className='btn_btn'><Likes p={item} myId={myid?.id}/></button>
-                            <button onClick={(e) =>{handleView(e,item.id);setActive(item.id)}} className='btn_btn'>{loading && active === item.id? <Loading/> : <BsFillPersonFill/>}</button>
-                            {/* <button className='btn_btn' onClick={() =>handelNew(item)}><BsChatLeftDotsFill/></button> */}
-                            {/* <NewChat item={item} myId={myid?.id} setDonate={setDonate}/>        */}
-                        </div>
-                    </div>
-                </div>
+                <MainCard id={item?.id} key={item.id} type='nikah'/>
+                // <div className="nikah_card" key={index}>
+                //     <div className="nikah_img">
+                //         <img src={item?.photo} alt="" />
+                //     </div>
+                //     <div className="nikah_main_info">
+                //         <div className="nikah_info">
+                //             <h4>{item?.username}, {item?.age}</h4>
+                //             <div className="nikah_loc">
+                //                 <span>{item?.tribe} -</span>
+                //                 <span> {item?.location}</span>
+                //             </div>
+                //         </div>                       
+                //         <div className="meetings_actions">                    
+                //             <button className='btn_btn'><Likes p={item} myId={myid?.id}/></button>
+                //             <button onClick={(e) =>{handleView(e,item.id);setActive(item.id)}} className='btn_btn'>{loading && active === item.id? <Loading/> : <BsFillPersonFill/>}</button>
+                //              <button className='btn_btn' onClick={() =>handelNew(item)}><BsChatLeftDotsFill/></button> 
+                //              <NewChat item={item} myId={myid?.id} setDonate={setDonate}/>       
+                //         </div>
+                //     </div>
+                // </div>
             ))}
         </div>
         {/* {donate &&

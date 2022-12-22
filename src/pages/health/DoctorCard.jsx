@@ -6,13 +6,15 @@ import { useAuth } from '../../hooks/useAuth';
 import useData from '../../hooks/useData';
 import NewDonate from '../donates/NewDonate';
 import moment from 'moment';
+import Appointment from '../appointments/Appointment';
 
 
 
-const DoctorCard = ({d, setAppoint}) => {
+const DoctorCard = ({d}) => {
     const navigate = useNavigate()
     const { user } = useAuth()
     const { doctors, users, donates } = useData()
+    const [appoint, setAppoint] = useState(null)
     const isDoc = user.uid === doctors?.find(l =>l.userId === user.uid)
     // console.log('isDoc', isDoc)
 
@@ -40,6 +42,8 @@ const DoctorCard = ({d, setAppoint}) => {
     <div className="doc_card" key={d.id}>
         {donate && <NewDonate setDonate={setDonate} item={donate}/>}
         {open && <NewChat setOpen={setOpen} myId={user.uid} item={open}/>} 
+        {appoint && <Appointment appoint={appoint} setAppoint={setAppoint}/>}
+     
         <img src={d.photo} />
         <div className="doc_card_details">
             <div className="doc_info">

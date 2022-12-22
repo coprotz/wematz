@@ -7,6 +7,7 @@ import { db, useAuth } from '../../hooks/useAuth'
 import useData from '../../hooks/useData'
 import LikeCard from './LikeCard'
 import './remarks.css'
+import { CgComment } from "react-icons/cg";
 
 
 
@@ -31,7 +32,7 @@ const Remarks = ({p, setShow, type}) => {
     uid: user.uid,
     type,
     type_id: p?.id,
-    action: 'ameipenda',
+    action: 'ameipenda'+" "+type+" "+"yako",
     isSeen: false,
     createdAt: serverTimestamp()
   }
@@ -72,8 +73,9 @@ const Remarks = ({p, setShow, type}) => {
           <button 
             className='btn_likes'
             onClick={handleLike}
-            >{isLike? <AiFillLike/> : <GrLike/>}</button>
-          <span>{lks?.length}</span> 
+            >{isLike? <AiFillLike/> : <GrLike/>}
+          </button>
+          <span className='length'>{lks?.length}</span> 
           <div className="likes_t">
             {lks?.slice(-3)?.filter(u =>u !==undefined)?.map(p => (
               <LikeCard item={p} key={p.id}/>
@@ -82,7 +84,7 @@ const Remarks = ({p, setShow, type}) => {
           </div>
         </div>
               
-        <span onClick={() => setShow(p.id)}>{coms?.length} Maoni</span>
+        <span onClick={() => setShow(p.id)} className='comments'>{coms?.length}<CgComment/></span>
     </div>
   )
 }

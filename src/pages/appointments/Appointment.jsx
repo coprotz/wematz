@@ -42,7 +42,7 @@ const Appointment = ({appoint, setAppoint}) => {
         <button className='btn_btn' onClick={() => setAppoint(null)}><GrClose/></button>
       </div>
       <div className='view_body'>          
-        <div className='view_photo doc_photo_appoint'>
+        <div className='appoint_photo'>
           <img src={appoint?.photo}/>
         </div>
    
