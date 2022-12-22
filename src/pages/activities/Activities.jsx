@@ -71,7 +71,7 @@ const Activities = () => {
                     {liked_me.length > 0 ? 
                         <div className='likes_members'>
                             {liked_me.map(item => (
-                               <MainCard id={item.id} key={item.id}/> 
+                               <MainCard id={item.id} key={item.id} handelNew={handelNew}/> 
                             ))}
                             
                         </div> 
@@ -86,7 +86,7 @@ const Activities = () => {
                     {myviews.length > 0 ? 
                         <div className='likes_members'>
                             {myviews.map(item => (
-                               <MainCard id={item.id} key={item.id}/> 
+                               <MainCard id={item.id} key={item.id} handelNew={handelNew}/> 
                             ))}
                             
                         </div> 
@@ -101,7 +101,7 @@ const Activities = () => {
                      {viewed_me.length > 0 ? 
                         <div className='likes_members'>
                             {viewed_me.map(item => (
-                               <MainCard id={item.id} key={item.id}/> 
+                               <MainCard id={item.id} key={item.id} handelNew={handelNew}/> 
                             ))}
                             
                         </div> 
