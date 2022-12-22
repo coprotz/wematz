@@ -1,4 +1,4 @@
-const CACHE_NAME = "version-1.1";
+const CACHE_NAME = "version-2";
 const urlsToCache = ['./manifest.json', './index.html', './offline.html' ];
 
 const self = this;

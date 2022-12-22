@@ -18,9 +18,9 @@ const Activities = () => {
     const mary = marriages.find(m => m.userId === user.uid)
 
     const mylikes = likes.filter(l => l.user_id === mary?.id)
-    const myliked = likes.filter(l => l.target_id === mary?.id)
+    const liked_me = likes.filter(l => l.target_id === mary?.id)
     const myviews = views.filter(l => l.user_id === mary?.id)
-    const myviewed = views.filter(l => l.target_id === mary?.id)
+    const viewed_me = views.filter(l => l.target_id === mary?.id)
 
     const [donate, setDonate] = useState(false)
     const [open, setOpen] = useState(null)
@@ -55,7 +55,7 @@ const Activities = () => {
                     {mylikes.length > 0 ? 
                         <div className='likes_members'>
                             {mylikes.map(item => (
-                               <MainCard id={item.target_id} key={item.id} handelNew={handelNew}/> 
+                               <MainCard id={item.id} key={item.id} handelNew={handelNew}/> 
                             ))}
                             
                         </div> 
@@ -68,10 +68,10 @@ const Activities = () => {
             return (
                 <div className="activity_res">
                     <h2>Walionipenda</h2>
-                    {myliked.length > 0 ? 
+                    {liked_me.length > 0 ? 
                         <div className='likes_members'>
-                            {myliked.map(item => (
-                               <MainCard id={item.target_id} key={item.id}/> 
+                            {liked_me.map(item => (
+                               <MainCard id={item.id} key={item.id}/> 
                             ))}
                             
                         </div> 
@@ -86,7 +86,7 @@ const Activities = () => {
                     {myviews.length > 0 ? 
                         <div className='likes_members'>
                             {myviews.map(item => (
-                               <MainCard id={item.target_id} key={item.id}/> 
+                               <MainCard id={item.id} key={item.id}/> 
                             ))}
                             
                         </div> 
@@ -98,10 +98,10 @@ const Activities = () => {
             return (
                 <div className="activity_res">
                     <h2>Walioniangalia</h2>
-                     {myviewed.length > 0 ? 
+                     {viewed_me.length > 0 ? 
                         <div className='likes_members'>
-                            {myviewed.map(item => (
-                               <MainCard id={item.target_id} key={item.id}/> 
+                            {viewed_me.map(item => (
+                               <MainCard id={item.id} key={item.id}/> 
                             ))}
                             
                         </div> 
