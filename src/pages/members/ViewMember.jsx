@@ -464,6 +464,7 @@ const ViewMember = () => {
                 </div>
             </div>
         </div>
+        {user.uid !== id && (
         <div className="follow_btn">
             {/* <button className='btn_reg'>Mfatili</button> */}
             <button 
@@ -471,7 +472,7 @@ const ViewMember = () => {
                 onClick={handleFollow}
                 >{loading? <Loading/> : isFollower? 'Unamfatilia' : 'Mfatilie'}
             </button>
-        </div>
+        </div>)}
       
     </div>  
             )
