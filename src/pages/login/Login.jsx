@@ -86,7 +86,7 @@ const Login = () => {
             
             <div className="sign_in">
                 <span>Sio mwanachama?</span>
-                <button className='btn_sign' onClick={() =>navigate('/register')}>Jisajiri</button>
+                <button className='btn_sign' onClick={() =>navigate('/register')}>Jisajili</button>
             </div>
              }
         </div>

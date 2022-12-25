@@ -53,6 +53,8 @@ const Register = () => {
     const [thanks, setThanks] = useState(null)
     const [reg, setReg] = useState(0)
 
+    console.log('ismos', isMosque)
+
     const data = {
         email: user?.email,           
         name:  user?.displayName ,
@@ -132,7 +134,8 @@ const Register = () => {
                 await setDoc(doc(db, 'users', `${newUser.user.uid}`), {
                 ...data1,
                 createdAt: serverTimestamp()
-                })
+                });
+                await setDoc(doc(db, 'userChats', `${newUser.user.uid}`), {})
                 setLoading(false)
                 navigate('/')
 
@@ -310,7 +313,7 @@ const Register = () => {
                             <button onClick={() =>setPage(0)} className='btn_btn'><HiOutlineArrowLeft/></button>
                             <h4>Rudi Nyuma</h4>
                         </div>
-                    <h1 className='register_title'>Tunaomba utupe taarifa zako zingine</h1>
+                    <h1 className='register_title'>Tunaomba utupe taarifa zako zingine kumalizia usajili</h1>
                     <span className='res_span'></span>
                     {err && <span>{err}</span>}
                     <div className="register_form">
@@ -533,9 +536,9 @@ const Register = () => {
                     </div>
                     
                 </div>
-                {isMosque === 'Ndio Upo'}
+                {isMosque === 'Ndio Upo' &&
                 <div className="items_group">
-                    <h3 className='item_title'>Jina la Msikiti unaoswalia unapokuwa Morogoro</h3>
+                    <h3 className='item_title'>Jina la Msikiti unaoswalia unapokuwa {location}</h3>
                     <div className="sel_items">
 
                         <input 
@@ -548,7 +551,7 @@ const Register = () => {
                         />
                     </div>
                     
-                </div>
+                </div>}
                 <div className="items_group">
                     <h3 className='item_title'>Kiwango chako cha Quran</h3>
                     <div className="selection_btns">
@@ -796,7 +799,7 @@ const Register = () => {
    
                 <div className="items_group">
                     {revert === 'Hapana'? <button className='btn_reg' onClick={() => setThanks(true)}>TUMA</button> :                    
-                    <button className='btn_reg' onClick={handleRegister} disabled={!isValid}>{loading? <Loading/> : 'TUMA USAJIRI'}</button> 
+                    <button className='btn_reg' onClick={handleRegister} disabled={!isValid}>{loading? <Loading/> : 'TUMA USAJILI'}</button> 
                     }
                 </div>
                 </div>

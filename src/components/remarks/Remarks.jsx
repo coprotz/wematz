@@ -44,7 +44,8 @@ const Remarks = ({p, setShow, type}) => {
 
     const data = {
       target_id : p.id,
-      user_id: user.uid
+      user_id: user.uid,
+      cat: type,
     }
 
     try {

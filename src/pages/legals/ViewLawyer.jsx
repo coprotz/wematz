@@ -95,7 +95,8 @@ const ViewLawyer = () => {
         const likeRef = collection(db, 'likes')
         const data = {
           target_id : id,
-          user_id: user.uid
+          user_id: user.uid,
+          cat: 'user',
         }
     
         try {
@@ -229,7 +230,7 @@ const ViewLawyer = () => {
                     </button>                   
                     <button className='btn_members'>Watu {lks?.length} Wamempenda</button>
                     {/* <button className='btn_members'><BsChatLeftDotsFill/> Chat</button> */}
-                    {/* <button className='btn_members' onClick={() =>handelNew(lawyer)}><BsChatLeftDotsFill/>Chat</button>    */}
+                    <button className='btn_members' onClick={() =>handelNew(lawyer)}><BsChatLeftDotsFill/>Chat</button>   
                        
                             
                 </div>

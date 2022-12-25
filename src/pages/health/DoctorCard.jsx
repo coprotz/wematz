@@ -53,9 +53,9 @@ const DoctorCard = ({d}) => {
             <div className="meetings_actions">                    
                 <button className='btn_btn' onClick={() =>setAppoint(d)}><BsCalendarDay/></button>
                 <button className='btn_btn' onClick={() =>navigate(`/health/doctors/${d.id}`)}><BsFillPersonFill/></button>
-                {/* {!isDoc &&            
+                {!isDoc &&            
                 <button className='btn_btn' onClick={() =>handelNew(d)}><BsChatLeftDotsFill/></button> 
-                }        */}
+                }       
             </div>
             
         </div>

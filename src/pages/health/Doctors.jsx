@@ -12,6 +12,7 @@ const Doctors = () => {
     const navigate = useNavigate()
     const { doctors } = useData()
     const [appoint, setAppoint] = useState(null)
+    const [searchTerm, setSearchTerm] = useState("")
     
   return (
     <div className='doctors_wrappers'>
@@ -31,10 +32,16 @@ const Doctors = () => {
             
         </div>
         <div className="nikah_search">
-           <Search title='Tafuta Daktari'/> 
+           <Search title='Tafuta Daktari' setSearchTerm={setSearchTerm}/> 
         </div>
         <div className="doctors_inner">
-            {doctors.filter(m =>m.status==='Amethibitishwa').map(d => (
+            {doctors.filter(m =>m.status==='Amethibitishwa').filter((val) => {
+              if(searchTerm === ''){
+                return val
+              }else if(val.name.toLowerCase().includes(searchTerm.toLocaleLowerCase())){
+                return val
+              }
+            }).map(d => (
               <DoctorCard d={d} setAppoint={setAppoint}/>
             ))}
             

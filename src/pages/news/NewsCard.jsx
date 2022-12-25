@@ -10,7 +10,7 @@ const NewsCard = ({n}) => {
         <div className="news_details">            
             <h3 className='news_name' onClick={() =>navigate(`/news/${n.id}`)}>{n.title}</h3>
             <div className="new_actions">
-                <Remarks p={n}/>
+                <Remarks p={n} type='news'/>
             </div>
         </div> 
     </div>

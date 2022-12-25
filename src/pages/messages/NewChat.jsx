@@ -1,85 +1,55 @@
-import { addDoc, collection } from 'firebase/firestore'
+import {  doc, getDoc, serverTimestamp, setDoc, updateDoc } from 'firebase/firestore'
 import React from 'react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { db, useAuth } from '../../hooks/useAuth'
-import useData from '../../hooks/useData'
+import { db } from '../../hooks/useAuth'
 import Loading from '../../components/loading/Loading'
-import { BsChatLeftDotsFill } from 'react-icons/bs'
-import NewDonate from '../donates/NewDonate'
+import { useContext } from 'react'
+import { ChatContext } from '../../hooks/chatsContext'
 
 
-
-const NewChat = ({item, myId, setOpen }) => {
-    // const { user } = useAuth()
-    const {  chats } = useData()   
-
-    const chatsRef = collection(db, 'chats')
-    // const [open, setOpen] = useState(null)
-    const [sending, setSending] = useState(null)
-   
+const NewChat = ({item,  setOpen, cuUser }) => {    
+    const [sending, setSending] = useState(null)   
     const navigate = useNavigate();
+    const { dispatch, active, setActive } = useContext(ChatContext)
 
-    // console.log('myid', myId)
-    // console.log('otherId', item?.id)
-
-      const mychats = chats?.filter(c =>c.members.includes(`${myId}`))
-      const oldChat = mychats?.find(c => c.members.find(m =>m === item?.id))
-
-      // const today = new Date().getTime()
-
-      // console.log('today', today)
-
-      // const mujaheed = donates?.find(d => d?.user_id === user.uid)
-      // const mujaheed = new Date(donates?.find(d => d?.user_id === user.uid)?.expiredAt?.seconds * 1000).toLocaleDateString("en-US")
-      // const isMujaheed = mujaheed && mujaheed.find(m =>m?.expiredAt > today)
-
-      // const expiredAdate = new Date(mujaheed?.expiredAt?.seconds * 1000).getTime()
-  
-      
-
-      // const valid = expiredAdate > today
-
-      // console.log('valid', valid)
-      // console.log('expiredAdate', expiredAdate)
-
-      const handleNew = async(e) => {
-
-        e.preventDefault();
-        
+    const handleNew = async () => {
         setSending(true)
-       
-            try {
 
-              if(oldChat){          
-               navigate(`/messages/${oldChat.id}`)       
-              }
-              else{
-                const data = {
-                  members : [`${ myId}`, `${item?.id}`]
-                 
-                }
-            
-                const chat = await addDoc(chatsRef, data)
-                if(chat){
-                  navigate(`/messages/${chat.id}`) 
-                }         
-                setSending(null)            
-              }     
-          
-              
-            } catch (error) {
-              console.log(error.message)
-            }
-       
-    
-        
+        const data = {
+          uid: item.id,
+          name: item.name,
+          photo: item?.photo || item.avatar
+        }
+        const combinedId = cuUser.id > item.id ? cuUser.id + item.id : item.id + cuUser.id;
+        try {
+          const res = await getDoc(doc(db, 'chats', combinedId));
+          if(!res.exists()){
+            await setDoc(doc(db, 'chats', combinedId), { messages: [] });
+
+            await updateDoc(doc(db, 'userChats', cuUser.id), {
+              [combinedId + ".userInfo"]: data,          
+              [combinedId + ".createdAt"]: serverTimestamp()
+            });
+            await updateDoc(doc(db, 'userChats', item.id), {
+              [combinedId+".userInfo"]: {
+                uid: cuUser.id,
+                name: cuUser.name,
+                photo: cuUser.photo || cuUser.avatar
+              },
+              [combinedId+".createdAt"]: serverTimestamp()
+            });
+          }
+          setSending(false)
+          navigate('/messages')
+          dispatch({ type: 'CHANGE_USER', payload: data })
+          setActive(true)
+
+        } catch (error) {
+          console.log(error.message)
       }
-    
-
-     
-      
-    
+        
+    }  
 
   return (
   

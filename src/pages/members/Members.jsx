@@ -17,6 +17,7 @@ import { HiOutlineArrowLeft } from 'react-icons/hi'
 const Members = () => {
     const { users, donates } = useData()
     const { user } = useAuth()
+    const cuUser = users?.find(u => u.id === user.uid)
     const wemas = users.filter(u =>u.id !== user.uid)
     const [donate, setDonate] = useState(false)
     const [open, setOpen] = useState(null)
@@ -29,18 +30,18 @@ const Members = () => {
     const valid = expire > today
 
     const handelNew = (item) => {
-        if(valid){           
+        // if(valid){           
              setOpen(item)
-         }else{
-             setDonate(item)
-         }
+        //  }else{
+            //  setDonate(item)
+        //  }
      }
  
    
   return (
     <div className='members_wrapper'>
         {donate && <NewDonate setDonate={setDonate} item={donate}/>}
-        {open && <NewChat setOpen={setOpen} myId={user.uid} item={open}/>}  
+        {open && <NewChat setOpen={setOpen} cuUser={cuUser} item={open}/>}  
         <div className="health_top">
             <div className="health_t_1">
                 <div className="heading_top">                

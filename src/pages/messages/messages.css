@@ -16,6 +16,19 @@
 
 }
 
+.users_found{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    background-color: var(--bg);
+    margin-top: 5px;
+    border-radius: 5px;
+}
+
+.search_user{
+    padding: 10px;
+}
+
 .mes_chatlists{
     height: calc(100vh - 230px);
     padding-top: 25px;
@@ -25,6 +38,24 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+    position: relative;
+}
+
+.btn_new_chat{
+    position: absolute;
+    right: 15px;
+    bottom: 15px;
+    border: none;
+    background-color: var(--primary);
+    color: white;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    box-shadow: var(--shadow);
 }
 
 
@@ -57,6 +88,24 @@
     gap: 10px;
     padding: 10px;
     cursor: pointer;
+}
+
+.user_found_info{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.found_user_img{
+    width: 30px;
+    height: 30px;
+    aspect-ratio: 1;
+}
+
+.found_user_img img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .active_chat_card{
@@ -154,6 +203,17 @@
     border-radius: 15px;
 }
 
+.chat_message{
+    /* height: calc(100vh - 230px); */
+    display: flex;
+    flex-direction: column;
+    flex: 2;
+}
+
+/* .desktop_chat{
+    
+} */
+
 .chat_messages{
     /* background-color: white; */
     height: calc(100vh - 280px);
@@ -162,6 +222,7 @@
     display: flex;
     flex-direction: column;
     gap: 15px;
+    flex: 2;
     /* padding: 15px; */
 }
 
@@ -175,7 +236,7 @@
     background-color: white;
     padding: 15px;
     max-width: 700px;
-    border-radius: 7px;
+   
 }
 
 .mes_body_time{
@@ -310,6 +371,11 @@
 
 .right{
     background-color: var(--primary);
+    border-radius: 10px 10px 0 10px;
+}
+
+.left{
+    border-radius: 0 10px 10px 10px;
 }
 
 .received{    
@@ -481,6 +547,70 @@
 }
 
 
+.chats_wrapper{
+    display: flex;
+    width: 100%;
+}
+
+.desktop_class{
+    flex: 1;
+    max-width: 30vw;
+}
+
+
+.messages_wrapper{
+    height: calc(100vh - 280px);
+    padding: 10px;
+    overflow-y: scroll;
+}
+
+.chat_head_left{
+    border-bottom: 1px solid var(--sec);
+    padding: 5px;
+}
+
+.chats_messages_wrapper{
+    display: flex; 
+    flex-direction: column;   
+    gap: 10px;
+}
+
+.message_owner{
+    display: flex;
+    flex-direction: row-reverse;
+    margin: 5px 0;
+    gap: 10px;
+}
+
+.message_contents{
+    display: flex;    
+    gap: 10px;
+}
+
+.message_body{
+    max-width: 80%;
+}
+
+.bg_blue{
+    background-color: var(--primary) !important;
+    color: white;
+    border-radius: 10px 0 10px 10px ;
+}
+
+.bg_white{
+    border-radius: 0 10px 10px 10px;
+    margin-bottom: 5px;
+}
+
+.no_chats{
+    display: flex;
+    height: calc(100vh - 180px);
+    justify-content: center;
+    align-items: center;
+    color: #aaa;
+}
+
+
 
 @media screen and (max-width: 940px){
     .messages_body{
@@ -577,6 +707,57 @@
         width: 20vw;
 
         background-color: white;
+    }
+
+    /* .mob_message_conatiner{
+        display: none;
+    } */
+
+    /* .message_container{
+        display: none;
+        flex: 0;
+    } */
+
+
+    .no_chats{
+        display: none;
+    }
+
+    .side_chats{
+        width: 100vw;
+        
+    }
+
+    .mob_message_conatiner{
+        width: 100vw;
+    }
+
+    .side_bar_active{
+        display: none;
+    }
+
+    .mob_chat_messgae{
+        width: 100vw;
+        height: calc(100vh - 210px);
+        display: flex;
+    }
+
+
+    .messages_wrapper{
+        height: calc(100vh - 260px);
+        padding: 10px;
+        overflow-y: scroll;
+    }
+
+    .mes_chatlists{
+        height: calc(100vh - 210px);
+        padding-top: 25px;
+        padding: 15px;
+        overflow-y: scroll;
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
     }
     
     

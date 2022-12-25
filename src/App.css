@@ -137,15 +137,34 @@
   
 }
 
-.about_ceo img{
-  width: 400px;
+.about_ceo_image{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
-.about_ceo_bio h1{
+.about_ceo img{
+  width: 100%;
+  max-width: 500px;
+}
+
+.about_ceo_image h1{
   color: rgb(202, 202, 202);
 }
 
-.about_ceo_bio h3{
+.about_ceo_bio{
+  flex: 1;
+}
+
+.ceo_info{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+  justify-content: center;
+}
+
+.about_ceo_image h3{
   color: gold;
   font-size: 25px;
 }

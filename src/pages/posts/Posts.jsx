@@ -93,6 +93,7 @@ const Posts = () => {
 
     const newQue = questions?.at(-1)
     const newMada = madas?.at(-1)
+    const [searchTerm, setSearchTerm] = useState("")
 
     // console.log('new', newQue)
    
@@ -111,7 +112,7 @@ const Posts = () => {
           <div className="posts_inner">
             <div className="posts_cont">
                 <SharePost setVideo={setVideo} setAudio={setAudio} setImage={setImage}/> 
-                <Search title='Tafuta Chapisho'/>  
+                <Search title='Andika Jina la MwanaWema kutafuta posti zake' setSearchTerm={setSearchTerm}/>  
             </div>
                    
               <motion.div 
@@ -119,8 +120,14 @@ const Posts = () => {
                   animate={{y:0}} 
                   transition={{ ease: "easeOut", duration: 0.5 }} 
                   className="post_grids">
-                    {posts?.map(p => (
-                      <PostCard p={p} key={p.id} setConfirm={setConfirm}/>
+                    {posts?.filter((val) => {
+                      if(searchTerm === ''){
+                        return val
+                      }else if(val.name.toLowerCase().includes(searchTerm.toLocaleLowerCase())){
+                        return val
+                      }
+                    }).map(p => (
+                        <PostCard p={p} key={p.id} setConfirm={setConfirm}/>
                     ))}
                </motion.div> 
           </div>

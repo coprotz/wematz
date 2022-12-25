@@ -1,133 +1,57 @@
 import React from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 // import { chats, users } from '../../data'
-import { db, useAuth } from '../../hooks/useAuth'
-import useData from '../../hooks/useData'
+// import { db, useAuth } from '../../hooks/useAuth'
+// import useData from '../../hooks/useData'
 import moment from 'moment'
-import { updateDoc, doc } from 'firebase/firestore'
+// import { updateDoc, doc } from 'firebase/firestore'
+import { useContext } from 'react'
+import { ChatContext } from '../../hooks/chatsContext'
+import useData from '../../hooks/useData'
 
 const ChatCard = ({chat}) => {
 
-    const { id } = useParams()
+    const { users } = useData()
+    const { dispatch, data, setActive } = useContext(ChatContext)
+    const user = users?.find(u => u.id === chat[1].userInfo.uid)
 
-    const { user } = useAuth();
-    const { messages, marriages, doctors, lawyers, users } = useData()
-
-    const cuUser = users?.find(u => u.id === user.uid)
-    const marry = marriages?.find(p=>p.userId === user.uid)
-    const dr = doctors?.find(p=>p.userId === user.uid)
-    const law = lawyers?.find(p=>p.userId === user.uid)
-
-    const myid = chat?.members.find(m => m === cuUser?.id || marry?.id || dr?.id || law?.id)
-
-    const memberId = chat?.members.find(m =>m !== myid)
-
-    console.log('my', myid)
-    console.log('member', memberId)
-    console.log('user', user.uid)
-   
-
-    
-
-    const isMarry = marriages?.find(m => m.id === memberId)
-    const isDoc = doctors?.find(d => d.id === memberId)
-    const isLaw = lawyers?.find(l => l.id === memberId)
-    const isUser = users?.find(a =>a.id === memberId) 
-
-    const name = isDoc?.name || isLaw?.name || isUser?.name || isMarry?.name || isMarry?.username
-    console.log('name', name)
-    console.log('isUser', isUser)
-    
-
-    const cuMsgs = messages && messages.filter(m => m.room === chat.id)
-    const lastMsg = messages && messages.findLast((m) => m.room === chat.id)
-    const isOwn = lastMsg?.uid === user.uid
-
-    // console.log('last', lastMsg)
-    // console.log('isOwn', isOwn)
-
-    const Name = () => {
-      if(isMarry){
-        return (
-          <>{isMarry?.username }</>
-        )
-      }else if(isDoc){
-        return (
-          <>{isDoc?.name}</>
-        )
-      }else if(isLaw){
-        return (
-          <>{isLaw?.name}</>
-        )
-      }else if(isUser) {
-        return (
-          <>{isUser?.name}</>
-        )
-      }
-    }
+    console.log('user', user)
 
    
-    console.log('sender', chat?.user_id)
-
-
-    const Photo = () => {
-      if(isMarry){
-        return (
-          // <>{member?.photo }</>
-          <img src={isMarry?.photo} />
-        )
-      }else if(isDoc){
-        return (
-          <img src={isDoc?.photo} />
-        )
-      }else if(isLaw){
-        return (
-          <img src={isLaw?.photo} />
-        )
-      }else if(isUser) {
-        return (
-          <img src={isUser?.photo || process.env.PUBLIC_URL + `${cuUser?.avatar}`} />
-        )
-      }
-    }
   
     const navigate = useNavigate()
 
-    const handleNavigate = async () => {
-      if(isOwn){
-        navigate(`/messages/${chat.id}`)
-      }else{
-        try {
-          await updateDoc(doc(db, 'messages', `${lastMsg.id}`), {isRead: true})
-          navigate(`/messages/${chat.id}`)
-        } catch (error) {
-            console.log(error.message)
-        }
-      }
-      
-    }
+   
 
-    const isRead = lastMsg?.isRead == true
-    // console.log('isread', isRead)
+    // const isRead = lastMsg?.isRead == true
+    const handleSelect = (u) => {
+      dispatch({type: "CHANGE_USER", payload: u})
+    }
+   
 
   return (
-    <div className={chat.id === id? 'active_chat_card' : "chat_card"} key={chat.id} onClick={handleNavigate}>
-      <div className="chat_wrap">
-        <div className="chat_wrleft">
-          <div className="chat_rec_photo">
-              {Photo()} 
-          </div>
-          <div className="chat_body">
-              <h4 className='chat_member_name'>{Name()}</h4>
-              <span className='chat_text'>{lastMsg?.text}</span>
-          </div>
+    <div className="chat_card" onClick={() =>{handleSelect(chat[1].userInfo);setActive(true)}} key={chat[0]}>
+    <div className="chat_wrap">
+      <div className="chat_wrleft">
+        <div className="chat_rec_photo">
+            <img src={user?.photo || process.env.PUBLIC_URL + `${user?.avatar}`} alt="" /> 
         </div>
-        <div className="chat_timer">
-          <small className='chat_la_time'>{moment(lastMsg?.createdAt?.toDate()).fromNow(true)}</small> 
-          <span className={ isOwn || isRead ? 'msg_read' : 'card_small_qty'}>{cuMsgs && cuMsgs.length}</span>
+        <div className="chat_body">
+          <div className="member_status">
+              <h3 className='profile_name'>{user?.name}</h3>
+              {user?.isOnline == true ? 
+              <span className="status_ind" style={{backgroundColor: '#0df60f'}}></span> :
+              <span className="status_ind" style={{backgroundColor: '#aaa'}}></span>
+              }
+          </div>                 
+          <span className='chat_text'>{chat[1].lastMessage?.message}</span>
         </div>
-        </div>
-    </div>
+      </div>
+      <div className="chat_timer">
+        <small className='chat_la_time'>{moment(chat[1].createdAt?.toDate()).fromNow(true)}</small>       
+      </div>
+      </div>
+  </div>
   )
 }
 

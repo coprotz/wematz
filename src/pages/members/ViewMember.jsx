@@ -1,4 +1,4 @@
-import { doc, updateDoc } from 'firebase/firestore'
+import { addDoc, collection, doc, serverTimestamp, updateDoc } from 'firebase/firestore'
 import React from 'react'
 import { useState } from 'react'
 import { GrClose } from 'react-icons/gr'
@@ -11,12 +11,14 @@ import { BsCamera } from 'react-icons/bs';
 import Loading from '../../components/loading/Loading'
 import moment from 'moment';
 import { ages, regions } from '../../data'
+import LoadingPage from '../../components/loading/LoadingPage'
+import FollowCard from './FollowCard'
 
 
 
 const ViewMember = () => {
     const { id } = useParams()
-    const { users, donates } = useData()
+    const { users, donates, posts, questions, comments, likes, followers } = useData()
     const navigate = useNavigate()
     const { user } = useAuth()
     const member = users?.find(u => u.id === id)
@@ -39,10 +41,15 @@ const ViewMember = () => {
 
     const { perc, url } = useStorage(file)
 
-    // console.log('valid', valid)
-    // console.log('expire', expire)
-    // console.log('today', today)
-    // console.log('mujaheed', mujaheed)
+    const memberPosts = posts?.filter(p =>p.userId === id)
+    const allComments = comments?.filter(p =>p.userId === id)
+    const memberanswers = comments?.filter(v => v.cat === 'que').filter(p =>p.userId === id)
+    const memberComments = allComments?.length - memberanswers?.length
+    const memberQue = questions?.filter(p =>p.userId === id)
+
+    const myFollowers = followers?.filter(f => f.follower_id === id)
+    const myFollowings = followers?.filter(f => f.following_id === id)
+    // console.log('posts', memberPosts)
 
     const handleSelect = (e) => {
         let selected = e.target.files[0];  
@@ -79,8 +86,59 @@ const ViewMember = () => {
     const [editEmplo, setEditEmplo] = useState(null)
     const [editProf, setEditProf] = useState(null)
 
-  return (
-    <div className='view_doctor_wrapper'>
+  
+  
+   
+    const myFolling = followers.filter(f => f?.follower_id === user.uid)
+    const isFollower = myFolling.find(f =>f?.following_id === id)
+    const myFolls = followers.filter(f =>f?.following_id === user.uid)
+    // console.log('myfoll', myFollowers)
+
+
+    const followRef = collection(db, 'followers')
+    const notificRef = collection(db, 'notifics')
+  
+    const newNotific = {
+      target_id: id,
+      uid: user.uid,
+      type: 'follow',
+      type_id: user.uid,
+      action: 'anakufatilia',
+      isSeen: false,
+      createdAt: serverTimestamp()
+    }
+
+  
+
+    const handleFollow = async(e) => {
+        e.preventDefault()
+
+        setLoading(true)
+
+        const data = {
+            follower_id: user.uid,
+            following_id: id
+        }
+        if(!isFollower){
+           try {
+            await addDoc(followRef, data)
+            await addDoc(notificRef, newNotific)
+            setLoading(null)
+            } catch (error) {
+            console.log(error.message)
+            }  
+        }else{
+            alert('Unamfatilia huyu ndugu')
+            setLoading(null)
+        }
+       
+    }
+
+
+    const RenderMember = () => {
+        if(member){
+            return (
+               <div className='view_doctor_wrapper'>
          {appoints && <Appoints setAppoints={setAppoints}/>}
         <div className="view_doc_top">
             <img src={member?.photo || process.env.PUBLIC_URL + member?.avatar} />
@@ -363,8 +421,72 @@ const ViewMember = () => {
                 </div>
             </div> )}
         </div>
+        <div className="member_activities">
+            <h3 className='title'>shughuli za mwanaWema</h3>
+            <div className="member_activities_grids">
+                <div className="activity_card">
+                    <h3>{memberPosts?.length}</h3>
+                    <span>Posti alizoanzisha</span>
+                </div>
+                <div className="activity_card">
+                    <h3>{memberComments}</h3>
+                    <span>Comments alizochangia Mada, Post, Habari</span>
+                </div>
+                <div className="activity_card">
+                    <h3>{memberQue?.length}</h3>
+                    <span>Maswali aliyouliza</span>
+                </div>
+                <div className="activity_card">
+                    <h3>{memberanswers?.length}</h3>
+                    <span>Majibu aliyotoa kwa maswali yaliyoulizwa</span>
+                </div>                
+            </div>
+        </div>
+        <div className="member_follows">
+            <div className="member_followings">
+                <h3 className='title'>{user.uid === id? 'Unaowafatilia' : 'Anaowafatilia'} ({myFollowers?.length})</h3>
+                <div className="followings_grids">
+                    {myFollowers?.map(m => (
+                       <FollowCard m={m.following_id} key={m.id}/> 
+                    ))}
+                    
+                  
+                </div>
+            </div>
+            <div className="member_followings">
+                <h3 className='title'>{user.uid === id? 'Wanaokufatilia' : 'Wanaomfatilia'} ({myFollowings?.length})</h3>
+                <div className="followings_grids">
+                    {myFollowings?.map(m => (
+                       <FollowCard m={m.follower_id} key={m.id}/>
+                    ))}
+                    
+                  
+                </div>
+            </div>
+        </div>
+        <div className="follow_btn">
+            {/* <button className='btn_reg'>Mfatili</button> */}
+            <button 
+                className={isFollower? 'btn_isFollow' : 'btn_reg'}
+                onClick={handleFollow}
+                >{loading? <Loading/> : isFollower? 'Unamfatilia' : 'Mfatilie'}
+            </button>
+        </div>
       
-    </div>
+    </div>  
+            )
+        }else {
+            return (
+                <div className="loading_wrapper">
+                    <LoadingPage/>
+                </div>
+                
+            )
+        }
+    }
+
+  return (
+   <>{RenderMember()}</>
   )
 }
 

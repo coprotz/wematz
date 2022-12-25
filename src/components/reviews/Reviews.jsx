@@ -49,8 +49,8 @@ const Reviews = ({doc, setShow}) => {
         
          
         </div>
-        <CreateReview title='Toa Maoni yako' doc={doc}/>
-        <h4 onClick={() => setShow(null)} style={{color:'blue'}}>Ficha Maoni</h4>
+        <CreateReview title='Toa Maoni yako' doc={doc} setShow={setShow}/>
+        <h4 onClick={() => setShow(null)} style={{color:'blue'}} className='hide_reviews'>Ficha Maoni</h4>
       
     </div>
   )

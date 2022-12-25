@@ -267,4 +267,13 @@
         position:static;
         /* top: 100px; */
     }
+
+    .view_mada{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 15px 0;
+        width: 95%;
+        margin: 0 auto;
+    }
 }

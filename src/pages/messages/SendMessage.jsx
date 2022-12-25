@@ -34,7 +34,7 @@ const SendMessage = ({chat}) => {
     const dr = doctors?.find(p=>p.userId === user.uid)
     const law = lawyers?.find(p=>p.userId === user.uid)
 
-    const myid = chat?.members.find(m => m === cuUser?.id || marry?.id || dr?.id || law?.id)  
+    const myid = chat?.members?.find(m => m === cuUser?.id || marry?.id || dr?.id || law?.id)  
  
  
     const myMarry = marriages?.find(m =>m.id === myid) 
@@ -74,8 +74,7 @@ const SendMessage = ({chat}) => {
       target_id: memberId,
       uid: user.uid,
       type: 'message',
-      action: 'amekutumia',
-      type: 'message',
+      action: 'amekutumia messagi',      
       type_id: chat?.id,
       isSeen: false,
       createdAt: serverTimestamp()
@@ -92,7 +91,7 @@ const SendMessage = ({chat}) => {
     } 
       
     }else if(!exitChat){
-      alert('Chat hii imeondolewa')
+       return alert('Chat hii imeondolewa')
     }
 
   

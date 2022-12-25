@@ -218,7 +218,7 @@ const ViewDoctor = () => {
                     {isLike? <AiFillLike/> : loading? <Loading/> : <GrLike/>}                  
                     </button>                   
                     <button className='btn_members'>Watu {lks?.length} Wamemkubali</button>
-                    {/* <button className='btn_members' onClick={() =>handelNew(doctor)}><BsChatLeftDotsFill/> Chat</button> */}
+                    <button className='btn_members' onClick={() =>handelNew(doctor)}><BsChatLeftDotsFill/> Chat</button>
                             
                 </div>
             </div> 

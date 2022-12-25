@@ -30,7 +30,7 @@ const MadaCard = ({m}) => {
                                    
                 
             </div>
-            <Remarks p={m}/>
+            <Remarks p={m} type='mada'/>
         </div>
     </div>
   )

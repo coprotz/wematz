@@ -6,6 +6,8 @@ import { doc, updateDoc } from 'firebase/firestore'
 import { GrClose } from "react-icons/gr";
 import { useEffect } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
+import { useContext } from 'react'
+import { ChatContext } from '../../hooks/chatsContext'
 
 
 
@@ -13,12 +15,16 @@ import { Navigate, useNavigate } from 'react-router-dom'
 const AlertCard = ({item, allnots, setAlert}) => {
     const {user} = useAuth()
     const { users, doctors, lawyers, marriages } = useData()
+    const { dispatch, setActive } = useContext(ChatContext)
     const cuUser = users.find(u => u.id === item?.uid)
     const navigate = useNavigate()
 
     
 
     // const status = allnots?.length
+    const data = {
+      uid: item?.uid
+    }
 
     const sender = 
       users?.find(u => u.id === item?.uid) || 
@@ -31,17 +37,22 @@ const AlertCard = ({item, allnots, setAlert}) => {
     const handleNavigate = async () => {
         
         if(item?.type === 'message'){
-          await updateDoc(doc(db, 'notifics', `${item?.id}`), {isSeen: true})
-          navigate(`/messages/${item?.type_id}`)
           setAlert(null)
+          navigate('/messages')
+          dispatch({ type: "CHANGE_USER", payload: data })
+          setActive(true)
+          await updateDoc(doc(db, 'notifics', `${item?.id}`), {isSeen: true})
+          
         }else if(item?.type === 'post'){
           await updateDoc(doc(db, 'notifics', `${item?.id}`), {isSeen: true})
           navigate('/')
           setAlert(null)
         }else if(item?.type === 'follow'){
-          await updateDoc(doc(db, 'notifics', `${item?.id}`), {isSeen: true})
-          navigate(`/members/${sender?.id}`)
           setAlert(null)
+          navigate(`/members/${sender?.id}`)
+          await updateDoc(doc(db, 'notifics', `${item?.id}`), {isSeen: true})
+          
+          
         }else if(item?.type === 'nikah') {
           await updateDoc(doc(db, 'notifics', `${item?.id}`), {isSeen: true})
           navigate(`/nikah/${sender?.id}`)

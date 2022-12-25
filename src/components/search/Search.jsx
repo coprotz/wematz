@@ -3,7 +3,7 @@ import './search.css'
 import {  BsSearch } from "react-icons/bs";
 import { HiSearchCircle } from "react-icons/hi";
 
-const Search = ({title}) => {
+const Search = ({title, setSearchTerm}) => {
 //   const input = document.querySelector(".finder__input");
 // const finder = document.querySelector(".finder");
 // const form = document.querySelector("form");
@@ -41,7 +41,12 @@ const Search = ({title}) => {
           <div class="finder__outer">
             <div class="finder__inner">
               <button className='btn_btn1'><HiSearchCircle/></button>
-              <input class="finder__input" type="text" name="q" placeholder={title}/>
+              <input 
+                class="finder__input" 
+                type="text" name="q" 
+                placeholder={title}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                />
             </div>
           </div>
         </div>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { GoLaw } from "react-icons/go";
 import Search from '../../components/search/Search';
 // import { lawyers } from '../../data';
@@ -14,6 +14,9 @@ const Mainlegals = () => {
 
   const { lawyers } = useData()
   const navigate = useNavigate()
+  const [searchTerm, setSearchTerm] = useState("")
+
+  // console.log('lawyers', lawyers)
 
   // console.log('lawyers', lawyers)
   
@@ -51,12 +54,18 @@ const Mainlegals = () => {
         </div>
         <h3 className='sub_title'>Wanasheria Wetu</h3>
         <div className="nikah_search">
-           <Search title='Tafuta Mwanasheria'/> 
+           <Search title='Tafuta Mwanasheria' setSearchTerm={setSearchTerm}/> 
         </div>
         <div className="doctors_inner">
-            {lawyers?.filter(l => l.status === 'Amethibitishwa').map(d => (
+            { lawyers?.filter(l => l.status === 'Amethibitishwa').filter((val) => {
+              if(searchTerm === ''){
+                return val
+              }else if(val.name.toLowerCase().includes(searchTerm.toLocaleLowerCase())){
+                return val
+              }
+            }).map(d => (
               <LawyerCard d={d} key={d.id}/>
-            ))}
+            )) }
             
         </div>
     </div>

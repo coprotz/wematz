@@ -33,7 +33,8 @@ const Likes = ({p, type}) => {
     e.preventDefault()
     const data = {
       target_id : p.id,
-      user_id: user.uid
+      user_id: user.uid,
+      cat: type
     }
 
     try {

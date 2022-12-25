@@ -1,3 +1,4 @@
+import { type } from '@testing-library/user-event/dist/type';
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 import React from 'react'
 import { useState } from 'react';
@@ -5,7 +6,7 @@ import {   BsFillShareFill } from "react-icons/bs";
 import { db, useAuth } from '../../hooks/useAuth';
 import useData from '../../hooks/useData';
 
-const CreateReview = ({title, doc}) => {
+const CreateReview = ({title, doc, setShow, type}) => {
     const [message, setMessage] = useState('')
     const [loading, setLoading] = useState(false)
     const { user } = useAuth()
@@ -37,7 +38,8 @@ const CreateReview = ({title, doc}) => {
             userId: user.uid,
             name: cuUser?.name,
             createdAt: serverTimestamp(),
-            text: message,           
+            text: message, 
+            cat: type,          
             photo: cuUser?.photo ? cuUser?.photo : process.env.PUBLIC_URL + cuUser?.avatar
         }
 
@@ -59,24 +61,29 @@ const CreateReview = ({title, doc}) => {
   return (
     <div className="review_share">
         <div className="share_text">
+            <div className="comment_info">
+                <img src={cuUser?.photo ? cuUser?.photo : process.env.PUBLIC_URL + cuUser?.avatar} alt="" />
+            </div>
             <textarea 
                 type= 'textarea'  
                 placeholder={title} 
-                className='sel_input3'
+                className='comment_input'
                 name='message'                        
                 value={message} 
-                 style={{width:'100%', height: message? '200px': '30px'}}
+                 style={{width:'100%', height: message? '100px': '30px'}}
                 onChange={(e) =>setMessage(e.target.value)}>
-            </textarea> 
-         
-            
+            </textarea>            
         </div>
-        <div className="share_action">       
+        <div className="share_action_btns">       
             <button 
-                className='btn_sign'
+                className='btn_yes'
                 disabled={!message}
                 onClick={handleComment}
-                >{loading? 'Inatuma' :<BsFillShareFill/> }</button>
+            >{loading? 'Inatuma' :'Tuma' }</button>
+             <button 
+                className='btn_no'                
+                onClick={() =>setShow(null)}
+            >{loading? 'Inatuma' :"Batilisha" }</button>
         </div>
     
     </div>

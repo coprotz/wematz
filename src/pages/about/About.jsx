@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react'
 import {motion} from 'framer-motion'
-import Achi from '../../assets/images/founder.jpg'
+import Achi from '../../assets/images/ceo.jpg'
 import { ImHome } from "react-icons/im";
 import { Link, useNavigate } from "react-router-dom";
 import { FaQuoteLeft, FaQuoteRight, FaShieldAlt } from "react-icons/fa";
@@ -26,11 +26,16 @@ const About = () => {
             <h1 className='about_slogan'>Lengo letu ni kuwa na jukwaa kubwa la waislamu, watakaoshirikiana kwenye kuhusiana mema na kukatazana mabaya na kusaidiana kwenye kila hali kwa kupeana ufumbuzi kwenye masuala ya uchumi, elimu, siasa ili kuwa na jamii bora itakayomridhisha Allah Subhaanahu Wata a' llah.</h1> 
         </div> 
         <div className="about_ceo_wrapper">        
-            <div className="about_ceo">            
-                <img src={Achi} alt="" />
+            <div className="about_ceo"> 
+                <div className='about_ceo_image'>                    
+                    <div className="ceo_info">
+                        <h1>MM Achi -</h1>
+                        <h3>Founder and CEO</h3>
+                    </div>
+                    <img src={Achi} alt="" />
+                </div>  
                 <div className="about_ceo_bio">
-                    <h1>MM Achi</h1>
-                    <h3>Founder and CEO</h3>
+                    
                     <p><FaQuoteLeft/> Hapa Wema tunaamini kila mtu anatakiwa apate taarifa sahihi ili afanye maamuzi sahihi, na tunaamini pia kila dakika ya mtu inayopita inatakiwa itumike kwenye mambo ya kheir tupu na sio mambo ya laghwi na Uadui. Kwa kujiunga humu na kushirikiana na Waislamu wenzako ni njia bora ya kujinasua kwenye majukwaa yaliyoanzishwa kuharibu jamii bora ya waislamu. <FaQuoteRight/></p>
                 </div>
             </div> 
