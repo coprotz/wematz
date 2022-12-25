@@ -21,8 +21,8 @@ const CreateReview = ({title, doc, setShow, type}) => {
     const newNotific = {
       target_id: doc?.userId,
       uid: user.uid,
-      type: 'swali lako',
-      action: 'amejibu',
+      type,
+      action: 'amerespond'+" "+{type}+" "+'yako',
       isSeen: false,
       createdAt: serverTimestamp()
     }

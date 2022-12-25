@@ -39,8 +39,8 @@ const Message = () => {
     
     {active ? 
      <motion.div 
-     initial={{ x:'100vw'}}
-     animate={{x:0}} 
+     initial={{ opacity:0}}
+     animate={{opacity:1}} 
      transition={{ ease: "easeOut", duration: 0.5 }}  
     className='message_container'>
         <div className="message_container_top">
