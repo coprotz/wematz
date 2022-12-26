@@ -11,7 +11,7 @@ import moment from 'moment'
 
 import './reviews.css'
 
-const Reviews = ({doc, setShow}) => {
+const Reviews = ({doc, setShow, type}) => {
 
     const {  comments } = useData()
 
@@ -49,7 +49,7 @@ const Reviews = ({doc, setShow}) => {
         
          
         </div>
-        <CreateReview title='Toa Maoni yako' doc={doc} setShow={setShow}/>
+        <CreateReview title='Toa Maoni yako' doc={doc} setShow={setShow} type={type}/>
         <h4 onClick={() => setShow(null)} style={{color:'blue'}} className='hide_reviews'>Ficha Maoni</h4>
       
     </div>

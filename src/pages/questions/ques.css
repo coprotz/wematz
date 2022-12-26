@@ -168,6 +168,7 @@
 
 .activity_card:hover{
     background-color: aliceblue;
+    color: black;
 }
 
 .activies_inner_body{

@@ -38,7 +38,7 @@ const ChatLists = () => {
      
     }, [cuUser?.id])
 
-    console.log(Object.entries(chats))
+    // console.log(Object.entries(chats))
 
      
 

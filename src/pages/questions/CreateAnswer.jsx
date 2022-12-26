@@ -6,7 +6,7 @@ import { answers } from '../../data';
 import { db, useAuth } from '../../hooks/useAuth';
 import useData from '../../hooks/useData';
 
-const CreateAnswer = ({title, item}) => {
+const CreateAnswer = ({title, item, type}) => {
     const [message, setMessage] = useState('')
     const [loading, setLoading] = useState(false)
     const { user } = useAuth()
@@ -22,8 +22,8 @@ const CreateAnswer = ({title, item}) => {
     const newNotific = {
       target_id: item?.userId,
       uid: user.uid,
-      type: 'swali lako',
-      action: 'amejibu',
+      type,
+      action: 'amejibu'+" "+`${type}`+" "+"lako",
       isSeen: false,
       createdAt: serverTimestamp()
     }

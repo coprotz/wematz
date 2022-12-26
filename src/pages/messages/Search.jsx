@@ -14,7 +14,7 @@ const Search = ({setCurrentUser}) => {
     // const [searchTerm, setSearchTerm] = useState("")
     const { users } = useData()
 
-    console.log('name', name)
+    // console.log('name', name)
 
     const handleSearch = async () => {
       

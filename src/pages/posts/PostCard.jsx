@@ -12,6 +12,7 @@ import { db, useAuth } from '../../hooks/useAuth'
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 import { deleteDoc, doc } from 'firebase/firestore'
+import { useNavigate } from 'react-router-dom'
 
 
 const PostCard = ({p, setConfirm}) => {
@@ -20,6 +21,7 @@ const PostCard = ({p, setConfirm}) => {
     const cuUser = users?.find(u => u.id === user.uid)
     const author = users?.find(u => u.id === p?.userId)
     const [show, setShow] = useState(null)
+    const navigate = useNavigate()
     
 
     const RenderPost = () => {
@@ -87,7 +89,7 @@ const PostCard = ({p, setConfirm}) => {
                     <img src={author?.photo? author?.photo : process.env.PUBLIC_URL + author?.avatar} alt="" />
                 </div>
                 <div className="card_username">
-                     <h5 className='author_name'>{author?.name}</h5>
+                     <h5 className='author_name' onClick={() =>navigate(`/members/${author.id}`)}>{author?.name}</h5>
                      <small className='timeago'>{moment(p?.createdAt?.toDate()).format('MMM Do YY, LT')}</small>
                 </div>
                 {cuUser?.isAdmin == true &&
@@ -101,7 +103,7 @@ const PostCard = ({p, setConfirm}) => {
         {RenderPost()}
         <Remarks p={p} setShow={setShow} type='post'/>
         {show &&
-        <Reviews doc={p} setShow={setShow}/>
+        <Reviews doc={p} setShow={setShow} type='post'/>
         }
     </div>
   )

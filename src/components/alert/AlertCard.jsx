@@ -44,18 +44,19 @@ const AlertCard = ({item, allnots, setAlert}) => {
           await updateDoc(doc(db, 'notifics', `${item?.id}`), {isSeen: true})
           
         }else if(item?.type === 'post'){
-          await updateDoc(doc(db, 'notifics', `${item?.id}`), {isSeen: true})
           navigate('/')
+          await updateDoc(doc(db, 'notifics', `${item?.id}`), {isSeen: true})          
           setAlert(null)
         }else if(item?.type === 'follow'){
-          setAlert(null)
           navigate(`/members/${sender?.id}`)
+          setAlert(null)         
           await updateDoc(doc(db, 'notifics', `${item?.id}`), {isSeen: true})
           
           
         }else if(item?.type === 'nikah') {
-          await updateDoc(doc(db, 'notifics', `${item?.id}`), {isSeen: true})
           navigate(`/nikah/${sender?.id}`)
+          await updateDoc(doc(db, 'notifics', `${item?.id}`), {isSeen: true})
+          
           setAlert(null)
         }else {
           await updateDoc(doc(db, 'notifics', `${item?.id}`), {isSeen: true})
@@ -71,20 +72,23 @@ const AlertCard = ({item, allnots, setAlert}) => {
 
     // console.log('nots', status)
 
-    // useEffect(() => {             
-    //    if(Notification.permission !== "denied") {
-    //       Notification.requestPermission().then((permission) => {
-    //         if(permission === "granted"){
-    //           const notification = new Notification("Wema Muslim Ummah", {
-    //             body: "Asante kwa kuruhusu notification kutoka Wema",
-    //             icon: "logo_512.png",
-    //             tag: `${user.uid}`
+    useEffect(() => {             
+       if(Notification.permission !== "denied") {
+          Notification.requestPermission().then((permission) => {                      
+            if(permission === "granted" ){
+                new Notification("Wema Forum", {
+                body: `${sender?.name || sender?.username+" "+item?.action}`,
+                icon: "logo_512.png",
+                tag: `${item?.uid}`
 
-    //           })
-    //         }
-    //       })
-    //     }
-    //   })
+              })
+            }
+          })
+            
+        
+          
+        }
+      }, [item?.id])
 
     // const today = new Date().getTime()
   return (

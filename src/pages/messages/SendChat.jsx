@@ -8,27 +8,33 @@ import { ChatContext } from '../../hooks/chatsContext'
 import { db, useAuth } from '../../hooks/useAuth'
 import { v4 as uuid } from 'uuid'
 import { addDoc, arrayUnion, collection, doc, serverTimestamp, Timestamp, updateDoc } from 'firebase/firestore'
+import useData from '../../hooks/useData'
 
 const SendChat = () => {
     const { user } = useAuth()
     const { data } = useContext(ChatContext)
     const [message, setMessage] = useState('')
     const [loading, setLoading] = useState(null)
+    const { notifics } = useData()
 
     // console.log('user', user.uid)
+    // const getNot = notifics?.filter(n => n.uid === user.uid)?.filter(v => v.target_id === data?.isUser.uid)?.find(f => f.type=== 'message')
 
-    // console.log('data', data)
+    // console.log('getNot', getNot)
 
     const handleSubmit = async (e) => {
         e.preventDefault()
 
         setLoading(true)
 
+        const getNot = notifics?.filter(n => n.uid === user.uid)?.filter(v => v.target_id === data?.isUser.uid)?.find(f => f.type=== 'message')
+
+
         const newNotific = {
             target_id: data.isUser.uid,
             uid: user.uid,
             type: 'message',
-            action: 'amekutumia messagi',      
+            action: message,      
             type_id: data.chatId,
             isSeen: false,
             createdAt: serverTimestamp()
@@ -60,8 +66,20 @@ const SendChat = () => {
                 },
                 [data.chatId + ".createdAt"]: serverTimestamp(),
             })
+            if(getNot){
+              await updateDoc(doc(db, 'notifics', getNot.id), {
+                isSeen: false, 
+                action: message,
+                createdAt: serverTimestamp()
+              })
+              
+            }else{
+             await addDoc(notificRef, newNotific)
+            }
 
-            await addDoc(notificRef, newNotific)
+            
+
+            
 
             setLoading(false)
             setMessage('')
@@ -73,6 +91,9 @@ const SendChat = () => {
 
 
     }
+
+   
+
   return (
     <div className='form_container' >      
     <form onSubmit={handleSubmit} className='form_inner_wrapper'>       
@@ -85,6 +106,7 @@ const SendChat = () => {
           <input 
             type="text" 
             value={message} 
+            id='textarea'            
             className='send_input' 
             placeholder='Message'
             onChange={(e) =>setMessage(e.target.value)} 

@@ -53,7 +53,7 @@ const ViewQue = () => {
             </div>
             <div className="view_que_create">
                 {/* <h3 className='sub_title'>Toa Jibu lako</h3> */}
-              <CreateReview title='Andika jibu lako' doc={que} type='que'/>  
+              <CreateReview title='Andika jibu lako' doc={que} type='swali'/>  
             </div>
             
         </div>

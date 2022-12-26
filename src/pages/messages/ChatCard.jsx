@@ -15,7 +15,7 @@ const ChatCard = ({chat}) => {
     const { dispatch, data, setActive } = useContext(ChatContext)
     const user = users?.find(u => u.id === chat[1].userInfo.uid)
 
-    console.log('user', user)
+    // console.log('user', user)
 
    
   

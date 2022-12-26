@@ -85,6 +85,7 @@ const FindUser = ({setNew}) => {
                     type="text"                    
                     placeholder='Andika kutafuta' 
                     className='input_find'
+                    style={{fontSize: '1.3rem'}}
                     onChange={(e) =>setSearchTerm(e.target.value)}
                     />
             </div>

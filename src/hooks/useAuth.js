@@ -3,7 +3,7 @@ import firebase from "firebase/compat/app";
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
-import {  getMessaging,  onMessage } from 'firebase/messaging'
+import {  getMessaging, getToken, onMessage } from 'firebase/messaging'
 import { 
     onAuthStateChanged, 
     signOut, 
@@ -44,33 +44,25 @@ export function useAuth(){
     return useContext(AuthContext)
 }
 
-export const getToken = (setTokenFound) => {
+
+
+export const requestForToken = () => {
     return getToken(messaging, {vapidKey: 'BGQeVBD9gxLxXc-ZFLi25oiJaByod9cGe4HBifKxYRdKz111YnV6PJ_VB-ObFCqNEy5jJAyqlJA2u5c5CnrLD3c'}).then((currentToken) => {
       if (currentToken) {
         console.log('current token for client: ', currentToken);
-        setTokenFound(true);
-        // Track the token -> client mapping, by sending to backend server
-        // show on the UI that permission is secured
+        // setTokenFound(true);        
       } else {
         console.log('No registration token available. Request permission to generate one.');
-        setTokenFound(false);
-        // shows on the UI that permission is required 
+        // setTokenFound(false);
+      
       }
     }).catch((err) => {
       console.log('An error occurred while retrieving token. ', err);
-      // catch error while creating client token
+     
     });
 
 }
 
-// export function onMessage
-
-// export const onMessageHandler = () =>
-//   new Promise((resolve) => {
-//     onMessage(messaging, (payload) => {
-//       resolve(payload);
-//     });
-// });
 
 export function AuthProvider({ children }) {
     const [user, setUser] = useState(null)

@@ -18,7 +18,7 @@ const QueCard = ({q}) => {
     const lastanswer = comments?.findLast(c => c.docId === q.id)
     const author = users?.find(u => u.id === q?.userId)
 
-    console.log('lastanswer', lastanswer)
+    // console.log('lastanswer', lastanswer)
 
   return (
     <div className="que_card" key={q.id}>

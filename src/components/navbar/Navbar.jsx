@@ -41,7 +41,7 @@ const Navbar = ({active, setActive}) => {
     const allnots = b.concat(marrynots)
     const mynots = allnots?.filter(a => a.isSeen == false)
 
-    console.log('marry', marry?.id)
+    // console.log('marry', marry?.id)
 
 
     const handleLogout = async () => {

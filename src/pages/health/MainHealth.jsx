@@ -41,7 +41,7 @@ const MainHealth = () => {
               {/* <h3>Chagua Clinic Uendelee</h3> */}
               <div className="clinics_rap">  
                   {clinics?.map(c => (
-                   <ClinicCard c={c}/>
+                   <ClinicCard c={c} key={c.id}/>
                   ))}
   
             </div>

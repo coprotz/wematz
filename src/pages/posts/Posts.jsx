@@ -15,12 +15,12 @@ import ShareAudio from './ShareAudio';
 import ShareImage from './ShareImage';
 import moment from 'moment'
 import Search from '../../components/search/Search';
-import { db, messaging, useAuth } from '../../hooks/useAuth';
+import { askPermission, db, requestForToken, useAuth } from '../../hooks/useAuth';
 import DeleteConfirm from '../../components/confirm/DeleteConfirm';
 import AlertSms from '../../components/alert/AlertSms';
 import { useEffect } from 'react';
 import { doc, updateDoc } from 'firebase/firestore';
-import { onMessageListener } from '../../firebase';
+import { messaging, onMessageListener } from '../../firebase';
 // import firebase from '../../hooks/useAuth';
 
 
@@ -59,6 +59,27 @@ const Posts = () => {
             console.log(error.message)
         }
       },[])
+
+      // useEffect(() => {             
+      //   if(Notification.permission !== "denied") {
+      //      Notification.requestPermission().then((permission) => {
+      //        if(permission === "granted"){
+      //          const notification = new Notification("Wema Muslim Ummah", {
+      //            body: "Asante kwa kuruhusu notification kutoka Wema",
+      //            icon: "logo_512.png",
+      //            tag: `${user.uid}`
+ 
+      //          })
+      //        }
+      //      })
+      //    }
+      //  },[])
+
+      useEffect(() => {
+          requestForToken();
+      },[])
+
+     
 
     
 

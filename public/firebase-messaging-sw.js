@@ -1,5 +1,6 @@
-importScripts("https://www.gstatic.com/firebasejs/8.2.0/firebase-app.js");
-importScripts("https://www.gstatic.com/firebasejs/8.2.0/firebase-messaging.js");
+importScripts('https://www.gstatic.com/firebasejs/9.10.0/firebase-app-compat.js');
+importScripts('https://www.gstatic.com/firebasejs/9.10.0/firebase-messaging-compat.js');
+
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_FIREBASE_KEY,
     projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
@@ -10,16 +11,16 @@ const firebaseConfig = {
 };
 firebase.initializeApp(firebaseConfig);
 
-// const messaging = firebase.messaging();
-// messaging.onBackgroundMessage(function (payload) {
-//   console.log("Received background message ", payload);
-//   const notificationTitle = payload.notification.title;
-//     const notificationOptions = {
-//       body: payload.notification.body,
-//       icon: "/logo192.png",
-//   };
-// return self.registration.showNotification(
-//     notificationTitle,
-//     notificationOptions
-//   );
-// });
+const messaging = firebase.messaging();
+messaging.onBackgroundMessage(function (payload) {
+  console.log("Received background message ", payload);
+  const notificationTitle = payload.notification.title;
+    const notificationOptions = {
+      body: payload.notification.body,
+      icon: "/logo_192.png",
+  };
+return self.registration.showNotification(
+    notificationTitle,
+    notificationOptions
+  );
+});
