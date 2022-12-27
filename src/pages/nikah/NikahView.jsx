@@ -47,7 +47,7 @@ const NikahView = () => {
     const expire = moment(mujaheed?.expiredAt).format('MMM Do YY, LT')
     const valid = expire > today
 
-    console.log('islike', isLike)
+    // console.log('islike', isLike)
 
     
 

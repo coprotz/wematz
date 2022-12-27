@@ -35,7 +35,13 @@ const ChatMessage = ({message}) => {
             }/>     
         </div>
         <div className={`message_body ${bgClass}`}>
-          <p className='message_p'>{message?.message}</p> 
+          {message.type === 'message'? 
+          <div className="message_image">
+            <img src={message?.message} alt='image'/>
+          </div>
+          
+          : 
+          <p className='message_p'>{message?.message}</p> }
           <small className='mes_body_time'>{moment(message?.data.toDate()).format('MMM Do YY, LT')}</small>  
         </div>
       </div>       

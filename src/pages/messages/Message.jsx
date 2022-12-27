@@ -10,11 +10,14 @@ import SendMessage from './SendMessage'
 import { motion } from 'framer-motion';
 import useData from '../../hooks/useData'
 import { useNavigate } from 'react-router-dom'
+import ShareImage from '../posts/ShareImage'
 
 const Message = () => {
     const [messages, setMessages] = useState([])
     const { data, active, setActive } = useContext(ChatContext)
     const { users } = useData()
+    const [image, setImage] = useState(false)
+
 
     const user = users?.find(u => u.id === data.isUser.uid)
     const navigate = useNavigate()
@@ -43,6 +46,7 @@ const Message = () => {
      animate={{opacity:1}} 
      transition={{ ease: "easeOut", duration: 0.5 }}  
     className='message_container'>
+         {image && <ShareImage setImage={setImage} type='message'/> } 
         <div className="message_container_top">
             <div className="message_user_info">
                 <div className="chat_head_left">
@@ -70,7 +74,7 @@ const Message = () => {
             
         </div>
         <div className="message_send">
-            <SendChat/>
+            <SendChat setImage={setImage}/>
         </div>
     </motion.div> 
     :   <div className='no_chats'>

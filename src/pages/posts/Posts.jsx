@@ -125,7 +125,7 @@ const Posts = () => {
     <div className="posts" ref={scrollRef}> 
         {video && <ShareVideo setVideo={setVideo}/> }   
         {audio && <ShareAudio setAudio={setAudio}/> }   
-        {image && <ShareImage setImage={setImage}/> } 
+        {image && <ShareImage setImage={setImage} type='image'/> } 
         {confirm && <DeleteConfirm setConfirm={setConfirm} id ={confirm} body='Unataka kuifuta posti hii...?' setAlert={setAlert}/> }
         {messageAlert && <AlertSms alert={messageAlert}/>} 
         {/* {!(userRespond) && !(Notification.permission === 'granted') && <div className='notifs'><button onClick={notifyuser}>Ask</button></div>}         */}

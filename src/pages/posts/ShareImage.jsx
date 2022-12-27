@@ -1,18 +1,24 @@
-import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
+import { addDoc, arrayUnion, collection, doc, serverTimestamp, Timestamp, updateDoc } from 'firebase/firestore'
 import React from 'react'
+import { useContext } from 'react'
 import { useState } from 'react'
 import { BsCardImage } from 'react-icons/bs'
+import { ChatContext } from '../../hooks/chatsContext'
 import { db, useAuth } from '../../hooks/useAuth'
 import useData from '../../hooks/useData'
 import useStorage from '../../hooks/useStorage'
+import { v4 as uuid } from 'uuid'
+import Loading from '../../components/loading/Loading'
 
 
 
-const ShareImage = ({setImage}) => {
+const ShareImage = ({setImage, type}) => {
     const [message, setMessage] = useState('')
     const [loading, setLoading] = useState(false)
     const { user } = useAuth()
-    const { users } = useData()
+    const { users, notifics } = useData()
+    const { data } = useContext(ChatContext)  
+   
     
 
     const [file, setFile] = useState(null)
@@ -46,12 +52,16 @@ const ShareImage = ({setImage}) => {
 
         setLoading(true)
 
+        if(type === 'image'){
+
+       
+
         const data = {
             userId: user.uid,
             name: cuUser?.name,
             createdAt: serverTimestamp(),
             pic: url,
-            type: 'image',
+            type,
             photo: cuUser?.photo? cuUser?.photo : process.env.PUBLIC_URL + cuUser?.avatar
         }
 
@@ -63,6 +73,42 @@ const ShareImage = ({setImage}) => {
         } catch (error) {
             console.log(error.message)
         }
+     }else if(type='message'){
+        
+        try {
+            await updateDoc(doc(db, 'chats', `${data.chatId}`), {
+                messages: arrayUnion({
+                    id: uuid(),
+                    message: url,
+                    type,
+                    uid: user.uid,
+                    data: Timestamp.now()
+                })
+               
+            })
+            setImage(null)
+
+            await updateDoc(doc(db, 'userChats', `${user.uid}`), {
+                [data.chatId + ".lastMessage"]: {
+                    message: url,
+                    type: 'image'
+                },
+                [data.chatId + ".createdAt"]: serverTimestamp(),
+            })
+            await updateDoc(doc(db, 'userChats', `${data.isUser.uid}`), {
+                [data.chatId + ".lastMessage"]: {
+                    message: url,
+                    type: 'image',
+                    isRead: false
+                },
+                [data.chatId + ".createdAt"]: serverTimestamp(),
+            })
+            
+        } catch (error) {
+            console.log(error.message)
+        }
+       
+     }
 
 
     }
@@ -70,12 +116,19 @@ const ShareImage = ({setImage}) => {
   return (
     <div className="share_video_outer">
         <div className="shared_video"> 
-            <h3>Pakia Picha</h3>
+            {!file &&<h3>Pakia Picha</h3>}
             {error && <span className='error error_profile'>{error}<button onClick={() =>setError('')} className='btn_error'>x</button></span>}  
-            <div className="user_photo">
-             { file?                         
-                 <img src={URL.createObjectURL(file)} alt="" /> : 
-                 <>  
+            
+             { file? 
+                <div className="share_image_container">
+                    <img src={URL.createObjectURL(file)} alt="" /> 
+                    <div className="video_progress">
+                        <span className="progres_rate" style={{width: `${perc+"%"}`}}></span>
+                    </div>
+                </div>                        
+                
+                 : 
+                 <div className="user_photo"> 
                  <label htmlFor="photo" className='profile_photo'>
                      <input 
                          type="file" 
@@ -86,9 +139,9 @@ const ShareImage = ({setImage}) => {
                      <span className='attached_photo'><BsCardImage/></span>
                  </label>
                  
-              </> 
+                </div>
              }
-            </div>
+            
             <div className="profile_photo_edit">                            
                     <button className='btn_cancel' onClick={() =>setImage(null)}>BATILISHA</button>
                 </div>
@@ -96,7 +149,7 @@ const ShareImage = ({setImage}) => {
             <button 
                 onClick={handleAudio}
                 disabled={!url} 
-                className='btn_sign'>{loading? 'Inatuma' : 'TUMA'}
+                className='btn_sign'>{loading? <Loading/> : type==='image'? 'POST PICHA' : "TUMA PICHA"}
             </button>
             
             <div className="profile_photo_edit">                            

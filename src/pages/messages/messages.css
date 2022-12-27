@@ -602,6 +602,33 @@
     max-width: 80%;
 }
 
+.message_body img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.image_last svg{
+    font-size: 2rem;
+    color: #aaa;
+
+}
+
+.chat_timers{
+    /* border: 1px solid red; */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 1px;
+}
+
+.unread{
+    background-color: var(--primary);
+    color: white;
+    border-radius: 2px;
+    padding: 2px;
+}
+
 .bg_blue{
     background-color: var(--primary) !important;
     color: white;

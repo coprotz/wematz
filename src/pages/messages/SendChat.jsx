@@ -11,7 +11,7 @@ import { addDoc, arrayUnion, collection, doc, serverTimestamp, Timestamp, update
 import useData from '../../hooks/useData'
 import { getMessaging } from 'firebase/messaging'
 
-const SendChat = () => {
+const SendChat = ({setImage}) => {
     const { user } = useAuth()
     const { data } = useContext(ChatContext)
     const [message, setMessage] = useState('')
@@ -52,6 +52,7 @@ const SendChat = () => {
                 messages: arrayUnion({
                     id: uuid(),
                     message,
+                    type: 'text',
                     uid: user.uid,
                     data: Timestamp.now()
                 })
@@ -63,12 +64,14 @@ const SendChat = () => {
             await updateDoc(doc(db, 'userChats', `${user.uid}`), {
                 [data.chatId + ".lastMessage"]: {
                     message,
+                    type: 'text'
                 },
                 [data.chatId + ".createdAt"]: serverTimestamp(),
             })
             await updateDoc(doc(db, 'userChats', `${data.isUser.uid}`), {
                 [data.chatId + ".lastMessage"]: {
                     message,
+                    type: 'text'
                 },
                 [data.chatId + ".createdAt"]: serverTimestamp(),
             })
@@ -127,7 +130,7 @@ const SendChat = () => {
             onChange={(e) =>setMessage(e.target.value)} 
             />  
             {!message &&        
-            <button className='btn_form' type='button'><HiOutlineCamera/></button>
+            <button className='btn_form' type='button' onClick={() =>setImage(true)}><HiOutlineCamera/></button>
             }
       </div> 
       <button 
