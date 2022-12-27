@@ -57,6 +57,8 @@ const SendChat = () => {
                 })
                 
             }) 
+            setLoading(false)
+            setMessage('')
 
             await updateDoc(doc(db, 'userChats', `${user.uid}`), {
                 [data.chatId + ".lastMessage"]: {
@@ -81,22 +83,21 @@ const SendChat = () => {
              await addDoc(notificRef, newNotific)
             }
 
-            const sendData = {
-              data: {
-                name: "Ally",
-                body: "hey guy i like you"
-              },
-              token: regToken
-            }
+            // const sendData = {
+            //   data: {
+            //     name: "Ally",
+            //     body: "hey guy i like you"
+            //   },
+            //   token: regToken
+            // }
 
-            getMessaging().send(sendData).then((response) => {
-              console.log('Successiful', response)
-            }).catch((error) => {
-              console.log('Error sending message:',error)
-            })
+            // getMessaging().send(sendData).then((response) => {
+            //   console.log('Successiful', response)
+            // }).catch((error) => {
+            //   console.log('Error sending message:',error)
+            // })
 
-            setLoading(false)
-            setMessage('')
+            
         } catch (error) {
             console.log(error.message)
         }

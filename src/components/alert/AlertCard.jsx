@@ -33,7 +33,7 @@ const AlertCard = ({item, allnots, setAlert}) => {
       doctors?.find(m => m.id === item?.uid) ||
       lawyers?.find(m => m.id === item?.uid)
 
-    console.log('sender', sender)
+    // console.log('sender', sender)
 
     const handleNavigate = async () => {
         
