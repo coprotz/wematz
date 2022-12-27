@@ -8,6 +8,7 @@ import { useEffect } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
 import { useContext } from 'react'
 import { ChatContext } from '../../hooks/chatsContext'
+import { RiMessage3Fill, RiAccountPinBoxFill, RiArticleFill } from "react-icons/ri";
 
 
 
@@ -32,7 +33,7 @@ const AlertCard = ({item, allnots, setAlert}) => {
       doctors?.find(m => m.id === item?.uid) ||
       lawyers?.find(m => m.id === item?.uid)
 
-    // console.log('item', item)
+    console.log('sender', sender)
 
     const handleNavigate = async () => {
         
@@ -72,37 +73,50 @@ const AlertCard = ({item, allnots, setAlert}) => {
 
     // console.log('nots', status)
 
-    useEffect(() => {             
-       if(Notification.permission !== "denied") {
-          Notification.requestPermission().then((permission) => {                      
-            if(permission === "granted" ){
-                new Notification("Wema Forum", {
-                body: `${sender?.name || sender?.username+" "+item?.action}`,
-                icon: "logo_512.png",
-                tag: `${item?.uid}`
+    // useEffect(() => {             
+    //    if(Notification.permission !== "denied") {
+    //       Notification.requestPermission().then((permission) => {                      
+    //         if(permission === "granted" ){
+    //             new Notification("Wema Forum", {
+    //             body: `${sender?.name || sender?.username+" "+item?.action}`,
+    //             icon: "logo_512.png",
+    //             tag: `${item?.uid}`
 
-              })
-            }
-          })
+    //           })
+    //         }
+    //       })
             
         
           
-        }
-      }, [item?.id])
+    //     }
+    //   }, [item?.id])
 
     // const today = new Date().getTime()
   return (
-    <div className="alert_card" onClick={handleNavigate}>    
-        <div className="activity_card" >
-            <div className="activity_photo">
+    <div className="alert_card">    
+        <div className="alert_card_wrapper" >
+          <div className="alert_card_top">
+            {item?.type === 'follow'? <RiAccountPinBoxFill/> : item?.type === 'message'? <RiMessage3Fill/> :<RiArticleFill/> }
+            
+            <h4 className='alert_card_title'>{item.type}</h4>
+            <h3>-</h3>
+            <span>{moment(item?.createdAt.toDate()).fromNow(true)}</span>
+          </div>
+          <div className="alert_card_body">
+            <div className="alert_card_left">
+              <h4>{sender?.name || sender?.username}</h4>
+              <span>{item?.action}</span>
+            </div>
+            <div className="alet_card_photo">
                 <img src={sender?.photo || process.env.PUBLIC_URL + sender?.avatar} />
             </div>
-            <div className="activies_inner_body">
-                <h4>{sender?.name || sender?.username}</h4><span>{item?.action}</span>
-                <small className='q_date'>{moment(item?.createdAt.seconds * 1000).format('MMM Do YY, LT') }</small>
-            </div>            
+          </div>
+          <div className="alert_card_footer">           
+            <button  onClick={handleNavigate} style={{backgroundColor:'#e1e1e1'}}>{item?.type === 'message'? 'JIBU' : 'ANGALIA'}</button>
+            <button onClick={() =>updateDoc(doc(db, 'notifics', `${item.id}`), {isSeen: true})}>ONDOA</button>
+          </div>                     
         </div>
-        <button className='btn_alert' onClick={() =>updateDoc(doc(db, 'notifics', `${item.id}`), {isSeen: true})}><GrClose/></button>
+        
     </div>
   )
 }
