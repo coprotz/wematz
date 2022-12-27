@@ -8,7 +8,7 @@ import { useEffect } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
 import { useContext } from 'react'
 import { ChatContext } from '../../hooks/chatsContext'
-import { RiMessage3Fill, RiAccountPinBoxFill, RiArticleFill } from "react-icons/ri";
+import { RiMessage3Fill, RiAccountPinBoxFill, RiArticleFill, RiImage2Fill } from "react-icons/ri";
 
 
 
@@ -71,7 +71,7 @@ const AlertCard = ({item, allnots, setAlert}) => {
         }
     }
 
-    // console.log('nots', status)
+    // console.log('item', item)
 
     // useEffect(() => {             
     //    if(Notification.permission !== "denied") {
@@ -105,7 +105,8 @@ const AlertCard = ({item, allnots, setAlert}) => {
           <div className="alert_card_body">
             <div className="alert_card_left">
               <h4>{sender?.name || sender?.username}</h4>
-              <span>{item?.action}</span>
+              {item?.cat === 'image' ? <div className='image_last'><RiImage2Fill/></div>  :
+              <span>{item?.action}</span>}
             </div>
             <div className="alet_card_photo">
                 <img src={sender?.photo || process.env.PUBLIC_URL + sender?.avatar} />

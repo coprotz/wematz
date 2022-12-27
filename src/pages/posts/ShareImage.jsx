@@ -65,6 +65,8 @@ const ShareImage = ({setImage, type}) => {
             photo: cuUser?.photo? cuUser?.photo : process.env.PUBLIC_URL + cuUser?.avatar
         }
 
+        
+
         try {
             await addDoc(postRef, data)
             setLoading(null)
@@ -74,8 +76,24 @@ const ShareImage = ({setImage, type}) => {
             console.log(error.message)
         }
      }else if(type='message'){
-        
+
+        const getNot = notifics?.filter(n => n.uid === user.uid)?.filter(v => v.target_id === data?.isUser.uid)?.find(f => f.type=== 'message')
+        const newNotific = {
+                target_id: data.isUser.uid,
+                uid: user.uid,
+                type: 'message',
+                action: url, 
+                cat: 'image',     
+                type_id: data.chatId,
+                isSeen: false,
+                createdAt: serverTimestamp()
+              }
+    
+              const notificRef = collection(db, 'notifics')
+
         try {
+            
+
             await updateDoc(doc(db, 'chats', `${data.chatId}`), {
                 messages: arrayUnion({
                     id: uuid(),
@@ -103,6 +121,18 @@ const ShareImage = ({setImage, type}) => {
                 },
                 [data.chatId + ".createdAt"]: serverTimestamp(),
             })
+
+            if(getNot){
+                await updateDoc(doc(db, 'notifics', getNot.id), {
+                  isSeen: false, 
+                  action: url,
+                  cat:'image',
+                  createdAt: serverTimestamp()
+                })
+                
+              }else{
+               await addDoc(notificRef, newNotific)
+              }
             
         } catch (error) {
             console.log(error.message)

@@ -25,7 +25,7 @@ const ChatCard = ({chat}) => {
   
     const navigate = useNavigate()
 
-    console.log('last', chat[1].lastMessage)
+    // console.log('last', chat[1].lastMessage)
 
    
 
@@ -60,9 +60,9 @@ const ChatCard = ({chat}) => {
               }
           </div> 
           {chat[1]?.lastMessage?.type === 'image' ?
-          <div className='image_last'>
-            <RiImage2Fill/>
-          </div> : 
+          <div className='image_last'><RiImage2Fill/></div> 
+            
+          : 
           <span className='chat_text'>{chat[1].lastMessage?.message}</span>
         }                
           

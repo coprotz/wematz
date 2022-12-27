@@ -38,7 +38,8 @@ const SendChat = ({setImage}) => {
             target_id: data.isUser.uid,
             uid: user.uid,
             type: 'message',
-            action: message,      
+            action: message, 
+            cat: 'text',     
             type_id: data.chatId,
             isSeen: false,
             createdAt: serverTimestamp()
