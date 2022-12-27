@@ -25,7 +25,7 @@ const SharePost = ({setVideo,setAudio, setImage}) => {
 
     const target = myfollowings.map(v =>v)
 
-    console.log('target', target)
+    // console.log('target', target)
 
    
 
