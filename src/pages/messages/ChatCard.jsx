@@ -30,7 +30,7 @@ const ChatCard = ({chat}) => {
    
 
   return (
-    <div className="chat_card" onClick={() =>{handleSelect(chat[1].userInfo);setActive(true)}} key={chat[0]}>
+    <div className="chat_card" onClick={() =>{handleSelect(chat[1].userInfo);setActive(true)}} >
     <div className="chat_wrap">
       <div className="chat_wrleft">
         <div className="chat_rec_photo">

@@ -1,5 +1,5 @@
 import { createContext, useState } from "react";
-import { createOffer } from "./peerConnection";
+import { createOffer } from "./peerConnection.js";
 
 
 const PeerContext = createContext()

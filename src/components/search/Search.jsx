@@ -35,14 +35,14 @@ const Search = ({title, setSearchTerm}) => {
 
 
   return (
-    <div class="search_container">
-      <form autocomplete="off">
-        <div class="finder">
-          <div class="finder__outer">
-            <div class="finder__inner">
+    <div className="search_container">
+      <form autoComplete="off">
+        <div className="finder">
+          <div className="finder__outer">
+            <div className="finder__inner">
               <button className='btn_btn1'><HiSearchCircle/></button>
               <input 
-                class="finder__input" 
+                className="finder__input" 
                 type="text" name="q" 
                 placeholder={title}
                 onChange={(e) => setSearchTerm(e.target.value)}

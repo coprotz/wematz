@@ -20,9 +20,10 @@ const Login = () => {
     // const [go, setGo] = useState(null)
     const [login, setLogin] = useState(0)  
     const { users } = useData()
+    const { user, signIn, googleSignIn } = useAuth()
     const cuUser = users?.find(u => u.id === user?.uid)
     const navigate = useNavigate();
-    const { user, signIn, googleSignIn } = useAuth()
+    
     const [loading, setLoading] = useState()
     const [err, setErr] = useState('')
     const { register,  watch, formState: { isValid } } = useForm({mode: 'all'});

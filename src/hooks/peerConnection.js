@@ -1,7 +1,7 @@
 import { collection, doc, updateDoc } from "firebase/firestore";
 import { useContext } from "react";
-import { PeerContext } from "./PeerContext";
-import { db, useAuth } from "./useAuth";
+import { PeerContext } from "./PeerContext.js";
+import { db, useAuth } from "./useAuth.js";
 
 
 

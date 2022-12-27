@@ -1,5 +1,5 @@
 import { addDoc, collection, doc, updateDoc } from "firebase/firestore";
-import { db, useAuth } from "./useAuth";
+import { db, useAuth } from "./useAuth.js";
 
 
 const callsRef = collection(db, 'calls')

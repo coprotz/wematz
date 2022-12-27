@@ -1,23 +1,32 @@
-importScripts('https://www.gstatic.com/firebasejs/9.10.0/firebase-app-compat.js');
-importScripts('https://www.gstatic.com/firebasejs/9.10.0/firebase-messaging-compat.js');
+// importScripts('https://www.gstatic.com/firebasejs/9.10.0/firebase-app-compat.js');
+// importScripts('https://www.gstatic.com/firebasejs/9.10.0/firebase-messaging-compat.js');
 
-const firebaseConfig = {
-    apiKey: process.env.REACT_APP_FIREBASE_KEY,
-    projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
-    storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
-    messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGE_ID,
-    appId: process.env.REACT_APP_FIREBASE_APPID,    
-    authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
-};
-firebase.initializeApp(firebaseConfig);
+import { initializeApp } from "firebase/app";
+import { getMessaging } from "firebase/messaging";
+import { onBackgroundMessage } from "firebase/messaging/sw";
+// const { initializeApp } = require("firebase/app")
+// const { getMessaging } = require("firebase/messaging")
+// const { onBackgroundMessage } = require("firebase/messaging/sw")
 
-const messaging = firebase.messaging();
-messaging.onBackgroundMessage(function (payload) {
+
+const firebaseApp = initializeApp({
+    apiKey: "AIzaSyByQ6_AXXj6EuiT7QfD6r6wTB6UuumrXl8",
+    projectId: "wema-68a94",
+    storageBucket: "wema-68a94.appspot.com",
+    databaseURL: 'https://wema-68a94.firebaseio.com',
+    messagingSenderId: "49323722271",
+    appId: "1:949323722271:web:aa08a916ed2dac80672f2a",    
+    authDomain: "wema-68a94.firebaseapp.com",
+});
+firebase.initializeApp(firebaseApp);
+
+const messaging = getMessaging();
+onBackgroundMessage(messaging, (payload) => {
   console.log("Received background message ", payload);
   const notificationTitle = payload.notification.title;
     const notificationOptions = {
       body: payload.notification.body,
-      icon: "/logo_192.png",
+      icon: "/images/logo_192.png",
   };
 return self.registration.showNotification(
     notificationTitle,

@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
-import { AuthProvider } from './hooks/useAuth';
-import { PeerContextProvider } from './hooks/PeerContext';
-import { ChatContextProvider } from './hooks/chatsContext';
+import App from './App.js';
+import { AuthProvider } from './hooks/useAuth.js';
+import { PeerContextProvider } from './hooks/PeerContext.js';
+import { ChatContextProvider } from './hooks/chatsContext.js';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

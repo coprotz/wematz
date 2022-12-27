@@ -68,7 +68,7 @@ const SideChats = () => {
           {Object?.entries(chats)?.length > 0 ? 
           <>
             {Object.entries(chats)?.sort((a,b)=>b[1].createdAt - a[1].createdAt).map(chat => (
-               <ChatCard chat = {chat}/>
+               <ChatCard chat = {chat} key={chat[0]}/>
               ))}
           </> : 'Hauna Chats'}
             <button className='btn_new_chat' onClick={() =>setNew(true)}><HiChatAlt/></button>

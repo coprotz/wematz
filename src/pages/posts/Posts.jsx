@@ -75,9 +75,9 @@ const Posts = () => {
       //    }
       //  },[])
 
-      useEffect(() => {
-          requestForToken();
-      },[])
+      // useEffect(() => {
+      //     requestForToken();
+      // },[])
 
      
 
@@ -133,7 +133,7 @@ const Posts = () => {
           <div className="posts_inner">
             <div className="posts_cont">
                 <SharePost setVideo={setVideo} setAudio={setAudio} setImage={setImage}/> 
-                <Search title='Andika Jina la MwanaWema kutafuta posti zake' setSearchTerm={setSearchTerm}/>  
+                <Search title='Andika Jina kutafuta posti zake' setSearchTerm={setSearchTerm}/>  
             </div>
                    
               <motion.div 

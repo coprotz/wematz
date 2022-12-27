@@ -1,69 +1,70 @@
+import './hooks/useAuth.js'
 import './App.css';
-import Home from './pages/home/Home';
+import Home from './pages/home/Home.jsx';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
-import Posts from './pages/posts/Posts';
-import Nikah from './pages/nikah/Nikah';
-import NikahView from './pages/nikah/NikahView';
-import Meetings from './pages/meetings/Meetings';
-import ViewMeeting from './pages/meetings/ViewMeeting';
-import Madas from './pages/mada/Madas';
-import Main from './pages/main/Main';
-import Register from './pages/register/Register';
-import Subscriptions from './pages/subscriptions/Subscriptions';
-import Recipies from './pages/recipies/Recipies';
-import News from './pages/news/News';
-import Questions from './pages/questions/Questions';
-import { MdMessage } from 'react-icons/md';
-import Opportunities from './pages/opportunities/Opportunites';
-import Health from './pages/health/Health';
-import NeedHelps from './pages/needHelps/NeedHelps';
-import Legals from './pages/legals/Legals';
-import Doctors from './pages/health/Doctors';
-import MainHealth from './pages/health/MainHealth';
-import ViewDoctor from './pages/health/ViewDoctor';
-import AllRecipies from './pages/recipies/AllRecipies';
-import ViewRecipie from './pages/recipies/ViewRecipie';
-import ViewClinic from './pages/health/ViewClinic';
-import NewsMain from './pages/news/NewsMain';
-import ViewNews from './pages/news/ViewNews';
-import QueMain from './pages/questions/QueMain';
-import ViewQue from './pages/questions/ViewQue';
-import CreateQue from './pages/questions/CreateQue';
-import Messages from './pages/messages/Messages';
-import MainMessages from './pages/messages/MainMessages';
-import ViewChat from './pages/messages/ViewChat';
-import Mainlegals from './pages/legals/Mainlegals';
-import Lawyer from './pages/legals/Lawyer';
-import MainNikah from './pages/nikah/MainNikah';
-import ViewLawyer from './pages/legals/ViewLawyer';
-import NikahReg from './pages/register/NikahReg';
-import Login from './pages/login/Login';
-import { useAuth } from './hooks/useAuth';
-import Profile from './pages/profile/Profile';
-import ViewPost from './pages/posts/ViewPost';
-import RegDoctors from './pages/opportunities/RegDoctors';
-import RegLawyers from './pages/opportunities/RegLawyers';
-import AllOppo from './pages/opportunities/AllOppo';
-import Activities from './pages/activities/Activities';
-import MyAccounts from './pages/profile/MyAccounts';
-import Members from './pages/members/Members';
-import AddMeeting from './pages/meetings/AddMeeting';
-import MeetingOutline from './pages/meetings/MeetingOutline';
-import Invited from './pages/meetings/Invited';
-import MyMeetings from './pages/meetings/MyMeetings';
-import Edit from './pages/meetings/Edit';
-import NewChat from './pages/messages/NewChat';
-import Donates from './pages/donates/Donates';
-import AdminMain from './pages/admin/AdminMain';
-import Admin from './pages/admin/Admin';
-import MainMada from './pages/mada/MainMada';
-import ViewMada from './pages/mada/ViewMada';
-import ViewMember from './pages/members/ViewMember';
-import About from './pages/about/About';
-import Contacts from './pages/contacts/Contacts';
-import Makala from './pages/health/Makala';
+import Posts from './pages/posts/Posts.jsx';
+import Nikah from './pages/nikah/Nikah.jsx';
+import NikahView from './pages/nikah/NikahView.jsx';
+import Meetings from './pages/meetings/Meetings.jsx';
+import ViewMeeting from './pages/meetings/ViewMeeting.jsx';
+import Madas from './pages/mada/Madas.jsx';
+import Main from './pages/main/Main.jsx';
+import Register from './pages/register/Register.jsx';
+import Subscriptions from './pages/subscriptions/Subscriptions.jsx';
+import Recipies from './pages/recipies/Recipies.jsx';
+import News from './pages/news/News.jsx';
+import Questions from './pages/questions/Questions.jsx';
+
+import Opportunities from './pages/opportunities/Opportunites.jsx';
+import Health from './pages/health/Health.jsx';
+import NeedHelps from './pages/needHelps/NeedHelps.jsx';
+import Legals from './pages/legals/Legals.jsx';
+import Doctors from './pages/health/Doctors.jsx';
+import MainHealth from './pages/health/MainHealth.jsx';
+import ViewDoctor from './pages/health/ViewDoctor.jsx';
+import AllRecipies from './pages/recipies/AllRecipies.jsx';
+import ViewRecipie from './pages/recipies/ViewRecipie.jsx';
+import ViewClinic from './pages/health/ViewClinic.jsx';
+import NewsMain from './pages/news/NewsMain.jsx';
+import ViewNews from './pages/news/ViewNews.jsx';
+import QueMain from './pages/questions/QueMain.jsx';
+import ViewQue from './pages/questions/ViewQue.jsx';
+import CreateQue from './pages/questions/CreateQue.jsx';
+import Messages from './pages/messages/Messages.jsx';
+import MainMessages from './pages/messages/MainMessages.jsx';
+import ViewChat from './pages/messages/ViewChat.jsx';
+import Mainlegals from './pages/legals/Mainlegals.jsx';
+
+import MainNikah from './pages/nikah/MainNikah.jsx';
+import ViewLawyer from './pages/legals/ViewLawyer.jsx';
+import NikahReg from './pages/register/NikahReg.jsx';
+import Login from './pages/login/Login.jsx';
+import { onMessageListener, requestForToken, useAuth } from './hooks/useAuth.js';
+import Profile from './pages/profile/Profile.jsx';
+import ViewPost from './pages/posts/ViewPost.jsx';
+import RegDoctors from './pages/opportunities/RegDoctors.jsx';
+import RegLawyers from './pages/opportunities/RegLawyers.jsx';
+import AllOppo from './pages/opportunities/AllOppo.jsx';
+import Activities from './pages/activities/Activities.jsx';
+import MyAccounts from './pages/profile/MyAccounts.jsx';
+import Members from './pages/members/Members.jsx';
+import AddMeeting from './pages/meetings/AddMeeting.jsx';
+import MeetingOutline from './pages/meetings/MeetingOutline.jsx';
+import Invited from './pages/meetings/Invited.jsx';
+import MyMeetings from './pages/meetings/MyMeetings.jsx';
+import Edit from './pages/meetings/Edit.jsx';
+
+import Donates from './pages/donates/Donates.jsx';
+
+import Admin from './pages/admin/Admin.jsx';
+import MainMada from './pages/mada/MainMada.jsx';
+import ViewMada from './pages/mada/ViewMada.jsx';
+import ViewMember from './pages/members/ViewMember.jsx';
+import About from './pages/about/About.jsx';
+import Contacts from './pages/contacts/Contacts.jsx';
+import Makala from './pages/health/Makala.jsx';
 import { useEffect } from 'react';
-import useData from './hooks/useData';
+// import useData from './hooks/useData';
 
 
 function App() {
@@ -74,6 +75,26 @@ function App() {
   const RequireAuth = ({children}) => {
     return user ? (children) : <Navigate to="/main"/>
   }
+
+  async function requestPermission() {
+    const permission = await Notification.requestPermission();
+
+    if(permission === "granted"){
+      requestForToken();
+      onMessageListener()     
+      }else if(permission === "denied"){
+      alert('Umezuia kupokea Notification kutoka Wema Forum')
+    }
+  }
+
+  useEffect(() => {
+    user && requestPermission()
+  }, [])
+
+//   useEffect(() => {
+//     user && 
+// },[])
+
 
     // const dr = doctors?.find(d => d.userId === user.uid)
     // const law = lawyers?.find(l =>l.userId === user.uid)

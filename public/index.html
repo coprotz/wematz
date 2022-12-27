@@ -16,7 +16,7 @@
     <title>Wema</title>
   </head>
   <body>
-    <noscript>Wema ummah.</noscript>
+    <noscript>Wema Forum.</noscript>
     <div id="root"></div>
     <script >
       // import {Workbox} from 'https://storage.googleapis.com/workbox-cdn/releases/4.1.0/workbox-window.prod.mjs';
@@ -45,7 +45,8 @@
         window.addEventListener('load', () => {
           navigator.serviceWorker.register('./serviceworker.js')
           .then((reg) => console.log('Success: ', reg.scope))
-          .catch((err) => console.log('Failure: ', err))
+          .catch((err) => console.log('Failure: ', err));
+          // navigator.serviceWorker.register("./firebase-messaging-sw.js");
         })
       }    
     </script>

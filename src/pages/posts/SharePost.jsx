@@ -67,15 +67,15 @@ const SharePost = ({setVideo,setAudio, setImage}) => {
                         <button className='btn_btn' onClick={() =>setImage(true)}>
                             <BsCardImage/>
                         </button>              
-                        <buttton className='btn_btn' onClick={() =>setVideo(true)}>
+                        <button className='btn_btn' onClick={() =>setVideo(true)}>
                             <BsCaretRightSquareFill />
-                        </buttton>
-                        <buttton className='btn_btn'>
+                        </button>
+                        <button className='btn_btn'>
                             <BsPaperclip/>
-                        </buttton>
-                        <buttton className='btn_btn' onClick={() =>setAudio(true)}>
+                        </button>
+                        <button className='btn_btn' onClick={() =>setAudio(true)}>
                             <BsSoundwave/>
-                        </buttton> </>}
+                        </button> </>}
                         <button 
                             className='btn_sign'
                             style={{minWidth: '70px', height: '50px'}}

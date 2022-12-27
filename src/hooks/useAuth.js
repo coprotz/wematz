@@ -22,6 +22,7 @@ const firebaseConfig = {
       apiKey: process.env.REACT_APP_FIREBASE_KEY,
       projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
       storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+      // databaseURL: 'https://wema-68a94.firebaseio.com',
       messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGE_ID,
       appId: process.env.REACT_APP_FIREBASE_APPID,    
       authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
@@ -47,7 +48,8 @@ export function useAuth(){
 
 
 export const requestForToken = () => {
-    return getToken(messaging, {vapidKey: 'BGQeVBD9gxLxXc-ZFLi25oiJaByod9cGe4HBifKxYRdKz111YnV6PJ_VB-ObFCqNEy5jJAyqlJA2u5c5CnrLD3c'}).then((currentToken) => {
+   
+    return getToken(messaging, {vapidKey: process.env.REACT_APP_VAPID_KEY}).then((currentToken) => {
       if (currentToken) {
         console.log('current token for client: ', currentToken);
         // setTokenFound(true);        
@@ -57,11 +59,22 @@ export const requestForToken = () => {
       
       }
     }).catch((err) => {
-      console.log('An error occurred while retrieving token. ', err);
+      console.log('An error: ', err.message);
      
     });
 
 }
+
+export const onMessageListener = () =>
+  new Promise((resolve) => {
+    onMessage(messaging, (payload) => {
+      console.log("payload", payload)
+      resolve(payload);
+    });
+  });
+
+// export const onForegroundMessage = () =>
+//   new Promise((resolve) => onMessage(messaging, (payload) => resolve(payload)));
 
 
 export function AuthProvider({ children }) {

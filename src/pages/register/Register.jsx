@@ -123,6 +123,7 @@ const Register = () => {
                    ...data,
                    createdAt: serverTimestamp()
                })
+               await setDoc(doc(db, 'userChats', `${user.uid}`), {})
                setLoading(false)
                navigate('/')
            } catch (error) {

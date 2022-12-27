@@ -1,6 +1,6 @@
 import { collection, limit, onSnapshot, orderBy, query } from "firebase/firestore"
 import { useEffect, useState } from "react"
-import { db } from "./useAuth"
+import { db } from "./useAuth.js"
 
 
 const useData = () => {

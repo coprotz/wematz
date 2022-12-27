@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { auth, db, storage } from './useAuth';
+import { auth, db, storage } from './useAuth.js';
 
 const useStorage = (file) => {
 
