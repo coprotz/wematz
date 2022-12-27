@@ -10,13 +10,13 @@ import { onBackgroundMessage } from "firebase/messaging/sw";
 
 
 const firebaseApp = initializeApp({
-    apiKey: "AIzaSyByQ6_AXXj6EuiT7QfD6r6wTB6UuumrXl8",
-    projectId: "wema-68a94",
-    storageBucket: "wema-68a94.appspot.com",
-    databaseURL: 'https://wema-68a94.firebaseio.com',
-    messagingSenderId: "49323722271",
-    appId: "1:949323722271:web:aa08a916ed2dac80672f2a",    
-    authDomain: "wema-68a94.firebaseapp.com",
+    apiKey: process.env.REACT_APP_FIREBASE_KEY,
+    projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+    databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL,
+    messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGE_ID,
+    appId: process.env.REACT_APP_FIREBASE_APPID,    
+    authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
 });
 firebase.initializeApp(firebaseApp);
 

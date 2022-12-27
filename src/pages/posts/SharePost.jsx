@@ -6,17 +6,30 @@ import { useState } from 'react';
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 import { db, useAuth } from '../../hooks/useAuth';
 import useData from '../../hooks/useData';
+import { useEffect } from 'react';
 
 
 const SharePost = ({setVideo,setAudio, setImage}) => {
     const [message, setMessage] = useState('')
     const [loading, setLoading] = useState(false)
     const { user } = useAuth()
-    const { users } = useData()
+    const { users, followers } = useData()
+
 
     const cuUser = users?.find(u => u.id === user?.uid)
 
     const postRef = collection(db, 'posts')
+
+    const myfollowings = followers?.filter(f => f.following_id === user.uid)
+    // console.log('myfolls', myfollowings.map(v =>v.follower_id))
+
+    const target = myfollowings.map(v =>v)
+
+    console.log('target', target)
+
+   
+
+   
 
 
     const handlePost = async(e) => {
