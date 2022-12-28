@@ -19,19 +19,12 @@ const SharePost = ({setVideo,setAudio, setImage}) => {
     const cuUser = users?.find(u => u.id === user?.uid)
 
     const postRef = collection(db, 'posts')
+    const notificRef = collection(db, 'notifics')
 
     const myfollowings = followers?.filter(f => f.following_id === user.uid)
-    // console.log('myfolls', myfollowings.map(v =>v.follower_id))
-
-    const target = myfollowings.map(v =>v)
-
-    // console.log('target', target)
+    const res = myfollowings.map(({follower_id}) => follower_id)
 
    
-
-   
-
-
     const handlePost = async(e) => {
         e.preventDefault()
 
@@ -46,10 +39,21 @@ const SharePost = ({setVideo,setAudio, setImage}) => {
             photo: cuUser?.photo? cuUser?.photo : process.env.PUBLIC_URL + cuUser?.avatar
         }
 
+        const newNotific = {
+            target_ids: res,
+            uid: user.uid,
+            type:'post',
+            action: 'ametuma post mpya, pitia na comment',
+            isSeen: false,
+            // type_id: newQue?.id,
+            createdAt: serverTimestamp()
+          }
+
         try {
             await addDoc(postRef, data)
             setLoading(null)
             setMessage('')
+            await addDoc(notificRef, newNotific)
         } catch (error) {
             console.log(error.message)
         }

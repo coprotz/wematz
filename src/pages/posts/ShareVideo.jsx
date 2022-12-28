@@ -12,11 +12,15 @@ const ShareVideo = ({setVideo}) => {
     const [caption, setCaption] = useState('')
     const [loading, setLoading] = useState(false)
     const { user } = useAuth()
-    const { users } = useData()
+    const { users, followers } = useData()
 
     const cuUser = users?.find(u => u.id === user?.uid)
+    const myfollowings = followers?.filter(f => f.following_id === user.uid)
+   
+    const res = myfollowings.map(({follower_id}) => follower_id)
 
     const postRef = collection(db, 'posts')
+    const notificRef = collection(db, 'notifics')
 
     const [file, setFile] = useState(null)
     const [error, setError] = useState('')
@@ -57,11 +61,22 @@ const ShareVideo = ({setVideo}) => {
             photo: cuUser?.photo || process.env.PUBLIC_URL + cuUser?.avatar
         }
 
+        const newNotific = {
+            target_ids: res,
+            uid: user.uid,
+            type:'post',
+            action: 'amepost video ya mafunzo mpya, pitia na comment',
+            isSeen: false,
+            // type_id: newQue?.id,
+            createdAt: serverTimestamp()
+          }
+
         try {
             await addDoc(postRef, data)
             setLoading(null)
             setMessage('')
             setVideo(null)
+            await addDoc(notificRef, newNotific)
         } catch (error) {
             console.log(error.message)
         }

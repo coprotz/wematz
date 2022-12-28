@@ -26,7 +26,7 @@ const CreateQue = () => {
 
     const res = users.map(({id}) => id)
 
-    console.log('res', res)
+    // console.log('res', res)
 
     const handleQue = async(e) => {
         e.preventDefault()

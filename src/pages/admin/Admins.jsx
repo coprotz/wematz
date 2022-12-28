@@ -20,7 +20,7 @@ const Admins = ({setPage}) => {
     const newNotific = {
       target_id: id,
       uid: user.uid,
-      type: '',
+      type: 'admin',
       action: 'amekuteua kuwa admin',
       isSeen: false,
       createdAt: serverTimestamp()

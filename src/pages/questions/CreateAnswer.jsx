@@ -2,6 +2,7 @@ import { addDoc, collection, serverTimestamp, updateDoc, doc } from 'firebase/fi
 import React from 'react'
 import { useState } from 'react';
 import {   BsFillShareFill } from "react-icons/bs";
+import Tiptak from '../../components/tiptap/Tiptap';
 import { answers } from '../../data';
 import { db, useAuth } from '../../hooks/useAuth';
 import useData from '../../hooks/useData';
@@ -65,6 +66,7 @@ const CreateAnswer = ({title, item, type}) => {
   return (
     <div className="review_share">
         <div className="share_text">
+            <Tiptak setBody={setMessage}/>
             <textarea 
                 type= 'textarea'  
                 placeholder={title} 

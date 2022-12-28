@@ -12,7 +12,7 @@ const ShareAudio = ({setAudio}) => {
     const [message, setMessage] = useState('')
     const [loading, setLoading] = useState(false)
     const { user } = useAuth()
-    const { users } = useData()
+    const { users, followers } = useData()
     const [caption, setCaption] = useState('')
     
 
@@ -40,6 +40,10 @@ const ShareAudio = ({setAudio}) => {
     const cuUser = users?.find(u => u.id === user?.uid)
 
     const postRef = collection(db, 'posts')
+    const notificRef = collection(db, 'notifics')
+
+    const myfollowings = followers?.filter(f => f.following_id === user.uid)
+    const res = myfollowings.map(({follower_id}) => follower_id)
 
 
     const handleAudio = async(e) => {
@@ -57,11 +61,22 @@ const ShareAudio = ({setAudio}) => {
             photo: cuUser?.photo? cuUser?.photo : process.env.PUBLIC_URL + cuUser?.avatar
         }
 
+        const newNotific = {
+            target_ids: res,
+            uid: user.uid,
+            type:'post',
+            action: 'amepost ujumbe wa sauti, pitia na comment',
+            isSeen: false,
+            // type_id: newQue?.id,
+            createdAt: serverTimestamp()
+          }
+
         try {
             await addDoc(postRef, data)
             setLoading(null)
             setMessage('')
             setAudio(null)
+            await addDoc(notificRef, newNotific)
         } catch (error) {
             console.log(error.message)
         }

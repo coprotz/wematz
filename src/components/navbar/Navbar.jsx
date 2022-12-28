@@ -33,7 +33,7 @@ const Navbar = ({active, setActive}) => {
 
     const othernots = notifics?.filter(n => n?.target_ids?.includes(`${user.uid}`))
 
-    console.log('othernots', othernots)
+    // console.log('othernots', othernots)
 
     const usernots = notifics?.filter(n => n.target_id === user.uid)
     const drnots = notifics?.filter(n => n.target_id === dr?.id)
