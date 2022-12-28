@@ -172,6 +172,12 @@
     gap: 5px;
 }
 
+.que_counts{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 .activies_body{
     display: flex;
     flex-direction: column-reverse;

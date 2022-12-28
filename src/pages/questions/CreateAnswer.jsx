@@ -57,15 +57,19 @@ const CreateAnswer = ({title, item, type}) => {
         } catch (error) {
             console.log(error.message)
         }
-
-        
-
-
     }
+
+   const maxWords = message.split('').length
+   console.log('max', maxWords)
   return (
     <div className="review_share">
         <div className="share_answer">
             <Tiptak setBody={setMessage} value={message}/>
+            <div className="que_counts">
+                <small>Herufi zisipungue 100</small>
+                <small>{maxWords}</small> 
+            </div>
+            
             {/* <textarea 
                 type= 'textarea'  
                 placeholder={title} 
@@ -81,7 +85,7 @@ const CreateAnswer = ({title, item, type}) => {
         <div className="share_action">       
             <button 
                 className='btn_sign'
-                disabled={!message}
+                disabled={maxWords < 100}
                 onClick={handleComment}
                 >{loading? <Loading/> :'Tuma Jibu Lako' }</button>
         </div>

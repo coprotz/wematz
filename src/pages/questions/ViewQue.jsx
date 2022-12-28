@@ -18,6 +18,8 @@ const ViewQue = () => {
     const navigate = useNavigate()
     const ans = comments?.filter(a => a.docId === que?.id)
 
+    
+
     // console.log('que', que)
   return (
     <div className='view_que'>        

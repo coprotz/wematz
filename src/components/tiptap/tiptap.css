@@ -3,7 +3,7 @@
     border-top: 1px solid grey;
     background-color: white;
     border-radius: 0 0 5px 5px;
-    min-height: 55vh;
+    min-height: 20vh;
     overflow-y: scroll;
 }
 
