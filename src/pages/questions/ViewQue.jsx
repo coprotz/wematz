@@ -18,7 +18,7 @@ const ViewQue = () => {
     const navigate = useNavigate()
     const ans = comments?.filter(a => a.docId === que?.id)
 
-    
+
 
     // console.log('que', que)
   return (
@@ -28,12 +28,14 @@ const ViewQue = () => {
                 <button onClick={() =>navigate('/questions')} className='btn_btn'><HiOutlineArrowLeft/></button>
                 <div className="que_author">
                     {que?.photo?  <img src={que?.photo || process.env.PUBLIC_URL + que?.photo} /> :<Loading/>}
-                </div>                      
-                <h4 style={{marginLeft: '15px'}}>{que?.name}</h4>
-            </div>
-            <div className="que_date_status">
-                <span>{moment(que?.createdAt?.seconds * 1000).format('MMM Do YY, LT') }</span>
-                <h4>: Ameuliza;</h4> 
+                </div>                  
+                <div className="showroom">
+                    <h4>{que?.name}</h4>                
+                    <div className="que_date_status">
+                        <span>{moment(que?.createdAt?.seconds * 1000).format('MMM Do YY, LT') }</span>
+                        <h4>: Ameuliza;</h4> 
+                    </div>
+                </div>
             </div>          
             
         </div>
@@ -42,7 +44,7 @@ const ViewQue = () => {
         </div>
         
         <div className="view_que_answers">
-            <h3 className='sub_title'>Majibu</h3>
+            <h3 className='sub_title'>Majibu({ans?.length})</h3>
             <div className="view_answers_grid">
                 {ans?.map(a => (
                     <div className="que_grid_anwers" key={a.id}>
@@ -50,10 +52,11 @@ const ViewQue = () => {
                             <img src={a?.photo || process.env.PUBLIC_URL + a?.photo} />
                         </div>
                         <div className="answered_body">
-                            <p className='answer_text'>{parser(`${a.text}`)}</p>
+                            
                             <small className='answered_small'>
                                 <span>{moment(a?.createdAt?.seconds * 1000).format('MMM Do YY, LT') }</span>
                             </small>
+                            <p className='answer_text'>{parser(`${a.text}`)}</p>
                         </div>
                     </div>
                 ))}

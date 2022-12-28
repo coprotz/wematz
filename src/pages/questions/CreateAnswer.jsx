@@ -15,7 +15,7 @@ const CreateAnswer = ({title, item, type}) => {
     const { users, questions } = useData()
 
     const cuUser = users?.find(u => u.id === user?.uid)
-    const cuQue = questions?.find(q => q.id === item.id)
+    const cuQue = questions?.find(q => q.id === item?.id)
 
     const commentRef = collection(db, 'comments')
     const likeRef = collection(db, 'likes')
@@ -38,7 +38,7 @@ const CreateAnswer = ({title, item, type}) => {
         setLoading(true)
 
         const data = {
-            docId: item.id,
+            docId: item?.id,
             userId: user.uid,
             name: cuUser?.name,
             createdAt: serverTimestamp(),

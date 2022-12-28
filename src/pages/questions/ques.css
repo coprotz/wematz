@@ -333,6 +333,12 @@
     color: var(--primary);
 }
 
+.showroom{
+    display: flex;
+    align-items: center;
+    margin-left: 15px;
+}
+
 
 
 @media screen and (max-width: 940px){
@@ -344,6 +350,17 @@
         border-bottom: 3px solid var(--bg);
     }
 
+    .showroom{
+        flex-direction: column;
+        align-items: flex-start;
+        margin-left: 15px;
+    }
+
+    .que_date_status{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
     .view_que_top{
         margin: 10px auto;
         font-size: 1.5rem;
@@ -351,6 +368,10 @@
         display: block;
         width: 95%;
     }
+
+    /* .aue_date_userinfo{
+        flex-direction: column;
+    } */
 
     .view_que_author{
         display: flex;
