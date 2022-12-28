@@ -7,6 +7,8 @@ import useData from '../../hooks/useData';
 import moment from 'moment'
 // import CreateAnswer from './CreateAnswer';
 import Loading from '../../components/loading/Loading';
+import CreateAnswer from './CreateAnswer';
+import parser from 'html-react-parser'
 
 
 const ViewQue = () => {
@@ -43,7 +45,7 @@ const ViewQue = () => {
                             <img src={a?.photo || process.env.PUBLIC_URL + a?.photo} />
                         </div>
                         <div className="answered_body">
-                            <p>{a.text}</p>
+                            <p className='answer_text'>{parser(`${a.text}`)}</p>
                             <small className='answered_small'>
                                 <span>{moment(a?.createdAt?.seconds * 1000).format('MMM Do YY, LT') }</span>
                             </small>
@@ -53,7 +55,7 @@ const ViewQue = () => {
             </div>
             <div className="view_que_create">
                 {/* <h3 className='sub_title'>Toa Jibu lako</h3> */}
-              <CreateReview title='Andika jibu lako' doc={que} type='swali'/>  
+              <CreateAnswer item={que} type='swali'/>  
             </div>
             
         </div>

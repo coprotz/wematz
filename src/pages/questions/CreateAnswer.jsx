@@ -2,6 +2,7 @@ import { addDoc, collection, serverTimestamp, updateDoc, doc } from 'firebase/fi
 import React from 'react'
 import { useState } from 'react';
 import {   BsFillShareFill } from "react-icons/bs";
+import Loading from '../../components/loading/Loading';
 import Tiptak from '../../components/tiptap/Tiptap';
 import { answers } from '../../data';
 import { db, useAuth } from '../../hooks/useAuth';
@@ -32,24 +33,22 @@ const CreateAnswer = ({title, item, type}) => {
     // console.log('doc', doc)
     
     const handleComment = async(e) => {
-        e.preventDefault()
-
-
-        const exiAnswers = [...item?.answers]
+        e.preventDefault()  
 
         setLoading(true)
 
         const data = {
             docId: item.id,
-            uid: user.uid,
-            name: cuUser?.name, 
-            answeredAt: Date.now(),     
-            text: message,           
+            userId: user.uid,
+            name: cuUser?.name,
+            createdAt: serverTimestamp(),
+            text: message, 
+            cat: type,          
             photo: cuUser?.photo ? cuUser?.photo : process.env.PUBLIC_URL + cuUser?.avatar
         }
 
         try {
-            await updateDoc(doc(db, 'questions', `${item.id}`), {answers: [...exiAnswers, data]})
+            await addDoc(commentRef, data)
             await addDoc(notificRef, newNotific)
             setMessage('')
             setLoading(null)
@@ -65,9 +64,9 @@ const CreateAnswer = ({title, item, type}) => {
     }
   return (
     <div className="review_share">
-        <div className="share_text">
-            <Tiptak setBody={setMessage}/>
-            <textarea 
+        <div className="share_answer">
+            <Tiptak setBody={setMessage} value={message}/>
+            {/* <textarea 
                 type= 'textarea'  
                 placeholder={title} 
                 className='sel_input3'
@@ -75,7 +74,7 @@ const CreateAnswer = ({title, item, type}) => {
                 value={message} 
                  style={{width:'100%', height: message? '200px': '30px'}}
                 onChange={(e) =>setMessage(e.target.value)}>
-            </textarea> 
+            </textarea>  */}
          
             
         </div>
@@ -84,7 +83,7 @@ const CreateAnswer = ({title, item, type}) => {
                 className='btn_sign'
                 disabled={!message}
                 onClick={handleComment}
-                >{loading? 'Inatuma' :<BsFillShareFill/> }</button>
+                >{loading? <Loading/> :'Tuma Jibu Lako' }</button>
         </div>
     
     </div>
