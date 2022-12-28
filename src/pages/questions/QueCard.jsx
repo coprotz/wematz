@@ -6,6 +6,7 @@ import { GrLike } from 'react-icons/gr'
 import Loading from '../../components/loading/Loading'
 import Remarks from '../../components/remarks/Remarks'
 import Likes from '../../components/remarks/Likes'
+import parser from 'html-react-parser'
 
 
 
@@ -41,7 +42,7 @@ const QueCard = ({q}) => {
                     amejibu 
                     <small className='last_time'>{moment(lastanswer?.createdAt?.seconds * 1000).format('MMM Do YY, LT') }</small>
                 </div>
-                <p className='p'>{lastanswer?.text}</p>
+                <p className='p'>{parser(`${lastanswer?.text}`)}</p>
                 <Likes p={lastanswer} type='jibu'/>
             </div>}
             
