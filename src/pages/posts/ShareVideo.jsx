@@ -29,9 +29,9 @@ const ShareVideo = ({setVideo}) => {
 
     const types = ['video/mp4', 'video/*']
 
-    console.log('file', file)
-    console.log('url', url)
-    console.log('perc', perc+"%")
+    // console.log('file', file)
+    // console.log('url', url)
+    // console.log('perc', perc+"%")
 
     const handleSelect = (e) => {
         let selected = e.target.files[0];
