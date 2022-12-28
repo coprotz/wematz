@@ -195,10 +195,10 @@ const Posts = () => {
                     Swali Jipya 
                     <button className='btn_view' onClick={() =>navigate(`/questions/${newQue?.id}`)}><BsArrowRight/></button>
                   </h3>
-                  <div className="help" key={newQue?.id}>
-                    <div className="help_sender">
+                  <div className="help" >
+                    {/* <div className="help_sender">
                       <img src={newQue?.photo} alt="" />
-                    </div>
+                    </div> */}
                     <div className="help_text">
                         <h4>{newQue?.que}</h4> 
                         <span className='timeago'>{moment(newQue?.createdAt?.toDate()).fromNow(true)}</span>

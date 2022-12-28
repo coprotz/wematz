@@ -19,14 +19,21 @@ const CreateQue = () => {
 
     const cuUser = users?.find(u => u.id === user?.uid)
     const queRef = collection(db, 'questions')
+    const notificRef = collection(db, 'notifics')
 
     const cat = watch('cat')
     const que = watch('que')
+
+    const res = users.map(({id}) => id)
+
+    console.log('res', res)
 
     const handleQue = async(e) => {
         e.preventDefault()
 
         setLoading(true)
+
+      
 
         const data = {
             cat,
@@ -39,9 +46,21 @@ const CreateQue = () => {
         }
 
         try {
-            await addDoc(queRef, data)
-            setLoading(null)
+           const newQue = await addDoc(queRef, data)
+            setLoading(null)            
             navigate('/questions')
+
+            const newNotific = {
+                target_ids: res,
+                uid: user.uid,
+                type:'que',
+                action: 'ameanzisha swali jipya, kuwa wa kwanza kujibu',
+                isSeen: false,
+                type_id: newQue?.id,
+                createdAt: serverTimestamp()
+              }
+
+              await addDoc(notificRef, newNotific)
         } catch (error) {
             console.log(error.message)
         }

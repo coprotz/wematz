@@ -31,6 +31,10 @@ const Navbar = ({active, setActive}) => {
     const dr = doctors?.find(d => d.userId === user.uid)
     const law = lawyers?.find(l =>l.userId === user.uid)
 
+    const othernots = notifics?.filter(n => n?.target_ids?.includes(`${user.uid}`))
+
+    console.log('othernots', othernots)
+
     const usernots = notifics?.filter(n => n.target_id === user.uid)
     const drnots = notifics?.filter(n => n.target_id === dr?.id)
     const lawnots = notifics?.filter(n => n.target_id === law?.id)
@@ -38,8 +42,9 @@ const Navbar = ({active, setActive}) => {
 
     const a = drnots.concat(usernots)
     const b = a.concat(lawnots)
-    const allnots = b.concat(marrynots)
-    const mynots = allnots?.filter(a => a.isSeen == false)
+    const c = b.concat(othernots)
+    const allnots = c.concat(marrynots)
+    const mynots = allnots?.filter(a => a.isSeen == false).filter(n => n.uid !== user.uid)
 
     // console.log('marry', marry?.id)
 

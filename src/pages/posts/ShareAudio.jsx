@@ -95,7 +95,7 @@ const ShareAudio = ({setAudio}) => {
            
             <button 
                 onClick={handleAudio}
-                disabled={!file} 
+                disabled={!file || !caption} 
                 className='btn_sign'>{loading? 'Inatuma' : 'TUMA'}
             </button>
             <textarea 

@@ -141,7 +141,7 @@ const ShareVideo = ({setVideo}) => {
             ></textarea>
             <button 
                 onClick={handleVideo}
-                disabled={!url} 
+                disabled={!url || !caption} 
                 style={{width: '95%', margin: '0 auto'}}
                 className='btn_sign'>{loading? 'Inatuma' : 'TUMA'}</button>
             <div className="profile_photo_edit">                            
