@@ -69,12 +69,12 @@ const MenuBar = ({ editor }) => {
         <FaQuoteRight />
       </button>
      
-      <button onClick={() => editor.chain().focus().undo().run()}>
+      {/* <button onClick={() => editor.chain().focus().undo().run()}>
         <FaUndo />
       </button>
       <button onClick={() => editor.chain().focus().redo().run()}>
         <FaRedo />
-      </button>
+      </button> */}
     </div>
   )
 }

@@ -159,6 +159,19 @@
     margin: 7px 0;
 }
 
+.aue_date_userinfo{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    width: 100%;
+}
+
+.que_date_status{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
 .activies_body{
     display: flex;
     flex-direction: column-reverse;
@@ -358,6 +371,18 @@
         gap: 1px;
     }
 
+    .que_grid_anwers{
+        margin-top: 10px;
+        flex-direction: column;
+        display: flex;
+        gap: 10px;
+        background-color: white;
+        padding: 15px;
+        border-radius: 3px;
+      
+    }
+    
+
     .view_que_create{
         margin: 15px auto;
         display: flex;
@@ -374,6 +399,14 @@
 
     .show_mobile{
         display: flex;
+    }
+
+    .view_que_author{
+       
+        flex-direction: column;
+        
+        gap: 7px;
+    
     }
     
 }

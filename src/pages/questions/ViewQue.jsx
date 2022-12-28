@@ -20,22 +20,25 @@ const ViewQue = () => {
 
     // console.log('que', que)
   return (
-    <div className='view_que'>
-        <div className="view_que_back">
-            <button onClick={() =>navigate('/questions')} className='btn_btn'><HiOutlineArrowLeft/></button>
+    <div className='view_que'>        
+        <div className="view_que_author">
+            <div className="aue_date_userinfo">           
+                <button onClick={() =>navigate('/questions')} className='btn_btn'><HiOutlineArrowLeft/></button>
+                <div className="que_author">
+                    {que?.photo?  <img src={que?.photo || process.env.PUBLIC_URL + que?.photo} /> :<Loading/>}
+                </div>                      
+                <h4 style={{marginLeft: '15px'}}>{que?.name}</h4>
+            </div>
+            <div className="que_date_status">
+                <span>{moment(que?.createdAt?.seconds * 1000).format('MMM Do YY, LT') }</span>
+                <h4>: Ameuliza;</h4> 
+            </div>          
+            
         </div>
         <div className="view_que_top">
             <h1>{que?.que}</h1>
         </div>
-        <div className="view_que_author">
-        <div className="que_author">
-            {que?.photo?  <img src={que?.photo || process.env.PUBLIC_URL + que?.photo} /> :<Loading/>}
-                </div>
-            {/* <span>Limeulizwa na</span> */}
-                      
-            <h4 style={{marginLeft: '15px'}}>{que?.name}</h4>          
-            <span>{moment(que?.createdAt?.seconds * 1000).format('MMM Do YY, LT') }</span>
-        </div>
+        
         <div className="view_que_answers">
             <h3 className='sub_title'>Majibu</h3>
             <div className="view_answers_grid">
