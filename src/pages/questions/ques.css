@@ -187,7 +187,7 @@
 .answer_text{
     font-size: 1.3rem;
     text-align: justify;
-    margin-top: 15px;
+    margin: 15px 0;
 }
 
 .activity_card{
@@ -414,6 +414,11 @@
         gap: 7px;
     
     }
+
+    .main_ques_top{
+        height: auto;        
+        /* padding-left: 20px; */
+        background-color: white;}
     
 }
 
