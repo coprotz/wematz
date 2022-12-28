@@ -166,7 +166,9 @@
 }
 
 .answer_text{
-    font-size: 1.1rem;
+    font-size: 1.3rem;
+    text-align: justify;
+    margin-top: 15px;
 }
 
 .activity_card{

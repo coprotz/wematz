@@ -42,7 +42,7 @@ const QueCard = ({q}) => {
                     amejibu 
                     <small className='last_time'>{moment(lastanswer?.createdAt?.seconds * 1000).format('MMM Do YY, LT') }</small>
                 </div>
-                <p className='p'>{parser(`${lastanswer?.text}`)}</p>
+                <p className='answer_text'>{parser(`${lastanswer?.text}`)}</p>
                 <Likes p={lastanswer} type='jibu'/>
             </div>}
             
