@@ -36,6 +36,7 @@ const Likes = ({p, myId, type}) => {
         type,
         action: 'amekupenda',       
         isSeen: false,
+        seen: [], 
         createdAt: serverTimestamp()
       }
   

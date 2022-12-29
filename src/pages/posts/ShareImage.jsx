@@ -100,6 +100,7 @@ const ShareImage = ({setImage, type}) => {
                 action: url, 
                 cat: 'image',     
                 type_id: data.chatId,
+                seen: [], 
                 isSeen: false,
                 createdAt: serverTimestamp()
               }

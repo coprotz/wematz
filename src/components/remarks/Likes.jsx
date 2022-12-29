@@ -26,6 +26,7 @@ const Likes = ({p, type}) => {
     type_id: p?.id,
     action: 'ameipenda'+" "+type+" "+'yako',
     isSeen: false,
+    seen: [],
     createdAt: serverTimestamp()
   }
 

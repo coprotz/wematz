@@ -67,6 +67,7 @@ const ShareVideo = ({setVideo}) => {
             type:'post',
             action: 'amepost video ya mafunzo mpya, pitia na comment',
             isSeen: false,
+            seen: [], 
             // type_id: newQue?.id,
             createdAt: serverTimestamp()
           }

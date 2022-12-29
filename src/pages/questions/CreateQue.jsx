@@ -25,6 +25,7 @@ const CreateQue = () => {
     const que = watch('que')
 
     const res = users.map(({id}) => id)
+    const alert = { res, isRead: false}
 
     // console.log('res', res)
 
@@ -40,8 +41,7 @@ const CreateQue = () => {
             que,
             userId: user.uid,
             photo: cuUser.photo ? cuUser?.photo : process.env.PUBLIC_URL + cuUser?.avatar,
-            name: cuUser?.name,
-            answers: [],
+            name: cuUser?.name,          
             createdAt: serverTimestamp()
         }
 
@@ -56,6 +56,7 @@ const CreateQue = () => {
                 type:'que',
                 action: 'ameanzisha swali jipya, kuwa wa kwanza kujibu',
                 isSeen: false,
+                seen: [],
                 type_id: newQue?.id,
                 createdAt: serverTimestamp()
               }

@@ -20,7 +20,7 @@ const Replies = ({p, type}) => {
             <CreateReview setShow={setReply} doc={p} title='Andika Kumjibu' type='maoni'/>
         }
         {revs.map(r => (
-            <div className="reply_boom">
+            <div className="reply_boom" key={r.id}>
                 <div className="reply_boom_img">
                     <img src={r.photo} alt="" />
                 </div>

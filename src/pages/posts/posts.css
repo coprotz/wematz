@@ -559,6 +559,10 @@ video{
       
     }
 
+    .post_cover_1{
+        flex-direction: column !important;
+    }
+
     
     
 }

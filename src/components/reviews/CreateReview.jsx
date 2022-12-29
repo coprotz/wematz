@@ -26,7 +26,8 @@ const CreateReview = ({title, doc, setShow, type}) => {
       type,
       action: 'amerespond'+" "+`${type}`+" "+'yako',
       isSeen: false,
-      type_id: doc?.type === 'post' ? doc?.id : doc?.docId,
+      seen: [], 
+      type_id: doc?.type === 'maoni' ? doc?.docId : doc?.id,
       createdAt: serverTimestamp()
     }
     // console.log('doc', doc)
@@ -42,7 +43,7 @@ const CreateReview = ({title, doc, setShow, type}) => {
             name: cuUser?.name,
             createdAt: serverTimestamp(),
             text: message, 
-            cat: type,          
+            cat: type,                     
             photo: cuUser?.photo ? cuUser?.photo : process.env.PUBLIC_URL + cuUser?.avatar
         }
 

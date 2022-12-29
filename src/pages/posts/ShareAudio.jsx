@@ -67,6 +67,7 @@ const ShareAudio = ({setAudio}) => {
             type:'post',
             action: 'amepost ujumbe wa sauti, pitia na comment',
             isSeen: false,
+            seen: [], 
             // type_id: newQue?.id,
             createdAt: serverTimestamp()
           }

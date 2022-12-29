@@ -33,9 +33,10 @@ const Navbar = ({active, setActive}) => {
 
     const othernots = notifics?.filter(n => n?.target_ids?.includes(`${user.uid}`))
     const othernots2 = notifics?.filter(n => n?.target_ids?.find(m =>m===user.uid))
+    // const othernots3 = notifics?.filter(n => n?.target_ids?.find(m =>m===user.uid))
 
-    console.log('othernots', othernots)
-    console.log('othernots2', othernots2)
+    // console.log('othernots', othernots)
+    // console.log('othernots2', othernots2)
 
     const usernots = notifics?.filter(n => n.target_id === user.uid)
     const drnots = notifics?.filter(n => n.target_id === dr?.id)
@@ -46,9 +47,9 @@ const Navbar = ({active, setActive}) => {
     const b = a.concat(lawnots)
     const c = b.concat(othernots)
     const allnots = c.concat(marrynots)
-    const mynots = allnots?.filter(a => a.isSeen == false).filter(n => n.uid !== user.uid)
+    const mynots = allnots?.filter(a => !a.seen?.includes(`${user.uid}`)).filter(n => n.uid !== user.uid)
 
-    // console.log('marry', marry?.id)
+    // console.log('mynots', mynots)
 
 
     const handleLogout = async () => {
@@ -56,11 +57,7 @@ const Navbar = ({active, setActive}) => {
         await logOut()
       
     }
-    
-
  
-
-    // console.log('photo', user)
    
   return (
     <div className="home_top_wrapper">

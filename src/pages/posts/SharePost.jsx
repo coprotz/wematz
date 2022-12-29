@@ -45,6 +45,7 @@ const SharePost = ({setVideo,setAudio, setImage}) => {
             type:'post',
             action: 'ametuma post mpya, pitia na comment',
             isSeen: false,
+            seen: [], 
             // type_id: newQue?.id,
             createdAt: serverTimestamp()
           }
@@ -68,7 +69,7 @@ const SharePost = ({setVideo,setAudio, setImage}) => {
                 <img src={me} alt="" />
             </div> */}
             <div className="share_details">
-                <div className="share_text">
+                <div className="share_text post_cover_1">
                     <textarea 
                         type= 'textarea'  
                         placeholder='Unataka kuwaambia nini WanaWema?' 

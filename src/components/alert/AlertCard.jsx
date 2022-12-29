@@ -2,13 +2,15 @@ import React from 'react'
 import { db, useAuth } from '../../hooks/useAuth'
 import useData from '../../hooks/useData'
 import moment from 'moment'
-import { doc, updateDoc } from 'firebase/firestore'
+import { arrayUnion, doc, updateDoc } from 'firebase/firestore'
 import { GrClose } from "react-icons/gr";
 import { useEffect } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
 import { useContext } from 'react'
 import { ChatContext } from '../../hooks/chatsContext'
 import { RiMessage3Fill, RiAccountPinBoxFill, RiArticleFill, RiImage2Fill } from "react-icons/ri";
+import { useState } from 'react'
+import Loading from '../loading/Loading'
 
 
 
@@ -18,6 +20,7 @@ const AlertCard = ({item, allnots, setAlert}) => {
     const { users, doctors, lawyers, marriages } = useData()
     const { dispatch, setActive } = useContext(ChatContext)
     const cuUser = users.find(u => u.id === item?.uid)
+    const [loading, setLoading] = useState(null)
     const navigate = useNavigate()
 
     
@@ -36,51 +39,54 @@ const AlertCard = ({item, allnots, setAlert}) => {
     // console.log('sender', sender)
 
     const handleNavigate = async () => {
-        
-        if(item?.type === 'message'){
-          setAlert(null)
-          navigate('/messages')
-          dispatch({ type: "CHANGE_USER", payload: data })
-          setActive(true)
-          await updateDoc(doc(db, 'notifics', `${item?.id}`), {isSeen: true})
-          
-        }else if(item?.type === 'post'){
-          navigate('/')
-          await updateDoc(doc(db, 'notifics', `${item?.id}`), {isSeen: true})          
-          setAlert(null)
-        }else if(item?.type === 'follow'){
-          navigate(`/members/${sender?.id}`)
-          setAlert(null)         
-          await updateDoc(doc(db, 'notifics', `${item?.id}`), {isSeen: true})
-          
-          
-        }else if(item?.type === 'nikah') {
-          navigate(`/nikah/${sender?.id}`)
-          await updateDoc(doc(db, 'notifics', `${item?.id}`), {isSeen: true})
-          
-          setAlert(null)
-        }else if(item?.type === 'swali') {
-          navigate(`/questions/${item?.type_id}`)
-          await updateDoc(doc(db, 'notifics', `${item?.id}`), {isSeen: true})
-          
-          setAlert(null)
-        }else if(item?.type === 'jibu') {
-          navigate(`/questions/${item?.type_id}`)
-          await updateDoc(doc(db, 'notifics', `${item?.id}`), {isSeen: true})
-          
-          setAlert(null)
-        }else {
-          await updateDoc(doc(db, 'notifics', `${item?.id}`), {isSeen: true})
-          setAlert(null)
-        }
+        try {
+          setLoading(true)
+       
+          if(item?.type === 'message'){
+            setAlert(null)
+            navigate('/messages')
+            dispatch({ type: "CHANGE_USER", payload: data })
+            setActive(true)
+            await updateDoc(doc(db, 'notifics', `${item?.id}`), {seen: arrayUnion(user.uid)})
+            
+          }else if(item?.type === 'post'){
+            navigate('/')
+            await updateDoc(doc(db, 'notifics', `${item?.id}`), {seen: arrayUnion(user.uid)})          
+            setAlert(null)
+          }else if(item?.type === 'follow'){
+            navigate(`/members/${sender?.id}`)
+            setAlert(null)         
+            await updateDoc(doc(db, 'notifics', `${item?.id}`), {seen: arrayUnion(user.uid)})
+            
+            
+          }else if(item?.type === 'nikah') {
+            navigate(`/nikah/${sender?.id}`)
+            await updateDoc(doc(db, 'notifics', `${item?.id}`), {seen: arrayUnion(user.uid)})
+            
+            setAlert(null)
+          }else if(item?.type === 'swali') {
+            navigate(`/questions/${item?.type_id}`)
+            await updateDoc(doc(db, 'notifics', `${item?.id}`), {seen: arrayUnion(user.uid)})
+            
+            setAlert(null)
+          }else if(item?.type === 'jibu') {
+            navigate(`/questions/${item?.type_id}`)
+            await updateDoc(doc(db, 'notifics', `${item?.id}`), {seen: arrayUnion(user.uid)})
+            
+            setAlert(null)
+          }else {
+            await updateDoc(doc(db, 'notifics', `${item?.id}`), {seen: arrayUnion(user.uid)})
+            setAlert(null)
+          }
+
+          setLoading(false)
+
+        } catch (error) {
+          console.log(error.message)
+      }
       }
 
-    const RenderNavigate = () => {
-        if(item?.type === 'message'){
-            navigate()
-        }
-    }
-
+  
     // console.log('item', item)
 
     // useEffect(() => {             
@@ -123,8 +129,8 @@ const AlertCard = ({item, allnots, setAlert}) => {
             </div>
           </div>
           <div className="alert_card_footer">           
-            <button  onClick={handleNavigate} style={{backgroundColor:'#e1e1e1'}}>{item?.type === 'message'? 'JIBU' : 'ANGALIA'}</button>
-            <button onClick={() =>updateDoc(doc(db, 'notifics', `${item.id}`), {isSeen: true})}>ONDOA</button>
+            <button  onClick={handleNavigate} style={{backgroundColor:'#e1e1e1'}}>{loading? <Loading/> : item?.type === 'message'? 'JIBU' : 'ANGALIA'}</button>
+            <button onClick={() =>updateDoc(doc(db, 'notifics', `${item.id}`), {seen: arrayUnion(user.uid)})}>ONDOA</button>
           </div>                     
         </div>
         

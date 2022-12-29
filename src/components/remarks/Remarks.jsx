@@ -34,6 +34,7 @@ const Remarks = ({p, setShow, type}) => {
     type_id: p?.id,
     action: 'ameipenda'+" "+type+" "+"yako",
     isSeen: false,
+    seen:[],
     createdAt: serverTimestamp()
   }
 
