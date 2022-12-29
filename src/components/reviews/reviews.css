@@ -56,6 +56,7 @@
     background-color: transparent;
     border-bottom: 2px solid #aaa;
     font-size: 1rem;
+    height: auto;
     width: 100%;
 }
 
@@ -198,7 +199,7 @@
 
     .patient_reviews{
         width: 95%;
-        margin: 0 auto;
+        margin: 15px auto;
         /* color: #aaa; */
     }
 

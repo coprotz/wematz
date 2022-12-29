@@ -17,7 +17,7 @@ const Replies = ({p, type}) => {
             <span onClick={() =>setReply(p.id)}>Jibu ({revs?.length})</span> }
         </div>
         {reply &&
-            <CreateReview setShow={setReply} doc={p} title='Andika Kumjibu' type={type}/>
+            <CreateReview setShow={setReply} doc={p} title='Andika Kumjibu' type='maoni'/>
         }
         {revs.map(r => (
             <div className="reply_boom">

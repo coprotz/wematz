@@ -21,12 +21,12 @@ const CreateReview = ({title, doc, setShow, type}) => {
     // console.log('doc', doc)
   
     const newNotific = {
-      target_id: doc?.userId,
+      target_id: doc?.userId || doc?.uid,
       uid: user.uid,
       type,
       action: 'amerespond'+" "+`${type}`+" "+'yako',
       isSeen: false,
-      type_id: doc?.docId,
+      type_id: doc?.type === 'post' ? doc?.id : doc?.docId,
       createdAt: serverTimestamp()
     }
     // console.log('doc', doc)
@@ -49,9 +49,10 @@ const CreateReview = ({title, doc, setShow, type}) => {
         try {
             await addDoc(commentRef, data)
             await addDoc(notificRef, newNotific)
-            setMessage('')
             setLoading(null)
             setShow(null)
+            setMessage('')
+            
             
            
         } catch (error) {
@@ -74,7 +75,7 @@ const CreateReview = ({title, doc, setShow, type}) => {
                 className='comment_input'
                 name='message'                        
                 value={message} 
-                 style={{width:'100%', height: message? '100px': '30px'}}
+                 style={{width:'100%'}}
                 onChange={(e) =>setMessage(e.target.value)}>
             </textarea>            
         </div>

@@ -32,8 +32,10 @@ const Navbar = ({active, setActive}) => {
     const law = lawyers?.find(l =>l.userId === user.uid)
 
     const othernots = notifics?.filter(n => n?.target_ids?.includes(`${user.uid}`))
+    const othernots2 = notifics?.filter(n => n?.target_ids?.find(m =>m===user.uid))
 
-    // console.log('othernots', othernots)
+    console.log('othernots', othernots)
+    console.log('othernots2', othernots2)
 
     const usernots = notifics?.filter(n => n.target_id === user.uid)
     const drnots = notifics?.filter(n => n.target_id === dr?.id)
