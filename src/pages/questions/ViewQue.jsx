@@ -44,7 +44,7 @@ const ViewQue = () => {
             
         </div>
         <div className="view_que_top">
-            <h1>{que?.que}</h1>
+            <h3>{que?.que}</h3>
         </div>
         
         <div className="view_que_answers">
