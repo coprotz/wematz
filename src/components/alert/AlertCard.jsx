@@ -74,6 +74,11 @@ const AlertCard = ({item, allnots, setAlert}) => {
             await updateDoc(doc(db, 'notifics', `${item?.id}`), {seen: arrayUnion(user.uid)})
             
             setAlert(null)
+          }else if(item?.type === 'que') {
+            navigate(`/questions/${item?.type_id}`)
+            await updateDoc(doc(db, 'notifics', `${item?.id}`), {seen: arrayUnion(user.uid)})
+            
+            setAlert(null)
           }else {
             await updateDoc(doc(db, 'notifics', `${item?.id}`), {seen: arrayUnion(user.uid)})
             setAlert(null)
