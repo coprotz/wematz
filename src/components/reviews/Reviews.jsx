@@ -1,7 +1,4 @@
-import React from 'react'
-// import { useState } from 'react';
-// import { BsStar,BsStarFill } from "react-icons/bs";
-// import { reviews } from '../../data';
+import React, { useState } from 'react'
 import useData from '../../hooks/useData';
 import CreateReview from './CreateReview';
 import moment from 'moment'
@@ -9,12 +6,16 @@ import moment from 'moment'
 
 
 
+
 import './reviews.css'
+import Remarks from '../remarks/Remarks';
+import Replies from '../replies/Replies';
+import userEvent from '@testing-library/user-event';
 
 const Reviews = ({doc, setShow, type}) => {
 
     const {  comments } = useData()
-
+    // const [show, setShow] = useState(null)
     const revs = comments?.filter(r =>r.docId === doc?.id)
     // const user = users?.find(u => u.id === doc?.userId)
 
@@ -26,7 +27,8 @@ const Reviews = ({doc, setShow, type}) => {
 
   return (
     <div className='reviews_container'>        
-        <h2 className='patient_reviews'>Maoni({revs?.length})</h2>        
+        <h2 className='patient_reviews'>Maoni({revs?.length})</h2> 
+        <CreateReview title='Toa Maoni yako' doc={doc} setShow={setShow} type={type}/>       
         <div className="reviews_patients">
             {revs?.map(r => (            
             <div className="review_card">
@@ -43,13 +45,16 @@ const Reviews = ({doc, setShow, type}) => {
                 <div className="reviews_body">                    
                     {/* <small>{moment(r?.createdAt?.toDate()).fromNow(true)}</small>                  */}
                     <p className="review_status">{r?.text}</p>
+                    <div className="replies_wrapper">                                
+                        <Replies p={r} type={type}/>                        
+                    </div>
                 </div>
             </div>
            ))}
         
          
         </div>
-        <CreateReview title='Toa Maoni yako' doc={doc} setShow={setShow} type={type}/>
+        
         <h4 onClick={() => setShow(null)} style={{color:'blue'}} className='hide_reviews'>Ficha Maoni</h4>
       
     </div>

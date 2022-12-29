@@ -19,6 +19,7 @@
     align-items: center;
     border-radius: 25px;
     background-color: rgb(224, 224, 224);
+    margin: 0 10px;
 }
 
 .length{
@@ -83,4 +84,19 @@
     font-size: 0.9rem;
     font-weight: 200;
     color: black !important;
+}
+
+
+@media screen and (max-width: 940px){
+    .mada_remarks{      
+        align-items: center;
+        justify-content: flex-start;
+        margin-left: 10px;
+        gap: 0px;
+        /* color: #aaa; */
+        margin: 0 auto;
+        padding: 10px 0;
+        /* border: 1px solid red; */
+    }
+
 }

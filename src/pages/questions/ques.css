@@ -339,6 +339,19 @@
     margin-left: 15px;
 }
 
+.share_answer_photo{
+    width: 35px;
+    height: 35px;
+    margin-bottom: 5px;
+}
+
+.share_answer_photo img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
 
 
 @media screen and (max-width: 940px){

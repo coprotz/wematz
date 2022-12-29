@@ -1,10 +1,10 @@
-import { type } from '@testing-library/user-event/dist/type';
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 import React from 'react'
 import { useState } from 'react';
 import {   BsFillShareFill } from "react-icons/bs";
 import { db, useAuth } from '../../hooks/useAuth';
 import useData from '../../hooks/useData';
+import Loading from '../loading/Loading';
 
 const CreateReview = ({title, doc, setShow, type}) => {
     const [message, setMessage] = useState('')
@@ -17,13 +17,16 @@ const CreateReview = ({title, doc, setShow, type}) => {
     const commentRef = collection(db, 'comments')
     const likeRef = collection(db, 'likes')
     const notificRef = collection(db, 'notifics')
+
+    // console.log('doc', doc)
   
     const newNotific = {
       target_id: doc?.userId,
       uid: user.uid,
       type,
-      action: 'amerespond'+" "+{type}+" "+'yako',
+      action: 'amerespond'+" "+`${type}`+" "+'yako',
       isSeen: false,
+      type_id: doc?.docId,
       createdAt: serverTimestamp()
     }
     // console.log('doc', doc)
@@ -48,6 +51,7 @@ const CreateReview = ({title, doc, setShow, type}) => {
             await addDoc(notificRef, newNotific)
             setMessage('')
             setLoading(null)
+            setShow(null)
             
            
         } catch (error) {
@@ -74,17 +78,18 @@ const CreateReview = ({title, doc, setShow, type}) => {
                 onChange={(e) =>setMessage(e.target.value)}>
             </textarea>            
         </div>
-        <div className="share_action_btns">       
+        {message &&
+        <div className="share_action_btns">    
+             <button 
+                className='btn_2'                
+                onClick={() =>setShow(null)}
+            >Batilisha</button>
             <button 
-                className='btn_yes'
+                className='btn_1'
                 disabled={!message}
                 onClick={handleComment}
-            >{loading? 'Inatuma' :'Tuma' }</button>
-             <button 
-                className='btn_no'                
-                onClick={() =>setShow(null)}
-            >{loading? 'Inatuma' :"Batilisha" }</button>
-        </div>
+            >{loading? <Loading/> :'Tuma' }</button>
+        </div>}
     
     </div>
   )

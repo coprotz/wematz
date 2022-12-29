@@ -1,0 +1,38 @@
+.replies_container{
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.replies_inner{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.reply_boom{
+    display: flex;
+    gap: 10px;
+}
+
+.reply_boom_img{
+    width: 30px;
+    height: 30px;
+    aspect-ratio: 1;
+}
+
+.reply_boom_img img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid #e1e1e1;
+}
+
+.reply_boom_userinfo{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}

@@ -38,7 +38,7 @@ const PostCard = ({p, setConfirm}) => {
         }else if(type === 'text') {
             return (
                 <div className="card_body">
-                    <p>{p?.tex}</p>
+                    <p>{p?.tex}</p>                   
                 </div>
             )
         }
@@ -101,7 +101,7 @@ const PostCard = ({p, setConfirm}) => {
             </div>
         </div>
         {RenderPost()}
-        <Remarks p={p} setShow={setShow} type='post'/>
+        <Remarks p={p} setShow={setShow} type='post' />
         {show &&
         <Reviews doc={p} setShow={setShow} type='post'/>
         }

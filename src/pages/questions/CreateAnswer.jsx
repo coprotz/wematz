@@ -24,7 +24,7 @@ const CreateAnswer = ({title, item, type}) => {
     const newNotific = {
       target_id: item?.userId,
       uid: user.uid,
-      type:'que',
+      type:'swali',
       action: 'amejibu swali lako',
       type_id:item?.id,
       isSeen: false,
@@ -43,7 +43,7 @@ const CreateAnswer = ({title, item, type}) => {
             name: cuUser?.name,
             createdAt: serverTimestamp(),
             text: message, 
-            cat: type,          
+            cat: type,                      
             photo: cuUser?.photo ? cuUser?.photo : process.env.PUBLIC_URL + cuUser?.avatar
         }
 
@@ -64,6 +64,9 @@ const CreateAnswer = ({title, item, type}) => {
   return (
     <div className="review_share">
         <div className="share_answer">
+            <div className="share_answer_photo">
+                <img src={cuUser?.photo ? cuUser?.photo : process.env.PUBLIC_URL + cuUser?.avatar} alt="" />
+            </div>
             <Tiptak setBody={setMessage} value={message}/>
             <div className="que_counts">
                 <small>Herufi zisipungue 100</small>

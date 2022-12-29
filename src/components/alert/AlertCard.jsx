@@ -59,7 +59,12 @@ const AlertCard = ({item, allnots, setAlert}) => {
           await updateDoc(doc(db, 'notifics', `${item?.id}`), {isSeen: true})
           
           setAlert(null)
-        }else if(item?.type === 'que') {
+        }else if(item?.type === 'swali') {
+          navigate(`/questions/${item?.type_id}`)
+          await updateDoc(doc(db, 'notifics', `${item?.id}`), {isSeen: true})
+          
+          setAlert(null)
+        }else if(item?.type === 'jibu') {
           navigate(`/questions/${item?.type_id}`)
           await updateDoc(doc(db, 'notifics', `${item?.id}`), {isSeen: true})
           

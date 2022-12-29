@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import CreateReview from '../../components/reviews/CreateReview'
 // import {  answers } from '../../data'
@@ -9,6 +9,9 @@ import moment from 'moment'
 import Loading from '../../components/loading/Loading';
 import CreateAnswer from './CreateAnswer';
 import parser from 'html-react-parser'
+import Likes from '../../components/remarks/Likes';
+import Remarks from '../../components/remarks/Remarks';
+import Reviews from '../../components/reviews/Reviews';
 
 
 const ViewQue = () => {
@@ -17,6 +20,7 @@ const ViewQue = () => {
     const que = questions?.find(q => q.id === id)
     const navigate = useNavigate()
     const ans = comments?.filter(a => a.docId === que?.id)
+    const [show, setShow] = useState(null)
 
 
 
@@ -45,8 +49,13 @@ const ViewQue = () => {
         
         <div className="view_que_answers">
             <h3 className='sub_title'>Majibu({ans?.length})</h3>
+            <div className="view_que_create">
+                {/* <h3 className='sub_title'>Toa Jibu lako</h3> */}
+              <CreateAnswer item={que} type='swali'/>  
+            </div>
             <div className="view_answers_grid">
                 {ans?.map(a => (
+                    <>
                     <div className="que_grid_anwers" key={a.id}>
                         <div className="answerd_photo">
                             <img src={a?.photo || process.env.PUBLIC_URL + a?.photo} />
@@ -57,14 +66,19 @@ const ViewQue = () => {
                                 <span>{moment(a?.createdAt?.seconds * 1000).format('MMM Do YY, LT') }</span>
                             </small>
                             <p className='answer_text'>{parser(`${a.text}`)}</p>
+                            <div className="reaction_div">                                
+                                <Remarks p={a} type='jibu' setShow={setShow}/>
+                                {show &&
+                                <Reviews doc={a} setShow={setShow} type='jibu'/>
+                                }
+                            </div>
                         </div>
                     </div>
+                   
+                    </>
                 ))}
             </div>
-            <div className="view_que_create">
-                {/* <h3 className='sub_title'>Toa Jibu lako</h3> */}
-              <CreateAnswer item={que} type='swali'/>  
-            </div>
+            
             
         </div>
     </div>
