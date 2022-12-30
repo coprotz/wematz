@@ -263,20 +263,20 @@
     align-items: center;
     gap: 10px;
     padding: 5px;
-    min-height: 50px;
-    bottom: 50px;
-    width: 98%;
+    min-height: 30px;
+    /* bottom: 50px; */
+    /* width: 98%; */
     position: relative;
-    position: fixed;
+    /* position: fixed; */
     background-color: var(--sec);
     /* border: 1px solid red; */
 }
 
-.textarea {
+/* .textarea {
     width: 100%;
     overflow: hidden;
     padding: 10px;
-}
+} */
 
 
 .form_inner_wrapper{
@@ -340,6 +340,7 @@
     padding: 7px;
     background-color: white;
     border-radius: 15px;
+    min-height: 50px;
     
     
 }
@@ -374,6 +375,10 @@
     border: none;
     outline: none;
     background-color: transparent;
+    display: flex;
+    align-items: center;
+    margin: auto;
+    /* min-height: 30px; */
 }
 
 .message_p{
@@ -570,9 +575,10 @@
 
 
 .messages_wrapper{
-    height: calc(100vh - 280px);
+    height: calc(100vh - 300px);
     padding: 10px;
     overflow-y: scroll;
+    /* margin-bottom: 20px; */
 }
 
 .chat_head_left{
@@ -782,7 +788,7 @@
 
 
     .messages_wrapper{
-        height: calc(100vh - 260px);
+        height: calc(100vh - 280px);
         padding: 10px;
         overflow-y: scroll;
     }

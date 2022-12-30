@@ -379,6 +379,7 @@
         font-size: 1.5rem;
         line-height: 1;
         display: block;
+        text-align: justify;
         width: 95%;
     }
 

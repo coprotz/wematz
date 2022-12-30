@@ -115,21 +115,21 @@ const SendChat = ({setImage}) => {
 
   return (
     <div className='form_container' >      
-    <form onSubmit={handleSubmit} className='form_inner_wrapper'>       
+    <form onSubmit={handleSubmit} className='form_inner_wrapper' autoComplete='off' autoCorrect='off'>       
       <div className="form_outer">
-          {!message &&          
+          {/* {!message &&          
           <div className="emoj">
             <button className='btn_form' type='button'><HiOutlinePaperClip/></button>
           </div> 
-          }
-          <input 
+          } */}
+          <textarea 
             type="text" 
             value={message} 
             id='textarea'            
             className='send_input' 
             placeholder='Message'
             onChange={(e) =>setMessage(e.target.value)} 
-            />  
+            ></textarea>
             {!message &&        
             <button className='btn_form' type='button' onClick={() =>setImage(true)}><HiOutlineCamera/></button>
             }
