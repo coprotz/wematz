@@ -8,7 +8,7 @@ import { FcHighPriority } from 'react-icons/fc';
 
 const LoadingPage = () => {
   const [counts, setCounts] = useState(0)
-  // const navigate = useNavigate()
+  const navigate = useNavigate()
   const { user, logOut, } = useAuth()
 
   // console.log('user', user)
@@ -24,8 +24,9 @@ const LoadingPage = () => {
         {counts === 5? 
           <div className='login_failure'>
             <FcHighPriority/>
-            <h1>Inaonesha kama hauna akaunti au kuna tatizo la mtandao, tafadhari fungua akaunti na ujaribu tena</h1>
-            <button onClick={() =>logOut()} className='btn_reg'>Nyumbani</button>
+            <h1>Kuna kitu hakipo sawa...</h1>
+            {/* <button onClick={() =>logOut()} className='btn_reg'>Nyumbani</button> */}
+            <button onClick={() =>navigate('/')} className='btn_reg'>Rudi Nyumbani</button>
           </div> : <Loading/>}
     </div>
   )
