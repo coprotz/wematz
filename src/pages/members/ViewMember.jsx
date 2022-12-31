@@ -141,7 +141,15 @@ const ViewMember = () => {
                <div className='view_doctor_wrapper'>
          {appoints && <Appoints setAppoints={setAppoints}/>}
         <div className="view_doc_top">
-            <img src={member?.photo || process.env.PUBLIC_URL + member?.avatar} />
+            {member?.photo ? <img src={member?.photo} alt="" />: 
+            <div 
+                className='avatar2'
+                style={{backgroundColor: `#${Math.floor(Math.random()*16777215).toString(16)}`,
+                height:'100%', width:'100%', fontSize:'3rem', objectFit:'cover'}}
+                >{member?.name[0]}
+            </div>
+            } 
+            {/* <img src={member?.photo || process.env.PUBLIC_URL + member?.avatar} /> */}
             {/* <div className="view_doc_photo">
                 <img src={member?.photo || process.env.PUBLIC_URL + member?.avatar} />            
             </div> */}
@@ -151,7 +159,15 @@ const ViewMember = () => {
                 </div>                      
                 : 
                 <div className="view_doc_photo">
-                    <img src={member?.photo || process.env.PUBLIC_URL + member?.avatar } /> 
+                     {member?.photo ? <img src={member?.photo} alt="" />: 
+                        <div 
+                            className='avatar2'
+                            style={{backgroundColor: `#${Math.floor(Math.random()*16777215).toString(16)}`,
+                            height:'105px', width:'105px', borderRadius:'50%', fontSize:'3rem'}}
+                            >{member?.name[0]}
+                        </div>
+                    } 
+                    {/* <img src={member?.photo || process.env.PUBLIC_URL + member?.avatar } />  */}
                     {isOwn && (                                             
                     <label htmlFor="photo" className='user_picture'>
                         <input 

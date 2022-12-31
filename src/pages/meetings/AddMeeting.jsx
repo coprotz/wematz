@@ -36,6 +36,12 @@ const AddMeeting = () => {
         member === 'M' ? users?.filter(m => m.gender === 'M') : 
         member === 'F' ? users?.filter(m => m.gender === 'F') : 
         member === '55' ? users?.filter(m => m.age < '55') : null
+
+    const parts = members?.map(({id}) => id)
+    const [add, setAdd] = useState(null)
+
+
+    const cuUser = users?.find(u => u.id === user.uid)
     
 
 
@@ -63,7 +69,7 @@ const AddMeeting = () => {
             start_date,
             start_time,
             type,
-            participants: members,
+            participants: parts,
             host: user.uid,
             createdAt: serverTimestamp()         
         }
@@ -91,11 +97,56 @@ const AddMeeting = () => {
 
 
   return (
+    <>
+    {add && (
+         <div className="add_parts_wrapper">
+            <div className="add_parts_inner">
+                <div className="add_parts_top">
+                    <div className="add_part_left">
+                        <h4>Weka Washiriki</h4>
+                    </div>
+                    <button onClick={() => setAdd(null)}>Close</button>
+                    </div>
+                        <div className="add_parts_body">
+                            <h2>Chagua kutoka katika list</h2>
+                            <div className="parts_container">
+                                {users?.map(({photo, name, avatar}) => (
+                                    <div className="sel_item">
+                                        <input 
+                                            type="checkbox" 
+                                            id='ab123333' 
+                                            value='Wazi' 
+                                            name='type' 
+                                            {...register("type", { required: true })}
+                                            />
+                                            <label htmlFor='ab123333'>
+                                                <div className="part_info_container">                                        
+                                                    <div className="part_img">
+                                                        {photo ? <img src={photo} alt="" /> :
+                                                        <div 
+                                                            className='avatar2'
+                                                            style={{backgroundColor: `#${Math.floor(Math.random()*16777215).toString(16)}`, width:'35px', height:'35px'}}
+                                                            >{name[0]}
+                                                        </div>
+                                                      }
+                                                    </div>
+                                                    <h4>{name}</h4>
+                                                </div>
+                                            </label>
+                                    </div>
+                                ))}
+                              
+                            </div>
+                        </div>
+                </div>
+        </div>)}
+   
     <motion.div 
              initial={{ x:'100vw'}}
              animate={{x:0}} 
              transition={{ ease: "easeOut", duration: 0.5 }}  
             className='add_meeting'>
+               
          <div className="top_meeting_wrapper">
             <div className="meeting_top">            
                 <button onClick={() => navigate('/meetings')} className='btn_btn'><BsArrowLeft/></button>
@@ -165,22 +216,28 @@ const AddMeeting = () => {
         </div>}
         {type === 'Faragha' &&  
         <div className="items_group">
-            <h3 className='item_title'>Weka Washiriki</h3>
-            <div className="sel_items">
-                <select name="" id="" className="sel_input">
-                {users.map(c => (
-                    <option value="">
-                        <div className="part_card">
-                            {c.fname}
-                        </div>
-                    </option>        
+           <button className="btn_sign" onClick={() =>setAdd(true)}>Weka Washiriki</button> 
+        </div>
+        
 
-                ))} 
-                </select>
+        // <div className="items_group">
+        //     <h3 className='item_title'>Weka Washiriki</h3>
+        //     <div className="sel_items">
+        //         <select name="" id="" className="sel_input">
+        //         {users.map(c => (
+        //             <option value="">
+        //                 <div className="part_card">
+        //                     {c.fname}
+        //                 </div>
+        //             </option>        
+
+        //         ))} 
+        //         </select>
                      
-            </div>
+        //     </div>
                     
-        </div>}
+        // </div>
+        }
         <div className="items_group">
             <h3 className='item_title'>Tarehe ya Ukumbi</h3>
             <div className="sel_items">
@@ -211,9 +268,14 @@ const AddMeeting = () => {
             <button 
                 className='btn_reg'
                 onClick={handleRoom}
-                >{loading? <Loading/> : 'ANZISHA UKUMBI'}</button>
+                >
+                {loading? 
+                <Loading/> 
+                 : 'ANZISHA UKUMBI'} 
+            </button>
         </div>
     </motion.div>
+    </>
   )
 }
 

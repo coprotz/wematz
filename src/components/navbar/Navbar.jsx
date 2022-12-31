@@ -78,7 +78,14 @@ const Navbar = ({active, setActive}) => {
                         {mynots?.length > 0 && <span className="nots_true"></span> }                                        
                     </div>               
                     <div className="profile_img">
-                        <img src={cuUser?.photo ? cuUser?.photo : process.env.PUBLIC_URL + cuUser?.avatar} />
+                        {cuUser?.photo ? <img src={cuUser?.photo} alt="" />: 
+                        <div 
+                            className='avatar2'
+                            style={{backgroundColor: `#${Math.floor(Math.random()*16777215).toString(16)}`, height:'35px', width:'35px'}}
+                            >{cuUser?.name[0]}
+                        </div>
+                        } 
+                        {/* <img src={cuUser?.photo ? cuUser?.photo : process.env.PUBLIC_URL + cuUser?.avatar} /> */}
                     </div>
                     <div className="user_action" onMouseEnter={() =>setShow(true)} onMouseLeave={() =>setShow(false)}>
                         <button className='btn_btn' ><BsThreeDotsVertical/></button>

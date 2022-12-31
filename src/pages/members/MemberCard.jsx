@@ -61,7 +61,13 @@ const MemberCard = ({member, handelNew}) => {
   return (
     <div className="wema_card" key={member?.id}>
         <div className="part_info">
-            <img src={member?.photo? member?.photo : process.env.PUBLIC_URL + member?.avatar} alt="" />                                            
+            {member?.photo ? <img src={member?.photo} alt="" />: 
+            <div 
+                className='avatar2'
+                style={{backgroundColor: `#${Math.floor(Math.random()*16777215).toString(16)}`}}
+                >{member?.name[0]}
+            </div>
+            }                                            
         </div>
         <div className="wema_info">
             <div className="member_status">

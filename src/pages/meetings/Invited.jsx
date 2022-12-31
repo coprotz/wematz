@@ -38,7 +38,7 @@ const Invited = () => {
           <th className='descr'>SN</th>
           <th className='qty'>Jina la Mdaharo</th>
           <th className='total'>Aina ya Ukumbi</th>
-          <th className='total'>Washiriki</th>  
+          <th className='total'>Waalikwa</th>  
           <th className='total'>Tarehe</th> 
           <th className='total'>Muda</th>    
           <th className='total'>Hali</th>     

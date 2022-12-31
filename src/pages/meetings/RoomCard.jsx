@@ -13,7 +13,7 @@ const RoomCard = ({m, setViewParts, index}) => {
         <td data-label='SN'>{index+1}</td>     
         <td data-label='Jina la Mdaharo' className='tab_column'>{m?.name}</td>
         <td data-label='Aina ya Ukumbi' className='tab_column'>Wazi</td>
-        <td data-label='Washiriki' className='tab_column'><button onClick={() =>setViewParts(m)}>Angalia</button></td>
+        <td data-label='Washiriki' className='tab_column'><button onClick={() =>setViewParts(m)}>Angalia ({m?.participants?.length})</button></td>
         <td data-label='Tarehe' className='tab_column'>{moment(m?.start_date).format('DD-M-YYYY') }</td>
         <td data-label='Muda' className='tab_column'>{m?.start_time}</td>   
         <td data-label='Hali' className='tab_column'><button onClick={() =>alert('Page under construction')}>Jiunge Sasa</button></td>           

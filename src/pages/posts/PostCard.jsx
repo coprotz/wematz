@@ -76,7 +76,14 @@ const PostCard = ({p, setConfirm}) => {
         <div className="post_top">
             <div className="post_card_user">
                 <div className="card_user_photo">
-                    <img src={author?.photo? author?.photo : process.env.PUBLIC_URL + author?.avatar} alt="" />
+                {author?.photo ? <img src={author?.photo} alt="" />: 
+                <div 
+                    className='avatar2'
+                    style={{backgroundColor: `#${Math.floor(Math.random()*16777215).toString(16)}`, height:'35px', width:'35px'}}
+                    >{author?.name[0]}
+                </div>
+                } 
+                    {/* <img src={author?.photo? author?.photo : process.env.PUBLIC_URL + author?.avatar} alt="" /> */}
                 </div>
                 <div className="card_username">
                      <h5 className='author_name' onClick={() =>navigate(`/members/${author.id}`)}>{author?.name}</h5>
