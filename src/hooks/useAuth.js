@@ -3,6 +3,7 @@ import firebase from "firebase/compat/app";
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
+import { getFunctions } from "firebase/functions"
 import {  getMessaging, getToken, onMessage } from 'firebase/messaging'
 import { 
     onAuthStateChanged, 
@@ -36,6 +37,7 @@ firebase.initializeApp(firebaseConfig)
 export const db = getFirestore(app);
 export const auth = getAuth(app);
 export const storage = getStorage(app);
+export const functions = getFunctions(app)
 const messaging = getMessaging(app)
 
 

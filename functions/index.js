@@ -1,9 +1,10 @@
 const functions = require("firebase-functions");
 
-// // Create and deploy your first functions
-// // https://firebase.google.com/docs/functions/get-started
-//
-// exports.helloWorld = functions.https.onRequest((request, response) => {
-//   functions.logger.info("Hello logs!", {structuredData: true});
-//   response.send("Hello from Firebase!");
-// });
+exports.randomNumber = functions.https.onRequest((req, res) => {
+    const number = Math.round(Math.random() * 100);
+    res.send(number.toString())
+})
+
+exports.sayHello = functions.https.onCall((data, context) => {
+    return `Asslaam aleikum`
+})

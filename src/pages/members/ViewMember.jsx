@@ -44,12 +44,13 @@ const ViewMember = () => {
     const memberPosts = posts?.filter(p =>p.userId === id)
     const allComments = comments?.filter(p =>p.userId === id)
     const memberanswers = comments?.filter(v => v.cat === 'que').filter(p =>p.userId === id)
+    const answers = comments?.filter(v => v.cat === 'jibu').filter(p =>p.userId === id)
     const memberComments = allComments?.length - memberanswers?.length
     const memberQue = questions?.filter(p =>p.userId === id)
 
     const myFollowers = followers?.filter(f => f.follower_id === id)
     const myFollowings = followers?.filter(f => f.following_id === id)
-    // console.log('posts', memberPosts)
+    console.log('answers', answers)
 
     const handleSelect = (e) => {
         let selected = e.target.files[0];  
@@ -85,6 +86,7 @@ const ViewMember = () => {
     const [editEdu, setEditEdu] = useState(null)
     const [editEmplo, setEditEmplo] = useState(null)
     const [editProf, setEditProf] = useState(null)
+    const [editGender, setEditGender] = useState(null)
 
   
   
@@ -263,6 +265,37 @@ const ViewMember = () => {
                         </button>
                         }
                         {editAge && <button onClick={() =>setEditAge(null)}>Cancel</button>}
+                    </div>                    
+                    
+                </div>
+                <div className="member_info_div">
+                    <span className='_info_div'>Jinsia :</span>
+                    {editGender ? 
+                        // <input type='text' value={editAge} onChange={(e) =>setEditAge(e.target.value)}/> 
+                        <select 
+                        name='age'  
+                        value={editGender}
+                        // className='sel_input'
+                        // style={{width: '100%'}}
+                        onChange={(e) =>setEditGender(e.target.value)}
+                        >                                    
+                       <option value='M'>Mume</option> 
+                       <option value='F' >Mke</option>                               
+                        </select>
+                        :
+                        <div className="name_wrapper">
+                            <h4>{member?.gender}</h4>
+                            {!editGender && isOwn && <button className='btn_edit' onClick={() => setEditGender(member?.gender)}>Edit</button> } 
+                        </div>                        
+                    }
+                    <div className='_btns'>                                               
+                        {editGender && 
+                        <button 
+                            onClick={() => {updateDoc(doc(db, 'users', `${id}`), {age:editGender});setEditGender(null)}}
+                            >Save
+                        </button>
+                        }
+                        {editGender && <button onClick={() =>setEditGender(null)}>Cancel</button>}
                     </div>                    
                     
                 </div>
@@ -453,7 +486,7 @@ const ViewMember = () => {
                     <span>Maswali aliyouliza</span>
                 </div>
                 <div className="activity_card">
-                    <h3>{memberanswers?.length}</h3>
+                    <h3>{answers?.length}</h3>
                     <span>Majibu aliyotoa kwa maswali yaliyoulizwa</span>
                 </div>                
             </div>

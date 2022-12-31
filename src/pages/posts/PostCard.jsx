@@ -65,7 +65,11 @@ const PostCard = ({p, setConfirm}) => {
                 </div>
             )
         }else {
-            return undefined
+            return (
+                <div className="home_video_player">
+                    <Loading/>
+                </div>
+            )
         }
     }
 

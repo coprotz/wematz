@@ -1656,9 +1656,9 @@ margin: 0 auto;
       line-height: 1;
   }
 
-  .about_ceo img{
+  /* .about_ceo img{
       width: 300px;
-  }
+  } */
 
   .security h4{
       font-size: 2rem;
@@ -1686,6 +1686,12 @@ margin: 0 auto;
 .contact_middle h1{
     font-size: 40px;
 }
+
+.about_ceo_image h3{
+  color: gold;
+  font-size: 1.2rem;
+}
+
 
 }
 

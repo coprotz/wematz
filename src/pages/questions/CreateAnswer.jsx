@@ -24,7 +24,7 @@ const CreateAnswer = ({title, item, type}) => {
     const newNotific = {
       target_id: item?.userId,
       uid: user.uid,
-      type:'swali',
+      type,
       action: 'amejibu swali lako',
       type_id:item?.id,
       isSeen: false,

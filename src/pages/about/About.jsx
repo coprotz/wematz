@@ -6,6 +6,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { FaQuoteLeft, FaQuoteRight, FaShieldAlt } from "react-icons/fa";
 import Nav from '../../components/nav/Nav';
 import Footer from '../../components/footer/Footer';
+import { httpsCallable } from 'firebase/functions';
+import { functions } from '../../hooks/useAuth';
 
 
 const About = () => {
@@ -14,6 +16,13 @@ const About = () => {
     useEffect(() => {
         window.scrollTo(0, 0)
       }, [])
+
+      const sayHello = httpsCallable(functions, 'sayHello');
+      const sayHello2 = () => {
+        sayHello().then(result => {
+            console.log(result.data)
+        })
+      }
 
   return (
     <div className='about'>
@@ -31,6 +40,7 @@ const About = () => {
                     <div className="ceo_info">
                         <h1>MM Achi -</h1>
                         <h3>Founder and CEO</h3>
+                        {/* <button onClick={sayHello2}>Say Assalaam</button> */}
                     </div>
                     <img src={Achi} alt="" />
                 </div>  
