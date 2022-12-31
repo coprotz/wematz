@@ -92,10 +92,7 @@ const PostCard = ({p, setConfirm}) => {
                 {cuUser?.isAdmin == true &&
                 <button className='btn_del' onClick={() => setConfirm(p.id)}><RiDeleteBinFill/></button>}
                
-            </div>
-            <div className="post_time">
-                
-            </div>
+            </div>          
         </div>
         {RenderPost()}
         <Remarks p={p} setShow={setShow} type='post' />
