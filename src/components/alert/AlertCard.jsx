@@ -114,7 +114,7 @@ const AlertCard = ({item, allnots, setAlert}) => {
 
     // const today = new Date().getTime()
   return (
-    <div className="alert_card">    
+    <div className="alert_card" key={item.id}>    
         <div className="alert_card_wrapper" >
           <div className="alert_card_top">
             {item?.type === 'follow'? <RiAccountPinBoxFill/> : item?.type === 'message'? <RiMessage3Fill/> :<RiArticleFill/> }
@@ -130,7 +130,14 @@ const AlertCard = ({item, allnots, setAlert}) => {
               <span>{item?.action}</span>}
             </div>
             <div className="alet_card_photo">
-                <img src={sender?.photo || process.env.PUBLIC_URL + sender?.avatar} />
+                {/* <img src={sender?.photo || process.env.PUBLIC_URL + sender?.avatar} /> */}
+                {sender?.photo ? <img src={sender?.photo} alt="" />: 
+                  <div 
+                      className='avatar2'
+                      style={{backgroundColor: `#${Math.floor(Math.random()*16777215).toString(16)}`, height:'40px', width:'40px', fontSize:'1.2rem'}}
+                      >{sender?.name? sender?.name[0] : 'no'}
+                    </div>
+                   }
             </div>
           </div>
           <div className="alert_card_footer">           

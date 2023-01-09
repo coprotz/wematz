@@ -29,6 +29,8 @@ const Members = () => {
     const expire = moment(mujaheed?.expiredAt).format('MMM Do YY, LT')
     const valid = expire > today
 
+    // console.log('members', users)
+
     const handelNew = (item) => {
         // if(valid){           
              setOpen(item)

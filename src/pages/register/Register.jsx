@@ -73,7 +73,9 @@ const Register = () => {
         avatar: '/images/profile.webp',
         prayer: 'NA' || prayer,
         quran: 'NA' || quran,
-        revert: 'NA' || revert,         
+        revert: 'NA' || revert,  
+        followers:[],
+        followings:[],       
         edu,
    
     }
@@ -98,7 +100,9 @@ const Register = () => {
         avatar: '/images/profile.webp',
         prayer: 'NA' || prayer,
         quran: 'NA' || quran,
-        revert: 'NA' || revert,      
+        revert: 'NA' || revert, 
+        followers:[],
+        followings:[],     
         edu,
    
     }
@@ -123,7 +127,7 @@ const Register = () => {
                    ...data,
                    createdAt: serverTimestamp()
                })
-               await setDoc(doc(db, 'userChats', `${user.uid}`), {})
+            //    await setDoc(doc(db, 'userChats', `${user.uid}`), {})
                setLoading(false)
                navigate('/')
            } catch (error) {
@@ -136,7 +140,7 @@ const Register = () => {
                 ...data1,
                 createdAt: serverTimestamp()
                 });
-                await setDoc(doc(db, 'userChats', `${newUser.user.uid}`), {})
+                // await setDoc(doc(db, 'userChats', `${newUser.user.uid}`), {})
                 setLoading(false)
                 navigate('/')
 

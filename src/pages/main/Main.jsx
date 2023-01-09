@@ -64,7 +64,7 @@ const Main = () => {
                     </div> */}
                 <h1 className='ma_b_title'>Wema</h1>
                 <h3>Ukumbi wa kuwakutanisha waislamu na wale wanaotarajia kuwa waislamu wa kitanzania wanaoishi 
-                    sehemeu mbalimbali duniani na kuwapa fursa ya kupeana mustkbari wa maisha ya kIIslamu duniani.
+                    sehemu mbalimbali duniani na kuwapa fursa ya kupeana mustkbari wa maisha ya kiislamu duniani.
                 </h3>
                 <div className="m_b_right_sign">
                     <button className='btn_sign' onClick={() => navigate('/register')}>Jiunge Ushiriki</button>
@@ -75,12 +75,14 @@ const Main = () => {
             </motion.div>
         </div> 
         <div className="main_footer">
-            <div className="m_f_logo" onClick={() =>navigate('/')}>Wema</div>
-            <div className="m_f_items">
-                <span onClick={() =>navigate('/about')}>Kuhusu</span>              
-                <span>Vigezo</span>
-                <span>Faragha</span>
-                <span onClick={() =>navigate('/contacts')}>Mawasiliano</span>
+            <div className="main_footer_inner">            
+                <div className="m_f_logo" onClick={() =>navigate('/')}>Wema</div>
+                <div className="m_f_items">
+                    <span onClick={() =>navigate('/about')}>Kuhusu</span>              
+                    <span>Vigezo</span>
+                    <span>Faragha</span>
+                    <span onClick={() =>navigate('/contacts')}>Mawasiliano</span>
+                </div>
             </div>
         </div>    
     </div>

@@ -1,10 +1,13 @@
 const functions = require("firebase-functions");
+const admin = require("firebase-admin");
+const { arrayUnion } = require("firebase/firestore");
+admin.initializeApp(functions.config().firebase);
 
-exports.randomNumber = functions.https.onRequest((req, res) => {
-    const number = Math.round(Math.random() * 100);
-    res.send(number.toString())
-})
+exports.newUserSignup = functions.auth.user().onCreate(user => {
+    return admin.firestore().collection('userChats').doc(user.uid).set({})
+});
 
-exports.sayHello = functions.https.onCall((data, context) => {
-    return `Asslaam aleikum`
-})
+exports.userDeleted = functions.auth.user().onDelete(user => {
+    const doc = admin.firestore().collection('users').doc(user.uid);
+    return doc.delete();
+});

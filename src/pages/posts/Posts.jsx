@@ -159,10 +159,20 @@ const Posts = () => {
                     <button className='btn_view' onClick={() =>navigate('/members')}><BsArrowRight/></button>
                 </h3>                                
                 <div className="new_users">
+               
                     {users?.slice(-7).map(u => (
-                        <div className="new_user" key={u.id}>
-                            <img src={u.photo || process.env.PUBLIC_URL + u?.avatar} alt="" />
+                       <div className="new_user" key={u.id}>
+                        {u?.photo ? <img src={u?.photo} alt="" />: 
+                        <div 
+                            className='avatar2'
+                            style={{backgroundColor: `#${Math.floor(Math.random()*16777215).toString(16)}`, height:'30px', width:'30px', fontSize:'1rem'}}
+                            >{u?.name? u?.name[0] : 'no'}
                         </div>
+                         }
+                        </div>
+                        // <div className="new_user" key={u.id}>
+                        //     <img src={u.photo || process.env.PUBLIC_URL + u?.avatar} alt="" />
+                        // </div>
                     ))}                              
                 </div>
                             

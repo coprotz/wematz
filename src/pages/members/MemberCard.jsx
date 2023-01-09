@@ -28,7 +28,8 @@ const MemberCard = ({member, handelNew}) => {
       type: 'follow',
       type_id: user.uid,
       action: 'anakufatilia',
-      isSeen: false,
+    //   isSeen: false,
+      seen:[],
       createdAt: serverTimestamp()
     }
 
@@ -65,7 +66,7 @@ const MemberCard = ({member, handelNew}) => {
             <div 
                 className='avatar2'
                 style={{backgroundColor: `#${Math.floor(Math.random()*16777215).toString(16)}`}}
-                >{member?.name[0]}
+                >{member.name? member?.name[0] : 'no'}
             </div>
             }                                            
         </div>

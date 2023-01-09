@@ -1,9 +1,11 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../../hooks/useAuth'
 import './footer.css'
 
 const Footer = () => {
     const navigate = useNavigate()
+    const { user } = useAuth()
   return (
     <div className='footer_wrapper'>
       <div className="footer_inner">      
@@ -13,7 +15,8 @@ const Footer = () => {
             {/* <span>Sadaka</span> */}
             <span>Vigezo</span>
             <span>Faragha</span>
-            <span onClick={() => navigate('/opportunities')}>Fursa</span>
+            {user &&
+            <span onClick={() => navigate('/opportunities')}>Fursa</span>}
             <span onClick={() => navigate('/contacts')}>Mawasiliano</span>
         </div>
       </div>

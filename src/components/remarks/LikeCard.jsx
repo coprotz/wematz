@@ -6,7 +6,14 @@ const LikeCard = ({item}) => {
     const user = users?.find(u => u.id === item?.user_id)
   return (
     <div className="liks_m">
-        <img src={user?.photo || process.env.PUBLIC_URL + user?.avatar} alt="" />
+       {user?.photo ? <img src={user?.photo} alt="" />: 
+        <div 
+          className='avatar2'
+          style={{backgroundColor: `#${Math.floor(Math.random()*16777215).toString(16)}`, height:'25px', width:'25px', fontSize:'1rem'}}
+          >{user?.name[0]}
+        </div>
+        }
+        {/* <img src={user?.photo || process.env.PUBLIC_URL + user?.avatar} alt="" /> */}
     </div>
   )
 }

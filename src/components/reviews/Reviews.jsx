@@ -34,7 +34,14 @@ const Reviews = ({doc, setShow, type}) => {
             <div className="review_card">
                 <div className="post_card_user">
                     <div className="card_user_photo">
-                        <img src={r?.photo} alt="" />
+                        {r?.photo ? <img src={r?.photo} alt="" />: 
+                        <div 
+                            className='avatar2'
+                            style={{backgroundColor: `#${Math.floor(Math.random()*16777215).toString(16)}`, height:'30px', width:'30px', fontSize:'1rem'}}
+                            >{r?.name[0]}
+                        </div>
+                         }
+                        {/* <img src={r?.photo} alt="" /> */}
                     </div>
                     <div className="card_username">
                         <h5 className='author_name'>{r?.name}</h5>

@@ -1,7 +1,7 @@
 .footer_wrapper{
     display: flex;
     justify-content: space-between;
-    padding: 15px;
+    /* padding: 15px; */
     background-color: var(--primary);
     margin-top: 10px;
     color: var(--bg);
@@ -16,7 +16,7 @@
     align-items: center;
     justify-content: space-between;
     width: 90%;
-    margin: 0 auto;
+    margin: 10px auto;
 }
 
 .m_f_items span:hover{
@@ -29,14 +29,15 @@
    
 
     .footer_wrapper{
-        font-size: 0.8rem;
+        font-size: 1rem;
         justify-content: center;
+        color: var(--sec);
     }
 
     .footer_inner{
         
-        justify-content: space-between;
-        width: 95%;
+        justify-content: center;
+        /* width: 95%; */
       
     }
 }

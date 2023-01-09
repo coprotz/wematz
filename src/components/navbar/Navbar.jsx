@@ -26,30 +26,30 @@ const Navbar = ({active, setActive}) => {
     const [alert, setAlert] = useState(null)
 
     const [show, setShow] = useState(null)
-    const [photo, setPhoto] = useState(null)
+    // const [photo, setPhoto] = useState(null)
 
-    const dr = doctors?.find(d => d.userId === user.uid)
-    const law = lawyers?.find(l =>l.userId === user.uid)
+    // const dr = doctors?.find(d => d.userId === user.uid)
+    // const law = lawyers?.find(l =>l.userId === user.uid)
 
     const othernots = notifics?.filter(n => n?.target_ids?.includes(`${user.uid}`))
-    const othernots2 = notifics?.filter(n => n?.target_ids?.find(m =>m===user.uid))
+    // const othernots2 = notifics?.filter(n => n?.target_ids?.find(m =>m===user.uid))
     // const othernots3 = notifics?.filter(n => n?.target_ids?.find(m =>m===user.uid))
 
     // console.log('othernots', othernots)
     // console.log('othernots2', othernots2)
 
     const usernots = notifics?.filter(n => n.target_id === user.uid)
-    const drnots = notifics?.filter(n => n.target_id === dr?.id)
-    const lawnots = notifics?.filter(n => n.target_id === law?.id)
-    const marrynots = notifics?.filter(n => n.target_id === marry?.id)
+    // const drnots = notifics?.filter(n => n.target_id === dr?.id)
+    // const lawnots = notifics?.filter(n => n.target_id === law?.id)
+    // const marrynots = notifics?.filter(n => n.target_id === marry?.id)
 
-    const a = drnots.concat(usernots)
-    const b = a.concat(lawnots)
-    const c = b.concat(othernots)
-    const allnots = c.concat(marrynots)
+    // const a = drnots.concat(usernots)
+    // const b = a.concat(lawnots)
+    // const c = b.concat(othernots)
+    const allnots = othernots.concat(usernots)
     const mynots = allnots?.filter(a => !a.seen?.includes(`${user.uid}`)).filter(n => n.uid !== user.uid)
 
-    // console.log('mynots', mynots)
+    // console.log('cuUser', cuUser)
 
 
     const handleLogout = async () => {
