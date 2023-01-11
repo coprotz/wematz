@@ -1,0 +1,103 @@
+.ibada_top span{
+    /* margin: 5px; */
+    padding: 5px 9px;
+    /* border: 1px solid #aaa; */
+    background-color: var(--sec);
+    border-radius: 5px;
+    
+}
+
+.ibada_link{
+    padding: 5px 9px;
+    /* border: 1px solid #aaa; */
+    background-color: var(--sec);
+    border-radius: 2px;
+}
+
+.ibada_top{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.ibada_link:hover{
+    border-bottom: 4px solid var(--primary);
+   
+    cursor: pointer;
+}
+
+.ibada_top .active{
+    background-color: var(--primary);
+    color: white;
+    font-weight: 700;
+    border-bottom: 4px solid var(--primary);
+    box-shadow: var(--shadow);
+    
+}
+
+.ibada_top .active:hover{
+    background-color: white;
+    color: black;
+    font-weight: 700;  
+    cursor: default;
+}
+
+.ibada_top a{
+    text-decoration: none;
+}
+
+.prayer_lists{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.prayer_date{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    border: 1px solid var(--sec);
+}
+
+.prayer_date_top{
+    text-align: center;
+    background-color: var(--sec);
+    color: var(--primary);
+    padding: 10px;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+}
+
+.prayer_date_times{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+   
+    padding: 10px;
+
+}
+
+.prayer_card{
+    text-align: center;
+}
+
+.current_time{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 10px 0;
+    padding: 7px;
+    text-align: center;
+}
+
+.active_card{
+    background-color: white;
+    color: var(--primary);
+    padding: 10px;
+}

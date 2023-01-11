@@ -64,6 +64,11 @@ import About from './pages/about/About.jsx';
 import Contacts from './pages/contacts/Contacts.jsx';
 import Makala from './pages/health/Makala.jsx';
 import { useEffect } from 'react';
+import Ibada from './pages/ibada/Ibada.jsx';
+import Quran from './pages/ibada/Quran.jsx';
+import Prayers from './pages/ibada/Prayers.jsx';
+import Nyiradi from './pages/ibada/Nyiradi.jsx';
+import Sunnah from './pages/ibada/Sunnah.jsx';
 // import useData from './hooks/useData';
 
 
@@ -214,6 +219,14 @@ function App() {
               <Route index element={<Mainlegals/>}/>
               <Route path='legals' element={<Mainlegals/>}/>  
                <Route path=':id' element={<ViewLawyer/>}/>            
+            </Route>
+            <Route path='ibada' element={<Ibada/>}>
+              <Route index element={<Quran/>}/>
+              <Route path='quran' element={<Quran/>}/>  
+              <Route path='swala' element={<Prayers/>}/>  
+              <Route path='nyiradi' element={<Nyiradi/>}/> 
+              <Route path='sunnah' element={<Sunnah/>}/> 
+               {/* <Route path=':id' element={<ViewLawyer/>}/>             */}
             </Route>
             <Route path='admin' element={<Admin/>}></Route>            
             <Route path='needHelps' element={<NeedHelps/>}></Route>

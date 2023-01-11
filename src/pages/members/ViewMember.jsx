@@ -13,6 +13,10 @@ import moment from 'moment';
 import { ages, regions } from '../../data'
 import LoadingPage from '../../components/loading/LoadingPage'
 import FollowCard from './FollowCard'
+import PlacesAutocomplete, {
+    geocodeByAddress,
+    getLatLng,
+    } from 'react-places-autocomplete';
 
 
 
@@ -87,6 +91,7 @@ const ViewMember = () => {
     const [editEmplo, setEditEmplo] = useState(null)
     const [editProf, setEditProf] = useState(null)
     const [editGender, setEditGender] = useState(null)
+    const [userGeo, setUserGeo] = useState(null)
 
   
   
@@ -95,6 +100,19 @@ const ViewMember = () => {
     const isFollower = myFolling.find(f =>f?.following_id === id)
     const myFolls = followers.filter(f =>f?.following_id === user.uid)
     // console.log('myfoll', myFollowers)
+
+    const changeAddress = address => {
+        setEditLocation(address);
+        };
+    
+    const handleAddress = address => {
+        geocodeByAddress(address)
+        .then(results => getLatLng(results[0]))
+        .then(latLng => setUserGeo(latLng))
+        .catch(error => console.error('Error', error));
+        setEditLocation(address)
+        
+        };
 
 
     const followRef = collection(db, 'followers')
@@ -403,24 +421,48 @@ const ViewMember = () => {
                 </div> */}
                 <div className="member_info_div">
                     <span className='_info_div'>Anapoishi :</span>
-                    {editLocation ? 
-                        // <input type='text' value={editAge} onChange={(e) =>setEditAge(e.target.value)}/> 
-                        <select 
-                        name='age'  
-                        value={editLocation}
-                        // className='sel_input'
-                        // style={{width: '100%'}}
-                        onChange={(e) =>setEditLocation(e.target.value)}
-                        >                                    
-                         {regions.map((item, index) => (
-                               
-                               <option 
-                                   value={item.name} 
-                                   key={index}
-                                   
-                                   >{item.name}</option> 
-                           ))}                                 
-                        </select>
+                    {editLocation ?                      
+                         <PlacesAutocomplete
+                         value={editLocation}
+                         onChange={changeAddress}
+                         onSelect={handleAddress}
+                            >
+                            {({ getInputProps, suggestions, getSuggestionItemProps, loading }) =>  (
+                            <div style={{width: '100%'}}>
+                                <input
+                                {...getInputProps({
+                                placeholder: 'Tafuta eneo...',
+                                className: 'location-search-input',
+                                
+                                })}
+                                className='sel_input'
+                                style={{width: '93%'}}
+                                />
+                                <div className="autocomplete-dropdown-container">
+                                    {loading && <div>Loading...</div>}
+                                    {suggestions.map(suggestion => {
+                                    const className = suggestion.active
+                                    ? 'suggestion-item--active'
+                                    : 'suggestion-item';
+                                    // inline style for demonstration purpose
+                                    const style = suggestion.active
+                                    ? { backgroundColor: '#fafafa', cursor: 'pointer' }
+                                    : { backgroundColor: '#ffffff', cursor: 'pointer' };
+                                    return (
+                                    <div
+                                    {...getSuggestionItemProps(suggestion, {
+                                    className,
+                                    style,
+                                    })}
+                                    >
+                                    <span>{suggestion.description}</span>
+                                    </div>
+                                    );
+                                    })}
+                                </div>
+                            </div>
+                            )}
+                            </PlacesAutocomplete>
                         :
                         <div className="name_wrapper">
                             <h4>{member?.location}</h4>
@@ -430,7 +472,7 @@ const ViewMember = () => {
                     <div className='_btns'>                                               
                         {editLocation && 
                         <button 
-                            onClick={() => {updateDoc(doc(db, 'users', `${id}`), {location:editLocation});setEditLocation(null)}}
+                            onClick={() => {updateDoc(doc(db, 'users', `${id}`), {location:editLocation, userLat: userGeo?.lat, userLng: userGeo?.lng});setEditLocation(null)}}
                             >Save
                         </button>
                         }

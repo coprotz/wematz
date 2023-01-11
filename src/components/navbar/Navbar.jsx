@@ -82,7 +82,7 @@ const Navbar = ({active, setActive}) => {
                         <div 
                             className='avatar2'
                             style={{backgroundColor: `#${Math.floor(Math.random()*16777215).toString(16)}`, height:'35px', width:'35px'}}
-                            >{cuUser?.name[0]}
+                            >{cuUser?.name? cuUser?.name[0] : 'NA'}
                         </div>
                         } 
                         {/* <img src={cuUser?.photo ? cuUser?.photo : process.env.PUBLIC_URL + cuUser?.avatar} /> */}

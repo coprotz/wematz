@@ -12,6 +12,10 @@ import { FcGoogle } from 'react-icons/fc';
 import {  HiOutlineArrowLeft } from "react-icons/hi";
 import Loading from '../../components/loading/Loading';
 import useData from '../../hooks/useData';
+import PlacesAutocomplete, {
+    geocodeByAddress,
+    getLatLng,
+    } from 'react-places-autocomplete';
 
 
 
@@ -26,6 +30,8 @@ const Register = () => {
     const { signUp, googleSignIn, user } = useAuth()
     const { users } = useData()
     const { register,  watch, formState: { isValid } } = useForm({mode: 'all'});
+    const [location, setLoaction] = useState('')
+    const [userGeo, setUserGeo] = useState(null)
 
    
 
@@ -48,12 +54,12 @@ const Register = () => {
     const emplo = watch('emplo')
     const prayer = watch('prayer')
     const profes = watch('profes')
-    const location = watch('location')
+    // const location = watch('location')
 
     const [thanks, setThanks] = useState(null)
     const [reg, setReg] = useState(0)
 
-    console.log('ismos', isMosque)
+    // console.log('ismos', isMosque)
 
     const data = {
         email: user?.email,           
@@ -65,17 +71,19 @@ const Register = () => {
         religion,
         isOnline: true,
         profes,
-        isMosque: 'NA' || isMosque,
-        islam: 'NA' || islam,
-        set: 'NA' || set,
-        mosque: 'NA' || mosque,
+        islam: religion === 'islam' ? islam : 'NA',
+        set: religion === 'islam' ? set : 'NA',
+        isMosque: religion === 'islam' ? isMosque : 'NA',
+        mosque: isMosque === 'Ndio Upo' ? mosque : 'NA',
         location,
         avatar: '/images/profile.webp',
-        prayer: 'NA' || prayer,
-        quran: 'NA' || quran,
-        revert: 'NA' || revert,  
+        prayer: religion === 'islam' ? prayer : 'NA',
+        quran: religion === 'islam' ? quran : 'NA',
+        revert: religion === 'christian' ? revert : 'NA',  
         followers:[],
-        followings:[],       
+        followings:[],  
+        userLat: userGeo?.lat,
+        userLng: userGeo?.lng,      
         edu,
    
     }
@@ -92,22 +100,39 @@ const Register = () => {
         religion,
         profes,
         isOnline: true,
-        islam: 'NA' || islam,
-        set: 'NA' || set,
-        isMosque: 'NA' || isMosque,
-        mosque: 'NA' || mosque,
+        islam: religion === 'islam' ? islam : 'NA',
+        set: religion === 'islam' ? set : 'NA',
+        isMosque: religion === 'islam' ? isMosque : 'NA',
+        mosque: isMosque === 'Ndio Upo' ? mosque : 'NA',
         location,
         avatar: '/images/profile.webp',
-        prayer: 'NA' || prayer,
-        quran: 'NA' || quran,
-        revert: 'NA' || revert, 
+        prayer: religion === 'islam' ? prayer : 'NA',
+        quran: religion === 'islam' ? quran : 'NA',
+        revert: religion === 'christian' ? revert : 'NA', 
         followers:[],
-        followings:[],     
+        followings:[], 
+        userLat: userGeo?.lat,
+        userLng: userGeo?.lng,    
         edu,
    
     }
 
-    // console.log('name', fname+" "+lname)
+    // console.log(location)
+
+    const handleChange = address => {
+        setLoaction(address);
+        };
+    
+    const handleSelect = address => {
+        geocodeByAddress(address)
+        .then(results => getLatLng(results[0]))
+        .then(latLng => setUserGeo(latLng))
+        .catch(error => console.error('Error', error));
+        setLoaction(address)
+        
+        };
+
+    // console.log('userGeo', userGeo)
 
     const handleRegister = async(e) => {
         e.preventDefault()
@@ -318,7 +343,7 @@ const Register = () => {
                             <button onClick={() =>setPage(0)} className='btn_btn'><HiOutlineArrowLeft/></button>
                             <h4>Rudi Nyuma</h4>
                         </div>
-                    <h1 className='register_title'>Tunaomba utupe taarifa zako zingine kumalizia usajili</h1>
+                    <h1 className='register_title'>Malizia usajili</h1>
                     <span className='res_span'></span>
                     {err && <span>{err}</span>}
                     <div className="register_form">
@@ -351,7 +376,7 @@ const Register = () => {
                         </div>
                       </div>
                 </div>
-                <div className="items_group" style={{width: '93%'}}>
+                <div className="items_group" >
                     <h3 className='item_title'>Umri</h3>
                     <div className="sel_items" style={{width: '100%'}}>
                         <select 
@@ -371,10 +396,51 @@ const Register = () => {
                         </div>
                     
                 </div>
-                <div className="items_group" style={{width: '93%'}}>
-                    <h3 className='item_title'>Unaishi - Mkoa</h3>
+                <div className="items_group" >
+                    <h3 className='item_title'>Unaishi</h3>
                     <div className="sel_items">
-                        <select 
+                        <PlacesAutocomplete
+                            value={location}
+                            onChange={handleChange}
+                            onSelect={handleSelect}
+                        >
+                        {({ getInputProps, suggestions, getSuggestionItemProps, loading }) =>  (
+                        <div style={{width: '100%'}}>
+                            <input
+                            {...getInputProps({
+                            placeholder: 'Tafuta eneo...',
+                            className: 'location-search-input',
+                            
+                            })}
+                            className='sel_input'
+                            style={{width: '93%'}}
+                            />
+                            <div className="autocomplete-dropdown-container">
+                                {loading && <div>Loading...</div>}
+                                {suggestions.map(suggestion => {
+                                const className = suggestion.active
+                                ? 'suggestion-item--active'
+                                : 'suggestion-item';
+                                // inline style for demonstration purpose
+                                const style = suggestion.active
+                                ? { backgroundColor: '#fafafa', cursor: 'pointer' }
+                                : { backgroundColor: '#ffffff', cursor: 'pointer' };
+                                return (
+                                <div
+                                {...getSuggestionItemProps(suggestion, {
+                                className,
+                                style,
+                                })}
+                                >
+                                <span>{suggestion.description}</span>
+                                </div>
+                                );
+                                })}
+                            </div>
+                        </div>
+                        )}
+                        </PlacesAutocomplete>
+                                        {/* <select 
                             name='location'  
                             className='sel_input'
                             style={{width: '100%'}}
@@ -389,7 +455,7 @@ const Register = () => {
                                     
                                     >{item.name}</option> 
                             ))}                                
-                            </select>                          
+                            </select>                           */}
                         </div>
                     
                 </div>
@@ -450,7 +516,13 @@ const Register = () => {
                             <label htmlFor="411">Kuzaliwa</label>
                         </div>
                         <div className="sel_item">
-                            <input type="radio" id='511' value='Nilisimu' name='religion'/>
+                            <input 
+                                type="radio" 
+                                id='511' 
+                                value='Nilisimu'
+                                name='islam'
+                                {...register("islam", { required: religion === 'islam' ? true : false })}
+                                />
                             <label htmlFor="511">Ulibadili Dini</label>
                         </div>                      
                      

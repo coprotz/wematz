@@ -35,7 +35,7 @@
     color: white;
 }
 
-.active{
+.home_menu .active{
     background-color: white;
     color: black !important;
     font-weight: 700;
@@ -45,7 +45,7 @@
     
 }
 
-.active:hover{
+.home_menu .active:hover{
     background-color: white;
     color: black;
     font-weight: 700;

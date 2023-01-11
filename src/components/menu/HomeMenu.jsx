@@ -79,6 +79,10 @@ const HomeMenu = ({active, setActive}) => {
             <MdOutlineVerifiedUser/>
             <span>Kuwa Mjaheed</span>
         </NavLink>
+        <NavLink to='/ibada' className="menu_item" onClick={() =>setActive(!active)}>
+            <MdOutlineVerifiedUser/>
+            <span>Ibada Zangu</span>
+        </NavLink>
         {admin &&
         <NavLink to='/admin' className="menu_item" onClick={() =>setActive(!active)}>
             <MdOutlineVerifiedUser/>

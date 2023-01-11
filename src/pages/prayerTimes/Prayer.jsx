@@ -6,7 +6,7 @@ import axios from 'axios';
 import moment from 'moment';
 
 
-const Prayer = () => {
+const Prayer = ({prayers}) => {
 
   const [prayerTimes, setPrayerTimes] = useState({
     loading: false,
@@ -46,9 +46,11 @@ useEffect(() => {
 
 
 const currentDate = moment(new Date()).format('DD-M-YYYY') 
+const today = new Date().getTime()
 const currentTime = moment(new Date()).format('HH:mm') 
-const todayTimes = prayerTimes?.prayers?.data?.find(p => p?.date?.gregorian?.date === currentDate)
+const todayTimes = prayerTimes?.prayers?.data?.find(p => p?.date?.timestamp  === '1674453661')
 
+console.log('today', today)
 console.log('todayTimes', todayTimes)
 
 
