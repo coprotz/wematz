@@ -2,8 +2,8 @@ import React from 'react'
 
 const Sunnah = () => {
   return (
-    <div>
-      sunnah
+    <div className='ibada_outer'>
+      sunnah is under construction
     </div>
   )
 }

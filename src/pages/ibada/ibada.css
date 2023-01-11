@@ -101,3 +101,10 @@
     color: var(--primary);
     padding: 10px;
 }
+
+.ibada_outer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+}

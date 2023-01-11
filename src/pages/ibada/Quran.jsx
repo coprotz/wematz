@@ -2,8 +2,8 @@ import React from 'react'
 
 const Quran = () => {
   return (
-    <div>
-      quran kareem
+    <div className='ibada_outer'>
+       quran page is under construction
     </div>
   )
 }

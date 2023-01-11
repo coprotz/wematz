@@ -54,7 +54,7 @@ const ViewMember = () => {
 
     const myFollowers = followers?.filter(f => f.follower_id === id)
     const myFollowings = followers?.filter(f => f.following_id === id)
-    console.log('answers', answers)
+    // console.log('answers', answers)
 
     const handleSelect = (e) => {
         let selected = e.target.files[0];  
@@ -223,21 +223,26 @@ const ViewMember = () => {
             <div className="view_doc_left">
                 <div className="member_edit">
                     {editName ? 
-                        <input type='text' value={editName} onChange={(e) =>setEditName(e.target.value)}/> :
+                        <div className="input_edit_form">
+                            <input type='text' value={editName} onChange={(e) =>setEditName(e.target.value)}/> 
+                            <div className='_btns'>                                               
+                             
+                                <button 
+                                    onClick={() => {updateDoc(doc(db, 'users', `${id}`), {name:editName});setEditName(null)}}
+                                    >Save
+                                </button>
+                             
+                                <button onClick={() =>setEditName(null)}>Cancel</button>
+                            </div>
+                        
+                        </div>
+                        :
                         <div className="name_wrapper">
                             <h2>{member?.name}</h2>
                             {!editName && isOwn && <button className='btn_edit' onClick={() => setEditName(member?.name)}>Edit</button> } 
                         </div>                        
                     }
-                    <div>                                               
-                        {editName && 
-                        <button 
-                            onClick={() => {updateDoc(doc(db, 'users', `${id}`), {name:editName});setEditName(null)}}
-                            >Save
-                        </button>
-                        }
-                        {editName && <button onClick={() =>setEditName(null)}>Cancel</button>}
-                    </div>                    
+                                        
                     
                 </div>
                 
@@ -254,67 +259,74 @@ const ViewMember = () => {
                     <span className='_info_div'>Age :</span>
                     {editAge ? 
                         // <input type='text' value={editAge} onChange={(e) =>setEditAge(e.target.value)}/> 
-                        <select 
-                        name='age'  
-                        value={editAge}
-                        // className='sel_input'
-                        // style={{width: '100%'}}
-                        onChange={(e) =>setEditAge(e.target.value)}
-                        >                                    
-                        {ages.map((age, index) => (
-                            <option 
-                                value={age} 
-                                key={index}
-                                
-                                >{age}</option> 
-                        ))}                                
-                        </select>
+                        <div className="input_edit_form">
+                             <select 
+                                name='age'  
+                                value={editAge}
+                                // className='sel_input'
+                                // style={{width: '100%'}}
+                                onChange={(e) =>setEditAge(e.target.value)}
+                                >                                    
+                                {ages.map((age, index) => (
+                                    <option 
+                                        value={age} 
+                                        key={index}
+                                        
+                                        >{age}</option> 
+                                ))}                                
+                                </select>
+                                <div className='_btns'>                                            
+                                    <button 
+                                        onClick={() => {updateDoc(doc(db, 'users', `${id}`), {age:editAge});setEditAge(null)}}
+                                        >Save
+                                    </button>
+                                   <button onClick={() =>setEditAge(null)}>Cancel</button>
+                                </div> 
+                        </div>
+                       
                         :
                         <div className="name_wrapper">
                             <h4>{member?.age}</h4>
                             {!editAge && isOwn && <button className='btn_edit' onClick={() => setEditAge(member?.age)}>Edit</button> } 
                         </div>                        
                     }
-                    <div className='_btns'>                                               
-                        {editAge && 
-                        <button 
-                            onClick={() => {updateDoc(doc(db, 'users', `${id}`), {age:editAge});setEditAge(null)}}
-                            >Save
-                        </button>
-                        }
-                        {editAge && <button onClick={() =>setEditAge(null)}>Cancel</button>}
-                    </div>                    
+                                      
                     
                 </div>
                 <div className="member_info_div">
                     <span className='_info_div'>Jinsia :</span>
                     {editGender ? 
-                        // <input type='text' value={editAge} onChange={(e) =>setEditAge(e.target.value)}/> 
-                        <select 
-                        name='age'  
-                        value={editGender}
-                        // className='sel_input'
-                        // style={{width: '100%'}}
-                        onChange={(e) =>setEditGender(e.target.value)}
-                        >                                    
-                       <option value='M'>Mume</option> 
-                       <option value='F' >Mke</option>                               
-                        </select>
+                        // <input type='text' value={editAge} onChange={(e) =>setEditAge(e.target.value)}/>
+                        <div className="input_edit_form">
+                            <select 
+                                name='age'  
+                                value={editGender}
+                                // className='sel_input'
+                                // style={{width: '100%'}}
+                                onChange={(e) =>setEditGender(e.target.value)}
+                                >                                    
+                                <option value='M'>Mume</option> 
+                                <option value='F' >Mke</option>                               
+                            </select>
+                            <div className='_btns'>                                               
+                              
+                                <button 
+                                    onClick={() => {updateDoc(doc(db, 'users', `${id}`), {age:editGender});setEditGender(null)}}
+                                    >Save
+                                </button>
+                               
+                                 <button onClick={() =>setEditGender(null)}>Cancel</button>
+                            </div>  
+                            
+                        </div> 
+                       
                         :
                         <div className="name_wrapper">
                             <h4>{member?.gender}</h4>
                             {!editGender && isOwn && <button className='btn_edit' onClick={() => setEditGender(member?.gender)}>Edit</button> } 
                         </div>                        
                     }
-                    <div className='_btns'>                                               
-                        {editGender && 
-                        <button 
-                            onClick={() => {updateDoc(doc(db, 'users', `${id}`), {age:editGender});setEditGender(null)}}
-                            >Save
-                        </button>
-                        }
-                        {editGender && <button onClick={() =>setEditGender(null)}>Cancel</button>}
-                    </div>                    
+                                     
                     
                 </div>
                
@@ -322,33 +334,37 @@ const ViewMember = () => {
                     <span className='_info_div'>Elimu :</span>
                     {editEdu ? 
                         // <input type='text' value={editAge} onChange={(e) =>setEditAge(e.target.value)}/> 
-                        <select 
-                        name='age'  
-                        value={editEdu}
-                        // className='sel_input'
-                        // style={{width: '100%'}}
-                        onChange={(e) =>setEditEdu(e.target.value)}
-                        >                                 
-                         <option value='Cheti' >Cheti</option>
-                         <option value='Stashahada' >Stashahada</option>
-                         <option value='Shahada' >Shahada</option>
-                         <option value='Zaidi ya Shahada' >Zaidi ya Shahada</option>                               
-                        </select>
+                        <div className="input_edit_form">
+                            <select 
+                                name='age'  
+                                value={editEdu}
+                                // className='sel_input'
+                                // style={{width: '100%'}}
+                                onChange={(e) =>setEditEdu(e.target.value)}
+                                >                                 
+                                <option value='Cheti' >Cheti</option>
+                                <option value='Stashahada' >Stashahada</option>
+                                <option value='Shahada' >Shahada</option>
+                                <option value='Zaidi ya Shahada' >Zaidi ya Shahada</option>                               
+                            </select>
+                            <div className='_btns'>                                               
+                               
+                                <button 
+                                    onClick={() => {updateDoc(doc(db, 'users', `${id}`), {edu:editEdu});setEditEdu(null)}}
+                                    >Save
+                                </button>
+                                <button onClick={() =>setEditEdu(null)}>Cancel</button>
+                            </div>  
+                            
+                        </div>
+                      
                         :
                         <div className="name_wrapper">
                             <h4>{member?.edu}</h4>
                             {!editEdu && isOwn && <button className='btn_edit' onClick={() => setEditEdu(member?.edu)}>Edit</button> } 
                         </div>                        
                     }
-                    <div className='_btns'>                                               
-                        {editEdu && 
-                        <button 
-                            onClick={() => {updateDoc(doc(db, 'users', `${id}`), {edu:editEdu});setEditEdu(null)}}
-                            >Save
-                        </button>
-                        }
-                        {editEdu && <button onClick={() =>setEditEdu(null)}>Cancel</button>}
-                    </div>                    
+                                    
                     
                 </div>
                
@@ -356,33 +372,35 @@ const ViewMember = () => {
                     <span className='_info_div'>Kazi :</span>
                     {editEmplo ? 
                         // <input type='text' value={editAge} onChange={(e) =>setEditAge(e.target.value)}/> 
-                        <select 
-                        name='age'  
-                        value={editEmplo}
-                        // className='sel_input'
-                        // style={{width: '100%'}}
-                        onChange={(e) =>setEditEmplo(e.target.value)}
-                        >                                 
-                         <option value='Mwanafunzi' >Mwanafunzi</option>
-                         <option value='Mfanyabiashara' >Mfanyabiashara</option>
-                         <option value='Nimeajiriwa' >Nimeajiriwa</option>
-                         <option value='Sina Shughuli Maalum' >Sina Shughuli Maalum</option>                               
-                        </select>
+                        <div className="input_edit_form">
+                            <select 
+                            name='age'  
+                            value={editEmplo}
+                            // className='sel_input'
+                            // style={{width: '100%'}}
+                            onChange={(e) =>setEditEmplo(e.target.value)}
+                            >                                 
+                            <option value='Mwanafunzi' >Mwanafunzi</option>
+                            <option value='Mfanyabiashara' >Mfanyabiashara</option>
+                            <option value='Nimeajiriwa' >Nimeajiriwa</option>
+                            <option value='Sina Shughuli Maalum' >Sina Shughuli Maalum</option>                               
+                            </select>
+                            <div className='_btns'>                                               
+                       
+                        <button 
+                            onClick={() => {updateDoc(doc(db, 'users', `${id}`), {emplo:editEmplo});setEditEmplo(null)}}
+                            >Save
+                        </button>
+                        <button onClick={() =>setEditEmplo(null)}>Cancel</button>
+                    </div> 
+                        </div>
                         :
                         <div className="name_wrapper">
                             <h4>{member?.emplo}</h4>
                             {!editEmplo && isOwn && <button className='btn_edit' onClick={() => setEditEmplo(member?.emplo)}>Edit</button> } 
                         </div>                        
                     }
-                    <div className='_btns'>                                               
-                        {editEmplo && 
-                        <button 
-                            onClick={() => {updateDoc(doc(db, 'users', `${id}`), {emplo:editEmplo});setEditEmplo(null)}}
-                            >Save
-                        </button>
-                        }
-                        {editEmplo && <button onClick={() =>setEditEmplo(null)}>Cancel</button>}
-                    </div>                    
+                                      
                     
                 </div>
                
@@ -390,29 +408,31 @@ const ViewMember = () => {
                     <span className='_info_div'>Ujuzi :</span>
                     {editProf ? 
                         // <input type='text' value={editAge} onChange={(e) =>setEditAge(e.target.value)}/> 
-                        <input 
-                        name='age' 
-                        type='text'
-                        value={editProf}
-                        // className='sel_input'
-                        // style={{width: '100%'}}
-                        onChange={(e) =>setEditProf(e.target.value)}                                                     
-                        />
+                        <div className="input_edit_form">
+                             <input 
+                                name='age' 
+                                type='text'
+                                value={editProf}
+                                // className='sel_input'
+                                // style={{width: '100%'}}
+                                onChange={(e) =>setEditProf(e.target.value)}                                                     
+                                />
+                             <div className='_btns'>                                            
+                                 <button 
+                                    onClick={() => {updateDoc(doc(db, 'users', `${id}`), {profes:editProf});setEditProf(null)}}
+                                    >Save
+                                </button>                                
+                                <button onClick={() =>setEditProf(null)}>Cancel</button>
+                            </div> 
+                        </div>
+                       
                         :
                         <div className="name_wrapper">
                             <h4>{member?.profes}</h4>
                             {!editProf && isOwn && <button className='btn_edit' onClick={() => setEditProf(member?.profes)}>Edit</button> } 
                         </div>                        
                     }
-                    <div className='_btns'>                                               
-                        {editProf && 
-                        <button 
-                            onClick={() => {updateDoc(doc(db, 'users', `${id}`), {profes:editProf});setEditProf(null)}}
-                            >Save
-                        </button>
-                        }
-                        {editProf && <button onClick={() =>setEditProf(null)}>Cancel</button>}
-                    </div>                    
+                                      
                     
                 </div>
                 {/* <div className="member_info_div">
@@ -421,22 +441,22 @@ const ViewMember = () => {
                 </div> */}
                 <div className="member_info_div">
                     <span className='_info_div'>Anapoishi :</span>
-                    {editLocation ?                      
+                    {editLocation ?  
+                        <div className="input_edit_form">                    
                          <PlacesAutocomplete
                          value={editLocation}
                          onChange={changeAddress}
                          onSelect={handleAddress}
                             >
                             {({ getInputProps, suggestions, getSuggestionItemProps, loading }) =>  (
-                            <div style={{width: '100%'}}>
+                            <div>
                                 <input
                                 {...getInputProps({
                                 placeholder: 'Tafuta eneo...',
                                 className: 'location-search-input',
                                 
                                 })}
-                                className='sel_input'
-                                style={{width: '93%'}}
+                               
                                 />
                                 <div className="autocomplete-dropdown-container">
                                     {loading && <div>Loading...</div>}
@@ -463,21 +483,21 @@ const ViewMember = () => {
                             </div>
                             )}
                             </PlacesAutocomplete>
+                            <div className='_btns'>                                               
+                                <button 
+                                    onClick={() => {updateDoc(doc(db, 'users', `${id}`), {location:editLocation, userLat: userGeo?.lat, userLng: userGeo?.lng});setEditLocation(null)}}
+                                    >Save
+                                </button>
+                                <button onClick={() =>setEditLocation(null)}>Cancel</button>
+                                </div>
+                            </div>
                         :
                         <div className="name_wrapper">
                             <h4>{member?.location}</h4>
                             {!editLocation && isOwn && <button className='btn_edit' onClick={() => setEditLocation(member?.location)}>Edit</button> } 
                         </div>                        
                     }
-                    <div className='_btns'>                                               
-                        {editLocation && 
-                        <button 
-                            onClick={() => {updateDoc(doc(db, 'users', `${id}`), {location:editLocation, userLat: userGeo?.lat, userLng: userGeo?.lng});setEditLocation(null)}}
-                            >Save
-                        </button>
-                        }
-                        {editLocation && <button onClick={() =>setEditLocation(null)}>Cancel</button>}
-                    </div>                    
+                                      
                     
                 </div>
             </div>

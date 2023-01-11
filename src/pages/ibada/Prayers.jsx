@@ -16,7 +16,7 @@ const Prayers = () => {
     const { users } = useData()
 
     const cuUser = users?.find( u => u.id === user.uid)
-    console.log('loc', location)
+    // console.log('loc', location)
 
     const lat = cuUser?.lat? cuUser?.lat : location?.coordinates?.lat
     const lng= cuUser?.lng ? cuUser?.lng : location?.coordinates?.lng
@@ -32,12 +32,12 @@ const Prayers = () => {
     const today = new Date().getUTCDate()
     const currentDate = moment(new Date()).format('DD MMM YYYY') 
 
-    console.log('currentDate', currentDate)
+    // console.log('currentDate', currentDate)
 
     useEffect(() =>{
         const getCity = async () => {
             const res = await axios.get('https://ipapi.co/json')
-            console.log('res', res)
+            // console.log('res', res)
             setCity(res?.data?.city)
             setLat(res?.data?.latitude)
             setLon(res?.data?.longitude)
@@ -67,7 +67,7 @@ useEffect(() => {
     fetchData();
 },[lat, lng]);
 
-console.log('prayerTimes', prayers)
+// console.log('prayerTimes', prayers)
 const todayTimes = prayers?.find(p => p?.date?.readable  === currentDate)
 
 const TimeZone = () => {
@@ -97,10 +97,10 @@ const TimeZone = () => {
 const nextPrayer = TimeZone()?.props.children
 // const currentTime = moment(new Date()).format('HH:mm') 
 
-console.log('time', nextPrayer)
-console.log('currentTime', currentTime)
+// console.log('time', nextPrayer)
+// console.log('currentTime', currentTime)
 const tr = nextPrayer - currentTime
-console.log('tr', tr)
+// console.log('tr', tr)
 
 
   return (

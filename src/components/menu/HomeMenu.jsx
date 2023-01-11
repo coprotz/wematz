@@ -2,9 +2,9 @@ import React from 'react'
 // import { BsFilePostFill } from "react-icons/bs";
 import { GiLovers, GiCook, GiTeacher } from "react-icons/gi";
 import { IoIosChatbubbles } from "react-icons/io";
-import { FaHeartbeat, FaRegNewspaper } from "react-icons/fa";
+import { FaHeartbeat, FaMosque, FaRegNewspaper } from "react-icons/fa";
 import { GoLaw } from "react-icons/go";
-import { RiTeamLine, RiQuestionnaireFill } from "react-icons/ri";
+import { RiTeamLine, RiQuestionnaireFill, RiAdminFill } from "react-icons/ri";
 import { HiHome } from "react-icons/hi";
 import { MdOutlineVerifiedUser } from "react-icons/md";
 import {  FiActivity } from "react-icons/fi";
@@ -80,12 +80,12 @@ const HomeMenu = ({active, setActive}) => {
             <span>Kuwa Mjaheed</span>
         </NavLink>
         <NavLink to='/ibada' className="menu_item" onClick={() =>setActive(!active)}>
-            <MdOutlineVerifiedUser/>
+            <FaMosque/>
             <span>Ibada Zangu</span>
         </NavLink>
         {admin &&
         <NavLink to='/admin' className="menu_item" onClick={() =>setActive(!active)}>
-            <MdOutlineVerifiedUser/>
+            <RiAdminFill/>
             <span>Admin</span>
         </NavLink>}
         {/* <NavLink to='/needHelps' className="menu_item" onClick={() =>setActive(active)}>
